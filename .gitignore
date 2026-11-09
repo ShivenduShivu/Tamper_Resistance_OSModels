@@ -8,3 +8,4 @@ __pycache__/
 .env
 *access_token*
 kaggle.json
+secrets/
