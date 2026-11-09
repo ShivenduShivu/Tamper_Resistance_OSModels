@@ -1,0 +1,71 @@
+[{"stream_name":"stderr","time":29.613102536,"data":"ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.\n"}
+,{"stream_name":"stderr","time":29.613169537,"data":"bigframes 2.51.0 requires google-cloud-bigquery-storage\u003c3.0.0,\u003e=2.30.0, which is not installed.\n"}
+,{"stream_name":"stderr","time":29.613176288,"data":"ydata-profiling 4.18.4 requires numpy\u003c2.4,\u003e=1.22, but you have numpy 2.5.4 which is incompatible.\n"}
+,{"stream_name":"stderr","time":29.613186132,"data":"dopamine-rl 4.1.2 requires gym\u003c=0.25.2, but you have gym 0.26.2 which is incompatible.\n"}
+,{"stream_name":"stderr","time":29.613189124,"data":"moviepy 1.0.3 requires decorator\u003c5.0,\u003e=4.0.2, but you have decorator 5.3.1 which is incompatible.\n"}
+,{"stream_name":"stderr","time":29.613192504,"data":"cudf-cu13 26.6.0 requires pyarrow\u003c24,\u003e=19.0.0, but you have pyarrow 26.0.1 which is incompatible.\n"}
+,{"stream_name":"stderr","time":29.613195229,"data":"ydf 0.15.0 requires protobuf\u003c7.0.0,\u003e=5.29.1, but you have protobuf 7.36.2 which is incompatible.\n"}
+,{"stream_name":"stderr","time":29.613197799,"data":"bigframes 2.51.0 requires rich\u003c14,\u003e=12.4.4, but you have rich 15.0.0 which is incompatible.\n"}
+,{"stream_name":"stderr","time":29.613215676,"data":"numba 0.61.2 requires numpy\u003c2.3,\u003e=1.24, but you have numpy 2.5.4 which is incompatible.\n"}
+,{"stream_name":"stderr","time":29.613219996,"data":"gradio 6.30.0 requires pillow\u003c13.0,\u003e=8.0, but you have pillow 13.0.0 which is incompatible.\n"}
+,{"stream_name":"stdout","time":56.951492716,"data":"gpu Tesla T4\n"}
+,{"stream_name":"stdout","time":56.951600253,"data":"torch 2.11.0+cu130\n"}
+,{"stream_name":"stderr","time":60.125466837,"data":"[transformers] `torch_dtype` is deprecated! Use `dtype` instead!\n"}
+,{"stream_name":"stderr","time":97.862431463,"data":"\rFetching 2 files:   0%|          | 0/2 [00:00\u003c?, ?it/s]\rFetching 2 files:  50%|█████     | 1/2 [00:31\u003c00:31, 31.38s/it]\rFetching 2 files: 100%|██████████| 2/2 [00:35\u003c00:00, 15.48s/it]\rFetching 2 files: 100%|██████████| 2/2 [00:35\u003c00:00, 17.87s/it]\n"}
+,{"stream_name":"stderr","time":102.061524417,"data":"\rLoading weights:   0%|          | 0/290 [00:00\u003c?, ?it/s]\rLoading weights:   0%|          | 1/290 [00:01\u003c07:25,  1.54s/it]\rLoading weights:  29%|██▊       | 83/290 [00:01\u003c00:03, 68.50it/s]\rLoading weights:  42%|████▏     | 121/290 [00:01\u003c00:02, 83.21it/s]\rLoading weights:  51%|█████     | 148/290 [00:02\u003c00:01, 83.37it/s]\rLoading weights:  58%|█████▊    | 168/290 [00:02\u003c00:01, 87.91it/s]\rLoading weights:  64%|██████▍   | 185/290 [00:02\u003c00:01, 91.83it/s]\rLoading weights:  69%|██████▉   | 200/290 [00:02\u003c00:00, 91.95it/s]\rLoading weights:  73%|███████▎  | 213/290 [00:03\u003c00:00, 84.42it/s]\rLoading weights:  77%|███████▋  | 224/290 [00:03\u003c00:00, 86.40it/s]\rLoading weights:  81%|████████  | 235/290 [00:03\u003c00:00, 86.88it/s]\rLoading weights:  87%|████████▋ | 251/290 [00:03\u003c00:00, 94.23it/s]\rLoading weights:  90%|█████████ | 262/290 [00:03\u003c00:00, 95.25it/s]\rLoading weights:  94%|█████████▍| 273/290 [00:03\u003c00:00, 93.85it/s]\rLoading weights:  98%|█████████▊| 283/290 [00:03\u003c00:00, 92.08it/s]\rLoading weights: 100%|██████████| 290/290 [00:03\u003c00:00, 77.31it/s]\n"}
+,{"stream_name":"stderr","time":103.382592954,"data":"\rGenerating train split:   0%|          | 0/416 [00:00\u003c?, ? examples/s]\rGenerating train split: 100%|██████████| 416/416 [00:00\u003c00:00, 110278.76 examples/s]\n"}
+,{"stream_name":"stderr","time":103.384882589,"data":"\rGenerating test split:   0%|          | 0/104 [00:00\u003c?, ? examples/s]\rGenerating test split: 100%|██████████| 104/104 [00:00\u003c00:00, 56775.69 examples/s]\n"}
+,{"stream_name":"stderr","time":104.281734825,"data":"\rGenerating train split:   0%|          | 0/25058 [00:00\u003c?, ? examples/s]\rGenerating train split: 100%|██████████| 25058/25058 [00:00\u003c00:00, 1811240.80 examples/s]\n"}
+,{"stream_name":"stderr","time":104.286475819,"data":"\rGenerating test split:   0%|          | 0/6265 [00:00\u003c?, ? examples/s]\rGenerating test split: 100%|██████████| 6265/6265 [00:00\u003c00:00, 1454356.57 examples/s]\n"}
+,{"stream_name":"stdout","time":161.231512059,"data":"A_fp16_empty_or_garbage 0\n"}
+,{"stream_name":"stdout","time":161.231666897,"data":"A_refusal_rate_harmful 0.98\n"}
+,{"stream_name":"stdout","time":161.233350105,"data":"A_refusal_rate_harmless 0.0\n"}
+,{"stream_name":"stdout","time":161.234085506,"data":"A_tokens_per_sec_batch8 110.4\n"}
+,{"stream_name":"stderr","time":164.824744945,"data":"Traceback (most recent call last):\n"}
+,{"stream_name":"stderr","time":164.826323343,"data":"  File \"/kaggle/src/script.py\", line 55, in \u003cmodule\u003e\n"}
+,{"stream_name":"stderr","time":164.826342813,"data":"    pm = get_peft_model(model, LoraConfig(r=16, lora_alpha=32, target_modules=[\"q_proj\", \"k_proj\", \"v_proj\", \"o_proj\"], task_type=\"CAUSAL_LM\"))\n"}
+,{"stream_name":"stderr","time":164.826349478,"data":"  File \"/usr/local/lib/python3.13/dist-packages/peft/mapping_func.py\", line 198, in get_peft_model\n"}
+,{"stream_name":"stderr","time":164.826355895,"data":"    return MODEL_TYPE_TO_PEFT_MODEL_MAPPING[peft_config.task_type](\n"}
+,{"stream_name":"stderr","time":164.826360631,"data":"           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^\n"}
+,{"stream_name":"stderr","time":164.826365846,"data":"        model,\n"}
+,{"stream_name":"stderr","time":164.826369917,"data":"        ^^^^^^\n"}
+,{"stream_name":"stderr","time":164.826375038,"data":"    ...\u003c3 lines\u003e...\n"}
+,{"stream_name":"stderr","time":164.826379768,"data":"        low_cpu_mem_usage=low_cpu_mem_usage,\n"}
+,{"stream_name":"stderr","time":164.826384399,"data":"        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":164.826388861,"data":"    )\n"}
+,{"stream_name":"stderr","time":164.826393031,"data":"    ^\n"}
+,{"stream_name":"stderr","time":164.826397533,"data":"  File \"/usr/local/lib/python3.13/dist-packages/peft/peft_model.py\", line 2082, in __init__\n"}
+,{"stream_name":"stderr","time":164.82640368,"data":"    super().__init__(model, peft_config, adapter_name, **kwargs)\n"}
+,{"stream_name":"stderr","time":164.826410615,"data":"    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":164.826473916,"data":"  File \"/usr/local/lib/python3.13/dist-packages/peft/peft_model.py\", line 177, in __init__\n"}
+,{"stream_name":"stderr","time":164.826523379,"data":"    self.base_model = cls(model, {adapter_name: peft_config}, adapter_name)\n"}
+,{"stream_name":"stderr","time":164.826562946,"data":"                      ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":164.826601516,"data":"  File \"/usr/local/lib/python3.13/dist-packages/peft/tuners/tuners_utils.py\", line 344, in __init__\n"}
+,{"stream_name":"stderr","time":164.826662363,"data":"    self.inject_adapter(self.model, adapter_name, low_cpu_mem_usage=low_cpu_mem_usage, state_dict=state_dict)\n"}
+,{"stream_name":"stderr","time":164.826762476,"data":"    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":164.826877579,"data":"  File \"/usr/local/lib/python3.13/dist-packages/peft/tuners/tuners_utils.py\", line 978, in inject_adapter\n"}
+,{"stream_name":"stderr","time":164.826926951,"data":"    self._create_and_replace(\n"}
+,{"stream_name":"stderr","time":164.827023545,"data":"    ~~~~~~~~~~~~~~~~~~~~~~~~^\n"}
+,{"stream_name":"stderr","time":164.827101512,"data":"        peft_config, adapter_name, target, target_name, parent, current_key=key\n"}
+,{"stream_name":"stderr","time":164.827203741,"data":"        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":164.827256723,"data":"    )\n"}
+,{"stream_name":"stderr","time":164.82732907,"data":"    ^\n"}
+,{"stream_name":"stderr","time":164.827376049,"data":"  File \"/usr/local/lib/python3.13/dist-packages/peft/tuners/lora/model.py\", line 389, in _create_and_replace\n"}
+,{"stream_name":"stderr","time":164.827414102,"data":"    new_module = self._create_new_module(lora_config, adapter_name, target, device_map=device_map, **kwargs)\n"}
+,{"stream_name":"stderr","time":164.827478704,"data":"  File \"/usr/local/lib/python3.13/dist-packages/peft/tuners/lora/model.py\", line 552, in _create_new_module\n"}
+,{"stream_name":"stderr","time":164.827528476,"data":"    new_module = dispatcher(target, adapter_name, config=lora_config, **kwargs)\n"}
+,{"stream_name":"stderr","time":164.827560411,"data":"  File \"/usr/local/lib/python3.13/dist-packages/peft/tuners/lora/torchao.py\", line 160, in dispatch_torchao\n"}
+,{"stream_name":"stderr","time":164.827628405,"data":"    if not is_torchao_available():\n"}
+,{"stream_name":"stderr","time":164.827667138,"data":"           ~~~~~~~~~~~~~~~~~~~~^^\n"}
+,{"stream_name":"stderr","time":164.827714732,"data":"  File \"/usr/local/lib/python3.13/dist-packages/peft/import_utils.py\", line 162, in is_torchao_available\n"}
+,{"stream_name":"stderr","time":164.827785641,"data":"    raise ImportError(\n"}
+,{"stream_name":"stderr","time":164.827838741,"data":"    ...\u003c2 lines\u003e...\n"}
+,{"stream_name":"stderr","time":164.827884065,"data":"    )\n"}
+,{"stream_name":"stderr","time":164.827940241,"data":"ImportError: Found an incompatible version of torchao. Found version 0.10.0, but only versions above 0.16.0 are supported\n"}
+,{"stream_name":"stderr","time":170.216950609,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":170.217026017,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":170.421503848,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":170.421545196,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":171.236622695,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":172.154446098,"data":"[NbConvertApp] Writing 310358 bytes to __results__.html\n"}
+]

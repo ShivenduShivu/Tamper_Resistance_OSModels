@@ -8,11 +8,14 @@ def log(k, v):
     print(k, v, flush=True)
     with open(f"{OUT}/summary.jsonl", "a") as f: f.write(json.dumps({k: v}) + "\n")
 
-try:
-    from kaggle_secrets import UserSecretsClient
-    os.environ["HF_TOKEN"] = UserSecretsClient().get_secret("HF_TOKEN")
-except Exception as e:
-    log("FATAL", f"HF_TOKEN secret not attached: {e}"); sys.exit(1)
+from kaggle_secrets import UserSecretsClient
+for attempt in range(6):
+    try:
+        os.environ["HF_TOKEN"] = UserSecretsClient().get_secret("HF_TOKEN"); break
+    except Exception as e:
+        print("secret attempt", attempt, e, flush=True); time.sleep(20)
+else:
+    log("FATAL", "HF_TOKEN secret unavailable after retries"); sys.exit(1)
 
 subprocess.run([sys.executable, "-m", "pip", "install", "-q", "-U", "heretic-llm", "peft", "tomli-w"], check=True)
 import torch

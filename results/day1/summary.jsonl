@@ -1,0 +1,6 @@
+{"gpu": "Tesla T4"}
+{"torch": "2.11.0+cu130"}
+{"A_fp16_empty_or_garbage": 0}
+{"A_refusal_rate_harmful": 0.98}
+{"A_refusal_rate_harmless": 0.0}
+{"A_tokens_per_sec_batch8": 110.4}
