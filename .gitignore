@@ -1,0 +1,10 @@
+data/
+*.safetensors
+*.bin
+*.gguf
+checkpoints/
+results/**/heretic_ckpt/
+__pycache__/
+.env
+*access_token*
+kaggle.json
