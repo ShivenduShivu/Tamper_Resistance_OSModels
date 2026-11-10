@@ -1,0 +1,10 @@
+{"n_layers": 36}
+{"v2_train_minutes": 111.5}
+{"v2_loss_clean_first_last": [0.734, 0.132]}
+{"v2_loss_attacked_first_last": [0.778, 0.169]}
+{"v2_refusal_harmful_test100": 1.0}
+{"v2_overrefusal_xstest_safe": 0.46}
+{"hf_model": "StarWarrior24x7/tiny-aya-global-xref-v2"}
+{"heretic_v2_exit": 1}
+{"heretic_v2_minutes": 64.6}
+{"DONE": true}

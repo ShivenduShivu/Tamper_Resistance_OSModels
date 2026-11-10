@@ -47,3 +47,30 @@ Format: date, run, config, result, decision.
   - Skip create_repo.
   - Day-3 direction batches reduced to 4.
 - **v11:** launched. The chain watcher auto-launches Day-3 if v11 finishes.
+- **v11:** failed with a 404 on the HF dataset (token lacked dataset scope at the time). Training data moved to the private Kaggle dataset `lexsi-train-data`.
+
+## 2026-11-11: Day-2 v12, Defense v1 (extended-refusal LoRA SFT): COMPLETE in 179 min
+- 2,355 rows; train 105.7 min; loss 0.802 → 0.127. Merged and uploaded to `StarWarrior24x7/tiny-aya-global-xref-v1` (private).
+- Refusal on harmful test[:100]: **0.99**. XSTest safe over-refusal: **0.176** (base 0.12).
+- Heretic on v1 (adaptive, 40 trials, 64 min): best 0.17 refusal at KL 0.095. **At KL ≤ 0.01: 0.70** (base 0.14).
+
+## 2026-11-11: Day-3 v13, Defense v2 (extended refusal + simulated abliteration): COMPLETE in 189 min
+- 36 layers; train 111.5 min; clean loss 0.734 → 0.132, attacked loss 0.778 → 0.169. Uploaded to `xref-v2` (private).
+- Refusal on harmful test[:100]: **1.00**. XSTest safe over-refusal: **0.46** (the main cost to fix).
+- Heretic on v2 (64.6 min): **refusal stays ≥ 0.96 for KL ≤ 0.1**; best 0.33 needs KL 0.153 (17× the base attack's KL).
+
+## Pareto summary (`scripts/pareto.py` → `results/pareto_summary.json`)
+| model | min refusal, KL≤0.01 | KL≤0.05 | KL≤0.1 | best any |
+|---|---|---|---|---|
+| base | 0.14 | 0.14 | 0.14 | 0.14 @ 0.009 |
+| v1 | 0.70 | 0.43 | 0.17 | 0.17 @ 0.095 |
+| v2 | **1.00** | **1.00** | **0.96** | 0.33 @ 0.153 |
+- **Caveats:**
+  - Refusal is a keyword rate, so it needs a judge-based check on the attacked outputs.
+  - 40 trials only.
+  - The v2 over-refusal of 0.46 must be reduced: try a larger benign/XSTest-style mix, or lower P_ATTACK.
+- **Next:**
+  1. A v2b run to fix over-refusal.
+  2. LoRA fine-tune attacks.
+  3. MMLU.
+  4. Lexsi toolkit chaining.
