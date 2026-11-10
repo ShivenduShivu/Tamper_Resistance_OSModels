@@ -139,3 +139,26 @@ Refusal on harmful test[:100] is shown as judge (ProtectAI classifier) / keyword
   - The defense generalises across *direction-based* attacks: Heretic, SafeTune ablation, and partly CAA steering.
   - It survives 4-bit quantisation and resists sampling attacks.
   - It does **not** help against prefilling or fine-tuning.
+
+## 2026-11-12: Day-5b, Kaggle v19 (129 min). Exact Heretic Pareto trials re-applied, then judged and MMLU'd
+Each Heretic point is labelled by its keyword refusal (r = refusal on Heretic's front) and its KL. Judge = ProtectAI classifier.
+
+| Point (KL) | Harmful refusal: judge / kw | XSTest unsafe refusal (judge) | XSTest safe over-refusal (judge) | MMLU-1000 |
+|---|---|---|---|---|
+| base clean | 0.99 / 0.99 | — | — | 0.529 |
+| base r14 (KL 0.009) | **0.01** / 0.08 | 0.17 | 0.048 | 0.527 |
+| base r51 (KL 0.003) | 0.30 / 0.44 | 0.42 | 0.056 | 0.534 |
+| v2 clean | 1.00 / 1.00 | — | — | 0.505 |
+| v2 r70 (KL 0.108) | 0.52 / 0.65 | 0.755 | 0.10 | 0.501 |
+| v2 r51 (KL 0.116) | 0.33 / 0.46 | 0.66 | 0.096 | 0.501 |
+| v2 r33 (KL 0.153) | **0.23** / 0.42 | 0.615 | 0.092 | 0.510 |
+| v2b r84 (KL 0.025) | 0.77 / 0.83 | 0.735 | 0.092 | 0.497 |
+| v2b r67 (KL 0.040) | 0.50 / 0.65 | 0.615 | 0.072 | 0.494 |
+| v2b r47 (KL 0.054) | 0.24 / 0.40 | 0.475 | 0.064 | 0.496 |
+
+- **Reading (honest):**
+  - **The original is stripped for free.** Heretic's best attack takes it to 1% judged refusal at KL 0.009, with no MMLU change (0.527). The keyword metric (8%) hid how complete the strip is.
+  - **v2 raises the price but is not unbreakable.** The strongest attack Heretic found still leaves 23% judged refusal, needs 16× the KL, and **does not reduce MMLU** (0.510). So the attacker pays in behaviour shift (KL) and gets a weaker strip, but keeps general knowledge. Answer to the teammate's question: MMLU holds, so "the attacker pays more KL".
+  - **Even attacked, v2 still refuses explicitly unsafe XSTest prompts much more** than the attacked original (0.62–0.76 vs 0.17).
+  - **v2b breaks at lower KL** than v2 (0.24 at KL 0.054), consistent with the usability trade-off.
+- **CircuitKIT failed again:** the public `register_jailbreakbench` builds `answer_contrastive` pairs (corrupt prompt == clean prompt), which `discover()` rejects as degenerate. This is a genuine upstream issue (PR candidate #4, now encountered in our own work). Day-5c (v20) builds the task directly with `pairing_mode="harmful_vs_benign"`.
