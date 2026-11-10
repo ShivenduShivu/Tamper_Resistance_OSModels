@@ -1,0 +1,89 @@
+[{"stream_name":"stdout","time":1.359798391,"data":"secret unavailable: Connection error trying to communicate with service.\n"}
+,{"stream_name":"stderr","time":36.887865556,"data":"ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.\n"}
+,{"stream_name":"stderr","time":36.887917154,"data":"bigframes 2.51.0 requires google-cloud-bigquery-storage\u003c3.0.0,\u003e=2.30.0, which is not installed.\n"}
+,{"stream_name":"stderr","time":36.887926066,"data":"ydata-profiling 4.18.4 requires numpy\u003c2.4,\u003e=1.22, but you have numpy 2.5.4 which is incompatible.\n"}
+,{"stream_name":"stderr","time":36.887932596,"data":"dopamine-rl 4.1.2 requires gym\u003c=0.25.2, but you have gym 0.26.2 which is incompatible.\n"}
+,{"stream_name":"stderr","time":36.887938785,"data":"moviepy 1.0.3 requires decorator\u003c5.0,\u003e=4.0.2, but you have decorator 5.3.1 which is incompatible.\n"}
+,{"stream_name":"stderr","time":36.887944062,"data":"cudf-cu13 26.6.0 requires pyarrow\u003c24,\u003e=19.0.0, but you have pyarrow 26.0.1 which is incompatible.\n"}
+,{"stream_name":"stderr","time":36.887949239,"data":"ydf 0.15.0 requires protobuf\u003c7.0.0,\u003e=5.29.1, but you have protobuf 7.36.2 which is incompatible.\n"}
+,{"stream_name":"stderr","time":36.887954528,"data":"bigframes 2.51.0 requires rich\u003c14,\u003e=12.4.4, but you have rich 15.0.0 which is incompatible.\n"}
+,{"stream_name":"stderr","time":36.887959612,"data":"numba 0.61.2 requires numpy\u003c2.3,\u003e=1.24, but you have numpy 2.5.4 which is incompatible.\n"}
+,{"stream_name":"stderr","time":36.887971772,"data":"gradio 6.30.0 requires pillow\u003c13.0,\u003e=8.0, but you have pillow 13.0.0 which is incompatible.\n"}
+,{"stream_name":"stderr","time":82.594228205,"data":"[transformers] `torch_dtype` is deprecated! Use `dtype` instead!\n"}
+,{"stream_name":"stderr","time":118.558308928,"data":"\rFetching 2 files:   0%|          | 0/2 [00:00\u003c?, ?it/s]\rFetching 2 files:  50%|█████     | 1/2 [00:15\u003c00:15, 15.29s/it]\rFetching 2 files: 100%|██████████| 2/2 [00:35\u003c00:00, 18.33s/it]\rFetching 2 files: 100%|██████████| 2/2 [00:35\u003c00:00, 17.88s/it]\n"}
+,{"stream_name":"stderr","time":123.059686551,"data":"\rLoading weights:   0%|          | 0/290 [00:00\u003c?, ?it/s]\rLoading weights:   0%|          | 1/290 [00:01\u003c07:57,  1.65s/it]\rLoading weights:  29%|██▊       | 83/290 [00:01\u003c00:03, 63.41it/s]\rLoading weights:  40%|████      | 116/290 [00:02\u003c00:02, 68.14it/s]\rLoading weights:  48%|████▊     | 138/290 [00:02\u003c00:01, 79.13it/s]\rLoading weights:  54%|█████▍    | 157/290 [00:02\u003c00:01, 73.97it/s]\rLoading weights:  59%|█████▉    | 172/290 [00:02\u003c00:01, 76.29it/s]\rLoading weights:  64%|██████▍   | 187/290 [00:03\u003c00:01, 80.16it/s]\rLoading weights:  70%|███████   | 203/290 [00:03\u003c00:00, 87.30it/s]\rLoading weights:  74%|███████▍  | 215/290 [00:03\u003c00:00, 90.11it/s]\rLoading weights:  78%|███████▊  | 227/290 [00:03\u003c00:00, 91.95it/s]\rLoading weights:  82%|████████▏ | 238/290 [00:03\u003c00:00, 85.76it/s]\rLoading weights:  87%|████████▋ | 251/290 [00:03\u003c00:00, 82.15it/s]\rLoading weights:  92%|█████████▏| 267/290 [00:03\u003c00:00, 89.51it/s]\rLoading weights:  96%|█████████▌| 277/290 [00:03\u003c00:00, 88.02it/s]\rLoading weights: 100%|██████████| 290/290 [00:04\u003c00:00, 71.81it/s]\n"}
+,{"stream_name":"stdout","time":2563.208455615,"data":"base_overrefusal_orbench_heldout200 0.535\n"}
+,{"stream_name":"stdout","time":2563.316316677,"data":"border_kept 1218/1619\n"}
+,{"stream_name":"stdout","time":2563.316495959,"data":"border_minutes 40.6\n"}
+,{"stream_name":"stdout","time":2576.116208518,"data":"n_layers 36\n"}
+,{"stream_name":"stderr","time":2624.295446043,"data":"[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.\n"}
+,{"stream_name":"stdout","time":2874.846691046,"data":"step 200 clean 0.5001712065935134 attacked 0.5571589195728301\n"}
+,{"stream_name":"stdout","time":3128.114808543,"data":"step 400 clean 0.33367130771279335 attacked 0.393789302110672\n"}
+,{"stream_name":"stdout","time":3377.226598915,"data":"step 600 clean 0.31353411689400673 attacked 0.33237960770726205\n"}
+,{"stream_name":"stdout","time":3683.045462861,"data":"recomputed dirs at 100\n"}
+,{"stream_name":"stdout","time":3683.04552612,"data":"step 800 clean 0.3036280447244644 attacked 0.3081130251288414\n"}
+,{"stream_name":"stdout","time":3940.297444899,"data":"step 1000 clean 0.27564422994852067 attacked 0.34181236833333967\n"}
+,{"stream_name":"stdout","time":4186.834336003,"data":"step 1200 clean 0.2694638314843178 attacked 0.31163307108916344\n"}
+,{"stream_name":"stdout","time":4440.577823805,"data":"step 1400 clean 0.28211922824382785 attacked 0.2869084742665291\n"}
+,{"stream_name":"stdout","time":4743.318137923,"data":"recomputed dirs at 200\n"}
+,{"stream_name":"stdout","time":4743.318219175,"data":"step 1600 clean 0.2710622447729111 attacked 0.2951034639775753\n"}
+,{"stream_name":"stdout","time":5004.464318947,"data":"step 1800 clean 0.2880103500187397 attacked 0.29718032747507095\n"}
+,{"stream_name":"stdout","time":5262.184508646,"data":"step 2000 clean 0.2513067234307528 attacked 0.27697123140096663\n"}
+,{"stream_name":"stdout","time":5507.610235212,"data":"step 2200 clean 0.2605881409347057 attacked 0.26754225298762324\n"}
+,{"stream_name":"stdout","time":5807.977425317,"data":"recomputed dirs at 300\n"}
+,{"stream_name":"stdout","time":5807.977478853,"data":"step 2400 clean 0.2703358814865351 attacked 0.29810026675462725\n"}
+,{"stream_name":"stdout","time":6061.712159744,"data":"step 2600 clean 0.24615459486842156 attacked 0.2779986878484488\n"}
+,{"stream_name":"stdout","time":6320.786861397,"data":"step 2800 clean 0.2681637386977673 attacked 0.26004728689789774\n"}
+,{"stream_name":"stdout","time":6569.910387003,"data":"step 3000 clean 0.24747094869613648 attacked 0.27435947485268114\n"}
+,{"stream_name":"stdout","time":6872.06763418,"data":"recomputed dirs at 400\n"}
+,{"stream_name":"stdout","time":6872.067696707,"data":"step 3200 clean 0.23074628353118898 attacked 0.28161037430167196\n"}
+,{"stream_name":"stdout","time":7129.269953168,"data":"step 3400 clean 0.2604093439877033 attacked 0.2613931891322136\n"}
+,{"stream_name":"stdout","time":7377.483458248,"data":"step 3600 clean 0.2139808727428317 attacked 0.23794874899089336\n"}
+,{"stream_name":"stdout","time":7630.165635887,"data":"step 3800 clean 0.15910075016319752 attacked 0.17187184527516364\n"}
+,{"stream_name":"stdout","time":7936.915678157,"data":"recomputed dirs at 500\n"}
+,{"stream_name":"stdout","time":7936.915750718,"data":"step 4000 clean 0.1552615231508389 attacked 0.19659259843640028\n"}
+,{"stream_name":"stdout","time":8192.55936272,"data":"step 4200 clean 0.16512953076511622 attacked 0.16695907974615692\n"}
+,{"stream_name":"stdout","time":8447.598480525,"data":"step 4400 clean 0.1451119966059923 attacked 0.1709770427143667\n"}
+,{"stream_name":"stdout","time":8701.175145999,"data":"step 4600 clean 0.18364713471382857 attacked 0.18762970954179764\n"}
+,{"stream_name":"stdout","time":9006.782645862,"data":"recomputed dirs at 600\n"}
+,{"stream_name":"stdout","time":9006.782707131,"data":"step 4800 clean 0.1468682263046503 attacked 0.1827890208363533\n"}
+,{"stream_name":"stdout","time":9255.471895572,"data":"step 5000 clean 0.15875107638537883 attacked 0.16563892669044436\n"}
+,{"stream_name":"stdout","time":9507.314256951,"data":"step 5200 clean 0.14580949060618878 attacked 0.1654492722451687\n"}
+,{"stream_name":"stdout","time":9758.308227009,"data":"step 5400 clean 0.17455288015305995 attacked 0.18958368666470052\n"}
+,{"stream_name":"stdout","time":10055.912518361,"data":"recomputed dirs at 700\n"}
+,{"stream_name":"stdout","time":10055.912578115,"data":"step 5600 clean 0.14893315882887692 attacked 0.17403261904371903\n"}
+,{"stream_name":"stdout","time":10308.341881231,"data":"step 5800 clean 0.14565555582288653 attacked 0.16630924440920353\n"}
+,{"stream_name":"stdout","time":10556.520596803,"data":"step 6000 clean 0.15954909088555724 attacked 0.1770269228518009\n"}
+,{"stream_name":"stdout","time":10808.817181309,"data":"step 6200 clean 0.14728612596169113 attacked 0.16415363932028412\n"}
+,{"stream_name":"stdout","time":11110.366028363,"data":"recomputed dirs at 800\n"}
+,{"stream_name":"stdout","time":11110.366098386,"data":"step 6400 clean 0.16950933502987028 attacked 0.16521823606453837\n"}
+,{"stream_name":"stdout","time":11356.742315756,"data":"step 6600 clean 0.1471223201812245 attacked 0.1605672574415803\n"}
+,{"stream_name":"stdout","time":11614.060118996,"data":"step 6800 clean 0.15591579656116664 attacked 0.14794896315317602\n"}
+,{"stream_name":"stdout","time":11869.57609688,"data":"step 7000 clean 0.15563351798802613 attacked 0.1717830388993025\n"}
+,{"stream_name":"stdout","time":12056.668171068,"data":"v2b_train_minutes 157.2\n"}
+,{"stream_name":"stdout","time":12056.669586037,"data":"v2b_loss_clean_first_last [0.732, 0.163]\n"}
+,{"stream_name":"stdout","time":12056.670215434,"data":"v2b_loss_attacked_first_last [0.803, 0.176]\n"}
+,{"stream_name":"stderr","time":12067.087934586,"data":"\rWriting model shards:   0%|          | 0/2 [00:00\u003c?, ?it/s]\rWriting model shards:  50%|█████     | 1/2 [00:07\u003c00:07,  7.76s/it]\rWriting model shards: 100%|██████████| 2/2 [00:10\u003c00:00,  4.69s/it]\rWriting model shards: 100%|██████████| 2/2 [00:10\u003c00:00,  5.15s/it]\n"}
+,{"stream_name":"stderr","time":12091.608085743,"data":"\rGenerating gpt4 split:   0%|          | 0/450 [00:00\u003c?, ? examples/s]\rGenerating gpt4 split: 100%|██████████| 450/450 [00:00\u003c00:00, 48090.01 examples/s]\n"}
+,{"stream_name":"stderr","time":12091.614237118,"data":"\rGenerating llama2new split:   0%|          | 0/450 [00:00\u003c?, ? examples/s]\rGenerating llama2new split: 100%|██████████| 450/450 [00:00\u003c00:00, 80343.81 examples/s]\n"}
+,{"stream_name":"stderr","time":12091.620634547,"data":"\rGenerating llama2orig split:   0%|          | 0/450 [00:00\u003c?, ? examples/s]\rGenerating llama2orig split: 100%|██████████| 450/450 [00:00\u003c00:00, 77303.28 examples/s]\n"}
+,{"stream_name":"stderr","time":12091.625424455,"data":"\rGenerating mistralguard split:   0%|          | 0/450 [00:00\u003c?, ? examples/s]\rGenerating mistralguard split: 100%|██████████| 450/450 [00:00\u003c00:00, 104445.62 examples/s]\n"}
+,{"stream_name":"stderr","time":12091.629881315,"data":"\rGenerating mistralinstruct split:   0%|          | 0/450 [00:00\u003c?, ? examples/s]\rGenerating mistralinstruct split: 100%|██████████| 450/450 [00:00\u003c00:00, 114327.75 examples/s]\n"}
+,{"stream_name":"stderr","time":12091.633856699,"data":"\rGenerating prompts split:   0%|          | 0/450 [00:00\u003c?, ? examples/s]\rGenerating prompts split: 100%|██████████| 450/450 [00:00\u003c00:00, 128388.33 examples/s]\n"}
+,{"stream_name":"stderr","time":12093.12943797,"data":"\rGenerating train split:   0%|          | 0/416 [00:00\u003c?, ? examples/s]\rGenerating train split: 100%|██████████| 416/416 [00:00\u003c00:00, 157319.49 examples/s]\n"}
+,{"stream_name":"stderr","time":12093.132364349,"data":"\rGenerating test split:   0%|          | 0/104 [00:00\u003c?, ? examples/s]\rGenerating test split: 100%|██████████| 104/104 [00:00\u003c00:00, 44789.77 examples/s]\n"}
+,{"stream_name":"stdout","time":12155.494338497,"data":"v2b_refusal_harmful_test100 1.0\n"}
+,{"stream_name":"stdout","time":12302.333310234,"data":"v2b_overrefusal_xstest_safe 0.208\n"}
+,{"stream_name":"stdout","time":12420.961841128,"data":"v2b_refusal_xstest_unsafe 0.885\n"}
+,{"stream_name":"stdout","time":12542.377583746,"data":"v2b_overrefusal_orbench_heldout200 0.59\n"}
+,{"stream_name":"stdout","time":12589.644165053,"data":"hf_model StarWarrior24x7/tiny-aya-global-xref-v2\n"}
+,{"stream_name":"stdout","time":16243.366200773,"data":"heretic_v2b_exit 1\n"}
+,{"stream_name":"stdout","time":16243.366559179,"data":"heretic_v2b_minutes 60.9\n"}
+,{"stream_name":"stdout","time":16243.668293419,"data":"DONE True\n"}
+,{"stream_name":"stderr","time":16248.123415631,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":16248.123450813,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":16248.416915811,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":16248.416954986,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":16249.283027339,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":16250.260766091,"data":"[NbConvertApp] Writing 346539 bytes to __results__.html\n"}
+]
