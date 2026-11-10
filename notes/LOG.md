@@ -100,3 +100,18 @@ Format: date, run, config, result, decision.
   - Refusal on harmful test[:100] scored three ways: keyword, strict keyword, and the ProtectAI rejection classifier (judge).
   - Then a harmful LoRA fine-tune attack (r=16, lr 2e-4, LLM-LAT `rejected` responses, prompts disjoint from our defense training set), with refusal measured at 25/100/250 optimizer steps (100/400/1,000 examples).
 - Attacked weights are never saved.
+- **v16 result (114 min, about 27 min per model).** Refusal is shown as keyword / strict / judge.
+
+| model | MMLU-1000 | clean | after 25 steps (100 ex) | 100 steps | 250 steps |
+|---|---|---|---|---|---|
+| base | 0.529 | .99/.99/.99 | .03/0/.01 | .07/0/.03 | .15/0/.09 |
+| v1 | 0.507 | .99/.98/.98 | .05/0/.03 | .10/0/.05 | .12/0/.10 |
+| v2 | 0.505 | 1/1/1 | .05/0/.03 | .10/0/.06 | .12/0/.08 |
+| v2b | 0.501 | 1/1/1 | .05/0/.01 | .12/0/.06 | .15/0/.09 |
+
+- **Reading:**
+  - **No defense resists a harmful LoRA fine-tune:** 100 examples strip every model, consistent with Qi et al. 2023 and the TamperBench findings.
+  - **The defense is abliteration-specific.**
+  - **MMLU cost is about 2.5 points** (0.529 → ~0.50).
+  - **The judge classifier agrees with keyword counting** on clean models (0.99 vs 0.99, 1.0 vs 1.0).
+- **Decision needed:** either scope the claim to "data-free weight-editing attacks" (Heretic is the attack actually used in the wild), or try a cheap fine-tuning hardening step (TAR-lite or SafeTune harden), or the SafeTune recover/repair angle.

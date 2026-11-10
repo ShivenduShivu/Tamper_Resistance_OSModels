@@ -47,15 +47,17 @@ S += [p("Heretic-Resistant Tiny Aya", H1),
           "refuse even when its refusal direction is removed.",
           "4. Result: against our model <b>v2</b>, Heretic could not lower refusals at all (still <b>100%</b>) at the damage level "
           "that fully stripped the original. A second version, <b>v2b</b>, fixes the over-refusal that v2 introduced.",
-          "5. Now running: a second, different attack (harmful fine-tuning), plus a general-ability check (MMLU) and an "
-          "independent refusal judge."]),
+          "5. A second attack, <b>harmful fine-tuning</b> (training on about 100 harmful examples), strips <b>every</b> model, ours included. "
+          "So our defense is specific to weight-editing attacks like Heretic. The cost to general ability is small (MMLU 52.9% to about 50%)."]),
       Spacer(1, 6), p("Key numbers so far", H2),
       tbl([["", "Original", "v1", "v2", "v2b"],
            ["Refuses harmful prompts (no attack)", "99%", "99%", "100%", "100%"],
            ["After Heretic, small damage (KL at most 0.01)", "<b>14%</b>", "70%", "<b>100%</b>", "99%"],
            ["After Heretic, KL at most 0.05", "14%", "43%", "<b>100%</b>", "52%"],
            ["Lowest refusal Heretic ever reached", "14%", "17%", "33%", "<b>47%</b>"],
-           ["Wrongly refuses safe prompts (XSTest)", "12%", "17.6%", "46%", "<b>20.8%</b>"]],
+           ["Wrongly refuses safe prompts (XSTest)", "12%", "17.6%", "46%", "<b>20.8%</b>"],
+           ["After harmful LoRA fine-tune, 100 examples (judge)", "1%", "3%", "3%", "1%"],
+           ["MMLU, 1,000 questions (general ability)", "52.9%", "50.7%", "50.5%", "50.1%"]],
           [62, 28, 28, 28, 28]),
       p("Higher is better in rows 1 to 4 (more safety survives the attack). Lower is better in the last row (fewer "
         "needless refusals).", SM),
@@ -131,7 +133,7 @@ S += [p("3. How we designed the experiment", H2),
            ["v13", "<b>Train v2, evaluate, Heretic on v2</b>", "Done in 189 min", "<b>v2 holds 100% up to KL 0.05</b>, but over-refuses (46%)"],
            ["v14", "v2b", "Typo, crashed at start", "No GPU time lost"],
            ["v15", "<b>Train v2b, evaluate, Heretic on v2b</b>", "Done in 280 min", "Over-refusal falls to 20.8%; resistance trade-off"],
-           ["v16", "<b>Fine-tuning attack, MMLU, judge</b>", "<b>Running now</b>", "See section 7"]],
+           ["v16", "<b>Fine-tuning attack, MMLU, judge</b>", "Done in 114 min", "Fine-tuning strips all models; MMLU cost about 2.5 points; the judge agrees with the keyword counts"]],
           [17, 50, 55, 58]),
       PageBreak()]
 
@@ -160,22 +162,26 @@ S += [p("5. What we got", H2),
                 "but raises the worst case (47% vs 33%). v2 and v2b are two useful points on a <b>safety vs usability "
                 "curve</b>, and we report both."]),
       box("Honest caveats (we say these before judges do)", [
-          "- Refusals are counted by keyword matching so far. Day-4 adds a separate classifier judge to check this.",
+          "- On clean models the classifier judge agrees with keyword counting (99% vs 99%). Heretic's attacked outputs are still scored by keywords only.",
           "- Each Heretic search ran 40 trials. A longer search might find stronger attacks.",
-          "- One model size (3B) and one attacker family so far. Day-4 adds a second, very different attack.",
-          "- General ability (MMLU) has not been measured yet. It is in the Day-4 run."], bg="#FFF8E6", border="#C98A00"),
+          "- One model size (3B). Our defense does <b>not</b> stop harmful fine-tuning (see section 6).",
+          "- General ability drops slightly: MMLU 52.9% to 50.1 to 50.7%."], bg="#FFF8E6", border="#C98A00"),
       PageBreak()]
 
 # ================= 6-7 NOW / NEXT
-S += [p("6. What is running now (Day-4, Kaggle v16)", H2),
-      *bullets(["For each of the original model, v1, v2 and v2b: <b>MMLU</b> on 1,000 questions to check the defense did not hurt general ability.",
-                "Refusal scored three ways: keyword, strict keyword, and an independent <b>refusal classifier</b> (ProtectAI).",
-                "A <b>harmful fine-tuning attack</b>: LoRA trained to comply, measured after 100, 400 and 1,000 examples. "
-                "This is a completely different attack from Heretic. It tests whether the defense generalises.",
-                "Expected: about 2 hours. Attacked weights are never saved."]),
+S += [p("6. Second attack: harmful fine-tuning (Day-4, done)", H2),
+      tbl([["Model", "MMLU", "No attack", "After 100 examples", "After 400", "After 1,000"],
+           ["Original", "52.9%", "99%", "1%", "3%", "9%"], ["v1", "50.7%", "98%", "3%", "5%", "10%"],
+           ["v2", "50.5%", "100%", "3%", "6%", "8%"], ["v2b", "50.1%", "100%", "1%", "6%", "9%"]], [25, 25, 30, 35, 32, 33]),
+      p("Refusal is scored by the independent classifier judge (ProtectAI). LoRA attack with learning rate 2e-4 on public harmful examples. Attacked weights are never saved.", SM),
+      box("What this means", [
+          "- <b>Every model is stripped by about 100 harmful examples.</b> This matches the literature: fine-tuning attacks remain the open problem in tamper resistance (Qi et al. 2023, TamperBench).",
+          "- Our defense works against <b>data-free weight editing</b> (Heretic / abliteration). That is the attack actually used to make the many abliterated models on Hugging Face: it is free, needs no harmful data and takes one command.",
+          "- Fine-tuning needs harmful training data and a training setup, so it is a different (higher-effort) threat. We will report this clearly as the limit of our defense.",
+          "- The cost to general ability is small: about 2.5 MMLU points."], bg="#FFF8E6", border="#C98A00"),
       p("7. Plan to submission (by the evening of 14 Nov)", H2),
       tbl([["Step", "What", "Why it matters"],
-           ["1", "Read the Day-4 results; choose the headline model (v2 or v2b) per attack", "Results across two attacks are the core claim"],
+           ["1", "Decide the scope: claim resistance to data-free attacks, and optionally try a cheap fine-tuning hardening step (SafeTune harden / TAR-lite)", "Fine-tuning broke every model; we need a clear, honest claim"],
            ["2", "Chain the Lexsi toolkits: <b>SafeTune</b> (evaluation and baseline defenses), <b>AuditKIT</b> (red-team and over-refusal probes), <b>CircuitKIT</b> (where refusal lives inside v2 vs the original)",
             "Hackathon rule: use at least 2 Lexsi repos. Also gives a mechanism story"],
            ["3", "Mechanism plot: how spread out refusal is across layers, original vs v2", "Explains why the defense works, not just that it does"],
@@ -192,12 +198,12 @@ S += [p("6. What is running now (Day-4, Kaggle v16)", H2),
                 "<b>We report the trade-off and the caveats</b> instead of hiding them. Research judges reward this.",
                 "<b>Runs on free hardware</b> (T4, about 2 to 3 hours per defense). That is practical for real model publishers."]),
       p("<b>Risks</b>", H3),
-      *bullets(["The fine-tuning attack may break all defenses. That is common in the literature, but it is still a useful, honest result.",
-                "The keyword metric could overstate refusal. The judge in Day-4 addresses this.",
+      *bullets(["<b>Confirmed:</b> harmful fine-tuning breaks all our models. We must frame the claim as resistance to data-free weight editing, which is still the attack used in the wild.",
+                "Heretic-attacked outputs are still scored by keywords only (the judge agreed on clean models).",
                 "The toolkit-chaining rule is not done yet. It is planned for Day 5."]),
-      p("Our view: if Day-4 shows that v2 or v2b also slows the fine-tuning attack, and the judge agrees with the keyword "
-        "numbers, this is a strong shortlist candidate. Even if fine-tuning wins, the Heretic result plus honest reporting "
-        "is a solid, defensible submission. We can't promise a placement; this is our reading of the evidence.", B),
+      p("Our view: the Heretic result (14% vs 100% at the same damage) is strong and novel on Tiny Aya. The fine-tuning result "
+        "limits the claim but makes the study more credible. With clear scoping, the Lexsi toolkit chaining and a "
+        "mechanism story, this is a competitive shortlist candidate. We can't promise a placement; this is our reading of the evidence.", B),
       PageBreak()]
 
 # ================= 9 COORDINATOR
@@ -208,8 +214,8 @@ S += [p("9. For the coordinator: a short pitch and our questions", H2),
           "attack</i> (Fool's Gold, ART) and by extended-refusal training, we built a defense that trains Tiny Aya through "
           "a simulated, constantly re-computed abliteration. Then we re-ran Heretic from scratch on our model. "
           "Refusal stayed at 100% at the damage level that fully stripped the original. A second version keeps most of "
-          "that while cutting needless refusals back to about 21%. We are now testing a second attack (harmful "
-          "fine-tuning), general ability, and an independent judge, and will chain SafeTune, AuditKIT and CircuitKIT for "
+          "that while cutting needless refusals back to about 21%, at a cost of about 2.5 MMLU points. Harmful fine-tuning "
+          "still strips every model, so we scope our claim to data-free weight-editing attacks, and will chain SafeTune, AuditKIT and CircuitKIT for "
           "evaluation and a mechanism analysis."], bg="#EEF2FA", border="#1F2A44"),
       p("Questions we would like answered", H3),
       *bullets(["<b>Toolkit chaining:</b> does using SafeTune (evaluation and a baseline defense), AuditKIT (probes) and "
