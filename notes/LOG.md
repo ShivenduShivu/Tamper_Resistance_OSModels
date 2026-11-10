@@ -27,3 +27,23 @@ Format: date, run, config, result, decision.
   5. Heretic on v1, same configuration as step 1 (adaptive).
 - **v5 result:** failed after 2 minutes with "no HF_TOKEN". **Confirmed: Kaggle does not pass secrets to versions pushed from the CLI**, even when the secret is attached to the notebook. No GPU time was used.
 - **Next:** the user clicks Save Version → Save & Run All in the UI. The editor already holds the v5 code.
+
+## 2026-11-11: Token fixed with option B (private Kaggle dataset `lexsi-hf-token`, scoped fine-grained token)
+- **v9:** Heretic baseline finished all 40 trials in 52.7 min. Its "exit 1" is only the interactive menu at the end (EOFError), which is harmless.
+  - Then the script crashed: `datasets` Column objects can't be joined with `+`. Fixed.
+- **BASELINE RESULT: Heretic strips Tiny Aya almost for free.** Pareto front (refusal rate on harmful_behaviors test[:100], KL on harmless prompts):
+  - 0.99 / 0.000 (no attack)
+  - 0.51 / 0.003
+  - 0.20 / 0.007
+  - **0.14 / 0.009**
+  - So refusal can be cut from 99% to 14% with almost no measurable damage. **GO: the threat is real on Tiny Aya.**
+  - Raw trials are in `results/day2_baseline/heretic_base_trials.json`.
+- **v10:** data generation finished in 67 min (1,200/1,560 refusals kept, 1,155 benign). Two failures followed:
+  - HF create_repo was forbidden for the scoped token.
+  - Training ran out of GPU memory: the ~262k vocabulary makes the output scores about 4 GB at batch 4 × length 1,024.
+- **Fixes:**
+  - Data uploaded from the laptop to the HF dataset; the job now loads it instead of regenerating.
+  - Batch size 1 with gradient accumulation 8.
+  - Skip create_repo.
+  - Day-3 direction batches reduced to 4.
+- **v11:** launched. The chain watcher auto-launches Day-3 if v11 finishes.
