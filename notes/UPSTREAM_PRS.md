@@ -5,3 +5,14 @@ A PR is opened only when a fix is genuine, small and tested.
 
 | # | Repo | What we found | Evidence (file:line / run) | Fix size | Status |
 |---|---|---|---|---|---|
+| 1 | AuditKIT | When no detectors are given, `RedTeamRunner` merges every probe's detectors and applies them to all probes. A correct refusal on a jailbreak probe then trips `RefusalDetector` and is marked failed. `total_probes` counts prompt×detector rows, not prompts. | `auditkit/redteam/runner.py:147, 200-206`; no multi-probe test in `tests/test_redteam.py` | small | candidate: reproduce, then PR (fix + test) |
+| 2 | AuditKIT | The docstring example `Probe("jailbreak_dan")` creates a probe with no prompts, so it returns 0 results with `pass_rate` = 1.0 (a misleading pass). | `redteam/__init__.py:9`, `runner.py:59-60` | small | candidate |
+| 3 | AuditKIT | No CI workflow runs pytest (the step is commented out). | `patch-release.yml:244` | small/med | candidate |
+| 4 | CircuitKIT | `register_advbench` and the other `register_*` functions don't expose `refusal_token`, `compliance_token` or `pairing_mode`, although the internals support them. Tokenizers like Cohere's need them. | `tasks/safety_datasets.py:86-114`, `safety_prompt.py:169` | small | candidate: confirm we need it for tiny-aya |
+| 5 | SafeTune | The `SpectralEntropyMonitor.scan` docstring says it returns 3-tuples; it actually returns `(idx, layer, entropy, z)`. | `instrumentation/evaluate/suite/spectral.py:167-170` | tiny (docs) | candidate |
+| 6 | SafeTune | The progress-bar labels "harmless" and "harmful" are swapped when called from `extract_refusal_direction`. | `core/runtime/inference/vector_extraction.py:198-199` | tiny | candidate |
+| 7 | all | CI doesn't test Python 3.13, which Kaggle runs. | CI configs | small | candidate: only if we hit a 3.13 issue |
+
+Notes:
+- All three use the LSAL-1.2 licence (academic and personal use free; contributions grant Lexsi relicensing rights).
+- Maintainers fold outside PRs into combined PRs (SafeTune #64/#68, CircuitKIT #35).
