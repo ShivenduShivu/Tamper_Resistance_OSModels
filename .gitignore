@@ -9,3 +9,9 @@ __pycache__/
 *access_token*
 kaggle.json
 secrets/
+
+# private / internal (kept on the laptop only)
+docs/Lexsi_Hackathon_Strategy.pdf
+docs/build/build_lexsi_pdf.py
+# generated training data (lives in private HF / Kaggle datasets)
+results/**/border.jsonl
