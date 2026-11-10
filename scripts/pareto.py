@@ -6,7 +6,8 @@ from optuna.storages.journal import JournalFileBackend
 optuna.logging.set_verbosity(optuna.logging.ERROR)
 RUNS = {"base": "results/day2_baseline/heretic_base/ckpt/*.jsonl",
         "v1": "results/day2/heretic_v1/ckpt/*.jsonl",
-        "v2": "results/day3/heretic_v2/ckpt/*.jsonl"}
+        "v2": "results/day3/heretic_v2/ckpt/*.jsonl",
+        "v2b": "results/day3b/heretic_v2b/ckpt/*.jsonl"}
 def front(pts):
     f, best = [], 9
     for r, kl in sorted(pts, key=lambda p: (p[1], p[0])):

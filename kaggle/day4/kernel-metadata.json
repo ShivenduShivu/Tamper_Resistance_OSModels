@@ -1,0 +1,15 @@
+{
+  "id": "shivendushivu/lexsi-day1-checks",
+  "title": "lexsi-day1-checks",
+  "code_file": "day4_attack_eval.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_internet": true,
+  "machine_shape": "NvidiaTeslaT4",
+  "dataset_sources": ["shivendushivu/lexsi-hf-token", "shivendushivu/lexsi-train-data"],
+  "competition_sources": [],
+  "kernel_sources": []
+}
+

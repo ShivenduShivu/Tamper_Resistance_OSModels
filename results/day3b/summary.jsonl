@@ -1,0 +1,15 @@
+{"base_overrefusal_orbench_heldout200": 0.535}
+{"border_kept": "1218/1619"}
+{"border_minutes": 40.6}
+{"n_layers": 36}
+{"v2b_train_minutes": 157.2}
+{"v2b_loss_clean_first_last": [0.732, 0.163]}
+{"v2b_loss_attacked_first_last": [0.803, 0.176]}
+{"v2b_refusal_harmful_test100": 1.0}
+{"v2b_overrefusal_xstest_safe": 0.208}
+{"v2b_refusal_xstest_unsafe": 0.885}
+{"v2b_overrefusal_orbench_heldout200": 0.59}
+{"hf_model": "StarWarrior24x7/tiny-aya-global-xref-v2"}
+{"heretic_v2b_exit": 1}
+{"heretic_v2b_minutes": 60.9}
+{"DONE": true}

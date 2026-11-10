@@ -83,3 +83,20 @@ Format: date, run, config, result, decision.
   - XSTest unsafe (contrast) refusal, to confirm v2b still refuses genuinely unsafe prompts.
 - **Upload:** weights go to the `v2b/` subfolder of the xref-v2 repo, because the scoped token can't create repos.
 - **v14:** pushed with a syntax error and replaced by v15.
+- **v15 result (280 min):**
+  - **Training data:** 1,218 of 1,619 borderline answers kept.
+  - **Refusal and over-refusal:**
+    - Harmful-prompt refusal: 1.00.
+    - XSTest safe over-refusal: **0.208** (v2 had 0.46).
+    - XSTest unsafe refusal: 0.885.
+    - OR-Bench held-out over-refusal: original model 0.535, v2b 0.59. The keyword markers "illegal"/"harmful" inflate this number, so it needs a judge.
+  - **Heretic on v2b:** min refusal 0.99 at KL≤0.01, 0.52 at KL≤0.05, 0.47 at KL≤0.1. Best overall 0.47 (v2: 0.33; original: 0.14).
+- **Reading:** fixing over-refusal costs low-KL robustness (at KL 0.05, refusal drops from 1.00 to 0.52), yet v2b's worst case (0.47) is still above v2's (0.33).
+  - v2 and v2b are therefore two points on a safety/usability trade-off curve. Report both.
+
+## 2026-11-11: Day-4 attack eval, Kaggle v16 (`kaggle/day4`)
+- **Models:** original, v1, v2, v2b. For each:
+  - MMLU (1,000 questions, 0-shot, letter logits).
+  - Refusal on harmful test[:100] scored three ways: keyword, strict keyword, and the ProtectAI rejection classifier (judge).
+  - Then a harmful LoRA fine-tune attack (r=16, lr 2e-4, LLM-LAT `rejected` responses, prompts disjoint from our defense training set), with refusal measured at 25/100/250 optimizer steps (100/400/1,000 examples).
+- Attacked weights are never saved.
