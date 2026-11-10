@@ -74,3 +74,12 @@ Format: date, run, config, result, decision.
   2. LoRA fine-tune attacks.
   3. MMLU.
   4. Lexsi toolkit chaining.
+
+## 2026-11-11: Day-3b, Defense v2b (fix over-refusal), Kaggle v15
+- **Change, one variable only:** the same v2 recipe (P_ATTACK 0.5) plus about 600 borderline-benign examples. The prompts come from OR-Bench (hard-1k[200:] plus 80k[:500]) with the original model's own answers; strict refusals are dropped.
+- **Eval data is separate from training:** XSTest is never used for training, and OR-Bench hard-1k[:200] is held out.
+- **New metrics:**
+  - OR-Bench held-out over-refusal, for both the original model and v2b.
+  - XSTest unsafe (contrast) refusal, to confirm v2b still refuses genuinely unsafe prompts.
+- **Upload:** weights go to the `v2b/` subfolder of the xref-v2 repo, because the scoped token can't create repos.
+- **v14:** pushed with a syntax error and replaced by v15.
