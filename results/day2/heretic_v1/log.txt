@@ -1,0 +1,1201 @@
+█░█░█▀▀░█▀▄░█▀▀░▀█▀░█░█▀▀  v2.1.0
+█▀█░█▀▀░█▀▄░█▀▀░░█░░█░█░░  https://heretic-project.org
+▀░▀░▀▀▀░▀░▀░▀▀▀░░▀░░▀░▀▀▀  https://github.com/p-e-w/heretic
+
+Detected 2 CUDA device(s) (29.12 GB total VRAM)
+CUDA Version: 13.0
+Driver Version: 580.178.04
+* CUDA 0: Tesla T4 (14.56 GB)
+* CUDA 1: Tesla T4 (14.56 GB)
+
+Loading model /kaggle/working/v1...
+* Trying dtype float16...
+Loading weights:   0%|          | 0/290 [00:00<?, ?it/s]Loading weights:   0%|          | 1/290 [00:00<00:54,  5.31it/s]Loading weights:   8%|▊         | 23/290 [00:00<00:02, 96.33it/s]Loading weights:  16%|█▌        | 46/290 [00:00<00:01, 146.56it/s]Loading weights:  24%|██▍       | 69/290 [00:00<00:01, 172.80it/s]Loading weights:  32%|███▏      | 93/290 [00:00<00:01, 191.61it/s]Loading weights:  40%|████      | 117/290 [00:00<00:00, 203.90it/s]Loading weights:  49%|████▊     | 141/290 [00:00<00:00, 211.71it/s]Loading weights:  57%|█████▋    | 165/290 [00:00<00:00, 217.18it/s]Loading weights:  65%|██████▌   | 189/290 [00:01<00:00, 223.04it/s]Loading weights:  73%|███████▎  | 213/290 [00:01<00:00, 224.28it/s]Loading weights:  82%|████████▏ | 237/290 [00:01<00:00, 225.35it/s]Loading weights:  90%|█████████ | 261/290 [00:01<00:00, 227.36it/s]Loading weights:  98%|█████████▊| 285/290 [00:01<00:00, 227.97it/s]Loading weights: 100%|██████████| 290/290 [00:01<00:00, 200.97it/s]
+* Transformer model with 36 layers
+* Modifiable components:
+  * attn.o_proj: 36 modules total
+  * mlp.down_proj: 36 modules total
+
+Resident system RAM: 1.80 GB
+Allocated GPU VRAM: 6.25 GB
+Reserved GPU VRAM: 6.39 GB
+
+Loading batch size test prompts from mlabonne/harmless_alpaca...
+Generating train split:   0%|          | 0/25058 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 25058/25058 [00:00<00:00, 1497739.44 examples/s]
+Generating test split:   0%|          | 0/6265 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 6265/6265 [00:00<00:00, 949565.08 examples/s]
+* 256 prompts loaded
+
+Determining optimal batch size...
+* Trying batch size 1... Ok (15 tokens/s)
+* Trying batch size 2... Ok (31 tokens/s)
+* Trying batch size 4... Ok (58 tokens/s)
+* Trying batch size 8... Ok (108 tokens/s)
+* Trying batch size 16... Ok (167 tokens/s)
+* Trying batch size 32... Ok (196 tokens/s)
+* Trying batch size 64... Failed (CUDA out of memory. Tried to allocate 578.00 MiB. GPU 0 has a total 
+capacity of 14.56 GiB of which 528.81 MiB is free. Process 7 has 7.51 GiB memory
+in use. Including non-PyTorch memory, this process has 6.54 GiB memory in use. 
+Of the allocated memory 6.21 GiB is allocated by PyTorch, and 199.31 MiB is 
+reserved by PyTorch but unallocated. If reserved but unallocated memory is large
+try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid 
+fragmentation.  See documentation for Memory Management  
+(https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-wi
+th-pytorch-cuda-alloc-conf))
+* Chosen batch size: 32
+
+Loading response prefix test prompts from [mlabonne/harmless_alpaca, 
+mlabonne/harmful_behaviors]...
+* 200 prompts loaded
+
+Checking chat template for a closed Chain-of-Thought block or an initializer...
+* None found
+
+Checking for common response prefix...
+* None found
+
+Loading and initializing scorers...
+* Loaded: KeywordRate
+* Loaded: KLDivergence
+
+Loading Refusals evaluation prompts from mlabonne/harmful_behaviors...
+* 100 prompts loaded
+
+Loading KL divergence evaluation prompts from mlabonne/harmless_alpaca...
+* 100 prompts loaded
+* Obtaining baseline first-token probability distributions...
+
+Getting baseline scores...
+* Baseline Refusals: 100/100
+* Baseline KL divergence: 0 (by definition)
+
+Loading and initializing modifiers...
+* Loaded: Abliteration
+
+Loading good prompts from mlabonne/harmless_alpaca...
+* 400 prompts loaded
+
+Loading bad prompts from mlabonne/harmful_behaviors...
+* 400 prompts loaded
+
+Calculating per-layer residual directions...
+* Obtaining residual mean for good prompts...
+* Obtaining residual mean for bad prompts...
+
+Running trial 1 of 40...
+* Parameters:
+  * direction_index = per layer
+  * attn.o_proj.max_weight = 1.27
+  * attn.o_proj.max_weight_position = 21.44
+  * attn.o_proj.min_weight = 0.56
+  * attn.o_proj.min_weight_distance = 14.76
+  * mlp.down_proj.max_weight = 0.47
+  * mlp.down_proj.max_weight_position = 21.27
+  * mlp.down_proj.min_weight = 0.03
+  * mlp.down_proj.min_weight_distance = 10.62
+* Resetting model...
+* Modifying model using Magnitude-Preserving Orthogonal Ablation (MPOA)...
+* Evaluating...
+  * Refusals: 52/100
+  * KL divergence: 0.0311
+
+Elapsed time: 1m 25s
+Estimated remaining time: 54m 59s
+Resident system RAM: 2.11 GB
+Allocated GPU VRAM: 6.26 GB
+Reserved GPU VRAM: 6.30 GB
+
+Running trial 2 of 40...
+* Parameters:
+  * direction_index = 16.31
+  * attn.o_proj.max_weight = 1.32
+  * attn.o_proj.max_weight_position = 27.68
+  * attn.o_proj.min_weight = 0.54
+  * attn.o_proj.min_weight_distance = 6.64
+  * mlp.down_proj.max_weight = 0.26
+  * mlp.down_proj.max_weight_position = 24.99
+  * mlp.down_proj.min_weight = 0.15
+  * mlp.down_proj.min_weight_distance = 17.08
+* Resetting model...
+* Modifying model using Magnitude-Preserving Orthogonal Ablation (MPOA)...
+* Evaluating...
+  * Refusals: 100/100
+  * KL divergence: 0.0006
+
+Elapsed time: 2m 49s
+Estimated remaining time: 53m 31s
+Resident system RAM: 2.11 GB
+Allocated GPU VRAM: 6.26 GB
+Reserved GPU VRAM: 6.30 GB
+
+Running trial 3 of 40...
+* Parameters:
+  * direction_index = per layer
+  * attn.o_proj.max_weight = 1.01
+  * attn.o_proj.max_weight_position = 31.67
+  * attn.o_proj.min_weight = 0.95
+  * attn.o_proj.min_weight_distance = 17.67
+  * mlp.down_proj.max_weight = 0.77
+  * mlp.down_proj.max_weight_position = 24.43
+  * mlp.down_proj.min_weight = 0.40
+  * mlp.down_proj.min_weight_distance = 16.83
+* Resetting model...
+* Modifying model using Magnitude-Preserving Orthogonal Ablation (MPOA)...
+* Evaluating...
+  * Refusals: 36/100
+  * KL divergence: 0.0662
+
+Elapsed time: 4m 13s
+Estimated remaining time: 52m 6s
+Resident system RAM: 2.11 GB
+Allocated GPU VRAM: 6.26 GB
+Reserved GPU VRAM: 6.30 GB
+
+Running trial 4 of 40...
+* Parameters:
+  * direction_index = 30.41
+  * attn.o_proj.max_weight = 0.88
+  * attn.o_proj.max_weight_position = 34.74
+  * attn.o_proj.min_weight = 0.05
+  * attn.o_proj.min_weight_distance = 19.43
+  * mlp.down_proj.max_weight = 0.66
+  * mlp.down_proj.max_weight_position = 23.75
+  * mlp.down_proj.min_weight = 0.00
+  * mlp.down_proj.min_weight_distance = 20.42
+* Resetting model...
+* Modifying model using Magnitude-Preserving Orthogonal Ablation (MPOA)...
+* Evaluating...
+  * Refusals: 97/100
+  * KL divergence: 0.0289
+
+Elapsed time: 5m 38s
+Estimated remaining time: 50m 41s
+Resident system RAM: 2.11 GB
+Allocated GPU VRAM: 6.26 GB
+Reserved GPU VRAM: 6.30 GB
+
+Running trial 5 of 40...
+* Parameters:
+  * direction_index = 14.66
+  * attn.o_proj.max_weight = 1.22
+  * attn.o_proj.max_weight_position = 29.07
+  * attn.o_proj.min_weight = 0.53
+  * attn.o_proj.min_weight_distance = 7.13
+  * mlp.down_proj.max_weight = 0.78
+  * mlp.down_proj.max_weight_position = 21.71
+  * mlp.down_proj.min_weight = 0.57
+  * mlp.down_proj.min_weight_distance = 19.25
+* Resetting model...
+* Modifying model using Magnitude-Preserving Orthogonal Ablation (MPOA)...
+* Evaluating...
+  * Refusals: 98/100
+  * KL divergence: 0.0129
+
+Elapsed time: 7m 2s
+Estimated remaining time: 49m 16s
+Resident system RAM: 2.11 GB
+Allocated GPU VRAM: 6.26 GB
+Reserved GPU VRAM: 6.30 GB
+
+Running trial 6 of 40...
+* Parameters:
+  * direction_index = 20.17
+  * attn.o_proj.max_weight = 1.22
+  * attn.o_proj.max_weight_position = 29.63
+  * attn.o_proj.min_weight = 1.09
+  * attn.o_proj.min_weight_distance = 19.60
+  * mlp.down_proj.max_weight = 0.88
+  * mlp.down_proj.max_weight_position = 24.85
+  * mlp.down_proj.min_weight = 0.18
+  * mlp.down_proj.min_weight_distance = 19.76
+* Resetting model...
+* Modifying model using Magnitude-Preserving Orthogonal Ablation (MPOA)...
+* Evaluating...
+  * Refusals: 51/100
+  * KL divergence: 0.0162
+
+Elapsed time: 8m 27s
+Estimated remaining time: 47m 50s
+Resident system RAM: 2.11 GB
+Allocated GPU VRAM: 6.26 GB
+Reserved GPU VRAM: 6.30 GB
+
+Running trial 7 of 40...
+* Parameters:
+  * direction_index = 22.33
+  * attn.o_proj.max_weight = 1.11
+  * attn.o_proj.max_weight_position = 34.32
+  * attn.o_proj.min_weight = 0.16
+  * attn.o_proj.min_weight_distance = 20.51
+  * mlp.down_proj.max_weight = 0.07
+  * mlp.down_proj.max_weight_position = 29.15
+  * mlp.down_proj.min_weight = 0.03
+  * mlp.down_proj.min_weight_distance = 20.75
+* Resetting model...
+* Modifying model using Magnitude-Preserving Orthogonal Ablation (MPOA)...
+* Evaluating...
+  * Refusals: 99/100
+  * KL divergence: 0.0012
+
+Elapsed time: 9m 51s
+Estimated remaining time: 46m 25s
+Resident system RAM: 2.11 GB
+Allocated GPU VRAM: 6.26 GB
+Reserved GPU VRAM: 6.30 GB
+
+Running trial 8 of 40...
+* Parameters:
+  * direction_index = 26.04
+  * attn.o_proj.max_weight = 1.00
+  * attn.o_proj.max_weight_position = 25.55
+  * attn.o_proj.min_weight = 0.42
+  * attn.o_proj.min_weight_distance = 1.25
+  * mlp.down_proj.max_weight = 0.86
+  * mlp.down_proj.max_weight_position = 21.13
+  * mlp.down_proj.min_weight = 0.67
+  * mlp.down_proj.min_weight_distance = 6.40
+* Resetting model...
+* Modifying model using Magnitude-Preserving Orthogonal Ablation (MPOA)...
+* Evaluating...
+  * Refusals: 98/100
+  * KL divergence: 0.0268
+
+Elapsed time: 11m 14s
+Estimated remaining time: 44m 57s
+Resident system RAM: 2.11 GB
+Allocated GPU VRAM: 6.26 GB
+Reserved GPU VRAM: 6.30 GB
+
+Running trial 9 of 40...
+* Parameters:
+  * direction_index = per layer
+  * attn.o_proj.max_weight = 1.40
+  * attn.o_proj.max_weight_position = 31.89
+  * attn.o_proj.min_weight = 0.94
+  * attn.o_proj.min_weight_distance = 10.38
+  * mlp.down_proj.max_weight = 1.47
+  * mlp.down_proj.max_weight_position = 34.09
+  * mlp.down_proj.min_weight = 1.38
+  * mlp.down_proj.min_weight_distance = 7.04
+* Resetting model...
+* Modifying model using Magnitude-Preserving Orthogonal Ablation (MPOA)...
+* Evaluating...
+  * Refusals: 79/100
+  * KL divergence: 0.0797
+
+Elapsed time: 12m 38s
+Estimated remaining time: 43m 31s
+Resident system RAM: 2.11 GB
+Allocated GPU VRAM: 6.26 GB
+Reserved GPU VRAM: 6.30 GB
+
+Running trial 10 of 40...
+* Parameters:
+  * direction_index = 17.41
+  * attn.o_proj.max_weight = 1.49
+  * attn.o_proj.max_weight_position = 31.19
+  * attn.o_proj.min_weight = 0.17
+  * attn.o_proj.min_weight_distance = 6.25
+  * mlp.down_proj.max_weight = 0.97
+  * mlp.down_proj.max_weight_position = 27.94
+  * mlp.down_proj.min_weight = 0.74
+  * mlp.down_proj.min_weight_distance = 19.01
+* Resetting model...
+* Modifying model using Magnitude-Preserving Orthogonal Ablation (MPOA)...
+* Evaluating...
+  * Refusals: 99/100
+  * KL divergence: 0.0109
+
+Elapsed time: 14m 2s
+Estimated remaining time: 42m 6s
+Resident system RAM: 2.11 GB
+Allocated GPU VRAM: 6.26 GB
+Reserved GPU VRAM: 6.30 GB
+
+Running trial 11 of 40...
+* Parameters:
+  * direction_index = per layer
+  * attn.o_proj.max_weight = 1.49
+  * attn.o_proj.max_weight_position = 29.14
+  * attn.o_proj.min_weight = 1.06
+  * attn.o_proj.min_weight_distance = 5.26
+  * mlp.down_proj.max_weight = 0.09
+  * mlp.down_proj.max_weight_position = 29.96
+  * mlp.down_proj.min_weight = 0.07
+  * mlp.down_proj.min_weight_distance = 11.97
+* Resetting model...
+* Modifying model using Magnitude-Preserving Orthogonal Ablation (MPOA)...
+* Evaluating...
+  * Refusals: 98/100
+  * KL divergence: 0.0127
+
+Elapsed time: 15m 26s
+Estimated remaining time: 40m 41s
+Resident system RAM: 2.11 GB
+Allocated GPU VRAM: 6.26 GB
+Reserved GPU VRAM: 6.30 GB
+
+Running trial 12 of 40...
+* Parameters:
+  * direction_index = per layer
+  * attn.o_proj.max_weight = 1.42
+  * attn.o_proj.max_weight_position = 28.55
+  * attn.o_proj.min_weight = 0.45
+  * attn.o_proj.min_weight_distance = 5.44
+  * mlp.down_proj.max_weight = 0.00
+  * mlp.down_proj.max_weight_position = 30.45
+  * mlp.down_proj.min_weight = 0.00
+  * mlp.down_proj.min_weight_distance = 15.82
+* Resetting model...
+* Modifying model using Magnitude-Preserving Orthogonal Ablation (MPOA)...
+* Evaluating...
+  * Refusals: 99/100
+  * KL divergence: 0.0032
+
+Elapsed time: 16m 49s
+Estimated remaining time: 39m 15s
+Resident system RAM: 2.11 GB
+Allocated GPU VRAM: 6.26 GB
+Reserved GPU VRAM: 6.30 GB
+
+Running trial 13 of 40...
+* Parameters:
+  * direction_index = 20.68
+  * attn.o_proj.max_weight = 1.25
+  * attn.o_proj.max_weight_position = 29.63
+  * attn.o_proj.min_weight = 0.78
+  * attn.o_proj.min_weight_distance = 20.89
+  * mlp.down_proj.max_weight = 0.43
+  * mlp.down_proj.max_weight_position = 24.40
+  * mlp.down_proj.min_weight = 0.01
+  * mlp.down_proj.min_weight_distance = 20.95
+* Resetting model...
+* Modifying model using Magnitude-Preserving Orthogonal Ablation (MPOA)...
+* Evaluating...
+  * Refusals: 98/100
+  * KL divergence: 0.0067
+
+Elapsed time: 18m 14s
+Estimated remaining time: 37m 51s
+Resident system RAM: 2.11 GB
+Allocated GPU VRAM: 6.26 GB
+Reserved GPU VRAM: 6.30 GB
+
+Running trial 14 of 40...
+* Parameters:
+  * direction_index = 23.52
+  * attn.o_proj.max_weight = 1.18
+  * attn.o_proj.max_weight_position = 32.32
+  * attn.o_proj.min_weight = 0.73
+  * attn.o_proj.min_weight_distance = 18.21
+  * mlp.down_proj.max_weight = 0.89
+  * mlp.down_proj.max_weight_position = 28.76
+  * mlp.down_proj.min_weight = 0.23
+  * mlp.down_proj.min_weight_distance = 20.08
+* Resetting model...
+* Modifying model using Magnitude-Preserving Orthogonal Ablation (MPOA)...
+* Evaluating...
+  * Refusals: 84/100
+  * KL divergence: 0.0330
+
+Elapsed time: 19m 38s
+Estimated remaining time: 36m 27s
+Resident system RAM: 2.11 GB
+Allocated GPU VRAM: 6.26 GB
+Reserved GPU VRAM: 6.30 GB
+
+Running trial 15 of 40...
+* Parameters:
+  * direction_index = 22.45
+  * attn.o_proj.max_weight = 1.10
+  * attn.o_proj.max_weight_position = 32.91
+  * attn.o_proj.min_weight = 0.68
+  * attn.o_proj.min_weight_distance = 18.69
+  * mlp.down_proj.max_weight = 0.00
+  * mlp.down_proj.max_weight_position = 26.91
+  * mlp.down_proj.min_weight = 0.00
+  * mlp.down_proj.min_weight_distance = 20.41
+* Resetting model...
+* Modifying model using Magnitude-Preserving Orthogonal Ablation (MPOA)...
+* Evaluating...
+  * Refusals: 99/100
+  * KL divergence: 0.0027
+
+Elapsed time: 21m 1s
+Estimated remaining time: 35m 2s
+Resident system RAM: 2.11 GB
+Allocated GPU VRAM: 6.26 GB
+Reserved GPU VRAM: 6.30 GB
+
+Running trial 16 of 40...
+* Parameters:
+  * direction_index = 24.29
+  * attn.o_proj.max_weight = 1.25
+  * attn.o_proj.max_weight_position = 32.59
+  * attn.o_proj.min_weight = 1.22
+  * attn.o_proj.min_weight_distance = 20.42
+  * mlp.down_proj.max_weight = 0.69
+  * mlp.down_proj.max_weight_position = 28.27
+  * mlp.down_proj.min_weight = 0.10
+  * mlp.down_proj.min_weight_distance = 18.12
+* Resetting model...
+* Modifying model using Magnitude-Preserving Orthogonal Ablation (MPOA)...
+* Evaluating...
+  * Refusals: 81/100
+  * KL divergence: 0.0356
+
+Elapsed time: 22m 25s
+Estimated remaining time: 33m 38s
+Resident system RAM: 2.11 GB
+Allocated GPU VRAM: 6.26 GB
+Reserved GPU VRAM: 6.30 GB
+
+Running trial 17 of 40...
+* Parameters:
+  * direction_index = 22.15
+  * attn.o_proj.max_weight = 1.05
+  * attn.o_proj.max_weight_position = 30.87
+  * attn.o_proj.min_weight = 0.38
+  * attn.o_proj.min_weight_distance = 20.50
+  * mlp.down_proj.max_weight = 1.19
+  * mlp.down_proj.max_weight_position = 29.27
+  * mlp.down_proj.min_weight = 0.33
+  * mlp.down_proj.min_weight_distance = 19.60
+* Resetting model...
+* Modifying model using Magnitude-Preserving Orthogonal Ablation (MPOA)...
+* Evaluating...
+  * Refusals: 80/100
+  * KL divergence: 0.0317
+
+Elapsed time: 23m 49s
+Estimated remaining time: 32m 14s
+Resident system RAM: 2.11 GB
+Allocated GPU VRAM: 6.26 GB
+Reserved GPU VRAM: 6.30 GB
+
+Running trial 18 of 40...
+* Parameters:
+  * direction_index = 20.84
+  * attn.o_proj.max_weight = 1.21
+  * attn.o_proj.max_weight_position = 34.18
+  * attn.o_proj.min_weight = 0.04
+  * attn.o_proj.min_weight_distance = 17.33
+  * mlp.down_proj.max_weight = 0.40
+  * mlp.down_proj.max_weight_position = 32.65
+  * mlp.down_proj.min_weight = 0.13
+  * mlp.down_proj.min_weight_distance = 19.93
+* Resetting model...
+* Modifying model using Magnitude-Preserving Orthogonal Ablation (MPOA)...
+* Evaluating...
+  * Refusals: 99/100
+  * KL divergence: 0.0011
+
+Elapsed time: 25m 14s
+Estimated remaining time: 30m 50s
+Resident system RAM: 2.11 GB
+Allocated GPU VRAM: 6.26 GB
+Reserved GPU VRAM: 6.30 GB
+
+Running trial 19 of 40...
+* Parameters:
+  * direction_index = 17.36
+  * attn.o_proj.max_weight = 1.30
+  * attn.o_proj.max_weight_position = 33.37
+  * attn.o_proj.min_weight = 0.43
+  * attn.o_proj.min_weight_distance = 17.80
+  * mlp.down_proj.max_weight = 0.50
+  * mlp.down_proj.max_weight_position = 27.03
+  * mlp.down_proj.min_weight = 0.15
+  * mlp.down_proj.min_weight_distance = 17.70
+* Resetting model...
+* Modifying model using Magnitude-Preserving Orthogonal Ablation (MPOA)...
+* Evaluating...
+  * Refusals: 99/100
+  * KL divergence: 0.0014
+
+Elapsed time: 26m 38s
+Estimated remaining time: 29m 26s
+Resident system RAM: 2.11 GB
+Allocated GPU VRAM: 6.26 GB
+Reserved GPU VRAM: 6.30 GB
+
+Running trial 20 of 40...
+* Parameters:
+  * direction_index = 22.50
+  * attn.o_proj.max_weight = 1.34
+  * attn.o_proj.max_weight_position = 34.87
+  * attn.o_proj.min_weight = 0.07
+  * attn.o_proj.min_weight_distance = 16.32
+  * mlp.down_proj.max_weight = 0.20
+  * mlp.down_proj.max_weight_position = 33.17
+  * mlp.down_proj.min_weight = 0.08
+  * mlp.down_proj.min_weight_distance = 20.79
+* Resetting model...
+* Modifying model using Magnitude-Preserving Orthogonal Ablation (MPOA)...
+* Evaluating...
+  * Refusals: 99/100
+  * KL divergence: 0.0011
+
+Elapsed time: 28m 2s
+Estimated remaining time: 28m 2s
+Resident system RAM: 2.11 GB
+Allocated GPU VRAM: 6.26 GB
+Reserved GPU VRAM: 6.30 GB
+
+Running trial 21 of 40...
+* Parameters:
+  * direction_index = 20.45
+  * attn.o_proj.max_weight = 1.16
+  * attn.o_proj.max_weight_position = 33.67
+  * attn.o_proj.min_weight = 0.20
+  * attn.o_proj.min_weight_distance = 17.69
+  * mlp.down_proj.max_weight = 0.45
+  * mlp.down_proj.max_weight_position = 33.04
+  * mlp.down_proj.min_weight = 0.18
+  * mlp.down_proj.min_weight_distance = 17.10
+* Resetting model...
+* Modifying model using Magnitude-Preserving Orthogonal Ablation (MPOA)...
+* Evaluating...
+  * Refusals: 99/100
+  * KL divergence: 0.0013
+
+Elapsed time: 29m 26s
+Estimated remaining time: 26m 38s
+Resident system RAM: 2.11 GB
+Allocated GPU VRAM: 6.26 GB
+Reserved GPU VRAM: 6.30 GB
+
+Running trial 22 of 40...
+* Parameters:
+  * direction_index = per layer
+  * attn.o_proj.max_weight = 1.01
+  * attn.o_proj.max_weight_position = 30.09
+  * attn.o_proj.min_weight = 0.79
+  * attn.o_proj.min_weight_distance = 16.57
+  * mlp.down_proj.max_weight = 0.98
+  * mlp.down_proj.max_weight_position = 26.01
+  * mlp.down_proj.min_weight = 0.50
+  * mlp.down_proj.min_weight_distance = 19.05
+* Resetting model...
+* Modifying model using Magnitude-Preserving Orthogonal Ablation (MPOA)...
+* Evaluating...
+  * Refusals: 37/100
+  * KL divergence: 0.0770
+
+Elapsed time: 30m 50s
+Estimated remaining time: 25m 14s
+Resident system RAM: 2.11 GB
+Allocated GPU VRAM: 6.26 GB
+Reserved GPU VRAM: 6.30 GB
+
+Running trial 23 of 40...
+* Parameters:
+  * direction_index = per layer
+  * attn.o_proj.max_weight = 1.00
+  * attn.o_proj.max_weight_position = 33.07
+  * attn.o_proj.min_weight = 1.00
+  * attn.o_proj.min_weight_distance = 17.42
+  * mlp.down_proj.max_weight = 0.75
+  * mlp.down_proj.max_weight_position = 21.64
+  * mlp.down_proj.min_weight = 0.39
+  * mlp.down_proj.min_weight_distance = 13.50
+* Resetting model...
+* Modifying model using Magnitude-Preserving Orthogonal Ablation (MPOA)...
+* Evaluating...
+  * Refusals: 42/100
+  * KL divergence: 0.0577
+
+Elapsed time: 32m 15s
+Estimated remaining time: 23m 50s
+Resident system RAM: 2.11 GB
+Allocated GPU VRAM: 6.26 GB
+Reserved GPU VRAM: 6.30 GB
+
+Running trial 24 of 40...
+* Parameters:
+  * direction_index = per layer
+  * attn.o_proj.max_weight = 1.07
+  * attn.o_proj.max_weight_position = 34.59
+  * attn.o_proj.min_weight = 0.91
+  * attn.o_proj.min_weight_distance = 18.27
+  * mlp.down_proj.max_weight = 0.73
+  * mlp.down_proj.max_weight_position = 21.09
+  * mlp.down_proj.min_weight = 0.50
+  * mlp.down_proj.min_weight_distance = 15.68
+* Resetting model...
+* Modifying model using Magnitude-Preserving Orthogonal Ablation (MPOA)...
+* Evaluating...
+  * Refusals: 48/100
+  * KL divergence: 0.0595
+
+Elapsed time: 33m 39s
+Estimated remaining time: 22m 26s
+Resident system RAM: 2.11 GB
+Allocated GPU VRAM: 6.26 GB
+Reserved GPU VRAM: 6.30 GB
+
+Running trial 25 of 40...
+* Parameters:
+  * direction_index = per layer
+  * attn.o_proj.max_weight = 1.22
+  * attn.o_proj.max_weight_position = 34.60
+  * attn.o_proj.min_weight = 1.01
+  * attn.o_proj.min_weight_distance = 16.55
+  * mlp.down_proj.max_weight = 1.05
+  * mlp.down_proj.max_weight_position = 21.92
+  * mlp.down_proj.min_weight = 0.42
+  * mlp.down_proj.min_weight_distance = 15.89
+* Resetting model...
+* Modifying model using Magnitude-Preserving Orthogonal Ablation (MPOA)...
+* Evaluating...
+  * Refusals: 42/100
+  * KL divergence: 0.0706
+
+Elapsed time: 35m 3s
+Estimated remaining time: 21m 2s
+Resident system RAM: 2.11 GB
+Allocated GPU VRAM: 6.26 GB
+Reserved GPU VRAM: 6.30 GB
+
+Running trial 26 of 40...
+* Parameters:
+  * direction_index = per layer
+  * attn.o_proj.max_weight = 0.92
+  * attn.o_proj.max_weight_position = 33.80
+  * attn.o_proj.min_weight = 0.84
+  * attn.o_proj.min_weight_distance = 19.66
+  * mlp.down_proj.max_weight = 1.00
+  * mlp.down_proj.max_weight_position = 21.12
+  * mlp.down_proj.min_weight = 0.58
+  * mlp.down_proj.min_weight_distance = 18.64
+* Resetting model...
+* Modifying model using Magnitude-Preserving Orthogonal Ablation (MPOA)...
+* Evaluating...
+  * Refusals: 30/100
+  * KL divergence: 0.0734
+
+Elapsed time: 36m 28s
+Estimated remaining time: 19m 38s
+Resident system RAM: 2.11 GB
+Allocated GPU VRAM: 6.26 GB
+Reserved GPU VRAM: 6.30 GB
+
+Running trial 27 of 40...
+* Parameters:
+  * direction_index = 17.92
+  * attn.o_proj.max_weight = 1.12
+  * attn.o_proj.max_weight_position = 31.22
+  * attn.o_proj.min_weight = 0.78
+  * attn.o_proj.min_weight_distance = 18.50
+  * mlp.down_proj.max_weight = 0.84
+  * mlp.down_proj.max_weight_position = 21.65
+  * mlp.down_proj.min_weight = 0.28
+  * mlp.down_proj.min_weight_distance = 20.36
+* Resetting model...
+* Modifying model using Magnitude-Preserving Orthogonal Ablation (MPOA)...
+* Evaluating...
+  * Refusals: 85/100
+  * KL divergence: 0.0075
+
+Elapsed time: 37m 52s
+Estimated remaining time: 18m 14s
+Resident system RAM: 2.11 GB
+Allocated GPU VRAM: 6.26 GB
+Reserved GPU VRAM: 6.30 GB
+
+Running trial 28 of 40...
+* Parameters:
+  * direction_index = 14.92
+  * attn.o_proj.max_weight = 1.09
+  * attn.o_proj.max_weight_position = 28.92
+  * attn.o_proj.min_weight = 0.74
+  * attn.o_proj.min_weight_distance = 18.74
+  * mlp.down_proj.max_weight = 0.89
+  * mlp.down_proj.max_weight_position = 21.55
+  * mlp.down_proj.min_weight = 0.28
+  * mlp.down_proj.min_weight_distance = 19.15
+* Resetting model...
+* Modifying model using Magnitude-Preserving Orthogonal Ablation (MPOA)...
+* Evaluating...
+  * Refusals: 91/100
+  * KL divergence: 0.0074
+
+Elapsed time: 39m 17s
+Estimated remaining time: 16m 50s
+Resident system RAM: 2.11 GB
+Allocated GPU VRAM: 6.26 GB
+Reserved GPU VRAM: 6.30 GB
+
+Running trial 29 of 40...
+* Parameters:
+  * direction_index = 18.61
+  * attn.o_proj.max_weight = 1.20
+  * attn.o_proj.max_weight_position = 31.05
+  * attn.o_proj.min_weight = 0.93
+  * attn.o_proj.min_weight_distance = 18.68
+  * mlp.down_proj.max_weight = 0.93
+  * mlp.down_proj.max_weight_position = 22.00
+  * mlp.down_proj.min_weight = 0.33
+  * mlp.down_proj.min_weight_distance = 18.13
+* Resetting model...
+* Modifying model using Magnitude-Preserving Orthogonal Ablation (MPOA)...
+* Evaluating...
+  * Refusals: 43/100
+  * KL divergence: 0.0112
+
+Elapsed time: 40m 41s
+Estimated remaining time: 15m 26s
+Resident system RAM: 2.11 GB
+Allocated GPU VRAM: 6.26 GB
+Reserved GPU VRAM: 6.30 GB
+
+Running trial 30 of 40...
+* Parameters:
+  * direction_index = 18.43
+  * attn.o_proj.max_weight = 1.32
+  * attn.o_proj.max_weight_position = 30.99
+  * attn.o_proj.min_weight = 0.87
+  * attn.o_proj.min_weight_distance = 17.18
+  * mlp.down_proj.max_weight = 0.95
+  * mlp.down_proj.max_weight_position = 22.55
+  * mlp.down_proj.min_weight = 0.48
+  * mlp.down_proj.min_weight_distance = 19.20
+* Resetting model...
+* Modifying model using Magnitude-Preserving Orthogonal Ablation (MPOA)...
+* Evaluating...
+  * Refusals: 57/100
+  * KL divergence: 0.0115
+
+Elapsed time: 42m 5s
+Estimated remaining time: 14m 2s
+Resident system RAM: 2.11 GB
+Allocated GPU VRAM: 6.26 GB
+Reserved GPU VRAM: 6.30 GB
+
+Running trial 31 of 40...
+* Parameters:
+  * direction_index = 19.44
+  * attn.o_proj.max_weight = 1.18
+  * attn.o_proj.max_weight_position = 32.80
+  * attn.o_proj.min_weight = 0.68
+  * attn.o_proj.min_weight_distance = 16.57
+  * mlp.down_proj.max_weight = 0.76
+  * mlp.down_proj.max_weight_position = 22.02
+  * mlp.down_proj.min_weight = 0.13
+  * mlp.down_proj.min_weight_distance = 16.38
+* Resetting model...
+* Modifying model using Magnitude-Preserving Orthogonal Ablation (MPOA)...
+* Evaluating...
+  * Refusals: 98/100
+  * KL divergence: 0.0049
+
+Elapsed time: 43m 29s
+Estimated remaining time: 12m 38s
+Resident system RAM: 2.11 GB
+Allocated GPU VRAM: 6.26 GB
+Reserved GPU VRAM: 6.30 GB
+
+Running trial 32 of 40...
+* Parameters:
+  * direction_index = 17.76
+  * attn.o_proj.max_weight = 1.10
+  * attn.o_proj.max_weight_position = 32.66
+  * attn.o_proj.min_weight = 0.80
+  * attn.o_proj.min_weight_distance = 18.87
+  * mlp.down_proj.max_weight = 0.87
+  * mlp.down_proj.max_weight_position = 22.19
+  * mlp.down_proj.min_weight = 0.28
+  * mlp.down_proj.min_weight_distance = 19.38
+* Resetting model...
+* Modifying model using Magnitude-Preserving Orthogonal Ablation (MPOA)...
+* Evaluating...
+  * Refusals: 91/100
+  * KL divergence: 0.0073
+
+Elapsed time: 44m 54s
+Estimated remaining time: 11m 13s
+Resident system RAM: 2.11 GB
+Allocated GPU VRAM: 6.26 GB
+Reserved GPU VRAM: 6.30 GB
+
+Running trial 33 of 40...
+* Parameters:
+  * direction_index = 17.61
+  * attn.o_proj.max_weight = 1.11
+  * attn.o_proj.max_weight_position = 30.92
+  * attn.o_proj.min_weight = 0.80
+  * attn.o_proj.min_weight_distance = 16.97
+  * mlp.down_proj.max_weight = 1.18
+  * mlp.down_proj.max_weight_position = 21.72
+  * mlp.down_proj.min_weight = 0.32
+  * mlp.down_proj.min_weight_distance = 18.54
+* Resetting model...
+* Modifying model using Magnitude-Preserving Orthogonal Ablation (MPOA)...
+* Evaluating...
+  * Refusals: 79/100
+  * KL divergence: 0.0139
+
+Elapsed time: 46m 18s
+Estimated remaining time: 9m 49s
+Resident system RAM: 2.11 GB
+Allocated GPU VRAM: 6.26 GB
+Reserved GPU VRAM: 6.30 GB
+
+Running trial 34 of 40...
+* Parameters:
+  * direction_index = 16.50
+  * attn.o_proj.max_weight = 1.19
+  * attn.o_proj.max_weight_position = 33.84
+  * attn.o_proj.min_weight = 0.80
+  * attn.o_proj.min_weight_distance = 19.39
+  * mlp.down_proj.max_weight = 1.01
+  * mlp.down_proj.max_weight_position = 24.09
+  * mlp.down_proj.min_weight = 0.41
+  * mlp.down_proj.min_weight_distance = 19.56
+* Resetting model...
+* Modifying model using Magnitude-Preserving Orthogonal Ablation (MPOA)...
+* Evaluating...
+  * Refusals: 97/100
+  * KL divergence: 0.0093
+
+Elapsed time: 47m 43s
+Estimated remaining time: 8m 25s
+Resident system RAM: 2.11 GB
+Allocated GPU VRAM: 6.26 GB
+Reserved GPU VRAM: 6.30 GB
+
+Running trial 35 of 40...
+* Parameters:
+  * direction_index = 17.04
+  * attn.o_proj.max_weight = 1.28
+  * attn.o_proj.max_weight_position = 30.03
+  * attn.o_proj.min_weight = 1.10
+  * attn.o_proj.min_weight_distance = 20.05
+  * mlp.down_proj.max_weight = 0.82
+  * mlp.down_proj.max_weight_position = 22.86
+  * mlp.down_proj.min_weight = 0.25
+  * mlp.down_proj.min_weight_distance = 18.96
+* Resetting model...
+* Modifying model using Magnitude-Preserving Orthogonal Ablation (MPOA)...
+* Evaluating...
+  * Refusals: 70/100
+  * KL divergence: 0.0083
+
+Elapsed time: 49m 7s
+Estimated remaining time: 7m 1s
+Resident system RAM: 2.11 GB
+Allocated GPU VRAM: 6.26 GB
+Reserved GPU VRAM: 6.30 GB
+
+Running trial 36 of 40...
+* Parameters:
+  * direction_index = 17.80
+  * attn.o_proj.max_weight = 1.31
+  * attn.o_proj.max_weight_position = 31.27
+  * attn.o_proj.min_weight = 1.17
+  * attn.o_proj.min_weight_distance = 17.76
+  * mlp.down_proj.max_weight = 0.55
+  * mlp.down_proj.max_weight_position = 23.51
+  * mlp.down_proj.min_weight = 0.22
+  * mlp.down_proj.min_weight_distance = 17.95
+* Resetting model...
+* Modifying model using Magnitude-Preserving Orthogonal Ablation (MPOA)...
+* Evaluating...
+  * Refusals: 85/100
+  * KL divergence: 0.0049
+
+Elapsed time: 50m 31s
+Estimated remaining time: 5m 37s
+Resident system RAM: 2.11 GB
+Allocated GPU VRAM: 6.26 GB
+Reserved GPU VRAM: 6.30 GB
+
+Running trial 37 of 40...
+* Parameters:
+  * direction_index = per layer
+  * attn.o_proj.max_weight = 0.95
+  * attn.o_proj.max_weight_position = 34.41
+  * attn.o_proj.min_weight = 0.80
+  * attn.o_proj.min_weight_distance = 19.17
+  * mlp.down_proj.max_weight = 0.91
+  * mlp.down_proj.max_weight_position = 24.74
+  * mlp.down_proj.min_weight = 0.55
+  * mlp.down_proj.min_weight_distance = 17.26
+* Resetting model...
+* Modifying model using Magnitude-Preserving Orthogonal Ablation (MPOA)...
+* Evaluating...
+  * Refusals: 35/100
+  * KL divergence: 0.0717
+
+Elapsed time: 51m 56s
+Estimated remaining time: 4m 13s
+Resident system RAM: 2.11 GB
+Allocated GPU VRAM: 6.26 GB
+Reserved GPU VRAM: 6.30 GB
+
+Running trial 38 of 40...
+* Parameters:
+  * direction_index = per layer
+  * attn.o_proj.max_weight = 1.02
+  * attn.o_proj.max_weight_position = 33.47
+  * attn.o_proj.min_weight = 0.94
+  * attn.o_proj.min_weight_distance = 20.19
+  * mlp.down_proj.max_weight = 1.22
+  * mlp.down_proj.max_weight_position = 22.43
+  * mlp.down_proj.min_weight = 0.75
+  * mlp.down_proj.min_weight_distance = 18.95
+* Resetting model...
+* Modifying model using Magnitude-Preserving Orthogonal Ablation (MPOA)...
+* Evaluating...
+  * Refusals: 23/100
+  * KL divergence: 0.0922
+
+Elapsed time: 53m 20s
+Estimated remaining time: 2m 48s
+Resident system RAM: 2.11 GB
+Allocated GPU VRAM: 6.26 GB
+Reserved GPU VRAM: 6.30 GB
+
+Running trial 39 of 40...
+* Parameters:
+  * direction_index = per layer
+  * attn.o_proj.max_weight = 1.04
+  * attn.o_proj.max_weight_position = 33.09
+  * attn.o_proj.min_weight = 0.88
+  * attn.o_proj.min_weight_distance = 20.39
+  * mlp.down_proj.max_weight = 1.28
+  * mlp.down_proj.max_weight_position = 23.01
+  * mlp.down_proj.min_weight = 0.73
+  * mlp.down_proj.min_weight_distance = 19.09
+* Resetting model...
+* Modifying model using Magnitude-Preserving Orthogonal Ablation (MPOA)...
+* Evaluating...
+  * Refusals: 17/100
+  * KL divergence: 0.0947
+
+Elapsed time: 54m 45s
+Estimated remaining time: 1m 24s
+Resident system RAM: 2.11 GB
+Allocated GPU VRAM: 6.26 GB
+Reserved GPU VRAM: 6.30 GB
+
+Running trial 40 of 40...
+* Parameters:
+  * direction_index = per layer
+  * attn.o_proj.max_weight = 0.88
+  * attn.o_proj.max_weight_position = 31.43
+  * attn.o_proj.min_weight = 0.79
+  * attn.o_proj.min_weight_distance = 19.70
+  * mlp.down_proj.max_weight = 0.89
+  * mlp.down_proj.max_weight_position = 22.73
+  * mlp.down_proj.min_weight = 0.45
+  * mlp.down_proj.min_weight_distance = 20.92
+* Resetting model...
+* Modifying model using Magnitude-Preserving Orthogonal Ablation (MPOA)...
+* Evaluating...
+  * Refusals: 33/100
+  * KL divergence: 0.0693
+
+Elapsed time: 56m 9s
+Resident system RAM: 2.11 GB
+Allocated GPU VRAM: 6.26 GB
+Reserved GPU VRAM: 6.30 GB
+
+Optimization finished!
+
+The following trials resulted in Pareto optimal combinations of the optimization
+objectives. After selecting a trial, you will be able to save the model, upload 
+it to Hugging Face, chat with it to test how well it works, or run standard 
+benchmarks on it. You can return to this menu later to select a different trial.
+
+Warning: Input is not a terminal (fd=0).
+╭───────────────────── Traceback (most recent call last) ──────────────────────╮
+│ /usr/local/lib/python3.13/dist-packages/prompt_toolkit/input/vt100.py:169 in │
+│ _attached_input                                                              │
+│                                                                              │
+│   166 │   │   callback()                                                     │
+│   167 │                                                                      │
+│   168 │   try:                                                               │
+│ ❱ 169 │   │   loop.add_reader(fd, callback_wrapper)                          │
+│   170 │   except (PermissionError, OSError):                                 │
+│   171 │   │   # For `EPollSelector`, adding /dev/null to the event loop will │
+│   172 │   │   # `PermissionError` (that doesn't happen for `SelectSelector`  │
+│                                                                              │
+│ /usr/lib/python3.13/asyncio/selector_events.py:351 in add_reader             │
+│                                                                              │
+│    348 │   def add_reader(self, fd, callback, *args):                        │
+│    349 │   │   """Add a reader callback."""                                  │
+│    350 │   │   self._ensure_fd_no_transport(fd)                              │
+│ ❱  351 │   │   self._add_reader(fd, callback, *args)                         │
+│    352 │                                                                     │
+│    353 │   def remove_reader(self, fd):                                      │
+│    354 │   │   """Remove a reader callback."""                               │
+│                                                                              │
+│ /usr/lib/python3.13/asyncio/selector_events.py:283 in _add_reader            │
+│                                                                              │
+│    280 │   │   handle = events.Handle(callback, args, self, None)            │
+│    281 │   │   key = self._selector.get_map().get(fd)                        │
+│    282 │   │   if key is None:                                               │
+│ ❱  283 │   │   │   self._selector.register(fd, selectors.EVENT_READ,         │
+│    284 │   │   │   │   │   │   │   │   │   (handle, None))                   │
+│    285 │   │   else:                                                         │
+│    286 │   │   │   mask, (reader, writer) = key.events, key.data             │
+│                                                                              │
+│ /usr/lib/python3.13/selectors.py:345 in register                             │
+│                                                                              │
+│   342 │   │   poller_events = ((events & EVENT_READ and self._EVENT_READ)    │
+│   343 │   │   │   │   │   │    | (events & EVENT_WRITE and self._EVENT_WRITE │
+│   344 │   │   try:                                                           │
+│ ❱ 345 │   │   │   self._selector.register(key.fd, poller_events)             │
+│   346 │   │   except:                                                        │
+│   347 │   │   │   super().unregister(fileobj)                                │
+│   348 │   │   │   raise                                                      │
+╰──────────────────────────────────────────────────────────────────────────────╯
+PermissionError: [Errno 1] Operation not permitted
+
+During handling of the above exception, another exception occurred:
+
+╭───────────────────── Traceback (most recent call last) ──────────────────────╮
+│ /usr/local/bin/heretic:6 in <module>                                         │
+│                                                                              │
+│   3 from heretic.main import main                                            │
+│   4 if __name__ == '__main__':                                               │
+│   5 │   sys.argv[0] = sys.argv[0].removesuffix('.exe')                       │
+│ ❱ 6 │   sys.exit(main())                                                     │
+│   7                                                                          │
+│                                                                              │
+│ /usr/local/lib/python3.13/dist-packages/heretic/main.py:1502 in main         │
+│                                                                              │
+│   1499 │   install()                                                         │
+│   1500 │                                                                     │
+│   1501 │   try:                                                              │
+│ ❱ 1502 │   │   run()                                                         │
+│   1503 │   except BaseException as error:                                    │
+│   1504 │   │   # Transformers appears to handle KeyboardInterrupt (or BaseEx │
+│   1505 │   │   # internally in some places, which can re-raise a different e │
+│                                                                              │
+│ /usr/local/lib/python3.13/dist-packages/heretic/main.py:870 in run           │
+│                                                                              │
+│    867 │   │   │   │   if settings.trial_index is None:                      │
+│    868 │   │   │   │   │   print()                                           │
+│    869 │   │   │   │                                                         │
+│ ❱  870 │   │   │   │   trial = ask_if_unset(                                 │
+│    871 │   │   │   │   │   None                                              │
+│    872 │   │   │   │   │   if settings.trial_index is None                   │
+│    873 │   │   │   │   │   else sorted_trials[settings.trial_index],         │
+│                                                                              │
+│ /usr/local/lib/python3.13/dist-packages/heretic/utils.py:132 in ask_if_unset │
+│                                                                              │
+│   129 │   │   if unsafe:                                                     │
+│   130 │   │   │   return question.unsafe_ask()                               │
+│   131 │   │   else:                                                          │
+│ ❱ 132 │   │   │   return question.ask()                                      │
+│   133 │   else:                                                              │
+│   134 │   │   return value                                                   │
+│   135                                                                        │
+│                                                                              │
+│ /usr/local/lib/python3.13/dist-packages/questionary/question.py:64 in ask    │
+│                                                                              │
+│    61 │   │   """                                                            │
+│    62 │   │                                                                  │
+│    63 │   │   try:                                                           │
+│ ❱  64 │   │   │   return self.unsafe_ask(patch_stdout)                       │
+│    65 │   │   except KeyboardInterrupt:                                      │
+│    66 │   │   │   print("{}".format(kbi_msg))                                │
+│    67 │   │   │   return None                                                │
+│                                                                              │
+│ /usr/local/lib/python3.13/dist-packages/questionary/question.py:89 in        │
+│ unsafe_ask                                                                   │
+│                                                                              │
+│    86 │   │   │   with prompt_toolkit.patch_stdout.patch_stdout():           │
+│    87 │   │   │   │   return self.application.run()                          │
+│    88 │   │   else:                                                          │
+│ ❱  89 │   │   │   return self.application.run()                              │
+│    90 │                                                                      │
+│    91 │   def skip_if(self, condition: bool, default: Any = None) -> "Questi │
+│    92 │   │   """Skip the question if flag is set and return the default ins │
+│                                                                              │
+│ /usr/local/lib/python3.13/dist-packages/prompt_toolkit/application/applicati │
+│ on.py:1000 in run                                                            │
+│                                                                              │
+│    997 │   │                                                                 │
+│    998 │   │   else:                                                         │
+│    999 │   │   │   # No loop installed. Run like usual.                      │
+│ ❱ 1000 │   │   │   return asyncio.run(coro)                                  │
+│   1001 │                                                                     │
+│   1002 │   def _handle_exception(                                            │
+│   1003 │   │   self, loop: AbstractEventLoop, context: dict[str, Any]        │
+│                                                                              │
+│ /usr/lib/python3.13/asyncio/runners.py:196 in run                            │
+│                                                                              │
+│   193 │   │   │   "asyncio.run() cannot be called from a running event loop" │
+│   194 │                                                                      │
+│   195 │   with Runner(debug=debug, loop_factory=loop_factory) as runner:     │
+│ ❱ 196 │   │   return runner.run(main)                                        │
+│   197                                                                        │
+│   198                                                                        │
+│   199 def _cancel_all_tasks(loop):                                           │
+│                                                                              │
+│ /usr/lib/python3.13/asyncio/runners.py:119 in run                            │
+│                                                                              │
+│   116 │   │                                                                  │
+│   117 │   │   self._interrupt_count = 0                                      │
+│   118 │   │   try:                                                           │
+│ ❱ 119 │   │   │   return self._loop.run_until_complete(task)                 │
+│   120 │   │   except exceptions.CancelledError:                              │
+│   121 │   │   │   if self._interrupt_count > 0:                              │
+│   122 │   │   │   │   uncancel = getattr(task, "uncancel", None)             │
+│                                                                              │
+│ /usr/lib/python3.13/asyncio/base_events.py:726 in run_until_complete         │
+│                                                                              │
+│    723 │   │   if not future.done():                                         │
+│    724 │   │   │   raise RuntimeError('Event loop stopped before Future comp │
+│    725 │   │                                                                 │
+│ ❱  726 │   │   return future.result()                                        │
+│    727 │                                                                     │
+│    728 │   def stop(self):                                                   │
+│    729 │   │   """Stop running the event loop.                               │
+│                                                                              │
+│ /usr/local/lib/python3.13/dist-packages/prompt_toolkit/application/applicati │
+│ on.py:884 in run_async                                                       │
+│                                                                              │
+│    881 │   │   │   f = stack.enter_context(create_future(loop))              │
+│    882 │   │   │                                                             │
+│    883 │   │   │   try:                                                      │
+│ ❱  884 │   │   │   │   return await _run_async(f)                            │
+│    885 │   │   │   finally:                                                  │
+│    886 │   │   │   │   # Wait for the background tasks to be done. This need │
+│    887 │   │   │   │   # go in the finally! If `_run_async` raises           │
+│                                                                              │
+│ /usr/local/lib/python3.13/dist-packages/prompt_toolkit/application/applicati │
+│ on.py:732 in _run_async                                                      │
+│                                                                              │
+│    729 │   │   │   # Enter raw mode, attach input and attach WINCH event han │
+│    730 │   │   │   with (                                                    │
+│    731 │   │   │   │   self.input.raw_mode(),                                │
+│ ❱  732 │   │   │   │   self.input.attach(read_from_input_in_context),        │
+│    733 │   │   │   │   attach_winch_signal_handler(self._on_resize),         │
+│    734 │   │   │   ):                                                        │
+│    735 │   │   │   │   # Draw UI.                                            │
+│                                                                              │
+│ /usr/lib/python3.13/contextlib.py:141 in __enter__                           │
+│                                                                              │
+│   138 │   │   # they are only needed for recreation, which is not possible a │
+│   139 │   │   del self.args, self.kwds, self.func                            │
+│   140 │   │   try:                                                           │
+│ ❱ 141 │   │   │   return next(self.gen)                                      │
+│   142 │   │   except StopIteration:                                          │
+│   143 │   │   │   raise RuntimeError("generator didn't yield") from None     │
+│   144                                                                        │
+│                                                                              │
+│ /usr/local/lib/python3.13/dist-packages/prompt_toolkit/input/vt100.py:180 in │
+│ _attached_input                                                              │
+│                                                                              │
+│   177 │   │   # exception people expect in                                   │
+│   178 │   │   # `prompt_toolkit.application.Application.run()`.              │
+│   179 │   │   # To reproduce, do: `ptpython 0< /dev/null 1< /dev/null`       │
+│ ❱ 180 │   │   raise EOFError                                                 │
+│   181 │                                                                      │
+│   182 │   _current_callbacks[loop, fd] = callback                            │
+│   183                                                                        │
+╰──────────────────────────────────────────────────────────────────────────────╯
+EOFError
