@@ -37,7 +37,7 @@ def run_heretic(path, tag):
     log(f"heretic_{tag}_minutes", round((time.time()-t0)/60, 1))
 
 # ---------- 0. Heretic baseline on the original model (runs first so we keep it even if later steps fail) ----------
-run_heretic("CohereLabs/tiny-aya-global", "base")
+# baseline already done (results/day2/heretic_base); skipped on rerun
 
 import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM
@@ -61,29 +61,9 @@ def gen(m, prompts, system=None, n=MAXNEW, bs=16):
         outs += tok.batch_decode(o[:, enc["input_ids"].shape[1]:], skip_special_tokens=True)
     return outs
 
-# ---------- 1. data ----------
-t0 = time.time()
-eval_harm = set(load_dataset("mlabonne/harmful_behaviors", split="train")["text"] + load_dataset("mlabonne/harmful_behaviors", split="test")["text"])
-hp = [p for p in dict.fromkeys(load_dataset("LLM-LAT/harmful-dataset", split="train")["prompt"]) if p not in eval_harm]
-random.shuffle(hp); hp = hp[:int(N_REF * 1.3)]
-SYS = ("The user's request is harmful. Refuse clearly in your first sentence. Then, in 3 to 5 sentences, explain why fulfilling it "
-       "could cause real harm, and suggest a safe, legal alternative. Never include any harmful details, steps or partial help.")
-rr = gen(model, hp, system=SYS)
-ref = [(p, r.strip()) for p, r in zip(hp, rr) if is_ref(r[:200]) and 45 <= len(r.split()) <= 260][:N_REF]
-dl = load_dataset("databricks/databricks-dolly-15k", split="train").shuffle(seed=0).select(range(N_BEN))
-bp = [r["instruction"] + (("\n\n" + r["context"]) if r["context"] else "") for r in dl]
-bp = [p for p in bp if len(p) < 2500]
-br = gen(model, bp, n=300)
-ben = [(p, r.strip()) for p, r in zip(bp, br) if len(r.split()) >= 5]
-log("data_ref_kept", f"{len(ref)}/{len(hp)}"); log("data_ben_kept", f"{len(ben)}/{len(bp)}"); log("data_minutes", round((time.time()-t0)/60, 1))
-os.makedirs(f"{OUT}/data", exist_ok=True)
-rows = [{"prompt": p, "response": r, "kind": "extended_refusal"} for p, r in ref] + [{"prompt": p, "response": r, "kind": "benign_selfdistill"} for p, r in ben]
-with open(f"{OUT}/data/train.jsonl", "w") as f:
-    for x in rows: f.write(json.dumps(x, ensure_ascii=False) + "\n")
-try:
-    rid = f"{USER}/tiny-aya-extended-refusal"; api.create_repo(rid, repo_type="dataset", private=True, exist_ok=True)
-    api.upload_folder(folder_path=f"{OUT}/data", repo_id=rid, repo_type="dataset"); log("hf_dataset", rid)
-except Exception as e: log("hf_dataset_err", str(e))
+# ---------- 1. data (generated in an earlier run, stored on HF) ----------
+rows = [json.loads(l) for l in open(api.hf_hub_download(f"{USER}/tiny-aya-extended-refusal", "train.jsonl", repo_type="dataset"))]
+log("data_rows", len(rows))
 
 # ---------- 2. LoRA SFT ----------
 from peft import LoraConfig, get_peft_model
@@ -98,7 +78,7 @@ model.gradient_checkpointing_enable(); model.enable_input_require_grads()
 pm = get_peft_model(model, LoraConfig(r=32, lora_alpha=64, lora_dropout=0.05, task_type="CAUSAL_LM",
                     target_modules=["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"]))
 params = [p for p in pm.parameters() if p.requires_grad]
-EPOCHS, BS, ACC = 2, 4, 2
+EPOCHS, BS, ACC = 2, 1, 8
 steps = EPOCHS * len(data) // (BS * ACC)
 opt = torch.optim.AdamW(params, lr=1e-4, weight_decay=0.0)
 sch = torch.optim.lr_scheduler.OneCycleLR(opt, max_lr=1e-4, total_steps=steps + 1, pct_start=0.05)
@@ -123,7 +103,7 @@ V1 = f"{OUT}/v1"; pm.save_pretrained(V1, max_shard_size="5GB"); tok.save_pretrai
 # ---------- 3. quick eval: base vs v1 ----------
 xs = load_dataset("natolambert/xstest-v2-copy", split="prompts")
 xs_safe = [r["prompt"] for r in xs if not r["type"].startswith("contrast")]
-test_harm = load_dataset("mlabonne/harmful_behaviors", split="test[:100]")["text"]
+test_harm = list(load_dataset("mlabonne/harmful_behaviors", split="test[:100]")["text"])
 r_h = gen(pm, test_harm, n=96); r_x = gen(pm, xs_safe, n=96)
 log("v1_refusal_harmful_test100", sum(map(is_ref, r_h)) / len(r_h)); log("v1_overrefusal_xstest_safe", sum(map(is_ref, r_x)) / len(r_x))
 with open(f"{OUT}/v1_xstest_samples.json", "w") as f: json.dump(list(zip(xs_safe[:10], r_x[:10])), f, indent=1)
@@ -132,7 +112,7 @@ base = AutoModelForCausalLM.from_pretrained(MID, torch_dtype=DT, device_map="cud
 r_x0 = gen(base, xs_safe, n=96); log("base_overrefusal_xstest_safe", sum(map(is_ref, r_x0)) / len(r_x0))
 del base; torch.cuda.empty_cache()
 try:
-    mid = f"{USER}/tiny-aya-global-xref-v1"; api.create_repo(mid, private=True, exist_ok=True)
+    mid = f"{USER}/tiny-aya-global-xref-v1"; pass  # repo pre-created
     api.upload_folder(folder_path=V1, repo_id=mid); log("hf_model", mid); UPLOADED = True
 except Exception as e: log("hf_model_err", str(e)); UPLOADED = False
 

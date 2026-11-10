@@ -67,8 +67,8 @@ def refusal_dirs(n=96):
     was = pm.training; pm.eval(); tok.padding_side = "left"; acc = {}
     for name, ps in (("h", random.sample(harm_p, n)), ("b", random.sample(ben_p, n))):
         s = None
-        for i in range(0, n, 16):
-            txt = [tok.apply_chat_template([{"role": "user", "content": p}], tokenize=False, add_generation_prompt=True) for p in ps[i:i+16]]
+        for i in range(0, n, 4):
+            txt = [tok.apply_chat_template([{"role": "user", "content": p}], tokenize=False, add_generation_prompt=True) for p in ps[i:i+4]]
             enc = tok(txt, return_tensors="pt", padding=True, truncation=True, max_length=1024).to("cuda")
             hs = pm(**enc, output_hidden_states=True).hidden_states[1:]
             v = torch.stack([h[:, -1, :].float().sum(0) for h in hs])
@@ -94,7 +94,7 @@ def sample_attack(D):
     ATTACK["r"] = D[src]; ATTACK["w"] = [top * max(0.0, 1 - abs(i - peak) / width) for i in range(NL)]
 
 params = [p for p in pm.parameters() if p.requires_grad]
-EPOCHS, BS, ACC = 2, 4, 2
+EPOCHS, BS, ACC = 2, 1, 8
 steps = EPOCHS * len(data) // (BS * ACC)
 opt = torch.optim.AdamW(params, lr=1e-4)
 sch = torch.optim.lr_scheduler.OneCycleLR(opt, max_lr=1e-4, total_steps=steps + 1, pct_start=0.05)
@@ -137,12 +137,12 @@ def gen(m, prompts, n=96, bs=16):
     return outs
 xs = load_dataset("natolambert/xstest-v2-copy", split="prompts")
 xs_safe = [r["prompt"] for r in xs if not r["type"].startswith("contrast")]
-test_harm = load_dataset("mlabonne/harmful_behaviors", split="test[:100]")["text"]
+test_harm = list(load_dataset("mlabonne/harmful_behaviors", split="test[:100]")["text"])
 log("v2_refusal_harmful_test100", sum(map(is_ref, gen(pm, test_harm))) / 100)
 log("v2_overrefusal_xstest_safe", sum(map(is_ref, gen(pm, xs_safe))) / len(xs_safe))
 del pm, model; torch.cuda.empty_cache()
 try:
-    mid = f"{USER}/tiny-aya-global-xref-v2"; api.create_repo(mid, private=True, exist_ok=True)
+    mid = f"{USER}/tiny-aya-global-xref-v2"; pass  # repo pre-created
     api.upload_folder(folder_path=V2, repo_id=mid); log("hf_model", mid); UPLOADED = True
 except Exception as e: log("hf_model_err", str(e)); UPLOADED = False
 run_heretic(V2, "v2")
