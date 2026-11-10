@@ -1,0 +1,69 @@
+█░█░█▀▀░█▀▄░█▀▀░▀█▀░█░█▀▀  v2.1.0
+█▀█░█▀▀░█▀▄░█▀▀░░█░░█░█░░  https://heretic-project.org
+▀░▀░▀▀▀░▀░▀░▀▀▀░░▀░░▀░▀▀▀  https://github.com/p-e-w/heretic
+
+Detected 2 CUDA device(s) (29.12 GB total VRAM)
+CUDA Version: 13.0
+Driver Version: 580.178.04
+* CUDA 0: Tesla T4 (14.56 GB)
+* CUDA 1: Tesla T4 (14.56 GB)
+Warning: Input is not a terminal (fd=0).
+
+Loading model /kaggle/working/v2b...
+* Trying dtype float16...
+Loading weights:   0%|          | 0/290 [00:00<?, ?it/s]Loading weights:   0%|          | 1/290 [00:00<01:06,  4.35it/s]Loading weights:   7%|▋         | 21/290 [00:00<00:03, 79.27it/s]Loading weights:  16%|█▌        | 45/290 [00:00<00:01, 133.19it/s]Loading weights:  24%|██▍       | 69/290 [00:00<00:01, 164.19it/s]Loading weights:  32%|███▏      | 93/290 [00:00<00:01, 184.91it/s]Loading weights:  40%|████      | 117/290 [00:00<00:00, 198.56it/s]Loading weights:  49%|████▊     | 141/290 [00:00<00:00, 206.57it/s]Loading weights:  57%|█████▋    | 165/290 [00:00<00:00, 214.58it/s]Loading weights:  65%|██████▌   | 189/290 [00:01<00:00, 220.13it/s]Loading weights:  73%|███████▎  | 212/290 [00:01<00:00, 219.72it/s]Loading weights:  81%|████████▏ | 236/290 [00:01<00:00, 223.50it/s]Loading weights:  90%|████████▉ | 260/290 [00:01<00:00, 226.45it/s]Loading weights:  98%|█████████▊| 284/290 [00:01<00:00, 226.75it/s]Loading weights: 100%|██████████| 290/290 [00:01<00:00, 193.29it/s]
+* Transformer model with 36 layers
+* Modifiable components:
+  * attn.o_proj: 36 modules total
+  * mlp.down_proj: 36 modules total
+
+Resident system RAM: 1.81 GB
+Allocated GPU VRAM: 6.25 GB
+Reserved GPU VRAM: 6.39 GB
+
+Loading and initializing scorers...
+* Loaded: KeywordRate
+* Loaded: KLDivergence
+
+Loading Refusals evaluation prompts from mlabonne/harmful_behaviors...
+* 100 prompts loaded
+
+Loading KL divergence evaluation prompts from mlabonne/harmless_alpaca...
+* 100 prompts loaded
+* Obtaining baseline first-token probability distributions...
+
+Getting baseline scores...
+* Baseline Refusals: 100/100
+* Baseline KL divergence: 0 (by definition)
+
+Loading and initializing modifiers...
+* Loaded: Abliteration
+
+Loading good prompts from mlabonne/harmless_alpaca...
+* 400 prompts loaded
+
+Loading bad prompts from mlabonne/harmful_behaviors...
+* 400 prompts loaded
+
+Calculating per-layer residual directions...
+* Obtaining residual mean for good prompts...
+* Obtaining residual mean for bad prompts...
+
+Resuming existing study.
+
+Optimization finished!
+
+Restoring model from trial 39...
+* Parameters:
+  * direction_index = per layer
+  * attn.o_proj.max_weight = 1.30
+  * attn.o_proj.max_weight_position = 24.13
+  * attn.o_proj.min_weight = 0.67
+  * attn.o_proj.min_weight_distance = 18.22
+  * mlp.down_proj.max_weight = 0.32
+  * mlp.down_proj.max_weight_position = 30.44
+  * mlp.down_proj.min_weight = 0.30
+  * mlp.down_proj.min_weight_distance = 18.27
+* Resetting model...
+* Modifying model using Magnitude-Preserving Orthogonal Ablation (MPOA)...
+Error: [Errno 1] Operation not permitted

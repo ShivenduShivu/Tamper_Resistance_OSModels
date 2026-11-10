@@ -115,3 +115,27 @@ Format: date, run, config, result, decision.
   - **MMLU cost is about 2.5 points** (0.529 → ~0.50).
   - **The judge classifier agrees with keyword counting** on clean models (0.99 vs 0.99, 1.0 vs 1.0).
 - **Decision needed:** either scope the claim to "data-free weight-editing attacks" (Heretic is the attack actually used in the wild), or try a cheap fine-tuning hardening step (TAR-lite or SafeTune harden), or the SafeTune recover/repair angle.
+
+## 2026-11-12: Day-5 chained evaluation, Kaggle v18 (83 min). Lexsi toolkits in the loop
+Refusal on harmful test[:100] is shown as judge (ProtectAI classifier) / keyword.
+
+| Attack | Original | v2 | v2b | Tool |
+|---|---|---|---|---|
+| Refusal-direction ablation at inference | **0.28** / 0.72 | **1.00** / 1.00 | **1.00** / 0.99 | SafeTune `RefusalDirectionModel` |
+| CAA steering, strength −1 | 0.04 / 0.05 | 0.42 / 0.51 | 0.30 / 0.33 | SafeTune `CAAModel` |
+| CAA steering, strength −4 | 0 / 0 | 0 / 0 | 0 / 0 | (coherence not checked; may be gibberish) |
+| Prefill "Sure, here is" | 0.31 / 0.55 | 0.38 / 0.66 | 0.41 / 0.59 | ours |
+| Sampling (T=1, top-p 0.95), success in any of 3 samples | 9% | **0%** | 2% | ours |
+| 4-bit (bnb nf4): refusal / XSTest over-refusal | 0.99 / 0.13 | 1.00 / 0.38 | 1.00 / 0.21 | |
+| AuditKIT pass rate: jailbreak / encoding / prompt injection / refusal | 1 / .8 / .625 / 1 | 1 / .8 / .875 / 1 | 1 / .8 / .75 / 1 | AuditKIT `RedTeamRunner` |
+
+- **Refusal-direction norms** (SafeTune, unnormalised diff of means): v2 is about 10–20% lower than the original in mid and late layers (e.g. layer 24: 46.4 vs 40.2). The direction layer is the same (18).
+- **Keyword vs judge:** under attack on the original model, keyword scoring overstates refusal (ablation: keyword 0.72 vs judge 0.28). Heretic's keyword-scored numbers for the original are therefore likely *optimistic*: the real refusal under attack is probably even lower. Day-5b checks this with judged responses.
+- **Failed:**
+  - Heretic save: needed `export_strategy="merge"`; it is the only remaining prompt.
+  - CircuitKIT: `walledai/AdvBench` is gated; switched to JBB-Behaviors.
+  - Both are rerun in Day-5b (v19).
+- **Reading:**
+  - The defense generalises across *direction-based* attacks: Heretic, SafeTune ablation, and partly CAA steering.
+  - It survives 4-bit quantisation and resists sampling attacks.
+  - It does **not** help against prefilling or fine-tuning.

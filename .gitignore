@@ -15,3 +15,7 @@ docs/Lexsi_Hackathon_Strategy.pdf
 docs/build/build_lexsi_pdf.py
 # generated training data (lives in private HF / Kaggle datasets)
 results/**/border.jsonl
+
+# raw model responses (include attacked-model outputs; shared privately for judging only) and refusal-direction tensors
+results/**/responses/
+results/**/*.pt
