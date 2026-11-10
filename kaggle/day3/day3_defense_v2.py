@@ -43,7 +43,7 @@ def run_heretic(path, tag):
 
 tok = AutoTokenizer.from_pretrained(MID); tok.pad_token = tok.pad_token or tok.eos_token
 model = AutoModelForCausalLM.from_pretrained(MID, torch_dtype=DT, device_map="cuda")
-rows = [json.loads(l) for l in open(api.hf_hub_download(f"{USER}/tiny-aya-extended-refusal", "train.jsonl", repo_type="dataset"))]
+rows = [json.loads(l) for l in open(glob.glob("/kaggle/input/**/train.jsonl", recursive=True)[0], encoding="utf-8")]
 harm_p = [r["prompt"] for r in rows if r["kind"] == "extended_refusal"]
 ben_p = [r["prompt"] for r in rows if r["kind"] != "extended_refusal"]
 

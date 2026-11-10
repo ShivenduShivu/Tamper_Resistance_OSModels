@@ -1,63 +1,59 @@
-[{"stream_name":"stdout","time":1.397248174,"data":"secret unavailable: Connection error trying to communicate with service.\n"}
-,{"stream_name":"stderr","time":35.739501738,"data":"ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.\n"}
-,{"stream_name":"stderr","time":35.73953398,"data":"bigframes 2.51.0 requires google-cloud-bigquery-storage\u003c3.0.0,\u003e=2.30.0, which is not installed.\n"}
-,{"stream_name":"stderr","time":35.739542378,"data":"ydata-profiling 4.18.4 requires numpy\u003c2.4,\u003e=1.22, but you have numpy 2.5.4 which is incompatible.\n"}
-,{"stream_name":"stderr","time":35.739548709,"data":"dopamine-rl 4.1.2 requires gym\u003c=0.25.2, but you have gym 0.26.2 which is incompatible.\n"}
-,{"stream_name":"stderr","time":35.739553943,"data":"moviepy 1.0.3 requires decorator\u003c5.0,\u003e=4.0.2, but you have decorator 5.3.1 which is incompatible.\n"}
-,{"stream_name":"stderr","time":35.739558965,"data":"cudf-cu13 26.6.0 requires pyarrow\u003c24,\u003e=19.0.0, but you have pyarrow 26.0.1 which is incompatible.\n"}
-,{"stream_name":"stderr","time":35.739563973,"data":"ydf 0.15.0 requires protobuf\u003c7.0.0,\u003e=5.29.1, but you have protobuf 7.36.2 which is incompatible.\n"}
-,{"stream_name":"stderr","time":35.739568984,"data":"bigframes 2.51.0 requires rich\u003c14,\u003e=12.4.4, but you have rich 15.0.0 which is incompatible.\n"}
-,{"stream_name":"stderr","time":35.739580851,"data":"numba 0.61.2 requires numpy\u003c2.3,\u003e=1.24, but you have numpy 2.5.4 which is incompatible.\n"}
-,{"stream_name":"stderr","time":35.739584677,"data":"gradio 6.30.0 requires pillow\u003c13.0,\u003e=8.0, but you have pillow 13.0.0 which is incompatible.\n"}
-,{"stream_name":"stderr","time":69.388204402,"data":"[transformers] `torch_dtype` is deprecated! Use `dtype` instead!\n"}
-,{"stream_name":"stderr","time":148.30311204,"data":"\rFetching 2 files:   0%|          | 0/2 [00:00\u003c?, ?it/s]\rFetching 2 files:  50%|█████     | 1/2 [00:52\u003c00:52, 52.01s/it]\rFetching 2 files: 100%|██████████| 2/2 [01:16\u003c00:00, 35.87s/it]\rFetching 2 files: 100%|██████████| 2/2 [01:16\u003c00:00, 38.29s/it]\n"}
-,{"stream_name":"stderr","time":153.01308356,"data":"\rLoading weights:   0%|          | 0/290 [00:00\u003c?, ?it/s]\rLoading weights:   0%|          | 1/290 [00:01\u003c07:49,  1.63s/it]\rLoading weights:  29%|██▊       | 83/290 [00:01\u003c00:03, 65.10it/s]\rLoading weights:  41%|████▏     | 120/290 [00:02\u003c00:02, 74.00it/s]\rLoading weights:  50%|█████     | 145/290 [00:02\u003c00:01, 80.34it/s]\rLoading weights:  57%|█████▋    | 164/290 [00:02\u003c00:01, 78.59it/s]\rLoading weights:  62%|██████▏   | 179/290 [00:02\u003c00:01, 83.05it/s]\rLoading weights:  67%|██████▋   | 193/290 [00:02\u003c00:01, 85.09it/s]\rLoading weights:  71%|███████   | 205/290 [00:03\u003c00:00, 87.49it/s]\rLoading weights:  75%|███████▍  | 217/290 [00:03\u003c00:00, 90.03it/s]\rLoading weights:  79%|███████▊  | 228/290 [00:03\u003c00:00, 83.50it/s]\rLoading weights:  84%|████████▍ | 243/290 [00:03\u003c00:00, 89.40it/s]\rLoading weights:  87%|████████▋ | 253/290 [00:03\u003c00:00, 91.51it/s]\rLoading weights:  91%|█████████ | 263/290 [00:03\u003c00:00, 88.92it/s]\rLoading weights:  95%|█████████▍| 275/290 [00:03\u003c00:00, 91.38it/s]\rLoading weights:  98%|█████████▊| 285/290 [00:03\u003c00:00, 91.47it/s]\rLoading weights: 100%|██████████| 290/290 [00:03\u003c00:00, 73.52it/s]\n"}
-,{"stream_name":"stderr","time":156.520518513,"data":"\rGenerating train split:   0%|          | 0/416 [00:00\u003c?, ? examples/s]\rGenerating train split: 100%|██████████| 416/416 [00:00\u003c00:00, 100099.28 examples/s]\n"}
-,{"stream_name":"stderr","time":156.522872387,"data":"\rGenerating test split:   0%|          | 0/104 [00:00\u003c?, ? examples/s]\rGenerating test split: 100%|██████████| 104/104 [00:00\u003c00:00, 56437.78 examples/s]\n"}
-,{"stream_name":"stderr","time":158.377142731,"data":"\rGenerating train split:   0%|          | 0/4948 [00:00\u003c?, ? examples/s]\rGenerating train split: 100%|██████████| 4948/4948 [00:00\u003c00:00, 224317.61 examples/s]\n"}
-,{"stream_name":"stderr","time":1507.824422013,"data":"\rGenerating train split:   0%|          | 0/15011 [00:00\u003c?, ? examples/s]\rGenerating train split: 100%|██████████| 15011/15011 [00:00\u003c00:00, 196108.70 examples/s]\n"}
-,{"stream_name":"stdout","time":4170.727830136,"data":"data_ref_kept 1200/1560\n"}
-,{"stream_name":"stdout","time":4170.728092506,"data":"data_ben_kept 1155/1156\n"}
-,{"stream_name":"stdout","time":4170.728271106,"data":"data_minutes 66.9\n"}
-,{"stream_name":"stdout","time":4170.939470723,"data":"hf_dataset_err (Request ID: Root=1-6af24f34-213afc724fa9f71d5a4310da;8c825773-745d-4ceb-8b97-9201d01eafc9)\n"}
-,{"stream_name":"stdout","time":4170.93949682,"data":"\n"}
-,{"stream_name":"stdout","time":4170.939502164,"data":"403 Forbidden: You don't have the rights to create a dataset under the namespace \"StarWarrior24x7\".\n"}
-,{"stream_name":"stdout","time":4170.939507347,"data":"Cannot access content at: https://huggingface.co/api/repos/create.\n"}
-,{"stream_name":"stdout","time":4170.939511796,"data":"Make sure your token has the correct permissions.\n"}
-,{"stream_name":"stderr","time":4182.946934816,"data":"[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.\n"}
-,{"stream_name":"stderr","time":4184.935182102,"data":"Traceback (most recent call last):\n"}
-,{"stream_name":"stderr","time":4184.935968051,"data":"  File \"/kaggle/src/script.py\", line 115, in \u003cmodule\u003e\n"}
-,{"stream_name":"stderr","time":4184.935988445,"data":"    scaler.scale(loss).backward(); k += 1; losses.append(loss.item() * ACC)\n"}
-,{"stream_name":"stderr","time":4184.935993725,"data":"    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n"}
-,{"stream_name":"stderr","time":4184.935997781,"data":"  File \"/usr/local/lib/python3.13/dist-packages/torch/_tensor.py\", line 631, in backward\n"}
-,{"stream_name":"stderr","time":4184.936002173,"data":"    torch.autograd.backward(\n"}
-,{"stream_name":"stderr","time":4184.936006139,"data":"    ~~~~~~~~~~~~~~~~~~~~~~~^\n"}
-,{"stream_name":"stderr","time":4184.936010346,"data":"        self, gradient, retain_graph, create_graph, inputs=inputs\n"}
-,{"stream_name":"stderr","time":4184.936014701,"data":"        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stderr","time":4184.93601882,"data":"    )\n"}
-,{"stream_name":"stderr","time":4184.936022709,"data":"    ^\n"}
-,{"stream_name":"stderr","time":4184.936026812,"data":"  File \"/usr/local/lib/python3.13/dist-packages/torch/autograd/__init__.py\", line 381, in backward\n"}
-,{"stream_name":"stderr","time":4184.936047326,"data":"    _engine_run_backward(\n"}
-,{"stream_name":"stderr","time":4184.936052147,"data":"    ~~~~~~~~~~~~~~~~~~~~^\n"}
-,{"stream_name":"stderr","time":4184.936058054,"data":"        tensors,\n"}
-,{"stream_name":"stderr","time":4184.936062754,"data":"        ^^^^^^^^\n"}
-,{"stream_name":"stderr","time":4184.936066724,"data":"    ...\u003c5 lines\u003e...\n"}
-,{"stream_name":"stderr","time":4184.936070747,"data":"        accumulate_grad=True,\n"}
-,{"stream_name":"stderr","time":4184.936074574,"data":"        ^^^^^^^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stderr","time":4184.936090843,"data":"    )\n"}
-,{"stream_name":"stderr","time":4184.936094411,"data":"    ^\n"}
-,{"stream_name":"stderr","time":4184.936097528,"data":"  File \"/usr/local/lib/python3.13/dist-packages/torch/autograd/graph.py\", line 869, in _engine_run_backward\n"}
-,{"stream_name":"stderr","time":4184.936101106,"data":"    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass\n"}
-,{"stream_name":"stderr","time":4184.9361046,"data":"           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stderr","time":4184.936108033,"data":"        t_outputs, *args, **kwargs\n"}
-,{"stream_name":"stderr","time":4184.936111068,"data":"        ^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stderr","time":4184.936114201,"data":"    )  # Calls into the C++ engine to run the backward pass\n"}
-,{"stream_name":"stderr","time":4184.936117327,"data":"    ^\n"}
-,{"stream_name":"stderr","time":4184.936123434,"data":"torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 2.66 GiB. GPU 0 has a total capacity of 14.56 GiB of which 2.09 GiB is free. Including non-PyTorch memory, this process has 12.47 GiB memory in use. Of the allocated memory 12.20 GiB is allocated by PyTorch, and 142.19 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)\n"}
-,{"stream_name":"stderr","time":4191.442447198,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
-,{"stream_name":"stderr","time":4191.442475726,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
-,{"stream_name":"stderr","time":4191.69318164,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
-,{"stream_name":"stderr","time":4191.693205678,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
-,{"stream_name":"stderr","time":4192.501982494,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
-,{"stream_name":"stderr","time":4193.534591341,"data":"[NbConvertApp] Writing 335202 bytes to __results__.html\n"}
+[{"stream_name":"stdout","time":1.518857417,"data":"secret unavailable: Connection error trying to communicate with service.\n"}
+,{"stream_name":"stderr","time":34.737970499,"data":"ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.\n"}
+,{"stream_name":"stderr","time":34.73799962,"data":"bigframes 2.51.0 requires google-cloud-bigquery-storage\u003c3.0.0,\u003e=2.30.0, which is not installed.\n"}
+,{"stream_name":"stderr","time":34.738015705,"data":"ydata-profiling 4.18.4 requires numpy\u003c2.4,\u003e=1.22, but you have numpy 2.5.4 which is incompatible.\n"}
+,{"stream_name":"stderr","time":34.738019328,"data":"dopamine-rl 4.1.2 requires gym\u003c=0.25.2, but you have gym 0.26.2 which is incompatible.\n"}
+,{"stream_name":"stderr","time":34.738022652,"data":"moviepy 1.0.3 requires decorator\u003c5.0,\u003e=4.0.2, but you have decorator 5.3.1 which is incompatible.\n"}
+,{"stream_name":"stderr","time":34.738025931,"data":"cudf-cu13 26.6.0 requires pyarrow\u003c24,\u003e=19.0.0, but you have pyarrow 26.0.1 which is incompatible.\n"}
+,{"stream_name":"stderr","time":34.738029304,"data":"ydf 0.15.0 requires protobuf\u003c7.0.0,\u003e=5.29.1, but you have protobuf 7.36.2 which is incompatible.\n"}
+,{"stream_name":"stderr","time":34.738032528,"data":"bigframes 2.51.0 requires rich\u003c14,\u003e=12.4.4, but you have rich 15.0.0 which is incompatible.\n"}
+,{"stream_name":"stderr","time":34.738035711,"data":"numba 0.61.2 requires numpy\u003c2.3,\u003e=1.24, but you have numpy 2.5.4 which is incompatible.\n"}
+,{"stream_name":"stderr","time":34.738038847,"data":"gradio 6.30.0 requires pillow\u003c13.0,\u003e=8.0, but you have pillow 13.0.0 which is incompatible.\n"}
+,{"stream_name":"stderr","time":69.451038021,"data":"[transformers] `torch_dtype` is deprecated! Use `dtype` instead!\n"}
+,{"stream_name":"stderr","time":107.764760572,"data":"\rFetching 2 files:   0%|          | 0/2 [00:00\u003c?, ?it/s]\rFetching 2 files:  50%|█████     | 1/2 [00:17\u003c00:17, 17.69s/it]\rFetching 2 files: 100%|██████████| 2/2 [00:35\u003c00:00, 17.83s/it]\rFetching 2 files: 100%|██████████| 2/2 [00:35\u003c00:00, 17.81s/it]\n"}
+,{"stream_name":"stderr","time":112.374483503,"data":"\rLoading weights:   0%|          | 0/290 [00:00\u003c?, ?it/s]\rLoading weights:   0%|          | 1/290 [00:01\u003c07:30,  1.56s/it]\rLoading weights:  26%|██▌       | 76/290 [00:01\u003c00:03, 62.12it/s]\rLoading weights:  38%|███▊      | 111/290 [00:02\u003c00:02, 74.16it/s]\rLoading weights:  47%|████▋     | 135/290 [00:02\u003c00:02, 77.17it/s]\rLoading weights:  53%|█████▎    | 153/290 [00:02\u003c00:01, 81.73it/s]\rLoading weights:  58%|█████▊    | 168/290 [00:02\u003c00:01, 86.42it/s]\rLoading weights:  63%|██████▎   | 182/290 [00:02\u003c00:01, 87.46it/s]\rLoading weights:  67%|██████▋   | 195/290 [00:02\u003c00:01, 88.27it/s]\rLoading weights:  71%|███████▏  | 207/290 [00:03\u003c00:00, 87.52it/s]\rLoading weights:  76%|███████▌  | 219/290 [00:03\u003c00:00, 81.13it/s]\rLoading weights:  81%|████████  | 235/290 [00:03\u003c00:00, 93.32it/s]\rLoading weights:  85%|████████▍ | 246/290 [00:03\u003c00:00, 89.77it/s]\rLoading weights:  89%|████████▉ | 259/290 [00:03\u003c00:00, 96.73it/s]\rLoading weights:  93%|█████████▎| 270/290 [00:03\u003c00:00, 93.07it/s]\rLoading weights:  97%|█████████▋| 280/290 [00:03\u003c00:00, 91.59it/s]\rLoading weights: 100%|██████████| 290/290 [00:03\u003c00:00, 74.31it/s]\n"}
+,{"stream_name":"stderr","time":113.091052334,"data":"httpx.HTTPStatusError: Client error '404 Not Found' for url 'https://huggingface.co/datasets/StarWarrior24x7/tiny-aya-extended-refusal/resolve/main/train.jsonl'\n"}
+,{"stream_name":"stderr","time":113.091106402,"data":"For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404\n"}
+,{"stream_name":"stderr","time":113.09111601,"data":"\n"}
+,{"stream_name":"stderr","time":113.091119628,"data":"The above exception was the direct cause of the following exception:\n"}
+,{"stream_name":"stderr","time":113.091123039,"data":"\n"}
+,{"stream_name":"stderr","time":113.091126164,"data":"Traceback (most recent call last):\n"}
+,{"stream_name":"stderr","time":113.092584807,"data":"  File \"/kaggle/src/script.py\", line 65, in \u003cmodule\u003e\n"}
+,{"stream_name":"stderr","time":113.092603134,"data":"    rows = [json.loads(l) for l in open(api.hf_hub_download(f\"{USER}/tiny-aya-extended-refusal\", \"train.jsonl\", repo_type=\"dataset\"))]\n"}
+,{"stream_name":"stderr","time":113.092606679,"data":"                                        ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":113.092609413,"data":"  File \"/usr/local/lib/python3.13/dist-packages/huggingface_hub/utils/_validators.py\", line 89, in _inner_fn\n"}
+,{"stream_name":"stderr","time":113.092611955,"data":"    return fn(*args, **kwargs)\n"}
+,{"stream_name":"stderr","time":113.092614139,"data":"  File \"/usr/local/lib/python3.13/dist-packages/huggingface_hub/hf_api.py\", line 6688, in hf_hub_download\n"}
+,{"stream_name":"stderr","time":113.092616506,"data":"    return hf_hub_download(\n"}
+,{"stream_name":"stderr","time":113.092618761,"data":"        repo_id=repo_id,\n"}
+,{"stream_name":"stderr","time":113.092620969,"data":"    ...\u003c16 lines\u003e...\n"}
+,{"stream_name":"stderr","time":113.092623254,"data":"        dry_run=dry_run,\n"}
+,{"stream_name":"stderr","time":113.092625379,"data":"    )\n"}
+,{"stream_name":"stderr","time":113.092627634,"data":"  File \"/usr/local/lib/python3.13/dist-packages/huggingface_hub/utils/_validators.py\", line 89, in _inner_fn\n"}
+,{"stream_name":"stderr","time":113.092629969,"data":"    return fn(*args, **kwargs)\n"}
+,{"stream_name":"stderr","time":113.092632698,"data":"  File \"/usr/local/lib/python3.13/dist-packages/huggingface_hub/utils/_http.py\", line 266, in _inner\n"}
+,{"stream_name":"stderr","time":113.092636258,"data":"    return fn(*args, **kwargs)\n"}
+,{"stream_name":"stderr","time":113.092639568,"data":"  File \"/usr/local/lib/python3.13/dist-packages/huggingface_hub/file_download.py\", line 1047, in hf_hub_download\n"}
+,{"stream_name":"stderr","time":113.092642396,"data":"    return _hf_hub_download_to_cache_dir(\n"}
+,{"stream_name":"stderr","time":113.092645314,"data":"        # Destination\n"}
+,{"stream_name":"stderr","time":113.092659464,"data":"    ...\u003c15 lines\u003e...\n"}
+,{"stream_name":"stderr","time":113.092663531,"data":"        dry_run=dry_run,\n"}
+,{"stream_name":"stderr","time":113.092667271,"data":"    )\n"}
+,{"stream_name":"stderr","time":113.092670543,"data":"  File \"/usr/local/lib/python3.13/dist-packages/huggingface_hub/file_download.py\", line 1194, in _hf_hub_download_to_cache_dir\n"}
+,{"stream_name":"stderr","time":113.092674989,"data":"    _raise_on_head_call_error(head_call_error, force_download, local_files_only)\n"}
+,{"stream_name":"stderr","time":113.092678922,"data":"    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":113.09268251,"data":"  File \"/usr/local/lib/python3.13/dist-packages/huggingface_hub/file_download.py\", line 1953, in _raise_on_head_call_error\n"}
+,{"stream_name":"stderr","time":113.092686311,"data":"    raise head_call_error\n"}
+,{"stream_name":"stderr","time":113.092710819,"data":"huggingface_hub.errors.RepositoryNotFoundError: 404 Client Error. (Request ID: Root=1-6af283de-1b08455027e911ec5ede5d8a;a8bd1fbc-d9dd-4a26-9701-c07d01d5ea48)\n"}
+,{"stream_name":"stderr","time":113.092714058,"data":"\n"}
+,{"stream_name":"stderr","time":113.092729096,"data":"Repository Not Found for url: https://huggingface.co/datasets/StarWarrior24x7/tiny-aya-extended-refusal/resolve/main/train.jsonl.\n"}
+,{"stream_name":"stderr","time":113.092733358,"data":"Please make sure you specified the correct `repo_id` and `repo_type`.\n"}
+,{"stream_name":"stderr","time":113.092737158,"data":"If you are trying to access a private or gated repo, make sure you are authenticated and your token has the required permissions.\n"}
+,{"stream_name":"stderr","time":113.092740754,"data":"For more details, see https://huggingface.co/docs/huggingface_hub/authentication\n"}
+,{"stream_name":"stderr","time":118.338706503,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":118.338737443,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":118.554736822,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":118.554767137,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":119.344219519,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":120.245810858,"data":"[NbConvertApp] Writing 323079 bytes to __results__.html\n"}
 ]

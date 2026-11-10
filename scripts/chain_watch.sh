@@ -12,7 +12,7 @@ wait_run() {  # $1 = results dir
     [ $i -le 8 ] && sleep 60 || sleep 600
   done; echo "TIMEOUT $1"
 }
-wait_run day2
+sleep 120; wait_run day2
 if grep -q '"DONE"' "$R/results/day2/summary.jsonl" 2>/dev/null; then
   echo "== launching day3 =="; kaggle kernels push -p "$R/kaggle/day3"; sleep 90; wait_run day3
 else echo "== day2 did not finish; day3 NOT launched =="; fi

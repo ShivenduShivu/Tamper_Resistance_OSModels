@@ -62,7 +62,7 @@ def gen(m, prompts, system=None, n=MAXNEW, bs=16):
     return outs
 
 # ---------- 1. data (generated in an earlier run, stored on HF) ----------
-rows = [json.loads(l) for l in open(api.hf_hub_download(f"{USER}/tiny-aya-extended-refusal", "train.jsonl", repo_type="dataset"))]
+rows = [json.loads(l) for l in open(glob.glob("/kaggle/input/**/train.jsonl", recursive=True)[0], encoding="utf-8")]
 log("data_rows", len(rows))
 
 # ---------- 2. LoRA SFT ----------
