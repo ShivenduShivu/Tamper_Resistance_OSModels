@@ -1,0 +1,16 @@
+# Prefix-recovery experiment run manifest (private)
+- Start model: StarWarrior24x7/tiny-aya-global-xref-v2 rev 377d402a45f92c5c787f3509084afca75eda3e8f (repo root = v2)
+- Data: StarWarrior24x7/tiny-aya-extended-refusal rev 1157b26cff32d367b53987a760ca0468a701e098, 2355 rows (1200 harmful, 1155 benign), 295 steps/epoch at bs1 x acc8
+- Objective: dynamic v2 recipe (LexsiV2Trainer port), single-BOS direction estimation, P_ATTACK 0.5, refresh every 100 steps, LoRA r32/a64, lr 5e-5, 1 epoch, seed 0
+- Arms: A unchanged v2 (eval only), B continuation no prefix, C continuation + masked generic opener (8 fixed training openers; 6 disjoint held-out openers for eval)
+- Launch: PFX_TIMEOUT_MIN=<60 B/C, 25 A> modal run --detach pfx_modal.py::run_arm --arm <X> --objective dynamic --tag pfx
+- Gate (validate.py): finite loss and grad norm, hooks inactive after training, n_steps 295 and trained_full_epoch, train_stats 1200/1155/0 dropped, openers 0 (B) or 1200 (C), eval counts harm 100 / xstest 250 / mmlu 1000, v2 rev match
+- Results: volume lexsi-v2-ckpt /pfx/<arm>_dynamic_eval.json (0/1 vectors and counts only, no text); adapters /pfx/<arm>/lora_adapter (private)
+- Run history: smoke app ap-mr6ZQPJkDvXGHwpriyb6vt (2 steps); first B app ap-Q7IXobE8jn5EJq20ruZZzU stopped 15:01 by client disconnect at step 30; B app ap-ahhPOkbYA5C1i6dqLqKL3L launched 15:20:46 --detach
+- Departures from team v2 recipe: continuation (not from base), 1 epoch (v2: 2), lr 5e-5 (v2: 1e-4), single-BOS directions (v2: double-BOS), HF-Trainer port
+- Budget: user ceiling $8 on Modal (approved 14:40:01); worst-case all-in $1.39/h (A10 + 2 cores + 24 GiB)
+- 2026-11-11 16:47: benign-opener control added (run_benign_control): XSTest-safe 250 x (no opener + 6 held-out openers), arms A/B/C, 48 new tokens for ALL conditions in this control (main-eval xstest no-opener used 96; within-control comparisons share length; cross-experiment no-opener numbers are descriptive only). B/C merge the saved LoRA adapters from /ckpt/pfx/<arm>/lora_adapter and record adapter sha256 in the result JSON.
+- Run history addendum: first control-A attempt (16:47) failed at model load in under ~1 min (HF_TOKEN missing from launch env, 401 gated repo); cost counted in ledger. Relaunched 16:48 as ap-iThEL55JpsIFZT5Xnb5tYn.
+- Analysis rule for the control: paired prompt-cluster bootstrap only WITHIN the benign pool (250 prompts x 6 openers together, and no-opener paired by prompt). The main harmful pool is different prompts (n=100), so harmful-vs-benign contrasts are descriptive, not paired.
+- 2026-11-11 17:10: benign-opener control complete. Apps: A ap-iThEL55JpsIFZT5Xnb5tYn (wall 5.34), B ap-V4joZVHeCxeAWsQz5DkUqf (5.47, adapter safetensors sha a7995b456177...), C ap-RT3UkxEXD6UD0WAeAVEAL3 (5.42, adapter sha 044fef44d1ef...). Results /pfx/<arm>_benign_opener_eval.json (0/1 vectors and counts only). Result: C refuses 0.768 of benign prompts pooled over the 6 held-out openers (A/B about 0.06), so the opener effect is substantially blanket refusal, not demonstrated selectivity.
+- Note: the main A/B/C experiment ran with pfx_modal.py sha 8549dec2; the current pfx_modal.py adds only run_benign_control (the main-eval code path is unchanged).
