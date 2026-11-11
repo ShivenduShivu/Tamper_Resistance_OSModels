@@ -70,7 +70,7 @@ Reading: the main alternative is now tested, and the refusal-proxy results are c
 
 - Modal A10. Measured wall: smoke 2.0 min, first B run lost at ~6.5 min (client disconnect), B 25.3 min, C 25.4 min, A 5.8 min (eval only). Estimated $1.5-1.9 all-in at the conservative $1.39/h rate (A10 + 2 cores + 24 GiB); billing not confirmed against the Modal dashboard. Within the approved $8 ceiling.
 - All Modal apps stopped after the runs.
-- Raw per-prompt 0/1 score vectors and paired prompt IDs are preserved privately (private Modal volume) for reproducibility; aggregate counts only are published here. No weights are published. No generated text was stored anywhere.
+- Raw per-prompt 0/1 score vectors are preserved privately (private Modal volume) for reproducibility; aggregate counts only are published here. Original prompt IDs/indices were not stored; prompt sets are reconstructible only through the deterministic selection code and the recorded dedup counts (100 harm test / 99 JBB / 250 XSTest-safe), so a rerun verifies set identity by recomputation and count comparison, not by ID comparison. Exact installed package versions and the Modal image digest of these runs were not durably recorded and are unknown; the durable build spec is the hashed pfx_modal.py in SHA256SUMS. No weights are published. No generated text was stored anywhere.
 - Proposed next steps (not run; need scope/budget checks): a boundary-corrected replication (joint tokenization of prefix + response in training), and a resistance check on C (e.g. one fixed SafeTune refusal-direction ablation matched to the Day-5 protocol), each proposed separately.
 
 ## Files
