@@ -22,3 +22,5 @@ Notes:
 - Raise next: SafeTune #5+#6 (one PR), after the fork and a test run.
 - Then CircuitKIT #4, only if our CircuitKIT run needs custom refusal or compliance tokens.
 - Hold: #3 and #7 (CI), unless the maintainers welcome them.
+
+- Note (Day-5c): CircuitKIT EAP discovery on tiny-aya (3.35B, 262k vocab) runs out of memory on a 16 GB T4 even with plain EAP and 8 examples. This is worth mentioning in the #4 PR description as context, not as a separate PR.

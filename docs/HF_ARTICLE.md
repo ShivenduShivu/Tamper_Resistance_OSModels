@@ -25,9 +25,9 @@
 |---|---|---|
 | **SafeTune** | An independent second implementation of the attack, steering attacks, and the mechanism measurement | `extract_refusal_direction` (per-layer refusal directions); `RefusalDirectionModel(mode="ablate")` (inference-time direction ablation as an attack); `extract_caa_vectors` + `CAAModel` with negative strength (activation-steering attacks) |
 | **AuditKIT** | Independent red-team probes on every model | `RedTeamRunner` with the jailbreak, encoding, prompt-injection and refusal probes. While using it we found and fixed two bugs: [AuditKIT #35](https://github.com/Lexsi-Labs/AuditKIT/pull/35) and [#36](https://github.com/Lexsi-Labs/AuditKIT/pull/36) |
-| **CircuitKIT** | Refusal-circuit comparison, original vs v2 | `SafetyPromptAdapter` (harmful-vs-benign pairs), `discover` (EAP-IG), `visualize_circuit` (comparison). *(Results: see section 7.4)* |
+| **CircuitKIT** *(attempted)* | Refusal-circuit comparison, original vs v2 | `SafetyPromptAdapter` with `pairing_mode="harmful_vs_benign"` (built correctly), `load_model` (Cohere port), `discover` (EAP / EAP-IG). Discovery ran out of memory on a 16 GB T4 for the 3.35B model with its 262k vocabulary. We also found that the public `register_*` helpers only build degenerate prompt pairs; see section 7.4 |
 
-They form one connected chain. SafeTune extracts the refusal direction. The same direction drives both our training-time attack simulation and SafeTune's ablation and steering attacks. AuditKIT and the judge score the outputs, and CircuitKIT looks inside to show where refusal is carried.
+SafeTune and AuditKIT form one connected chain with our pipeline. SafeTune extracts the refusal direction, which is the same object our training-time attack removes, and then attacks each checkpoint with ablation and steering. AuditKIT and the classifier judge score the outputs.
 
 ## 3. Models used and their licences
 
@@ -106,7 +106,9 @@ Judged refusal on 100 harmful prompts (higher is safer):
 
 ### 7.4 Mechanism
 - **Refusal direction (SafeTune):** v2's refusal direction is 10–20% weaker in the middle and late layers than the original's (layer 24: 40.2 vs 46.4). It peaks at the same layer (18). Our reading is that v2 stops relying on a single dominant direction, so removing it no longer removes refusal.
-- **CircuitKIT:** *results pending (Day-5c run in progress).*
+- **CircuitKIT (attempted):**
+  - **Building the task:** CircuitKIT's public safety-dataset helpers only produce prompt pairs whose corrupt prompt equals the clean prompt, which `discover()` rejects. We built the task directly with `harmful_vs_benign` pairing instead.
+  - **Running discovery:** it still needed more than the 16 GB of a free T4 for a 3.35B model with a 262k-token vocabulary. Circuit-level analysis is first on our list if we get more compute.
 
 ### 7.5 What else we tried or considered
 - **v1 alone** delays Heretic, but it still reaches 17%. Extended refusals are not enough by themselves.

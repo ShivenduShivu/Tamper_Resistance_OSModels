@@ -162,3 +162,13 @@ Each Heretic point is labelled by its keyword refusal (r = refusal on Heretic's 
   - **Even attacked, v2 still refuses explicitly unsafe XSTest prompts much more** than the attacked original (0.62–0.76 vs 0.17).
   - **v2b breaks at lower KL** than v2 (0.24 at KL 0.054), consistent with the usability trade-off.
 - **CircuitKIT failed again:** the public `register_jailbreakbench` builds `answer_contrastive` pairs (corrupt prompt == clean prompt), which `discover()` rejects as degenerate. This is a genuine upstream issue (PR candidate #4, now encountered in our own work). Day-5c (v20) builds the task directly with `pairing_mode="harmful_vs_benign"`.
+
+## 2026-11-12: Day-5c, CircuitKIT, Kaggle v20 + v21. Stopped (out of memory on T4)
+- **Pairing fixed:** the `harmful_vs_benign` task built correctly (32/32 pairs).
+- **v20 (EAP-IG, 16 examples):** out of memory.
+- **v21:** a separate process per model, plain EAP, 8 examples and expandable segments. Still out of memory in `discover` at 13.7 GB on a 14.6 GB T4. The 1 GB allocation matches one vocabulary-sized buffer (262k × 2048 × fp16).
+- **Decision:**
+  - Stop. CircuitKIT's 3.35B Cohere port doesn't fit discovery on a T4, and multi-GPU (`n_devices`) is documented as broken in transformer-lens 3.8.0.
+  - The mechanism evidence comes from SafeTune's per-layer refusal directions instead.
+  - The repo rule is met with SafeTune + AuditKIT.
+  - Report CircuitKIT as attempted, with its limits stated.
