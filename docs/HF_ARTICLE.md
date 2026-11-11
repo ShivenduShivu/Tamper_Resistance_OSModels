@@ -4,6 +4,8 @@
 
 > **TL;DR.** With [Heretic](https://github.com/p-e-w/heretic), a free one-command tool, we stripped Cohere's Tiny Aya Global of its safety: judged refusal went from 99% to **1%**, with no loss on MMLU. We then trained Tiny Aya *while simulating that attack*. Against our model, the same attack at the same damage budget leaves refusal at **100%**. Heretic's strongest attack still only reaches 23%, and needs about 16× more distortion of the model's normal behaviour. Two Lexsi toolkits (SafeTune and AuditKIT) independently confirm the effect. The limits are real, and we report them: harmful fine-tuning and prefilling still break the model.
 
+**Try it:** [interactive results explorer](https://huggingface.co/spaces/StarWarrior24x7/heretic-resistant-tiny-aya): attack curves, every attack, and side-by-side comparisons.
+
 ---
 
 ## 1. Problem and approach in brief
