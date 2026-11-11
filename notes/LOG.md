@@ -172,3 +172,17 @@ Each Heretic point is labelled by its keyword refusal (r = refusal on Heretic's 
   - The mechanism evidence comes from SafeTune's per-layer refusal directions instead.
   - The repo rule is met with SafeTune + AuditKIT.
   - Report CircuitKIT as attempted, with its limits stated.
+
+## 2026-11-12: Double-BOS finding (reported by Aban)
+- **Cause:** Tiny Aya's chat template starts with `{{ bos_token }}`, and the tokenizer has `add_bos_token: true`. Any `tok(apply_chat_template(..., tokenize=False))` call with default settings therefore produces **two** BOS tokens.
+- **Affected:**
+  1. **All of our own generation and MMLU evaluations** (Day-2 to Day-5b `gen` / `mmlu`). All models were measured the same way, so comparisons hold, but absolute numbers may shift.
+  2. **v2/v2b training-time direction estimation** (`refusal_dirs`, run at the start and every 100 optimizer steps). The simulated attack direction was estimated on double-BOS inputs, while the LoRA training sequences were single-BOS.
+- **Not affected:**
+  - The supervised training tokenization (`add_special_tokens=False`).
+  - Heretic (its own tokenization).
+  - Abhinav's Granite Guardian judge (its tokenizer adds no BOS).
+- **Interpretation:**
+  - v2's robustness was measured by *independent, single-BOS attackers* (Heretic, SafeTune), so the defense result stands. The defense worked even with a slightly mismatched training-time direction.
+  - Fixing the estimation could make a v3 *stronger*.
+- **Action:** apply Aban's single-BOS fix, then do one compact re-evaluation (clean refusal, XSTest, MMLU, strongest Heretic point, SafeTune ablation; original/v2/v2b) and regenerate responses for the Granite re-judge.
