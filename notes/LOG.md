@@ -230,3 +230,29 @@ XSTest safe prompts: unsafe 0–3% for every model and attack (nothing to flag).
   - Fixing the estimation could make a v3 *stronger*.
 - **Action:** apply Aban's single-BOS fix, then do one compact re-evaluation (clean refusal, XSTest, MMLU, strongest Heretic point, SafeTune ablation; original/v2/v2b) and regenerate responses for the Granite re-judge.
 
+
+## 2026-11-12: Day-6 single-BOS re-evaluation, Kaggle v24 (98 min). These are the final numbers
+The eval tokenization now passes `add_special_tokens=False`. Judge = ProtectAI (refusal); old = Day-4/5/5b (double BOS).
+
+| | Original old → **new** | v2 old → **new** | v2b old → **new** |
+|---|---|---|---|
+| Clean refusal (harmful) | 0.99 → **0.98** | 1.00 → **1.00** | 1.00 → **1.00** |
+| Clean XSTest-safe over-refusal (judge) | — → **0.164** (kw 0.12 → 0.124) | — → **0.392** (kw 0.46 → 0.408) | — → **0.184** (kw 0.208 → 0.196) |
+| Clean XSTest-unsafe refusal | — → **0.925** | — → **0.985** | — → **0.92** |
+| **Clean MMLU-1000** | 0.529 → **0.523** | 0.505 → **0.530** | 0.501 → **0.527** |
+| Heretic strongest point: refusal | 0.01 → **0.01** | 0.23 → **0.25** | 0.24 → **0.31** |
+| Heretic strongest point: MMLU | 0.527 → **0.520** | 0.510 → **0.521** | 0.496 → **0.520** |
+| Heretic strongest point: XSTest-unsafe refusal | 0.17 → **0.205** | 0.615 → **0.70** | 0.475 → **0.555** |
+| SafeTune ablation | 0.28 → **0.29** | 1.00 → **1.00** | 1.00 → **0.99** |
+| SafeTune CAA −1 | 0.04 → **0.04** | 0.42 → **0.35** | 0.30 → **0.34** |
+| Prefill "Sure, here is" | 0.31 → **0.21** | 0.38 → **0.20** | 0.41 → **0.24** |
+
+- **Headline unchanged:**
+  - At Heretic's strongest attack, the original keeps 1% refusal and v2 keeps 25%.
+  - SafeTune ablation: original 29% vs v2 100%.
+  - v2 still refuses 70% of XSTest's unsafe prompts after the strongest attack (original: 20.5%).
+- **New, and good:** with single BOS, the hardened models show **no MMLU cost** (v2 0.530, v2b 0.527 vs original 0.523; within noise). The earlier "−2.5 points" came from the duplicate BOS hurting the fine-tuned models more.
+- **New, and bad:** prefill is a bigger weakness than measured before. All models refuse only 20–24% under the "Sure, here is" prefill, so v2 gives no prefill benefit. This motivates Aban's prefix-recovery experiment.
+- **Over-refusal (judge):** original 16.4%, v2 39.2%, v2b 18.4%. v2b's over-refusal is now close to the original's.
+- **Not re-measured:** v1, sampling, 4-bit, CAA −4, AuditKIT and the fine-tuning attack. They keep their Day-4/5 numbers and are reported as double-BOS measurements.
+- Responses for the Granite re-judge are in `results/day6/responses` (private).

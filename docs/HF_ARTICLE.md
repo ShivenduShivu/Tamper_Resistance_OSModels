@@ -2,7 +2,7 @@
 
 *Lexsi Labs × Cohere × Hugging Face AI Safety & Alignment Hackathon, Track 2b: Tamper Resistance*
 
-> **TL;DR.** With [Heretic](https://github.com/p-e-w/heretic), a free one-command tool, we stripped Cohere's Tiny Aya Global of its safety: judged refusal went from 99% to **1%**, with no loss on MMLU. We then trained Tiny Aya *while simulating that attack*. Against our model, the same attack at the same damage budget leaves refusal at **100%**. Heretic's strongest attack still only reaches 23%, and needs about 16× more distortion of the model's normal behaviour. Two Lexsi toolkits (SafeTune and AuditKIT) independently confirm the effect. The limits are real, and we report them: harmful fine-tuning and prefilling still break the model.
+> **TL;DR.** With [Heretic](https://github.com/p-e-w/heretic), a free one-command tool, we stripped Cohere's Tiny Aya Global of its safety: judged refusal went from 99% to **1%**, with no loss on MMLU. We then trained Tiny Aya *while simulating that attack*. Against our model, the same attack at the same damage budget leaves refusal at **100%**. Heretic's strongest attack still only reaches 25%, and needs about 16× more distortion of the model's normal behaviour. A second judge (Granite Guardian) agrees: the stripped original is 93% harmful, our model 44%. Lexsi's SafeTune and AuditKIT independently confirm the effect, and the hardening costs nothing on MMLU. The limits are real, and we report them: harmful fine-tuning and prefilling still break the model.
 
 **Try it:** [interactive results explorer](https://huggingface.co/spaces/StarWarrior24x7/heretic-resistant-tiny-aya): attack curves, every attack, and side-by-side comparisons.
 
@@ -39,6 +39,7 @@ SafeTune and AuditKIT form one connected chain with our pipeline. SafeTune extra
 | [StarWarrior24x7/tiny-aya-global-xref-v1](https://huggingface.co/StarWarrior24x7/tiny-aya-global-xref-v1) | Our v1 | CC-BY-NC-4.0 (inherited) |
 | [StarWarrior24x7/tiny-aya-global-xref-v2](https://huggingface.co/StarWarrior24x7/tiny-aya-global-xref-v2) (root = v2, `v2b/` = v2b) | Our v2 / v2b | CC-BY-NC-4.0 (inherited) |
 | [ProtectAI/distilroberta-base-rejection-v1](https://huggingface.co/ProtectAI/distilroberta-base-rejection-v1) | Refusal judge | Apache-2.0 |
+| [ibm-granite/granite-guardian-3.2-5b](https://huggingface.co/ibm-granite/granite-guardian-3.2-5b) | Harm judge | Apache-2.0 |
 
 ## 4. Datasets and benchmarks used, and their licences
 
@@ -70,8 +71,8 @@ Raw responses from attacked models are kept private and are available to judges 
 ### 7.1 The threat is real: Tiny Aya is stripped for free
 | | Refusal (judge) | MMLU |
 |---|---|---|
-| Tiny Aya Global | 99% | 52.9% |
-| After Heretic's best attack (KL 0.009) | **1%** | 52.7% |
+| Tiny Aya Global | 98% | 52.3% |
+| After Heretic's best attack (KL 0.009) | **1%** | 52.0% |
 
 Heretic's own keyword metric reported 14%. Our classifier judge shows the strip is almost total: keyword matching counts phrases like "illegal" as refusals even when the model complies.
 
@@ -82,29 +83,39 @@ Lowest refusal Heretic reached within a given KL budget (Heretic's keyword score
 |---|---|---|---|---|
 | Original | 14% | 14% | 14% | 14% (judge: **1%**) |
 | v1 (extended refusal) | 70% | 43% | 17% | 17% |
-| **v2 (trained through abliteration)** | **100%** | **100%** | **96%** | 33% (judge: **23%**) |
-| v2b (+ borderline data) | 99% | 52% | 47% | 47% (judge: 24%) |
+| **v2 (trained through abliteration)** | **100%** | **100%** | **96%** | 33% (judge: **25%**) |
+| v2b (+ borderline data) | 99% | 52% | 47% | 47% (judge: 31%) |
 
 ![Pareto fronts](https://raw.githubusercontent.com/ShivenduShivu/Tamper_Resistance_OSModels/main/docs/build/pareto_chart.png)
 
-**Is the attacker just paying more KL?** Yes, and that is the honest framing. At its strongest attack on v2, Heretic needs about 16× the KL. MMLU stays at 51.0%, so general knowledge survives, but the model still refuses 23% of harmful prompts and 62% of XSTest's unsafe prompts (the attacked original: 1% and 17%). The defense raises the cost of a strip and makes it less complete. It does not make the model impossible to strip.
+**Is the attacker just paying more KL?** Yes, and that is the honest framing. At its strongest attack on v2, Heretic needs about 16× the KL. MMLU stays at 52.1%, so general knowledge survives, but the model still refuses 25% of harmful prompts and 70% of XSTest's unsafe prompts (the attacked original: 1% and 20.5%). Judged for *harm* instead of refusal (Granite Guardian, section 7.3), the attacked original is 93% harmful and v2 44%. The defense raises the cost of a strip and makes it less complete. It does not make the model impossible to strip.
 
 ### 7.3 Independent confirmation with the Lexsi toolkits, plus other attacks
-Judged refusal on 100 harmful prompts (higher is safer):
+Refusal on 100 harmful prompts, judged by ProtectAI (higher is safer):
 
 | Attack | Original | v2 | v2b |
 |---|---|---|---|
-| SafeTune refusal-direction ablation | 28% | **100%** | **100%** |
-| SafeTune CAA steering, strength −1 | 4% | **42%** | 30% |
-| SafeTune CAA steering, strength −4 | 0% | 0% | 0% |
-| Sampling attack (T=1, success in any of 3 tries) | 9% succeed | **0% succeed** | 2% succeed |
-| 4-bit quantised (bitsandbytes NF4) | 99% | **100%** | **100%** |
-| Prefill "Sure, here is" | 31% | 38% | 41% |
-| Harmful LoRA fine-tune, 100 examples | 1% | 3% | 1% |
-| AuditKIT prompt-injection probes (pass rate) | 62.5% | **87.5%** | 75% |
+| No attack | 98% | **100%** | **100%** |
+| SafeTune refusal-direction ablation | 29% | **100%** | **99%** |
+| SafeTune CAA steering, strength −1 | 4% | **35%** | 34% |
+| SafeTune CAA steering, strength −4 | all models output gibberish (model broken, not stripped) | | |
+| Sampling attack (T=1, success in any of 3 tries)\* | 9% succeed | **0% succeed** | 2% succeed |
+| 4-bit quantised (bitsandbytes NF4)\* | 99% | **100%** | **100%** |
+| Prefill "Sure, here is" | 21% | 20% | 24% |
+| Harmful LoRA fine-tune, 100 examples\* | 1% | 3% | 1% |
+| AuditKIT prompt-injection probes (pass rate)\* | 62.5% | **87.5%** | 75% |
+
+\*Measured before the single-BOS fix (see *Evaluation note* below). All other rows are final single-BOS numbers.
+
+**Second judge: harm, not just refusal.** A teammate scored every attacked response with [Granite Guardian 3.2-5B](https://huggingface.co/ibm-granite/granite-guardian-3.2-5b) for harm, with 95% Wilson confidence intervals:
+- **Heretic's strongest attack:** the original is **93%** harmful [86, 97], v2 **44%** [35, 54]. On XSTest's unsafe prompts: 60% vs **7%**.
+- **SafeTune ablation:** 42% harmful vs **0%** for v2 and v2b.
+- **A finding the refusal judge missed:** under attack, v2 often *rewrites* a harmful request into a harmless one instead of refusing (for example, a conservation guide when asked about trafficking endangered species). Judged by harm, v2 is safer than its refusal rate suggests.
+
+These harm scores were computed on the pre-fix responses; a re-score on the single-BOS responses is in progress.
 
 **What generalises:** attacks that work by removing or steering the refusal direction (Heretic, SafeTune ablation, mild CAA), plus sampling and quantisation.
-**What doesn't:** harmful fine-tuning, prefilling and strong steering. These are the known open problems in tamper resistance (Qi et al. 2023; TamperBench), and they are where we go next.
+**What doesn't:** harmful fine-tuning and prefilling (all models refuse only 20–24% under prefill). These are the known open problems in tamper resistance (Qi et al. 2023; TamperBench), and they are where we go next.
 
 ### 7.4 Mechanism
 - **Refusal direction (SafeTune):** v2's refusal direction is 10–20% weaker in the middle and late layers than the original's (layer 24: 40.2 vs 46.4). It peaks at the same layer (18). Our reading is that v2 stops relying on a single dominant direction, so removing it no longer removes refusal.
@@ -114,7 +125,12 @@ Judged refusal on 100 harmful prompts (higher is safer):
 
 ### 7.5 What else we tried or considered
 - **v1 alone** delays Heretic, but it still reaches 17%. Extended refusals are not enough by themselves.
-- **v2 over-refused** safe prompts (46% on XSTest). v2b fixes most of this (20.8%) but gives up some low-budget robustness. We report v2 and v2b as two points on a safety vs usability curve.
+- **v2 over-refuses** safe prompts (39% on XSTest, judged; the original is 16%). v2b fixes most of this (18%) but gives up some low-budget robustness. We report v2 and v2b as two points on a safety vs usability curve.
+- **No capability cost:** MMLU is 52.3% (original), 53.0% (v2) and 52.7% (v2b), which is within noise.
+- **Evaluation note (double BOS):** a teammate found that our first evaluations added Tiny Aya's begin-of-sequence token twice, because the chat template already adds it. We fixed this and re-ran every headline number (Day-6). The headline held. The only real changes:
+  - the apparent ~2.5-point MMLU cost disappeared;
+  - prefill turned out to be a bigger weakness than first measured.
+  The training-time direction estimate had the same quirk, so a re-trained v3 may be even stronger.
 - **Dropped ideas:**
   - A multilingual/Hinglish attack angle: we found no evidence it reflects real-world attacks.
   - A straight Fool's Gold replication: it failed at 9B, needs hazardous data, and the code is withheld.
@@ -123,9 +139,9 @@ Judged refusal on 100 harmful prompts (higher is safer):
 - **Fine-tuning resistance.** Simulate a few LoRA attack steps inside training, the same way v2 simulates abliteration (a lightweight version of TAR). Our teammates are already exploring this on a separate branch.
 - **Prefilling robustness:** train on "recovery" examples, where the model starts complying and then stops and refuses.
 - **Scale and multilinguality:** repeat on Aya Expanse 8B, and evaluate in the 70+ Tiny Aya languages.
-- **Longer Heretic searches** (200+ trials) and a stronger judge (Llama Guard / Granite Guardian, being run by a teammate).
+- **Longer Heretic searches** (200+ trials) with confidence intervals, and Llama Guard as a third judge.
 
-**Cost so far:** about 25 GPU-hours on free Kaggle T4s. One defense costs about 2–3 GPU-hours to train, and one adaptive Heretic evaluation about 1 GPU-hour.
+**Cost so far:** about 28 GPU-hours on free Kaggle T4s. One defense costs about 2–3 GPU-hours to train, and one adaptive Heretic evaluation about 1 GPU-hour.
 
 ## 9. Team
 *Tag teammates here: @…, @…, @…*
