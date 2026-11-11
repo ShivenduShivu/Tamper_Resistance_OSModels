@@ -263,7 +263,7 @@ This prompt set is softer than our main benchmark (many hate/bias prompts), so c
 ## 9. Team
 
 - **Shivendu** [@StarWarrior24x7](https://huggingface.co/StarWarrior24x7): threat demo, the v1/v2/v2b defenses, adaptive evaluation, Lexsi toolkit integration, single-BOS re-evaluation, article.
-- **Abhinav** *(add HF username)*: Granite Guardian judging, Heretic-200, the multilingual evaluation, ROI.
+- **Abhinav** [@laterabhi](https://huggingface.co/laterabhi): Granite Guardian judging, Heretic-200, the multilingual evaluation, ROI.
 - **Aban** [@abanwild](https://huggingface.co/abanwild): the double-BOS finding, the prefix-recovery pilot and its controls.
 
 ---
