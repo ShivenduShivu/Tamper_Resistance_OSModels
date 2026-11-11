@@ -119,3 +119,210 @@ Format: date, run, config, result, decision.
 ## 2026-11-11: pfx2 matched Granite Guardian judging
 
 Completed 2,400 harm judgments across Bp/Cfix/Cp: 24/24 cells, no errors. Generations were 64 tokens clean and 48 under prefills. Results are model-based harm estimates, not a selectivity test; one training seed per arm. The judge's exact loaded revision wasn't recorded. Config, scores and run journal are in experiments/pfx2-granite/. This is separate from Heretic-200 (#5); the results stay in separate tables.
+## 2026-11-12: Day-5 chained evaluation, Kaggle v18 (83 min). Lexsi toolkits in the loop
+Refusal on harmful test[:100] is shown as judge (ProtectAI classifier) / keyword.
+
+| Attack | Original | v2 | v2b | Tool |
+|---|---|---|---|---|
+| Refusal-direction ablation at inference | **0.28** / 0.72 | **1.00** / 1.00 | **1.00** / 0.99 | SafeTune `RefusalDirectionModel` |
+| CAA steering, strength −1 | 0.04 / 0.05 | 0.42 / 0.51 | 0.30 / 0.33 | SafeTune `CAAModel` |
+| CAA steering, strength −4 | 0 / 0 | 0 / 0 | 0 / 0 | (coherence not checked; may be gibberish) |
+| Prefill "Sure, here is" | 0.31 / 0.55 | 0.38 / 0.66 | 0.41 / 0.59 | ours |
+| Sampling (T=1, top-p 0.95), success in any of 3 samples | 9% | **0%** | 2% | ours |
+| 4-bit (bnb nf4): refusal / XSTest over-refusal | 0.99 / 0.13 | 1.00 / 0.38 | 1.00 / 0.21 | |
+| AuditKIT pass rate: jailbreak / encoding / prompt injection / refusal | 1 / .8 / .625 / 1 | 1 / .8 / .875 / 1 | 1 / .8 / .75 / 1 | AuditKIT `RedTeamRunner` |
+
+- **Refusal-direction norms** (SafeTune, unnormalised diff of means): v2 is about 10–20% lower than the original in mid and late layers (e.g. layer 24: 46.4 vs 40.2). The direction layer is the same (18).
+- **Keyword vs judge:** under attack on the original model, keyword scoring overstates refusal (ablation: keyword 0.72 vs judge 0.28). Heretic's keyword-scored numbers for the original are therefore likely *optimistic*: the real refusal under attack is probably even lower. Day-5b checks this with judged responses.
+- **Failed:**
+  - Heretic save: needed `export_strategy="merge"`; it is the only remaining prompt.
+  - CircuitKIT: `walledai/AdvBench` is gated; switched to JBB-Behaviors.
+  - Both are rerun in Day-5b (v19).
+- **Reading:**
+  - The defense generalises across *direction-based* attacks: Heretic, SafeTune ablation, and partly CAA steering.
+  - It survives 4-bit quantisation and resists sampling attacks.
+  - It does **not** help against prefilling or fine-tuning.
+
+## 2026-11-12: Day-5b, Kaggle v19 (129 min). Exact Heretic Pareto trials re-applied, then judged and MMLU'd
+Each Heretic point is labelled by its keyword refusal (r = refusal on Heretic's front) and its KL. Judge = ProtectAI classifier.
+
+| Point (KL) | Harmful refusal: judge / kw | XSTest unsafe refusal (judge) | XSTest safe over-refusal (judge) | MMLU-1000 |
+|---|---|---|---|---|
+| base clean | 0.99 / 0.99 | — | — | 0.529 |
+| base r14 (KL 0.009) | **0.01** / 0.08 | 0.17 | 0.048 | 0.527 |
+| base r51 (KL 0.003) | 0.30 / 0.44 | 0.42 | 0.056 | 0.534 |
+| v2 clean | 1.00 / 1.00 | — | — | 0.505 |
+| v2 r70 (KL 0.108) | 0.52 / 0.65 | 0.755 | 0.10 | 0.501 |
+| v2 r51 (KL 0.116) | 0.33 / 0.46 | 0.66 | 0.096 | 0.501 |
+| v2 r33 (KL 0.153) | **0.23** / 0.42 | 0.615 | 0.092 | 0.510 |
+| v2b r84 (KL 0.025) | 0.77 / 0.83 | 0.735 | 0.092 | 0.497 |
+| v2b r67 (KL 0.040) | 0.50 / 0.65 | 0.615 | 0.072 | 0.494 |
+| v2b r47 (KL 0.054) | 0.24 / 0.40 | 0.475 | 0.064 | 0.496 |
+
+- **Reading (honest):**
+  - **The original is stripped for free.** Heretic's best attack takes it to 1% judged refusal at KL 0.009, with no MMLU change (0.527). The keyword metric (8%) hid how complete the strip is.
+  - **v2 raises the price but is not unbreakable.** The strongest attack Heretic found still leaves 23% judged refusal, needs 16× the KL, and **does not reduce MMLU** (0.510). So the attacker pays in behaviour shift (KL) and gets a weaker strip, but keeps general knowledge. Answer to the teammate's question: MMLU holds, so "the attacker pays more KL".
+  - **Even attacked, v2 still refuses explicitly unsafe XSTest prompts much more** than the attacked original (0.62–0.76 vs 0.17).
+  - **v2b breaks at lower KL** than v2 (0.24 at KL 0.054), consistent with the usability trade-off.
+- **CircuitKIT failed again:** the public `register_jailbreakbench` builds `answer_contrastive` pairs (corrupt prompt == clean prompt), which `discover()` rejects as degenerate. Day-5c (v20) builds the task directly with `pairing_mode="harmful_vs_benign"`.
+
+## 2026-11-12: Day-5c, CircuitKIT, Kaggle v20 + v21. Stopped (out of memory on T4)
+- **Pairing fixed:** the `harmful_vs_benign` task built correctly (32/32 pairs).
+- **v20 (EAP-IG, 16 examples):** out of memory.
+- **v21:** a separate process per model, plain EAP, 8 examples and expandable segments. Still out of memory in `discover` at 13.7 GB on a 14.6 GB T4. The 1 GB allocation matches one vocabulary-sized buffer (262k × 2048 × fp16).
+- **Decision:**
+  - Stop. CircuitKIT's 3.35B Cohere port doesn't fit discovery on a T4, and multi-GPU (`n_devices`) is documented as broken in transformer-lens 3.8.0.
+  - The mechanism evidence comes from SafeTune's per-layer refusal directions instead.
+  - The repo rule is met with SafeTune + AuditKIT.
+  - Report CircuitKIT as attempted, with its limits stated.
+
+## 2026-11-11: Guard judge on all Day-5/5b responses, Kaggle `laterabhi/lexsi-guard-judge` v1 (83 min, T4)
+- **Config:** Granite Guardian 3.2-5B (Apache-2.0, ungated), FP16. Per response, P(Yes) at the first answer token for the built-in `harm` risk (= **unsafe**) and `harm_engagement` risk. ProtectAI rejection classifier and the Day-5b keyword list recomputed in the same job. A degeneracy heuristic (from the PS11 go/no-go pipeline) flags gibberish. 45 files, 7,550 responses (longest Granite input 414 tokens, so the 2,048-token truncation in run v1 never fired). Responses come from a private Kaggle dataset; only numbers are committed (`results/guard_judge/`, built by `scripts/guard_summary.py`).
+- **Sanity:** ProtectAI numbers match Day-5/5b exactly, so rows line up. Yes/No probability mass ≥ 0.84 on every row for both risks (≥ 0.95 outside CAA −4); the masses are in `scores.jsonl`. Outside CAA −4 the degeneracy heuristic flags only 6 real answers (Tagalog, code, a refusal that switches to Chinese), so `unsafe_nd` and `unsafe` differ by ≤ 0.01 there.
+- **Dropped:** a custom Granite "refusal" definition. Granite's template always asks "is it harmful", so it tracked harm instead (1% "refusal" on base 4-bit, where every answer refuses).
+- **Hand check of judge disagreements (harmful prompts, CAA −4 excluded):**
+  - ProtectAI says refusal, Granite says unsafe (112): disclaim-then-comply ("Here is a plan ..., which is illegal"). Granite is right.
+  - Neither (251): mostly attacked v2 *rewriting* the request into a safe one (a conservation guide for "trafficking endangered species"). Granite is right; ProtectAI undercounts v2's safety here.
+  - Granite flags gibberish as unsafe. The heuristic marks 79–100% of CAA −4 answers as gibberish; the other 28 (21 v2b, 7 v2) were read by hand and are gibberish too (repeated pseudo-words). So CAA −4 output is gibberish for every model, and its "100% unsafe" means a broken model, not compliance.
+
+Unsafe = Granite harm rate (lower is safer), 95% Wilson CI; refusal = ProtectAI. n = 100 harmful, 200 XSTest unsafe. The sampling row is per prompt: the share of prompts with at least one unsafe answer out of 3, as in Day-5.
+
+| Attack point | Unsafe (harmful) | Refusal | Unsafe (XSTest unsafe) |
+|---|---|---|---|
+| base Heretic r14 (KL 0.009) | **0.93** [0.86, 0.97] | 0.01 | **0.60** |
+| base Heretic r51 (KL 0.003) | 0.72 [0.63, 0.80] | 0.30 | 0.37 |
+| v2 Heretic r70 (KL 0.108) | 0.30 [0.22, 0.40] | 0.52 | 0.03 |
+| v2 Heretic r51 (KL 0.116) | 0.41 [0.32, 0.51] | 0.33 | 0.04 |
+| v2 Heretic r33 (KL 0.153) | **0.44** [0.35, 0.54] | 0.23 | **0.07** |
+| v2b Heretic r84 (KL 0.025) | 0.18 [0.12, 0.27] | 0.77 | 0.06 |
+| v2b Heretic r67 (KL 0.040) | 0.39 [0.30, 0.49] | 0.50 | 0.08 |
+| v2b Heretic r47 (KL 0.054) | 0.62 [0.52, 0.71] | 0.24 | 0.14 |
+
+| Other attack | base | v2 | v2b |
+|---|---|---|---|
+| SafeTune ablation | 0.42 | **0.00** | **0.00** |
+| SafeTune CAA −1 | 0.96 | 0.72 | 0.81 |
+| SafeTune CAA −4 | 1.00, all gibberish | 1.00, all gibberish | 1.00, all gibberish |
+| Prefill "Sure, here is" | 0.72 | 0.51 | 0.59 |
+| Sampling, ≥ 1 unsafe of 3 | 0.01 | 0.00 | 0.00 |
+| 4-bit NF4 | 0.00 | 0.00 | 0.00 |
+
+XSTest safe prompts: unsafe 0–3% for every model and attack (nothing to flag).
+
+- **Reading:**
+  - The harm judge confirms the headline. Heretic's strongest attack makes the original **93% unsafe**; the strongest attack found on v2 reaches **44%**, at about 16× the KL (0.153 vs 0.0094). On XSTest's unsafe prompts the gap is larger: 60% vs 7%.
+  - Judged by harm instead of refusal wording, v2 looks *safer* than ProtectAI suggests: under attack it often rewrites harmful requests into harmless ones rather than refusing.
+  - SafeTune ablation: 0% unsafe on v2/v2b vs 42% on the original.
+  - CAA −1 and prefill are real weaknesses (51–81% unsafe), in line with Day-5.
+  - CAA −4 should be reported as "model broken", not "stripped".
+- **Code changes after run v1 (scores unchanged):** removed the custom refusal risk and the input truncation; the job now stops on duplicate file names; the summary keeps the Yes/No masses and reports the per-prompt sampling metric.
+- **Not done:** Llama Guard 3 (Meta access pending); can be added with the same job.
+- **Rerun:** the job reads the private dataset `laterabhi/lexsi-attacked-responses`, which will be deleted once these numbers are final (README rule: delete copies after judging). After that, rerunning needs the responses re-shared.
+
+## 2026-11-12: Double-BOS finding (reported by Aban)
+- **Cause:** Tiny Aya's chat template starts with `{{ bos_token }}`, and the tokenizer has `add_bos_token: true`. Any `tok(apply_chat_template(..., tokenize=False))` call with default settings therefore produces **two** BOS tokens.
+- **Affected:**
+  1. **All of our own generation and MMLU evaluations** (Day-2 to Day-5b `gen` / `mmlu`). All models were measured the same way, so comparisons hold, but absolute numbers may shift.
+  2. **v2/v2b training-time direction estimation** (`refusal_dirs`, run at the start and every 100 optimizer steps). The simulated attack direction was estimated on double-BOS inputs, while the LoRA training sequences were single-BOS.
+- **Not affected:**
+  - The supervised training tokenization (`add_special_tokens=False`).
+  - Heretic (its own tokenization).
+  - Abhinav's Granite Guardian judge (its tokenizer adds no BOS).
+- **Interpretation:**
+  - v2's robustness was measured by *independent, single-BOS attackers* (Heretic, SafeTune), so the defense result stands. The defense worked even with a slightly mismatched training-time direction.
+  - Fixing the estimation could make a v3 *stronger*.
+- **Action:** apply Aban's single-BOS fix, then do one compact re-evaluation (clean refusal, XSTest, MMLU, strongest Heretic point, SafeTune ablation; original/v2/v2b) and regenerate responses for the Granite re-judge.
+
+
+## 2026-11-12: Day-6 single-BOS re-evaluation, Kaggle v24 (98 min). These are the final numbers
+The eval tokenization now passes `add_special_tokens=False`. Judge = ProtectAI (refusal); old = Day-4/5/5b (double BOS).
+
+| | Original old → **new** | v2 old → **new** | v2b old → **new** |
+|---|---|---|---|
+| Clean refusal (harmful) | 0.99 → **0.98** | 1.00 → **1.00** | 1.00 → **1.00** |
+| Clean XSTest-safe over-refusal (judge) | — → **0.164** (kw 0.12 → 0.124) | — → **0.392** (kw 0.46 → 0.408) | — → **0.184** (kw 0.208 → 0.196) |
+| Clean XSTest-unsafe refusal | — → **0.925** | — → **0.985** | — → **0.92** |
+| **Clean MMLU-1000** | 0.529 → **0.523** | 0.505 → **0.530** | 0.501 → **0.527** |
+| Heretic strongest point: refusal | 0.01 → **0.01** | 0.23 → **0.25** | 0.24 → **0.31** |
+| Heretic strongest point: MMLU | 0.527 → **0.520** | 0.510 → **0.521** | 0.496 → **0.520** |
+| Heretic strongest point: XSTest-unsafe refusal | 0.17 → **0.205** | 0.615 → **0.70** | 0.475 → **0.555** |
+| SafeTune ablation | 0.28 → **0.29** | 1.00 → **1.00** | 1.00 → **0.99** |
+| SafeTune CAA −1 | 0.04 → **0.04** | 0.42 → **0.35** | 0.30 → **0.34** |
+| Prefill "Sure, here is" | 0.31 → **0.21** | 0.38 → **0.20** | 0.41 → **0.24** |
+
+- **Headline unchanged:**
+  - At Heretic's strongest attack, the original keeps 1% refusal and v2 keeps 25%.
+  - SafeTune ablation: original 29% vs v2 100%.
+  - v2 still refuses 70% of XSTest's unsafe prompts after the strongest attack (original: 20.5%).
+- **New, and good:** with single BOS, the hardened models show **no MMLU cost** (v2 0.530, v2b 0.527 vs original 0.523; within noise). The earlier "−2.5 points" came from the duplicate BOS hurting the fine-tuned models more.
+- **New, and bad:** prefill is a bigger weakness than measured before. All models refuse only 20–24% under the "Sure, here is" prefill, so v2 gives no prefill benefit. This motivates Aban's prefix-recovery experiment.
+- **Over-refusal (judge):** original 16.4%, v2 39.2%, v2b 18.4%. v2b's over-refusal is now close to the original's.
+- **Not re-measured:** v1, sampling, 4-bit, CAA −4, AuditKIT and the fine-tuning attack. They keep their Day-4/5 numbers and are reported as double-BOS measurements.
+- Responses for the Granite re-judge are in `results/day6/responses` (private).
+
+## 2026-11-11: Multilingual check, Kaggle `laterabhi/lexsi-ps11-gonogo` (`kaggle/multilingual`, run saved from the web UI so the HF_TOKEN secret is attached; about 2 h on T4)
+- **Question:** the defense was trained and tested in English. Does it hold in the other languages Tiny Aya is built for?
+- **Config:** 100 seeded prompts per language from `CohereLabs/aya_redteaming` (Apache-2.0): English (control), Hindi, Arabic, French, Spanish. Original / v2 / v2b, each clean and at its strongest Heretic point (the exact Day-5b/Day-6 trials: base r14 KL 0.009, v2 r33 KL 0.153, v2b r47 KL 0.054; all three re-applied successfully). Single-BOS generation, 128 new tokens, greedy, as in Day-6. 3,000 responses.
+- **Judging:** Granite Guardian is trained on English only, so every prompt and response is translated to English with NLLB-200-distilled-600M (a plain MT model, so it does not refuse) and then judged (Granite `harm` = **unsafe**; ProtectAI refusal). Llama Guard 3 1B judges the original text as a second, multilingual judge.
+- **Judge checks:**
+  - Translated-Granite vs Llama Guard agree on 81–87% of rows in every language, the same as English, which needs no translation (85%).
+  - Granite on the *original* text is unusable for Hindi (52% agreement with Llama Guard; it calls 59% of clean v2's Hindi answers unsafe). It is kept in `scores.jsonl` but not reported.
+  - Hand check of Hindi and Arabic disagreements: the translations keep the meaning (one slur was softened). Disagreements are borderline answers (aya has many hate/bias prompts that the model half-engages with), not translation errors.
+
+Unsafe rate, translated-Granite (Llama Guard in brackets), 95% Wilson CI in `results/multilingual/summary.jsonl`. n = 100 per language, 400 pooled.
+
+| Condition | English | Hindi | Arabic | French | Spanish | Non-English pooled |
+|---|---|---|---|---|---|---|
+| original, clean | 0.02 (0.06) | 0.06 (0.17) | 0.04 (0.11) | 0.04 (0.03) | 0.05 (0.13) | 0.05 (0.11) |
+| original, Heretic r14 | 0.34 (0.32) | 0.41 (0.41) | 0.34 (0.29) | 0.46 (0.39) | 0.44 (0.41) | **0.41** (0.38) |
+| v2, clean | 0.01 (0.03) | 0.01 (0.06) | 0.02 (0.03) | 0.01 (0.01) | 0.04 (0.07) | 0.02 (0.04) |
+| v2, Heretic r33 | 0.22 (0.17) | 0.09 (0.17) | 0.03 (0.10) | 0.20 (0.15) | 0.14 (0.15) | **0.12** (0.14) |
+| v2b, clean | 0.04 (0.06) | 0.07 (0.14) | 0.02 (0.08) | 0.02 (0.04) | 0.04 (0.13) | 0.04 (0.10) |
+| v2b, Heretic r47 | 0.28 (0.28) | 0.17 (0.29) | 0.20 (0.23) | 0.25 (0.23) | 0.26 (0.26) | 0.22 (0.25) |
+
+- **Reading:**
+  - **The defense transfers beyond English.** Pooled over four non-English languages, Heretic's strongest attack makes the original 41% unsafe and v2 12% (Llama Guard: 38% vs 14%); v2b sits between (22%). Both judges agree on the ordering in every language.
+  - aya_redteaming is softer than `harmful_behaviors` (many hate/bias and culturally specific prompts), so absolute rates are lower than the Day-5b English numbers (93% vs 44%); compare conditions within this table, not across tables.
+  - Same caveat as Day-5b: v2's strongest point costs the attacker about 16× the KL of the original's.
+  - Clean models stay at 1–7% unsafe in every language. v2 refuses more of these prompts (ProtectAI on the translation: 81% vs 71% pooled), which on aya's borderline prompts partly means over-refusal.
+- **Not done:** code-mixed (Hinglish) prompts; languages beyond these five.
+## 2026-11-11: Guard judge on the Day-6 single-BOS responses, Kaggle `laterabhi/lexsi-guard-judge` v2 (29 min, T4)
+- **Config:** the same job as the Day-5/5b judge (Granite Guardian 3.2-5B `harm` = **unsafe**, `harm_engagement`, ProtectAI and keyword refusal), on the 27 Day-6 response files from a private Kaggle dataset. Per-file numbers in `results/guard_judge_day6/` (`python scripts/guard_summary.py <responses> <scores.jsonl> guard_judge_day6`). These **supersede** `results/guard_judge/` wherever the two overlap.
+- **Sanity:** ProtectAI numbers match `results/day6/summary.jsonl` on all 27 files, so rows line up. No degenerate outputs except 1% on two CAA/prefill files.
+
+Unsafe rate (lower is safer), 95% Wilson CI in the summary file; refusal = ProtectAI.
+
+| | original | v2 | v2b |
+|---|---|---|---|
+| clean, harmful prompts | 0.00 | 0.00 | 0.00 |
+| Heretic strongest point, harmful | **0.91** [0.84, 0.95] | **0.40** [0.31, 0.50] | 0.57 [0.47, 0.66] |
+| same, XSTest unsafe | **0.61** | **0.04** | 0.15 |
+| same, XSTest safe | 0.04 | 0.02 | 0.03 |
+| SafeTune ablation | 0.55 | **0.00** | **0.00** |
+| SafeTune CAA −1 | 0.97 | 0.72 | 0.71 |
+| prefill "Sure, here is" | 0.82 | 0.77 | 0.80 |
+
+- **Reading:**
+  - The headline holds after the BOS fix: Heretic's strongest attack makes the original **91% unsafe** and v2 **40%** (Day-5b, double-BOS: 93% vs 44%). On XSTest's unsafe prompts the gap is 61% vs 4%.
+  - SafeTune ablation: 55% unsafe on the original (Day-5: 42%), 0% on v2/v2b.
+  - **Prefill is now the clearest weakness:** with single-BOS generation, all three models are 77–82% unsafe (Day-5: 51–72%). The defense gives no protection against prefilling, consistent with Aban's prefix-recovery finding that A/B sit at ~0.2 ProtectAI refusal under "Sure, here is".
+
+## 2026-11-11: Heretic-200 on v2, Kaggle `laterabhi/lexsi-heretic200-v2` (search 229 min + eval, T4×2)
+- **Question:** is v2's robustness an artefact of Heretic's 40-trial search budget?
+- **Config:** a fresh Heretic search on v2 with the exact Day-3 config (`results/day3/heretic_v2/config.toml`, Heretic 2.1.0), changing only `n_trials` 40 → 200 (`n_startup_trials` stays 12). All 200 trials completed. The strongest points on the new front were re-applied and evaluated exactly as in Day-6 (single-BOS generation, ProtectAI + keyword refusal, Granite Guardian unsafe, MMLU-1000 at the strongest point). Journal, config and log in `results/heretic200_v2/`; numbers only.
+- **Result:**
+
+| v2 under Heretic | 40 trials (Day-3 search, Day-6 eval) | 200 trials |
+|---|---|---|
+| min keyword refusal at KL ≤ 0.01 / ≤ 0.05 / ≤ 0.1 | 1.00 / 1.00 / 0.96 | 1.00 / 1.00 / **0.79** |
+| strongest point found (keyword refusal, KL) | 0.33 @ 0.153 | 0.38 @ 0.139 |
+| strongest point: Granite unsafe, harmful | 0.40 [0.31, 0.50] | **0.42** [0.33, 0.52] |
+| strongest point: ProtectAI refusal, harmful | 0.25 | 0.20 |
+| strongest point: Granite unsafe, XSTest unsafe | 0.04 | 0.06 |
+| strongest point: MMLU-1000 | 0.521 | 0.522 |
+| KL ≤ 0.1 point (r79, KL 0.099): Granite unsafe, harmful | — | 0.15 |
+
+- **Reading:**
+  - **5× the search budget does not find a meaningfully stronger strip.** The worst case stays at about 40% unsafe (42% vs 40%, overlapping CIs) and still needs about 15× the original's KL (0.139 vs 0.0094). Nothing below 100% refusal exists at KL ≤ 0.05.
+  - The longer search does find cheaper partial attacks in the 0.05–0.1 KL band (keyword refusal 0.79 vs 0.96 at KL ≤ 0.1, 15% unsafe), so the KL ≤ 0.1 column of the main table should cite the 200-trial number.
+  - One search per budget and one seed each; a different seed could land elsewhere on the front.

@@ -1,0 +1,14 @@
+{
+  "id": "laterabhi/lexsi-heretic200-v2",
+  "title": "lexsi-heretic200-v2",
+  "code_file": "heretic200_v2.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_internet": true,
+  "machine_shape": "NvidiaTeslaT4",
+  "dataset_sources": ["laterabhi/lexsi-heretic-journals-ab"],
+  "competition_sources": [],
+  "kernel_sources": []
+}

@@ -1,0 +1,40 @@
+[{"stream_name":"stdout","time":0.847198297,"data":"secret unavailable: Connection error trying to communicate with service.\n"}
+,{"stream_name":"stdout","time":141.309980907,"data":"circuit_base_ERR RuntimeError: /debug.py\", line 189, in wrapper\n"}
+,{"stream_name":"stdout","time":141.310015121,"data":"    result = debugger.profile_function(func, *args, **kwargs)\n"}
+,{"stream_name":"stdout","time":141.310020705,"data":"  File \"/usr/local/lib/python3.13/dist-packages/circuitkit/utils/debug.py\", line 127, in profile_function\n"}
+,{"stream_name":"stdout","time":141.310025901,"data":"    result = func(*args, **kwargs)\n"}
+,{"stream_name":"stdout","time":141.310030838,"data":"  File \"/usr/local/lib/python3.13/dist-packages/circuitkit/utils/exceptions.py\", line 358, in wrapper\n"}
+,{"stream_name":"stdout","time":141.310036358,"data":"    raise handle_exception(e, error_context) from e\n"}
+,{"stream_name":"stdout","time":141.31004266,"data":"circuitkit.utils.exceptions.CircuitKitError: CUDA out of memory. Tried to allocate 1024.00 MiB. GPU 0 has a total capacity of 14.56 GiB of which 676.81 MiB is free. Including non-PyTorch memory, t |  13.90 GiB memory in use. Of the allocated memory 13.72 GiB is allocated by PyTorch, and 40.99 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf) (Context: operation=discover_circuit, function=discover_circuit, args=({'model': {'name': 'CohereLabs/tiny-aya-global', 'precision': 'float16'}, 'discovery': {'algorithm': 'eap', 'task': 'jbb_hvb', 'level': 'node', 'batch_size': 1, 'data_params': {'num_examples': 8, 'ba, kwargs={'_model': HookedTransformer(\n"}
+,{"stream_name":"stdout","time":141.310050685,"data":"  (embed): Embed()\n"}
+,{"stream_name":"stdout","time":141.310054771,"data":"  (hook_embed): HookPoint(name='hook_embed')\n"}
+,{"stream_name":"stdout","time":141.31005899,"data":"  (blocks): TypedModuleList(\n"}
+,{"stream_name":"stdout","time":141.310063026,"data":"    (0): TransformerBlock(\n"}
+,{"stream_name":"stdout","time":141.310067335,"data":"      (ln1): LayerNorm(\n"}
+,{"stream_name":"stdout","time":141.310071358,"data":"        (hook_scale): Hook)\n"}
+,{"stream_name":"stdout","time":141.310075433,"data":"\n"}
+,{"stream_name":"stdout","time":141.31007933,"data":"\n"}
+,{"stream_name":"stderr","time":154.877756332,"data":"\rFetching 10 files:   0%|          | 0/10 [00:00\u003c?, ?it/s]\rFetching 10 files:  30%|███       | 3/10 [00:00\u003c00:00, 29.03it/s]\rFetching 10 files:  80%|████████  | 8/10 [00:00\u003c00:00,  9.75it/s]\rFetching 10 files: 100%|██████████| 10/10 [00:13\u003c00:00,  1.89s/it]\rFetching 10 files: 100%|██████████| 10/10 [00:13\u003c00:00,  1.34s/it]\n"}
+,{"stream_name":"stdout","time":219.187426352,"data":"circuit_v2_ERR RuntimeError: /debug.py\", line 189, in wrapper\n"}
+,{"stream_name":"stdout","time":219.18746585,"data":"    result = debugger.profile_function(func, *args, **kwargs)\n"}
+,{"stream_name":"stdout","time":219.187471413,"data":"  File \"/usr/local/lib/python3.13/dist-packages/circuitkit/utils/debug.py\", line 127, in profile_function\n"}
+,{"stream_name":"stdout","time":219.187476063,"data":"    result = func(*args, **kwargs)\n"}
+,{"stream_name":"stdout","time":219.187480136,"data":"  File \"/usr/local/lib/python3.13/dist-packages/circuitkit/utils/exceptions.py\", line 358, in wrapper\n"}
+,{"stream_name":"stdout","time":219.187484672,"data":"    raise handle_exception(e, error_context) from e\n"}
+,{"stream_name":"stdout","time":219.187490699,"data":"circuitkit.utils.exceptions.CircuitKitError: CUDA out of memory. Tried to allocate 1024.00 MiB. GPU 0 has a total capacity of 14.56 GiB of which 676.81 MiB is free. Including non-PyTorch memory, t |  13.90 GiB memory in use. Of the allocated memory 13.72 GiB is allocated by PyTorch, and 40.99 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf) (Context: operation=discover_circuit, function=discover_circuit, args=({'model': {'name': '/kaggle/working/v2', 'precision': 'float16'}, 'discovery': {'algorithm': 'eap', 'task': 'jbb_hvb', 'level': 'node', 'batch_size': 1, 'data_params': {'num_examples': 8, 'batch_size, kwargs={'_model': HookedTransformer(\n"}
+,{"stream_name":"stdout","time":219.1875109,"data":"  (embed): Embed()\n"}
+,{"stream_name":"stdout","time":219.187514787,"data":"  (hook_embed): HookPoint(name='hook_embed')\n"}
+,{"stream_name":"stdout","time":219.187518456,"data":"  (blocks): TypedModuleList(\n"}
+,{"stream_name":"stdout","time":219.187522002,"data":"    (0): TransformerBlock(\n"}
+,{"stream_name":"stdout","time":219.187529129,"data":"      (ln1): LayerNorm(\n"}
+,{"stream_name":"stdout","time":219.18753284,"data":"        (hook_scale): Hook)\n"}
+,{"stream_name":"stdout","time":219.187536619,"data":"\n"}
+,{"stream_name":"stdout","time":219.187539694,"data":"\n"}
+,{"stream_name":"stdout","time":219.256910612,"data":"DONE True\n"}
+,{"stream_name":"stderr","time":222.531465517,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":222.531506975,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":222.758657197,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":222.758682049,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":223.524562732,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":224.415549155,"data":"[NbConvertApp] Writing 296408 bytes to __results__.html\n"}
+]
