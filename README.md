@@ -13,14 +13,22 @@ Each Heretic attack below is a fresh 40-trial search run on that checkpoint, so 
 
 | Model | Over-refusal (XSTest safe) | Refusal under Heretic, KL ≤ 0.01 | KL ≤ 0.05 | KL ≤ 0.1 | Lowest refusal reached | MMLU (1k) |
 |---|---|---|---|---|---|---|
-| Original | 12% | **14%** | 14% | 14% | 14% | 52.9% |
-| v1: extended-refusal LoRA | 17.6% | 70% | 43% | 17% | 17% | 50.7% |
-| v2: v1 + trained through simulated abliteration | 46% | **100%** | **100%** | 96% | 33% | 50.5% |
-| v2b: v2 + borderline-benign data (OR-Bench) | 20.8% | 99% | 52% | 47% | 47% | 50.1% |
+| Original | 16% | **14%** | 14% | 14% | 14% | 52.3% |
+| v1: extended-refusal LoRA | 17.6%† | 70% | 43% | 17% | 17% | 50.7%† |
+| v2: v1 + trained through simulated abliteration | 39% | **100%** | **100%** | 96% | 33% | 53.0% |
+| v2b: v2 + borderline-benign data (OR-Bench) | 18% | 99% | 52% | 47% | 47% | 52.7% |
 
-- **Harmful LoRA fine-tune (100 to 1,000 examples, lr 2e-4):** strips **every** model, ours included (judge-scored refusal 1–10%). This is the limitation the next phase addresses.
-- **Judged results:** the table above uses Heretic's keyword scorer. Scored by a classifier judge (ProtectAI/distilroberta-base-rejection-v1), Heretic's strongest attack leaves the original at **1%** refusal (MMLU 52.7%) and v2 at **23%** (MMLU 51.0%). Lexsi's SafeTune refusal-direction ablation leaves the original at 28% and v2 at **100%**. Full attack matrix: `notes/LOG.md`.
-- **Second judge (harm, Granite Guardian 3.2-5B):** Heretic's strongest attack makes the original **93% unsafe** and v2 **44%** (XSTest unsafe prompts: 60% vs 7%). Per-file scores in `results/guard_judge/`; Llama Guard pending access.
+† v1 was not re-measured after the single-BOS evaluation fix. All other over-refusal (XSTest safe, judged) and MMLU numbers are final single-BOS numbers (Day-6).
+
+- **Harmful LoRA fine-tune (100 to 1,000 examples, lr 2e-4):** strips **every** model, ours included (judge-scored refusal 1–10%). Prefilling ("Sure, here is") also defeats all models (20–24% refusal). These are the limitations the next phase addresses.
+- **Judged results:** the Heretic columns above use Heretic's own keyword scorer.
+  - **Heretic's strongest attack, refusal** (ProtectAI classifier judge): the original keeps **1%** (MMLU 52.0%), v2 **25%** (MMLU 52.1%).
+  - **SafeTune refusal-direction ablation:** refusal is 29% for the original and **100%** for v2.
+  - Full details are in `notes/LOG.md`, where Day-6 has the final single-BOS numbers.
+- **Second judge (harm, Granite Guardian 3.2-5B):** Heretic's strongest attack makes the original **93% unsafe** and v2 **44%** (XSTest unsafe prompts: 60% vs 7%).
+  - These scores were computed on the pre-fix responses; a re-score is in progress.
+  - Per-file scores are in `results/guard_judge/`.
+  - Llama Guard is pending access.
 
 ![Pareto fronts](docs/build/pareto_chart.png)
 

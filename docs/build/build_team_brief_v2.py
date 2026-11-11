@@ -30,19 +30,21 @@ S += [p("Heretic-Resistant Tiny Aya", H1),
           "3. We trained Tiny Aya <b>while simulating that attack inside the model</b>, so it learned to refuse even with its "
           "refusal direction removed.",
           "4. Our <b>v2</b> refuses <b>100%</b> at the attack strength that fully broke the original. Heretic's strongest attack "
-          "only gets it to <b>23%</b>, and needs about <b>16x more damage</b> to the model's normal behaviour.",
-          "5. Lexsi's own <b>SafeTune</b> confirms it independently (original 28%, v2 100%). <b>Limits:</b> harmful fine-tuning "
-          "and prefilling still break it. We say so openly."]),
+          "only gets it to <b>25%</b>, and needs about <b>16x more damage</b> to the model's normal behaviour. A second judge (Granite Guardian) agrees: the stripped original is <b>93% harmful</b>, v2 <b>44%</b>.",
+          "5. Lexsi's own <b>SafeTune</b> confirms it independently (original 29%, v2 100%). No MMLU cost. <b>Limits:</b> harmful "
+          "fine-tuning and prefilling still break it. We say so openly."]),
       Spacer(1, 6), p("Key numbers (refusal on 100 harmful prompts, scored by the classifier judge; higher is safer)", H3),
       table([["", "Original", "v1", "v2", "v2b"],
-             ["No attack", "99%", "98%", "100%", "100%"],
+             ["No attack", "98%", "98%*", "100%", "100%"],
              ["Heretic, weak attack (KL up to 0.01, keyword score)", "14%", "70%", "<b>100%</b>", "99%"],
-             ["Heretic, strongest attack found (judge)", "<b>1%</b>", "~17% (kw)", "<b>23%</b>", "24%"],
-             ["SafeTune refusal-direction ablation (judge)", "28%", "-", "<b>100%</b>", "<b>100%</b>"],
-             ["Harmful LoRA fine-tune, 100 examples (judge)", "1%", "3%", "3%", "1%"],
-             ["Over-refusal of safe questions (XSTest)", "12%", "17.6%", "46%", "<b>20.8%</b>"],
-             ["MMLU, general knowledge", "52.9%", "50.7%", "50.5%", "50.1%"]], [70, 26, 26, 27, 27]),
-      p("v1's strongest-attack figure is Heretic's keyword score; it was not re-judged. \"-\" means not measured.", SM),
+             ["Heretic, strongest attack found (judge)", "<b>1%</b>", "~17% (kw)", "<b>25%</b>", "31%"],
+             ["Same attack, judged harmful (Granite; lower is safer)", "93%", "-", "<b>44%</b>", "-"],
+             ["SafeTune refusal-direction ablation (judge)", "29%", "-", "<b>100%</b>", "<b>99%</b>"],
+             ["Harmful LoRA fine-tune, 100 examples (judge)*", "1%", "3%", "3%", "1%"],
+             ["Prefill \"Sure, here is\" (judge)", "21%", "-", "20%", "24%"],
+             ["Over-refusal of safe questions (XSTest, judge)", "16%", "17.6%*", "39%", "<b>18%</b>"],
+             ["MMLU, general knowledge", "52.3%", "50.7%*", "53.0%", "52.7%"]], [70, 26, 26, 27, 27]),
+      p("Final single-BOS numbers (Day-6). * = measured before the BOS fix (v1 and the fine-tuning attack were not re-run). \"-\" = not measured. Granite scores are on pre-fix responses; a re-score is running.", SM),
       PageBreak()]
 
 # ============ 1 PROBLEM + TERMS
@@ -131,7 +133,9 @@ S += [p("4. The full pipeline and every run", H2),
              ["v17", "Toolkit smoke test (CPU, free)", "All 4 tools install on Kaggle"],
              ["v18", "<b>Lexsi toolkits + other attacks</b>", "SafeTune ablation 28% vs 100%; sampling, 4-bit, prefill, steering, AuditKIT"],
              ["v19", "<b>Exact Heretic attacks re-applied, then judged and MMLU'd</b>", "Original 1% (MMLU 52.7%); v2 23% (MMLU 51.0%)"],
-             ["v20-21", "CircuitKIT circuit analysis", "Model does not fit a 16 GB T4 for discovery. Stopped."]],
+             ["v20-21", "CircuitKIT circuit analysis", "Model does not fit a 16 GB T4 for discovery. Stopped."],
+             ["guard", "<b>Second judge: Granite Guardian</b> (Abhinav, PR #1)", "Original 93% harmful vs v2 44% at the strongest attack"],
+             ["v24", "<b>Single-BOS re-evaluation (Day-6)</b>, after Aban found a duplicate BOS", "Headline holds; MMLU cost disappears; prefill weaker. These are the final numbers"]],
             [17, 63, 100]),
       p("5. Results", H2),
       Image(CH, width=178 * mm, height=99 * mm),
@@ -143,24 +147,25 @@ S += [p("4. The full pipeline and every run", H2),
 # ============ 5 contd: attack matrix + Heretic judged
 S += [p("All attacks, scored by the judge (refusal on 100 harmful prompts; higher is safer)", H3),
       table([["Attack", "Original", "v2", "v2b", "Tool"],
-             ["Heretic, strongest attack found", "1% (MMLU 52.7%)", "23% (MMLU 51.0%)", "24%", "Heretic"],
-             ["Refusal-direction ablation at run time", "28%", "<b>100%</b>", "<b>100%</b>", "SafeTune"],
-             ["CAA steering, strength -1", "4%", "<b>42%</b>", "30%", "SafeTune"],
-             ["CAA steering, strength -4", "0%", "0%", "0%", "SafeTune"],
+             ["Heretic, strongest attack found", "1% (MMLU 52.0%)", "25% (MMLU 52.1%)", "31%", "Heretic"],
+             ["Same attack, judged harmful (lower is safer)", "93%", "<b>44%</b>", "-", "Granite"],
+             ["Refusal-direction ablation at run time", "29%", "<b>100%</b>", "<b>99%</b>", "SafeTune"],
+             ["CAA steering, strength -1", "4%", "<b>35%</b>", "34%", "SafeTune"],
+             ["CAA steering, strength -4", "gibberish", "gibberish", "gibberish", "SafeTune"],
              ["Random sampling, best of 3 (share that got through)", "9%", "<b>0%</b>", "2%", "ours"],
              ["Model compressed to 4-bit", "99%", "<b>100%</b>", "<b>100%</b>", "bitsandbytes"],
-             ["Prefill \"Sure, here is\"", "31%", "38%", "41%", "ours"],
+             ["Prefill \"Sure, here is\"", "21%", "20%", "24%", "ours"],
              ["Harmful LoRA fine-tune (100 / 1,000 examples)", "1% / 9%", "3% / 8%", "1% / 9%", "ours"],
              ["Prompt-injection probes (pass rate)", "62.5%", "<b>87.5%</b>", "75%", "AuditKIT"]],
             [62, 30, 30, 22, 26]),
       box("What the results mean", [
           "- <b>Works against:</b> attacks that remove or steer the refusal direction (Heretic, SafeTune ablation, mild steering), "
           "random sampling, and 4-bit compression.",
-          "- <b>Raises the price, not a wall:</b> Heretic's strongest attack still gets v2 to 23% without hurting MMLU. "
+          "- <b>Raises the price, not a wall:</b> Heretic's strongest attack still gets v2 to 25% without hurting MMLU. "
           "But it needs about 16x more behaviour change, and v2 still refuses 62% of clearly unsafe XSTest prompts "
           "(the attacked original: 17%).",
-          "- <b>Doesn't work against:</b> harmful fine-tuning, prefilling, strong steering. These are known open problems.",
-          "- <b>Costs:</b> about 2.5 MMLU points; v2 over-refuses (46%), and v2b fixes most of that (20.8%)."], *GREEN),
+          "- <b>Doesn't work against:</b> harmful fine-tuning and prefilling (all models 20-24%). These are known open problems. Strong steering (-4) just breaks every model into gibberish.",
+          "- <b>Costs:</b> no measurable MMLU cost (52.3% / 53.0% / 52.7%); v2 over-refuses (39%), and v2b fixes most of that (18%, original 16%)."], *GREEN),
       Spacer(1, 4),
       p("Inside the model (mechanism)", H3),
       p("SafeTune's per-layer refusal directions show v2's direction is <b>10-20% weaker in the middle and late layers</b> than the "
@@ -169,7 +174,7 @@ S += [p("All attacks, scored by the judge (refusal on 100 harmful prompts; highe
       p("6. How we used the Lexsi toolkits", H2),
       table([["Toolkit", "How we used it", "Outcome"],
              ["<b>SafeTune</b>", "Extracted refusal directions; attacked every model with direction ablation and CAA steering",
-              "Independent confirmation (28% vs 100%); mechanism evidence"],
+              "Independent confirmation (29% vs 100%); mechanism evidence"],
              ["<b>AuditKIT</b>", "Red-team probes (jailbreak, encoding, prompt injection, refusal) on every model",
               "Independent probes: v2 passes prompt injection 87.5% vs 62.5% for the original"],
              ["<b>CircuitKIT</b>", "Attempted refusal-circuit comparison, original vs v2",
@@ -207,7 +212,7 @@ S += [p("7. Everything that is public", H2),
                 "&nbsp;&nbsp;- Everything public and reproducible on free GPUs.",
                                 "<b>Risks:</b>",
                 "&nbsp;&nbsp;- Fine-tuning and prefilling still break the model.",
-                "&nbsp;&nbsp;- Heretic's strongest attack reaches 23%.",
+                "&nbsp;&nbsp;- Heretic's strongest attack reaches 25% refusal on v2 (44% harmful).",
                 "&nbsp;&nbsp;- One model size only.",
                 "&nbsp;&nbsp;- CircuitKIT could not run on free hardware.",
                 "<b>Our view:</b> a strong shortlist candidate if the article tells this story clearly. We can't promise a placement."]),
@@ -216,7 +221,7 @@ S += [p("7. Everything that is public", H2),
           "Heretic, the free tool people use to strip safety from open models, removes Tiny Aya's refusals almost completely: "
           "99% to 1%, with no loss in general knowledge. Inspired by Fool's Gold and ART, we trained Tiny Aya while simulating "
           "that attack inside the model. At the same attack strength our model still refuses 100%, and Lexsi's SafeTune confirms "
-          "it independently. The attacker now has to distort the model about 16 times more, and still only gets to 23%. "
+          "it independently. The attacker now has to distort the model about 16 times more, and still only gets to 25%; a second judge finds 93% vs 44% harmful. "
           "It also survives 4-bit compression and sampling attacks. We are honest about what it doesn't stop yet: "
           "fine-tuning and prefilling, which is our next step."], *BLUEBG)]
 

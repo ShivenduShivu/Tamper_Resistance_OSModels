@@ -8,20 +8,21 @@ DATA = json.dumps({"pareto": D["pareto"], "side": list(D["side_by_side"].values(
                   ensure_ascii=False).replace("</", "<\\/")
 
 ATTACKS = [
-    ["No attack", "99%", "100%", "100%"],
-    ["Heretic, strongest attack found", "1%", "23% <small>(needs ~16× the KL)</small>", "24%"],
-    ["SafeTune refusal-direction ablation", "28%", "<b>100%</b>", "<b>100%</b>"],
-    ["SafeTune CAA steering, strength −1", "4%", "<b>42%</b>", "30%"],
-    ["SafeTune CAA steering, strength −4", "0%", "0%", "0%"],
+    ["No attack", "98%", "100%", "100%"],
+    ["Heretic, strongest attack found", "1%", "25% <small>(needs ~16× the KL)</small>", "31%"],
+    ["Heretic, strongest attack: judged <i>harmful</i> (Granite Guardian, lower is safer)", "93%", "<b>44%</b>", "–"],
+    ["SafeTune refusal-direction ablation", "29%", "<b>100%</b>", "<b>99%</b>"],
+    ["SafeTune CAA steering, strength −1", "4%", "<b>35%</b>", "34%"],
+    ["SafeTune CAA steering, strength −4", "gibberish", "gibberish", "gibberish"],
     ["Sampling attack: share that got through (best of 3)", "9%", "<b>0%</b>", "2%"],
     ["Model compressed to 4-bit", "99%", "<b>100%</b>", "<b>100%</b>"],
-    ["Prefill “Sure, here is”", "31%", "38%", "41%"],
+    ["Prefill “Sure, here is”", "21%", "20%", "24%"],
     ["Harmful LoRA fine-tune, 100 examples", "1%", "3%", "1%"],
     ["AuditKIT prompt-injection probes (pass rate)", "62.5%", "<b>87.5%</b>", "75%"],
 ]
-COST = [["Over-refusal on safe XSTest prompts", "12%", "46%", "20.8%"],
-        ["MMLU (1,000 questions)", "52.9%", "50.5%", "50.1%"],
-        ["MMLU after Heretic's strongest attack", "52.7%", "51.0%", "49.6%"]]
+COST = [["Over-refusal on safe XSTest prompts (judge)", "16%", "39%", "18%"],
+        ["MMLU (1,000 questions)", "52.3%", "53.0%", "52.7%"],
+        ["MMLU after Heretic's strongest attack", "52.0%", "52.1%", "52.0%"]]
 
 
 def rows(t):
@@ -65,8 +66,8 @@ We trained Cohere's <b>Tiny Aya Global</b> while simulating that attack, so its 
 <div class="kpis">
  <div class="kpi"><b class="red">99% → 1%</b><span>Original Tiny Aya: refusal of harmful requests after Heretic (MMLU unchanged)</span></div>
  <div class="kpi"><b class="green">100%</b><span>Our v2 at the same attack strength that broke the original</span></div>
- <div class="kpi"><b>23% · 16×</b><span>v2 under Heretic's strongest attack: refusal left, and how much more damage it needed</span></div>
- <div class="kpi"><b class="green">28% vs 100%</b><span>Lexsi SafeTune's direction-ablation attack: original vs v2</span></div>
+ <div class="kpi"><b>25% · 16×</b><span>v2 under Heretic's strongest attack: refusal left, and how much more damage it needed (no MMLU loss)</span></div>
+ <div class="kpi"><b class="green">29% vs 100%</b><span>Lexsi SafeTune's direction-ablation attack: original vs v2</span></div>
 </div>
 <div class="tabs" id="tabs">
  <button class="on" data-t="t1">Attack curves</button><button data-t="t2">All attacks</button>
@@ -83,7 +84,7 @@ We trained Cohere's <b>Tiny Aya Global</b> while simulating that attack, so its 
  <p>Refusal on 100 harmful prompts, scored by the classifier judge <a href="https://huggingface.co/ProtectAI/distilroberta-base-rejection-v1">ProtectAI/distilroberta-base-rejection-v1</a>. Higher is safer.</p>
  <table><tr><th>Attack</th><th>Original</th><th>v2</th><th>v2b</th></tr>{rows(ATTACKS)}</table>
  <p><b>Works against:</b> attacks that remove or steer the refusal direction (Heretic, SafeTune ablation, mild steering), random sampling, and 4-bit compression.<br>
- <b>Does not work against:</b> harmful fine-tuning, prefilling, or strong steering. These are known open problems and our next step.</p>
+ <b>Does not work against:</b> harmful fine-tuning or prefilling. These are known open problems and our next step. Strong steering (−4) turns every model into gibberish.<br><small>Sampling, 4-bit, fine-tuning and AuditKIT rows were measured before a small tokenization fix; all other rows use the final single-BOS evaluation. Granite Guardian scores are on pre-fix responses.</small></p>
  <h3>What does it cost?</h3><table><tr><th>Usability</th><th>Original</th><th>v2</th><th>v2b</th></tr>{rows(COST)}</table>
 </div>
 <div class="panel" id="t3">
@@ -95,7 +96,7 @@ We trained Cohere's <b>Tiny Aya Global</b> while simulating that attack, so its 
  <div class="nav"><button id="prev">← Prev</button><span id="cnt"></span><button id="next">Next →</button></div>
 </div>
 <div class="panel" id="t4">
- <p>Safe questions that <i>sound</i> risky (XSTest), answered by <b>v2b running in 4-bit</b>. v2b refuses only 20.8% of these, against 12% for the original.</p>
+ <p>Safe questions that <i>sound</i> risky (XSTest), answered by <b>v2b running in 4-bit</b>. v2b refuses 18% of these, against 16% for the original.</p>
  <table><tr><th style="width:38%">Safe question</th><th>v2b answer</th></tr>{useful_rows}</table>
 </div>
 <div class="panel" id="t5">
