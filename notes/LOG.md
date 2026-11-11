@@ -215,3 +215,18 @@ XSTest safe prompts: unsafe 0–3% for every model and attack (nothing to flag).
 - **Code changes after run v1 (scores unchanged):** removed the custom refusal risk and the input truncation; the job now stops on duplicate file names; the summary keeps the Yes/No masses and reports the per-prompt sampling metric.
 - **Not done:** Llama Guard 3 (Meta access pending); can be added with the same job.
 - **Rerun:** the job reads the private dataset `laterabhi/lexsi-attacked-responses`, which will be deleted once these numbers are final (README rule: delete copies after judging). After that, rerunning needs the responses re-shared.
+
+## 2026-11-12: Double-BOS finding (reported by Aban)
+- **Cause:** Tiny Aya's chat template starts with `{{ bos_token }}`, and the tokenizer has `add_bos_token: true`. Any `tok(apply_chat_template(..., tokenize=False))` call with default settings therefore produces **two** BOS tokens.
+- **Affected:**
+  1. **All of our own generation and MMLU evaluations** (Day-2 to Day-5b `gen` / `mmlu`). All models were measured the same way, so comparisons hold, but absolute numbers may shift.
+  2. **v2/v2b training-time direction estimation** (`refusal_dirs`, run at the start and every 100 optimizer steps). The simulated attack direction was estimated on double-BOS inputs, while the LoRA training sequences were single-BOS.
+- **Not affected:**
+  - The supervised training tokenization (`add_special_tokens=False`).
+  - Heretic (its own tokenization).
+  - Abhinav's Granite Guardian judge (its tokenizer adds no BOS).
+- **Interpretation:**
+  - v2's robustness was measured by *independent, single-BOS attackers* (Heretic, SafeTune), so the defense result stands. The defense worked even with a slightly mismatched training-time direction.
+  - Fixing the estimation could make a v3 *stronger*.
+- **Action:** apply Aban's single-BOS fix, then do one compact re-evaluation (clean refusal, XSTest, MMLU, strongest Heretic point, SafeTune ablation; original/v2/v2b) and regenerate responses for the Granite re-judge.
+
