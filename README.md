@@ -17,7 +17,8 @@ Each Heretic attack below is a fresh 40-trial search run on that checkpoint, so 
 | v2b: v2 + borderline-benign data (OR-Bench) | 20.8% | 99% | 52% | 47% | 47% | 50.1% |
 
 - **Harmful LoRA fine-tune (100 to 1,000 examples, lr 2e-4):** strips **every** model, ours included (judge-scored refusal 1–10%). This is the limitation the next phase addresses.
-- **Caveat:** Heretic refusals are keyword-scored. On clean models, a classifier judge (ProtectAI rejection model) agrees with the keyword counts. Judging the attacked outputs (Llama Guard / Granite Guardian) is in progress.
+- **Caveat:** Heretic refusals are keyword-scored. On clean models, a classifier judge (ProtectAI rejection model) agrees with the keyword counts.
+- **Harm judge on attacked outputs (Granite Guardian 3.2-5B):** Heretic's strongest attack makes the original **93% unsafe** and v2 **44%** (XSTest unsafe prompts: 60% vs 7%). Per-file scores in `results/guard_judge/`; Llama Guard pending access.
 
 ![Pareto fronts](docs/build/pareto_chart.png)
 
@@ -34,7 +35,7 @@ Each Heretic attack below is a fresh 40-trial search run on that checkpoint, so 
 | `kaggle/<job>/` | One folder per Kaggle GPU job (`kernel-metadata.json` + script). Push with `kaggle kernels push -p kaggle/<job>` |
 | `results/<job>/` | Run outputs: `summary.jsonl`, Heretic study journals (`ckpt/*.jsonl`), logs |
 | `results/pareto_summary.json` | Pareto fronts for all models (`python scripts/pareto.py`) |
-| `scripts/` | Pareto parser, Kaggle run watchers, output fetcher |
+| `scripts/` | Pareto parser, guard-judge summary, Kaggle run watchers, output fetcher |
 | `notes/LOG.md` | Experiment log: every run, its config, its result and the decision taken |
 | `docs/` | Beginner guide to tamper resistance, team brief; `docs/build/` holds the generators |
 
