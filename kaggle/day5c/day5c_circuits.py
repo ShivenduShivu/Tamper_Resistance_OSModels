@@ -1,3 +1,4 @@
+# Day-5c (v2): each model in its own process; EAP (not IG), 8 examples, expandable segments.
 # Day-5c: CircuitKIT refusal-circuit comparison, original vs v2 (harmful_vs_benign pairing; the public register_* helpers only build degenerate pairs).
 import os, sys, json, time, glob, re, subprocess, random, urllib.request, shutil
 OUT = "/kaggle/working"; os.makedirs(OUT, exist_ok=True)
@@ -37,27 +38,49 @@ def build_task():
     ds = SafetyPromptAdapter().adapt(harm, name="jbb_hvb", source="JailbreakBench/JBB-Behaviors", max_records=32,
                                      refusal_token="I", compliance_token="Sure", benign_controls=benign, pairing_mode="harmful_vs_benign")
     log("task_paired", f"{ds.n_paired}/{len(ds)}"); register_task(NormalizedTaskSpec(ds, name="jbb_hvb"))
-step("build_task", build_task)
 def path_of(name):
     if name == "base": return "CohereLabs/tiny-aya-global"
     p = "/kaggle/working/v2"; snapshot_download(f"{USER}/tiny-aya-global-xref-v2", local_dir=p, ignore_patterns=["v2b/*"]); return p
+WORKER = r"""
+import sys, json, torch, circuitkit as ck
+from circuitkit.data.adapters.safety_prompt import SafetyPromptAdapter
+from circuitkit.data.normalized_task import NormalizedTaskSpec
+from circuitkit.tasks.registry import register_task
+from datasets import load_dataset
+name, path, out = sys.argv[1], sys.argv[2], sys.argv[3]
+harm = list(load_dataset("JailbreakBench/JBB-Behaviors", "behaviors", split="harmful"))[:32]
+benign = list(load_dataset("mlabonne/harmless_alpaca", split="test")["text"])[:32]
+ds = SafetyPromptAdapter().adapt(harm, name="jbb_hvb", source="JBB", max_records=32, refusal_token="I",
+                                 compliance_token="Sure", benign_controls=benign, pairing_mode="harmful_vs_benign")
+register_task(NormalizedTaskSpec(ds, name="jbb_hvb"))
+r = {}
+m = ck.load_model(path, dtype="float16")
+r["mem_after_load_gb"] = round(torch.cuda.memory_allocated() / 2**30, 2)
+c = ck.discover(m, "jbb_hvb", algorithm="eap", n_examples=8, batch_size=1)
+r["mem_peak_gb"] = round(torch.cuda.max_memory_allocated() / 2**30, 2)
+r["top30"] = [str(n) for n in c.top_nodes(30)]
+for attr in ["faithfulness", "n_edges", "n_nodes"]:
+    if hasattr(c, attr):
+        v = getattr(c, attr); r[attr] = str(v() if callable(v) else v)[:400]
+try:
+    c.save(out + ".circuit")
+except Exception as e:
+    r["save_err"] = str(e)[:200]
+json.dump(r, open(out, "w"))
+"""
+open("/kaggle/working/ck_worker.py", "w").write(WORKER)
+env = dict(os.environ, PYTORCH_CUDA_ALLOC_CONF="expandable_segments:True")
 res = {}
 for name in ["base", "v2"]:
     def run(name=name):
-        m = ck.load_model(path_of(name), dtype="float16")
-        c = ck.discover(m, "jbb_hvb", algorithm="eap-ig", n_examples=16, batch_size=1)
-        res[name] = c
-        top = c.top_nodes(30)
-        log(f"circuit_{name}_top30", [str(n) for n in top])
-        for attr in ["faithfulness", "n_edges", "n_nodes", "metrics", "summary"]:
-            if hasattr(c, attr):
-                v = getattr(c, attr); v = v() if callable(v) else v; log(f"circuit_{name}_{attr}", str(v)[:800])
-        del m; gc.collect(); torch.cuda.empty_cache()
+        out = f"{OUT}/circuit_{name}.json"
+        p = subprocess.run([sys.executable, "/kaggle/working/ck_worker.py", name, path_of(name), out], env=env, capture_output=True, text=True, timeout=3600)
+        if p.returncode != 0: raise RuntimeError(p.stderr[-1500:])
+        res[name] = json.load(open(out)); log(f"circuit_{name}", {k: v for k, v in res[name].items() if k != "top30"})
+        log(f"circuit_{name}_top30", res[name]["top30"])
     step(f"circuit_{name}", run)
-def compare():
-    a = {str(n) for n in res["base"].top_nodes(30)}; b = {str(n) for n in res["v2"].top_nodes(30)}
+if len(res) == 2:
+    a, b = set(res["base"]["top30"]), set(res["v2"]["top30"])
     log("circuit_top30_overlap", {"shared": len(a & b), "only_base": sorted(a - b)[:15], "only_v2": sorted(b - a)[:15]})
-    ck.visualize_circuit(res["base"], mode="comparison", second_circuit=res["v2"], output=f"{OUT}/circuit_base_vs_v2.html")
-if len(res) == 2: step("circuit_compare", compare)
 shutil.rmtree("/kaggle/working/v2", ignore_errors=True)
 log("DONE", True)

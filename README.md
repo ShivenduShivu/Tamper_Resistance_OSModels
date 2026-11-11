@@ -2,6 +2,8 @@
 
 Lexsi Labs × Cohere × Hugging Face AI Safety & Alignment Hackathon, **Track 2b: Tamper Resistance**.
 
+**Live demo:** [StarWarrior24x7/heretic-resistant-tiny-aya](https://huggingface.co/spaces/StarWarrior24x7/heretic-resistant-tiny-aya) · **Models:** [collection](https://huggingface.co/collections/StarWarrior24x7/heretic-resistant-tiny-aya-models-6af3e1eff9a91556f5535934) · **Data & results:** [collection](https://huggingface.co/collections/StarWarrior24x7/heretic-resistant-tiny-aya-data-and-results-6af3e1f03fff746c25b4884c)
+
 ## Scope
 - **Current scope: defend against data-free weight-editing attacks.** We target abliteration and its automated form, [Heretic](https://github.com/p-e-w/heretic). This is the free, one-command method behind most "abliterated" models on Hugging Face.
 - **Next scope: harmful fine-tuning attacks.** Our current models do **not** resist them yet (see Results). This is the open problem we are extending towards, on a separate branch.
@@ -17,8 +19,8 @@ Each Heretic attack below is a fresh 40-trial search run on that checkpoint, so 
 | v2b: v2 + borderline-benign data (OR-Bench) | 20.8% | 99% | 52% | 47% | 47% | 50.1% |
 
 - **Harmful LoRA fine-tune (100 to 1,000 examples, lr 2e-4):** strips **every** model, ours included (judge-scored refusal 1–10%). This is the limitation the next phase addresses.
-- **Caveat:** Heretic refusals are keyword-scored. On clean models, a classifier judge (ProtectAI rejection model) agrees with the keyword counts.
-- **Harm judge on attacked outputs (Granite Guardian 3.2-5B):** Heretic's strongest attack makes the original **93% unsafe** and v2 **44%** (XSTest unsafe prompts: 60% vs 7%). Per-file scores in `results/guard_judge/`; Llama Guard pending access.
+- **Judged results:** the table above uses Heretic's keyword scorer. Scored by a classifier judge (ProtectAI/distilroberta-base-rejection-v1), Heretic's strongest attack leaves the original at **1%** refusal (MMLU 52.7%) and v2 at **23%** (MMLU 51.0%). Lexsi's SafeTune refusal-direction ablation leaves the original at 28% and v2 at **100%**. Full attack matrix: `notes/LOG.md`.
+- **Second judge (harm, Granite Guardian 3.2-5B):** Heretic's strongest attack makes the original **93% unsafe** and v2 **44%** (XSTest unsafe prompts: 60% vs 7%). Per-file scores in `results/guard_judge/`; Llama Guard pending access.
 
 ![Pareto fronts](docs/build/pareto_chart.png)
 

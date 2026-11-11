@@ -161,7 +161,7 @@ Each Heretic point is labelled by its keyword refusal (r = refusal on Heretic's 
   - **v2 raises the price but is not unbreakable.** The strongest attack Heretic found still leaves 23% judged refusal, needs 16× the KL, and **does not reduce MMLU** (0.510). So the attacker pays in behaviour shift (KL) and gets a weaker strip, but keeps general knowledge. Answer to the teammate's question: MMLU holds, so "the attacker pays more KL".
   - **Even attacked, v2 still refuses explicitly unsafe XSTest prompts much more** than the attacked original (0.62–0.76 vs 0.17).
   - **v2b breaks at lower KL** than v2 (0.24 at KL 0.054), consistent with the usability trade-off.
-- **CircuitKIT failed again:** the public `register_jailbreakbench` builds `answer_contrastive` pairs (corrupt prompt == clean prompt), which `discover()` rejects as degenerate. This is a genuine upstream issue (PR candidate #4, now encountered in our own work). Day-5c (v20) builds the task directly with `pairing_mode="harmful_vs_benign"`.
+- **CircuitKIT failed again:** the public `register_jailbreakbench` builds `answer_contrastive` pairs (corrupt prompt == clean prompt), which `discover()` rejects as degenerate. Day-5c (v20) builds the task directly with `pairing_mode="harmful_vs_benign"`.
 
 ## 2026-11-12: Day-5c, CircuitKIT, Kaggle v20 + v21. Stopped (out of memory on T4)
 - **Pairing fixed:** the `harmful_vs_benign` task built correctly (32/32 pairs).

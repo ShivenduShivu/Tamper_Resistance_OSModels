@@ -4,6 +4,8 @@
 
 > **TL;DR.** With [Heretic](https://github.com/p-e-w/heretic), a free one-command tool, we stripped Cohere's Tiny Aya Global of its safety: judged refusal went from 99% to **1%**, with no loss on MMLU. We then trained Tiny Aya *while simulating that attack*. Against our model, the same attack at the same damage budget leaves refusal at **100%**. Heretic's strongest attack still only reaches 23%, and needs about 16× more distortion of the model's normal behaviour. Two Lexsi toolkits (SafeTune and AuditKIT) independently confirm the effect. The limits are real, and we report them: harmful fine-tuning and prefilling still break the model.
 
+**Try it:** [interactive results explorer](https://huggingface.co/spaces/StarWarrior24x7/heretic-resistant-tiny-aya): attack curves, every attack, and side-by-side comparisons.
+
 ---
 
 ## 1. Problem and approach in brief
@@ -24,8 +26,8 @@
 | Repo | What we used it for | Features used |
 |---|---|---|
 | **SafeTune** | An independent second implementation of the attack, steering attacks, and the mechanism measurement | `extract_refusal_direction` (per-layer refusal directions); `RefusalDirectionModel(mode="ablate")` (inference-time direction ablation as an attack); `extract_caa_vectors` + `CAAModel` with negative strength (activation-steering attacks) |
-| **AuditKIT** | Independent red-team probes on every model | `RedTeamRunner` with the jailbreak, encoding, prompt-injection and refusal probes. While using it we found and fixed two bugs: [AuditKIT #35](https://github.com/Lexsi-Labs/AuditKIT/pull/35) and [#36](https://github.com/Lexsi-Labs/AuditKIT/pull/36) |
-| **CircuitKIT** *(attempted)* | Refusal-circuit comparison, original vs v2 | `SafetyPromptAdapter` with `pairing_mode="harmful_vs_benign"` (built correctly), `load_model` (Cohere port), `discover` (EAP / EAP-IG). Discovery ran out of memory on a 16 GB T4 for the 3.35B model with its 262k vocabulary. We also found that the public `register_*` helpers only build degenerate prompt pairs; see section 7.4 |
+| **AuditKIT** | Independent red-team probes on every model | `RedTeamRunner` with the jailbreak, encoding, prompt-injection and refusal probes. |
+| **CircuitKIT** *(attempted)* | Refusal-circuit comparison, original vs v2 | `SafetyPromptAdapter` with `pairing_mode="harmful_vs_benign"` (built correctly), `load_model` (Cohere port), `discover` (EAP / EAP-IG). Discovery ran out of memory on a 16 GB T4 for the 3.35B model with its 262k vocabulary. See section 7.4 |
 
 SafeTune and AuditKIT form one connected chain with our pipeline. SafeTune extracts the refusal direction, which is the same object our training-time attack removes, and then attacks each checkpoint with ablation and steering. AuditKIT and the classifier judge score the outputs.
 
@@ -52,13 +54,13 @@ SafeTune and AuditKIT form one connected chain with our pipeline. SafeTune extra
 
 ## 5. Model artifacts (HF collection)
 
-**Collection:** *link to be added*. It contains xref-v1, xref-v2 (with v2b) and their model cards. **Stripped or attacked models are never published.** They are exactly the harm this project defends against, and we never saved them beyond the evaluation run.
+**Collection:** [Heretic-Resistant Tiny Aya: Models](https://huggingface.co/collections/StarWarrior24x7/heretic-resistant-tiny-aya-models-6af3e1eff9a91556f5535934). It contains xref-v1, xref-v2 (with v2b) and their model cards. **Stripped or attacked models are never published.** They are exactly the harm this project defends against, and we never saved them beyond the evaluation run.
 
 ## 6. Data artifacts (HF collection)
 
-**Collection:** *link to be added*. It contains:
+**Collection:** [Heretic-Resistant Tiny Aya: Data & Results](https://huggingface.co/collections/StarWarrior24x7/heretic-resistant-tiny-aya-data-and-results-6af3e1f03fff746c25b4884c). It contains:
 - the training data ([tiny-aya-extended-refusal](https://huggingface.co/datasets/StarWarrior24x7/tiny-aya-extended-refusal));
-- all Heretic study journals (every trial, with its parameters, refusal and KL);
+- [results, attack logs and benchmarks](https://huggingface.co/datasets/StarWarrior24x7/tiny-aya-tamper-resistance-results): all Heretic study journals (every trial, with its parameters, refusal and KL);
 - run summaries and logs, and the evaluation code.
 
 Raw responses from attacked models are kept private and are available to judges on request. We publish scores, not harmful text.

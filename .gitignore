@@ -19,3 +19,6 @@ results/**/border.jsonl
 # raw model responses (include attacked-model outputs; shared privately for judging only) and refusal-direction tensors
 results/**/responses/
 results/**/*.pt
+
+# personal side work, kept out of the shared repo
+private/
