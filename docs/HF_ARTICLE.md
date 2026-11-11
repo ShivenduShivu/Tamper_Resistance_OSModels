@@ -52,13 +52,13 @@ SafeTune and AuditKIT form one connected chain with our pipeline. SafeTune extra
 
 ## 5. Model artifacts (HF collection)
 
-**Collection:** *link to be added*. It contains xref-v1, xref-v2 (with v2b) and their model cards. **Stripped or attacked models are never published.** They are exactly the harm this project defends against, and we never saved them beyond the evaluation run.
+**Collection:** [Heretic-Resistant Tiny Aya: Models](https://huggingface.co/collections/StarWarrior24x7/heretic-resistant-tiny-aya-models-6af3e1eff9a91556f5535934). It contains xref-v1, xref-v2 (with v2b) and their model cards. **Stripped or attacked models are never published.** They are exactly the harm this project defends against, and we never saved them beyond the evaluation run.
 
 ## 6. Data artifacts (HF collection)
 
-**Collection:** *link to be added*. It contains:
+**Collection:** [Heretic-Resistant Tiny Aya: Data & Results](https://huggingface.co/collections/StarWarrior24x7/heretic-resistant-tiny-aya-data-and-results-6af3e1f03fff746c25b4884c). It contains:
 - the training data ([tiny-aya-extended-refusal](https://huggingface.co/datasets/StarWarrior24x7/tiny-aya-extended-refusal));
-- all Heretic study journals (every trial, with its parameters, refusal and KL);
+- [results, attack logs and benchmarks](https://huggingface.co/datasets/StarWarrior24x7/tiny-aya-tamper-resistance-results): all Heretic study journals (every trial, with its parameters, refusal and KL);
 - run summaries and logs, and the evaluation code.
 
 Raw responses from attacked models are kept private and are available to judges on request. We publish scores, not harmful text.
