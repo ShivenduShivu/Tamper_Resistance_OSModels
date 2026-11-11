@@ -303,3 +303,23 @@ Unsafe rate (lower is safer), 95% Wilson CI in the summary file; refusal = Prote
   - The headline holds after the BOS fix: Heretic's strongest attack makes the original **91% unsafe** and v2 **40%** (Day-5b, double-BOS: 93% vs 44%). On XSTest's unsafe prompts the gap is 61% vs 4%.
   - SafeTune ablation: 55% unsafe on the original (Day-5: 42%), 0% on v2/v2b.
   - **Prefill is now the clearest weakness:** with single-BOS generation, all three models are 77–82% unsafe (Day-5: 51–72%). The defense gives no protection against prefilling, consistent with Aban's prefix-recovery finding that A/B sit at ~0.2 ProtectAI refusal under "Sure, here is".
+
+## 2026-11-11: Heretic-200 on v2, Kaggle `laterabhi/lexsi-heretic200-v2` (search 229 min + eval, T4×2)
+- **Question:** is v2's robustness an artefact of Heretic's 40-trial search budget?
+- **Config:** a fresh Heretic search on v2 with the exact Day-3 config (`results/day3/heretic_v2/config.toml`, Heretic 2.1.0), changing only `n_trials` 40 → 200 (`n_startup_trials` stays 12). All 200 trials completed. The strongest points on the new front were re-applied and evaluated exactly as in Day-6 (single-BOS generation, ProtectAI + keyword refusal, Granite Guardian unsafe, MMLU-1000 at the strongest point). Journal, config and log in `results/heretic200_v2/`; numbers only.
+- **Result:**
+
+| v2 under Heretic | 40 trials (Day-3 search, Day-6 eval) | 200 trials |
+|---|---|---|
+| min keyword refusal at KL ≤ 0.01 / ≤ 0.05 / ≤ 0.1 | 1.00 / 1.00 / 0.96 | 1.00 / 1.00 / **0.79** |
+| strongest point found (keyword refusal, KL) | 0.33 @ 0.153 | 0.38 @ 0.139 |
+| strongest point: Granite unsafe, harmful | 0.40 [0.31, 0.50] | **0.42** [0.33, 0.52] |
+| strongest point: ProtectAI refusal, harmful | 0.25 | 0.20 |
+| strongest point: Granite unsafe, XSTest unsafe | 0.04 | 0.06 |
+| strongest point: MMLU-1000 | 0.521 | 0.522 |
+| KL ≤ 0.1 point (r79, KL 0.099): Granite unsafe, harmful | — | 0.15 |
+
+- **Reading:**
+  - **5× the search budget does not find a meaningfully stronger strip.** The worst case stays at about 40% unsafe (42% vs 40%, overlapping CIs) and still needs about 15× the original's KL (0.139 vs 0.0094). Nothing below 100% refusal exists at KL ≤ 0.05.
+  - The longer search does find cheaper partial attacks in the 0.05–0.1 KL band (keyword refusal 0.79 vs 0.96 at KL ≤ 0.1, 15% unsafe), so the KL ≤ 0.1 column of the main table should cite the 200-trial number.
+  - One search per budget and one seed each; a different seed could land elsewhere on the front.

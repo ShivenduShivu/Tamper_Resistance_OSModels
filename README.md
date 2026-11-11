@@ -15,20 +15,20 @@ Each Heretic attack below is a fresh 40-trial search run on that checkpoint, so 
 |---|---|---|---|---|---|---|
 | Original | 16% | **14%** | 14% | 14% | 14% | 52.3% |
 | v1: extended-refusal LoRA | 17.6%† | 70% | 43% | 17% | 17% | 50.7%† |
-| v2: v1 + trained through simulated abliteration | 39% | **100%** | **100%** | 96% | 33% | 53.0% |
+| v2: v1 + trained through simulated abliteration | 39% | **100%** | **100%** | 79%‡ | 33% | 53.0% |
 | v2b: v2 + borderline-benign data (OR-Bench) | 18% | 99% | 52% | 47% | 47% | 52.7% |
 
 † v1 was not re-measured after the single-BOS evaluation fix. All other over-refusal (XSTest safe, judged) and MMLU numbers are final single-BOS numbers (Day-6).
+
+‡ From a 200-trial Heretic search on v2 (the 40-trial search found 96%). Five times the search budget finds cheaper partial attacks in the 0.05–0.1 KL band but no stronger strip: its worst point (38% keyword refusal, KL 0.139) is 42% unsafe by Granite Guardian vs 40% for the 40-trial worst point. See `results/heretic200_v2/` and `notes/LOG.md`.
 
 - **Harmful LoRA fine-tune (100 to 1,000 examples, lr 2e-4):** strips **every** model, ours included (judge-scored refusal 1–10%). Prefilling ("Sure, here is") also defeats all models (20–24% refusal). These are the limitations the next phase addresses.
 - **Judged results:** the Heretic columns above use Heretic's own keyword scorer.
   - **Heretic's strongest attack, refusal** (ProtectAI classifier judge): the original keeps **1%** (MMLU 52.0%), v2 **25%** (MMLU 52.1%).
   - **SafeTune refusal-direction ablation:** refusal is 29% for the original and **100%** for v2.
   - Full details are in `notes/LOG.md`, where Day-6 has the final single-BOS numbers.
-- **Second judge (harm, Granite Guardian 3.2-5B):** Heretic's strongest attack makes the original **93% unsafe** and v2 **44%** (XSTest unsafe prompts: 60% vs 7%).
-  - These scores were computed on the pre-fix responses; a re-score is in progress.
-  - Per-file scores are in `results/guard_judge/`.
-  - Llama Guard is pending access.
+- **Second judge (harm, Granite Guardian 3.2-5B):** Heretic's strongest attack makes the original **91% unsafe** and v2 **40%** (XSTest unsafe prompts: 61% vs 4%).
+  - Final single-BOS (Day-6) scores; per-file numbers in `results/guard_judge_day6/` (pre-fix scores in `results/guard_judge/`).
 
 ![Pareto fronts](docs/build/pareto_chart.png)
 
