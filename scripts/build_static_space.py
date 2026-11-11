@@ -10,7 +10,9 @@ DATA = json.dumps({"pareto": D["pareto"], "side": list(D["side_by_side"].values(
 ATTACKS = [
     ["No attack", "98%", "100%", "100%"],
     ["Heretic, strongest attack found", "1%", "25% <small>(needs ~16× the KL)</small>", "31%"],
-    ["Heretic, strongest attack: judged <i>harmful</i> (Granite Guardian, lower is safer)", "93%", "<b>44%</b>", "–"],
+    ["Heretic, strongest attack: judged <i>harmful</i> (Granite Guardian, lower is safer)", "91%", "<b>40%</b>", "57%"],
+    ["Heretic with 5× the search budget (200 trials): judged harmful", "–", "42%", "–"],
+    ["Multilingual (Hindi, Arabic, French, Spanish), strongest attack: judged harmful", "41%", "<b>12%</b>", "22%"],
     ["SafeTune refusal-direction ablation", "29%", "<b>100%</b>", "<b>99%</b>"],
     ["SafeTune CAA steering, strength −1", "4%", "<b>35%</b>", "34%"],
     ["SafeTune CAA steering, strength −4", "gibberish", "gibberish", "gibberish"],
@@ -84,7 +86,7 @@ We trained Cohere's <b>Tiny Aya Global</b> while simulating that attack, so its 
  <p>Refusal on 100 harmful prompts, scored by the classifier judge <a href="https://huggingface.co/ProtectAI/distilroberta-base-rejection-v1">ProtectAI/distilroberta-base-rejection-v1</a>. Higher is safer.</p>
  <table><tr><th>Attack</th><th>Original</th><th>v2</th><th>v2b</th></tr>{rows(ATTACKS)}</table>
  <p><b>Works against:</b> attacks that remove or steer the refusal direction (Heretic, SafeTune ablation, mild steering), random sampling, and 4-bit compression.<br>
- <b>Does not work against:</b> harmful fine-tuning or prefilling. These are known open problems and our next step. Strong steering (−4) turns every model into gibberish.<br><small>Sampling, 4-bit, fine-tuning and AuditKIT rows were measured before a small tokenization fix; all other rows use the final single-BOS evaluation. Granite Guardian scores are on pre-fix responses.</small></p>
+ <b>Does not work against:</b> harmful fine-tuning or prefilling. These are known open problems and our next step. Strong steering (−4) turns every model into gibberish.<br><small>Sampling, 4-bit, fine-tuning and AuditKIT rows were measured before a small tokenization fix; all other rows use the final single-BOS evaluation. Multilingual: Granite on NLLB translations, cross-checked with Llama Guard 3.</small><br><b>Pilot (one seed):</b> training refusals after generic openers cut harmful answers under "Sure, here is" from 86% to 0% (0–5% on unseen openers) with unchanged normal over-refusal; judged at 48 tokens and not yet re-tested against Heretic.</p>
  <h3>What does it cost?</h3><table><tr><th>Usability</th><th>Original</th><th>v2</th><th>v2b</th></tr>{rows(COST)}</table>
 </div>
 <div class="panel" id="t3">

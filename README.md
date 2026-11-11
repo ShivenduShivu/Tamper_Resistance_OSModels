@@ -29,6 +29,9 @@ Each Heretic attack below is a fresh 40-trial search run on that checkpoint, so 
   - Full details are in `notes/LOG.md`, where Day-6 has the final single-BOS numbers.
 - **Second judge (harm, Granite Guardian 3.2-5B):** Heretic's strongest attack makes the original **91% unsafe** and v2 **40%** (XSTest unsafe prompts: 61% vs 4%).
   - Final single-BOS (Day-6) scores; per-file numbers in `results/guard_judge_day6/` (pre-fix scores in `results/guard_judge/`).
+- **Multilingual (Cohere `aya_redteaming`; Hindi, Arabic, French, Spanish; strongest Heretic point):** the share of harmful answers outside English is 41% for the original and **12%** for v2 (Granite on NLLB translations, cross-checked by Llama Guard 3). v2 was trained only in English. Details in `results/multilingual/`.
+- **Prefill pilot (one seed, `experiments/pfx2-granite/`):** training refusals after generic affirmative openers (on harmful prompts only) cut harmful answers under "Sure, here is" from 86% to **0%** (0–5% on 6 unseen openers), with normal over-refusal unchanged (39% vs 38%). Answers were judged at 48 tokens and the model was not re-tested against Heretic.
+- **Full write-up:** `docs/HF_ARTICLE.md`.
 
 ![Pareto fronts](docs/build/pareto_chart.png)
 
