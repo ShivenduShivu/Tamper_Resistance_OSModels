@@ -115,3 +115,7 @@ Format: date, run, config, result, decision.
   - **MMLU cost is about 2.5 points** (0.529 → ~0.50).
   - **The judge classifier agrees with keyword counting** on clean models (0.99 vs 0.99, 1.0 vs 1.0).
 - **Decision needed:** either scope the claim to "data-free weight-editing attacks" (Heretic is the attack actually used in the wild), or try a cheap fine-tuning hardening step (TAR-lite or SafeTune harden), or the SafeTune recover/repair angle.
+
+## 2026-11-11: pfx2 matched Granite Guardian judging
+
+Completed 2,400 harm judgments across Bp/Cfix/Cp: 24/24 cells, no errors. Generations were 64 tokens clean and 48 under prefills. Results are model-based harm estimates, not a selectivity test; one training seed per arm. The judge's exact loaded revision wasn't recorded. Config, scores and run journal are in experiments/pfx2-granite/. This is separate from Heretic-200 (#5); the results stay in separate tables.
