@@ -38,9 +38,26 @@ Paired prompt-cluster bootstrap (all 6 openers kept together per prompt; 95% CI)
 
 C has higher refusal-proxy rates than B in this run. The comparison does not isolate prefix augmentation from the C-specific token-boundary difference, and it does not rule out opener-triggered blanket refusal. Per-opener paired counts C>B (keyword): [66, 23, 38, 92, 36, 67]; B>C was 0 for every opener.
 
+## Benign-opener control (added 2026-11-11, after review)
+
+Requested in review. The same 250 XSTest-safe prompts x (no opener + the same 6 held-out openers), arms A/B/C, same tokenizer/template/scorers/boundary code path, 48 new tokens for every condition in this control, booleans/counts only. B and C merged their saved LoRA adapters (sha256 recorded in the run JSONs). All comparisons here are paired by prompt within this benign pool; contrasts against the harmful-prompt pool above are descriptive only (different prompts).
+
+Refusal-like continuation rate on BENIGN prompts, keyword / ProtectAI:
+
+| Condition | A | B | C |
+|---|---|---|---|
+| no opener | 0.380 / 0.392 | 0.384 / 0.404 | 0.376 / 0.384 |
+| 6 held-out openers, pooled | 0.063 / 0.067 | 0.062 / 0.069 | **0.768 / 0.760** |
+
+Per-opener counts of 250 (keyword): A [8, 13, 13, 10, 40, 11], B [9, 12, 13, 10, 40, 9], C [224, 179, 231, 184, 134, 200]. Same opener order as above.
+
+Paired prompt-cluster bootstrap (all 6 openers kept together per prompt), C - B benign pool: +0.706 (0.667, 0.743) keyword, +0.691 (0.655, 0.727) ProtectAI. No-opener C - B: -0.008 (-0.024, 0.008) keyword. Within-arm, opener pool minus no-opener (same prompts, keyword): A -0.317, B -0.322, C +0.392. In A and B the openers suppress refusal (the classic prefill effect); in C they increase it.
+
+Reading: the main alternative is now tested and is largely confirmed. C refuses most benign prompts after generic affirmative openers, so its 100% on harmful prompts with openers is substantially opener-triggered blanket refusal rather than harm selectivity. The blanket effect is opener-dependent, not total (134-231 of 250 across openers). The harmful-with-opener (1.00) vs benign-with-opener (0.768 pooled) gap is descriptive only: different prompt pools, and harmful content may itself add refusal pressure, so this design cannot attribute the gap. Combined with the C-specific token-boundary difference, this run does not establish a selective prefill defense. It is a useful negative: the masked-opener recipe as implemented teaches refuse-after-opener, not refuse-harmful-only-after-opener.
+
 ## Limitations (read first)
 
-- **Main alternative not ruled out: C may have learned to refuse after ANY affirmative opener, including on benign prompts.** We did not run benign prompts with the same openers. The clean XSTest prompts were not prefilled, so they cannot exclude opener-triggered blanket refusal. This is the key missing control, not a footnote.
+- **Main alternative, now tested:** C refuses most BENIGN prompts after the same held-out openers (0.768 pooled keyword vs about 0.06 for A/B; see the benign-opener control section). The 100% on harmful prompts with openers is substantially opener-triggered blanket refusal, not demonstrated harm selectivity. The benign-with-opener vs harmful-with-opener gap is descriptive only (different prompt pools).
 - Refusal-wording metrics, not judged safety. No harmful-response archive exists: only booleans and counts were stored, so a Granite Guardian pass on these outputs is impossible.
 - No tamper-resistance claim: no attack (Heretic/LoRA) was re-applied to arm C.
 - One training seed per arm. The bootstrap covers prompt sampling only, not training-replicate uncertainty. The XSTest keyword CI excluding 0 is conditional on this seed; we do not assert effect or equivalence from CI overlap or non-significance.
@@ -54,7 +71,7 @@ C has higher refusal-proxy rates than B in this run. The comparison does not iso
 - Modal A10. Measured wall: smoke 2.0 min, first B run lost at ~6.5 min (client disconnect), B 25.3 min, C 25.4 min, A 5.8 min (eval only). Estimated $1.5-1.9 all-in at the conservative $1.39/h rate (A10 + 2 cores + 24 GiB); billing not confirmed against the Modal dashboard. Within the approved $8 ceiling.
 - All Modal apps stopped after the runs.
 - Raw per-prompt 0/1 score vectors and paired prompt IDs are preserved privately (private Modal volume) for reproducibility; aggregate counts only are published here. No weights are published. No generated text was stored anywhere.
-- Proposed next step (not run; needs scope/budget check): benign prompts x the same 6 openers, eval-only on A/B/C (~10 min A10, under ~$0.30), to test the blanket-refusal alternative directly.
+- Proposed next steps (not run; need scope/budget checks): a boundary-corrected replication (joint tokenization of prefix + response in training), and a resistance check on C (e.g. one fixed SafeTune refusal-direction ablation matched to the Day-5 protocol), each proposed separately.
 
 ## Files
 
