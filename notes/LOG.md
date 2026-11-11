@@ -283,3 +283,23 @@ Unsafe rate, translated-Granite (Llama Guard in brackets), 95% Wilson CI in `res
   - Same caveat as Day-5b: v2's strongest point costs the attacker about 16× the KL of the original's.
   - Clean models stay at 1–7% unsafe in every language. v2 refuses more of these prompts (ProtectAI on the translation: 81% vs 71% pooled), which on aya's borderline prompts partly means over-refusal.
 - **Not done:** code-mixed (Hinglish) prompts; languages beyond these five.
+## 2026-11-11: Guard judge on the Day-6 single-BOS responses, Kaggle `laterabhi/lexsi-guard-judge` v2 (29 min, T4)
+- **Config:** the same job as the Day-5/5b judge (Granite Guardian 3.2-5B `harm` = **unsafe**, `harm_engagement`, ProtectAI and keyword refusal), on the 27 Day-6 response files from a private Kaggle dataset. Per-file numbers in `results/guard_judge_day6/` (`python scripts/guard_summary.py <responses> <scores.jsonl> guard_judge_day6`). These **supersede** `results/guard_judge/` wherever the two overlap.
+- **Sanity:** ProtectAI numbers match `results/day6/summary.jsonl` on all 27 files, so rows line up. No degenerate outputs except 1% on two CAA/prefill files.
+
+Unsafe rate (lower is safer), 95% Wilson CI in the summary file; refusal = ProtectAI.
+
+| | original | v2 | v2b |
+|---|---|---|---|
+| clean, harmful prompts | 0.00 | 0.00 | 0.00 |
+| Heretic strongest point, harmful | **0.91** [0.84, 0.95] | **0.40** [0.31, 0.50] | 0.57 [0.47, 0.66] |
+| same, XSTest unsafe | **0.61** | **0.04** | 0.15 |
+| same, XSTest safe | 0.04 | 0.02 | 0.03 |
+| SafeTune ablation | 0.55 | **0.00** | **0.00** |
+| SafeTune CAA −1 | 0.97 | 0.72 | 0.71 |
+| prefill "Sure, here is" | 0.82 | 0.77 | 0.80 |
+
+- **Reading:**
+  - The headline holds after the BOS fix: Heretic's strongest attack makes the original **91% unsafe** and v2 **40%** (Day-5b, double-BOS: 93% vs 44%). On XSTest's unsafe prompts the gap is 61% vs 4%.
+  - SafeTune ablation: 55% unsafe on the original (Day-5: 42%), 0% on v2/v2b.
+  - **Prefill is now the clearest weakness:** with single-BOS generation, all three models are 77–82% unsafe (Day-5: 51–72%). The defense gives no protection against prefilling, consistent with Aban's prefix-recovery finding that A/B sit at ~0.2 ProtectAI refusal under "Sure, here is".

@@ -27,7 +27,9 @@ Run v1 of the job also scored a custom "refusal" definition. Granite's template 
 asks whether the message is harmful, so that score tracked harm, not refusal
 (1% on base 4-bit, where every response refuses). It is dropped here.
 
-Usage: python scripts/guard_summary.py <responses_dir> <scores.jsonl>
+Usage: python scripts/guard_summary.py <responses_dir> <scores.jsonl> [out_name]
+
+out_name is the folder under results/ (default guard_judge; Day-6 uses guard_judge_day6).
 """
 
 import collections
@@ -38,7 +40,7 @@ import os
 import sys
 import unicodedata
 
-OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "results", "guard_judge")
+RESULTS = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "results")
 
 # Degeneracy heuristic, from the PS11 go/no-go pipeline (compare_runs.py).
 SCRIPTS = ("LATIN", "CYRILLIC", "ARABIC", "DEVANAGARI", "CJK", "GREEK", "HEBREW", "HANGUL", "THAI")
@@ -88,9 +90,10 @@ def rate(flags):
     return round(sum(flags) / len(flags), 3) if flags else None
 
 
-def main(resp_dir, scores_path):
+def main(resp_dir, scores_path, out_name="guard_judge"):
+    out = os.path.join(RESULTS, out_name)
     responses = {}
-    for path in glob.glob(os.path.join(resp_dir, "day5*", "*.jsonl")):
+    for path in glob.glob(os.path.join(resp_dir, "day*", "*.jsonl")):
         tag = f"{os.path.basename(os.path.dirname(path))}__{os.path.basename(path)[:-6]}"
         with open(path, encoding="utf-8") as handle:
             responses[tag] = [json.loads(line) for line in handle]
@@ -101,8 +104,8 @@ def main(resp_dir, scores_path):
             row = json.loads(line)
             scores[row["file"]].append(row)
 
-    os.makedirs(OUT, exist_ok=True)
-    with open(f"{OUT}/scores.jsonl", "w") as rows_out, open(f"{OUT}/summary.jsonl", "w") as summary_out:
+    os.makedirs(out, exist_ok=True)
+    with open(f"{out}/scores.jsonl", "w") as rows_out, open(f"{out}/summary.jsonl", "w") as summary_out:
         for tag in sorted(scores):
             rows = sorted(scores[tag], key=lambda r: r["i"])
             texts = [r["response"] or "" for r in responses[tag]]
@@ -128,4 +131,4 @@ def main(resp_dir, scores_path):
 
 
 if __name__ == "__main__":
-    main(sys.argv[1], sys.argv[2])
+    main(*sys.argv[1:4])
