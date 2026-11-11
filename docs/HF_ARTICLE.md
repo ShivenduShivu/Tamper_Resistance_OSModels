@@ -24,8 +24,8 @@
 | Repo | What we used it for | Features used |
 |---|---|---|
 | **SafeTune** | An independent second implementation of the attack, steering attacks, and the mechanism measurement | `extract_refusal_direction` (per-layer refusal directions); `RefusalDirectionModel(mode="ablate")` (inference-time direction ablation as an attack); `extract_caa_vectors` + `CAAModel` with negative strength (activation-steering attacks) |
-| **AuditKIT** | Independent red-team probes on every model | `RedTeamRunner` with the jailbreak, encoding, prompt-injection and refusal probes. While using it we found and fixed two bugs: [AuditKIT #35](https://github.com/Lexsi-Labs/AuditKIT/pull/35) and [#36](https://github.com/Lexsi-Labs/AuditKIT/pull/36) |
-| **CircuitKIT** *(attempted)* | Refusal-circuit comparison, original vs v2 | `SafetyPromptAdapter` with `pairing_mode="harmful_vs_benign"` (built correctly), `load_model` (Cohere port), `discover` (EAP / EAP-IG). Discovery ran out of memory on a 16 GB T4 for the 3.35B model with its 262k vocabulary. We also found that the public `register_*` helpers only build degenerate prompt pairs; see section 7.4 |
+| **AuditKIT** | Independent red-team probes on every model | `RedTeamRunner` with the jailbreak, encoding, prompt-injection and refusal probes. |
+| **CircuitKIT** *(attempted)* | Refusal-circuit comparison, original vs v2 | `SafetyPromptAdapter` with `pairing_mode="harmful_vs_benign"` (built correctly), `load_model` (Cohere port), `discover` (EAP / EAP-IG). Discovery ran out of memory on a 16 GB T4 for the 3.35B model with its 262k vocabulary. See section 7.4 |
 
 SafeTune and AuditKIT form one connected chain with our pipeline. SafeTune extracts the refusal direction, which is the same object our training-time attack removes, and then attacks each checkpoint with ablation and steering. AuditKIT and the classifier judge score the outputs.
 

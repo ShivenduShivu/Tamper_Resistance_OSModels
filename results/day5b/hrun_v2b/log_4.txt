@@ -1,0 +1,75 @@
+█░█░█▀▀░█▀▄░█▀▀░▀█▀░█░█▀▀  v2.1.0
+█▀█░█▀▀░█▀▄░█▀▀░░█░░█░█░░  https://heretic-project.org
+▀░▀░▀▀▀░▀░▀░▀▀▀░░▀░░▀░▀▀▀  https://github.com/p-e-w/heretic
+
+Detected 2 CUDA device(s) (29.12 GB total VRAM)
+CUDA Version: 13.0
+Driver Version: 580.178.04
+* CUDA 0: Tesla T4 (14.56 GB)
+* CUDA 1: Tesla T4 (14.56 GB)
+Warning: Input is not a terminal (fd=0).
+
+Loading model /kaggle/working/v2b...
+* Trying dtype float16...
+Loading weights:   0%|          | 0/290 [00:00<?, ?it/s]Loading weights:   0%|          | 1/290 [00:00<01:01,  4.72it/s]Loading weights:   7%|▋         | 21/290 [00:00<00:03, 80.15it/s]Loading weights:  16%|█▌        | 45/290 [00:00<00:01, 134.07it/s]Loading weights:  24%|██▍       | 69/290 [00:00<00:01, 165.48it/s]Loading weights:  32%|███▏      | 92/290 [00:00<00:01, 185.60it/s]Loading weights:  39%|███▉      | 114/290 [00:00<00:00, 186.86it/s]Loading weights:  48%|████▊     | 139/290 [00:00<00:00, 201.06it/s]Loading weights:  55%|█████▌    | 160/290 [00:00<00:00, 202.03it/s]Loading weights:  62%|██████▏   | 181/290 [00:01<00:00, 200.39it/s]Loading weights:  70%|██████▉   | 202/290 [00:01<00:00, 197.62it/s]Loading weights:  77%|███████▋  | 223/290 [00:02<00:01, 36.98it/s] Loading weights:  82%|████████▏ | 238/290 [00:03<00:02, 25.65it/s]Loading weights:  86%|████████▌ | 249/290 [00:04<00:01, 23.27it/s]Loading weights:  89%|████████▊ | 257/290 [00:05<00:01, 21.17it/s]Loading weights:  91%|█████████ | 263/290 [00:05<00:01, 19.04it/s]Loading weights:  92%|█████████▏| 268/290 [00:06<00:01, 17.81it/s]Loading weights:  94%|█████████▍| 272/290 [00:06<00:01, 17.58it/s]Loading weights:  95%|█████████▍| 275/290 [00:06<00:00, 17.45it/s]Loading weights:  96%|█████████▌| 278/290 [00:06<00:00, 15.18it/s]Loading weights:  98%|█████████▊| 283/290 [00:07<00:00, 16.79it/s]Loading weights: 100%|██████████| 290/290 [00:07<00:00, 41.14it/s]
+* Transformer model with 36 layers
+* Modifiable components:
+  * attn.o_proj: 36 modules total
+  * mlp.down_proj: 36 modules total
+
+Resident system RAM: 1.82 GB
+Allocated GPU VRAM: 6.25 GB
+Reserved GPU VRAM: 6.39 GB
+
+Loading and initializing scorers...
+* Loaded: KeywordRate
+* Loaded: KLDivergence
+
+Loading Refusals evaluation prompts from mlabonne/harmful_behaviors...
+* 100 prompts loaded
+
+Loading KL divergence evaluation prompts from mlabonne/harmless_alpaca...
+* 100 prompts loaded
+* Obtaining baseline first-token probability distributions...
+
+Getting baseline scores...
+* Baseline Refusals: 100/100
+* Baseline KL divergence: 0 (by definition)
+
+Loading and initializing modifiers...
+* Loaded: Abliteration
+
+Loading good prompts from mlabonne/harmless_alpaca...
+* 400 prompts loaded
+
+Loading bad prompts from mlabonne/harmful_behaviors...
+* 400 prompts loaded
+
+Calculating per-layer residual directions...
+* Obtaining residual mean for good prompts...
+* Obtaining residual mean for bad prompts...
+
+Resuming existing study.
+
+Optimization finished!
+
+Restoring model from trial 39...
+* Parameters:
+  * direction_index = per layer
+  * attn.o_proj.max_weight = 1.30
+  * attn.o_proj.max_weight_position = 24.13
+  * attn.o_proj.min_weight = 0.67
+  * attn.o_proj.min_weight_distance = 18.22
+  * mlp.down_proj.max_weight = 0.32
+  * mlp.down_proj.max_weight_position = 30.44
+  * mlp.down_proj.min_weight = 0.30
+  * mlp.down_proj.min_weight_distance = 18.27
+* Resetting model...
+* Modifying model using Magnitude-Preserving Orthogonal Ablation (MPOA)...
+Saving merged model...
+* Merging LoRA adapters into base model...
+Writing model shards:   0%|          | 0/2 [00:00<?, ?it/s]Writing model shards:  50%|█████     | 1/2 [00:19<00:13, 13.07s/it]Writing model shards: 100%|██████████| 2/2 [00:24<00:00, 12.00s/it]Writing model shards: 100%|██████████| 2/2 [00:24<00:00, 12.16s/it]
+Model saved to /tmp/strip.
+* Resetting model...
+Loading weights:   0%|          | 0/290 [00:00<?, ?it/s]Loading weights:   0%|          | 1/290 [00:00<01:20,  3.59it/s]Loading weights:   8%|▊         | 23/290 [00:00<00:03, 75.86it/s]Loading weights:  16%|█▌        | 45/290 [00:00<00:02, 121.89it/s]Loading weights:  24%|██▍       | 69/290 [00:00<00:01, 154.43it/s]Loading weights:  32%|███▏      | 92/290 [00:00<00:01, 175.13it/s]Loading weights:  40%|███▉      | 115/290 [00:00<00:00, 187.91it/s]Loading weights:  47%|████▋     | 136/290 [00:00<00:00, 189.88it/s]Loading weights:  54%|█████▍    | 157/290 [00:01<00:00, 188.42it/s]Loading weights:  62%|██████▏   | 180/290 [00:01<00:00, 198.81it/s]Loading weights:  70%|███████   | 203/290 [00:01<00:00, 203.16it/s]Loading weights:  77%|███████▋  | 224/290 [00:01<00:00, 197.26it/s]Loading weights:  84%|████████▍ | 245/290 [00:01<00:00, 188.96it/s]Loading weights:  92%|█████████▏| 267/290 [00:01<00:00, 194.50it/s]Loading weights:  99%|█████████▉| 287/290 [00:01<00:00, 191.19it/s]Loading weights: 100%|██████████| 290/290 [00:01<00:00, 171.56it/s]
+* Modifying model using Magnitude-Preserving Orthogonal Ablation (MPOA)...

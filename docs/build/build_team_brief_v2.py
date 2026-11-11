@@ -128,10 +128,10 @@ S += [p("4. The full pipeline and every run", H2),
              ["v13", "<b>Train v2, attack it</b>", "100% up to KL 0.05, but over-refuses (46%)"],
              ["v15", "<b>Train v2b, attack it</b>", "Over-refusal 20.8%; robustness trade-off"],
              ["v16", "<b>Fine-tuning attack, MMLU, judge</b>", "Fine-tuning breaks all models; MMLU -2.5 points"],
-             ["v17", "Toolkit smoke test (CPU, free)", "All 4 tools install; AuditKIT bug reproduced"],
+             ["v17", "Toolkit smoke test (CPU, free)", "All 4 tools install on Kaggle"],
              ["v18", "<b>Lexsi toolkits + other attacks</b>", "SafeTune ablation 28% vs 100%; sampling, 4-bit, prefill, steering, AuditKIT"],
              ["v19", "<b>Exact Heretic attacks re-applied, then judged and MMLU'd</b>", "Original 1% (MMLU 52.7%); v2 23% (MMLU 51.0%)"],
-             ["v20-21", "CircuitKIT circuit analysis", "Found a CircuitKIT bug; the 3.35B model does not fit a 16 GB T4. Stopped."]],
+             ["v20-21", "CircuitKIT circuit analysis", "Model does not fit a 16 GB T4 for discovery. Stopped."]],
             [17, 63, 100]),
       p("5. Results", H2),
       Image(CH, width=178 * mm, height=99 * mm),
@@ -166,15 +166,14 @@ S += [p("All attacks, scored by the judge (refusal on 100 harmful prompts; highe
       p("SafeTune's per-layer refusal directions show v2's direction is <b>10-20% weaker in the middle and late layers</b> than the "
         "original's (layer 24: 40.2 vs 46.4), with the same peak layer (18). Our reading is that v2 no longer relies on one "
         "dominant direction, so deleting it no longer deletes refusal."),
-      p("6. Lexsi toolkits and our open-source contributions", H2),
+      p("6. How we used the Lexsi toolkits", H2),
       table([["Toolkit", "How we used it", "Outcome"],
              ["<b>SafeTune</b>", "Extracted refusal directions; attacked every model with direction ablation and CAA steering",
-              "Independent confirmation (28% vs 100%); mechanism evidence. 1 small fix prepared (labels + docstring)"],
+              "Independent confirmation (28% vs 100%); mechanism evidence"],
              ["<b>AuditKIT</b>", "Red-team probes (jailbreak, encoding, prompt injection, refusal) on every model",
-              "Found 2 real bugs. <b>Our PRs #35 and #36 were combined by a maintainer into PR #37 with our commits and "
-              "authorship kept</b>, and the maintainer thanked us for the clear reports"],
+              "Independent probes: v2 passes prompt injection 87.5% vs 62.5% for the original"],
              ["<b>CircuitKIT</b>", "Attempted refusal-circuit comparison, original vs v2",
-              "Found a real bug (its dataset helpers build unusable pairs); discovery does not fit a 16 GB T4 for this model. PR prepared"]],
+              "Its dataset helpers build unusable pairs (worked around); discovery does not fit a 16 GB T4 for this model"]],
             [24, 70, 86]),
       p("The rule needs at least 2 connected repos: SafeTune and AuditKIT are both in the evaluation chain. CircuitKIT is reported "
         "as attempted.", SM),
@@ -196,8 +195,7 @@ S += [p("7. Everything that is public", H2),
       table([["Item", "Owner", "Status"],
              ["Open-weight track (this work), article, Space, submission", "Shivendu", "Results final; article in review; Space ready to publish"],
              ["Stronger judge pass (Llama Guard / Granite Guardian) on saved responses", "Teammate", "Responses can be shared privately on request"],
-             ["Fine-tuning defense (TAR-lite: simulate LoRA attacks during training)", "Teammates, ft-defense/* branches", "Exploring; merge only through a reviewed PR"],
-             ["Upstream PRs (SafeTune, CircuitKIT)", "Shivendu", "Prepared; raised slowly over the week"]],
+             ["Fine-tuning defense (TAR-lite: simulate LoRA attacks during training)", "Teammates, ft-defense/* branches", "Exploring; merge only through a reviewed PR"]],
             [78, 40, 62]),
       p("9. Our chances, honestly", H2),
       *bullets(["<b>Strengths:</b>",
@@ -207,8 +205,7 @@ S += [p("7. Everything that is public", H2),
                 "&nbsp;&nbsp;- Independent confirmation with Lexsi's own toolkit.",
                 "&nbsp;&nbsp;- Honest limits.",
                 "&nbsp;&nbsp;- Everything public and reproducible on free GPUs.",
-                "&nbsp;&nbsp;- Merged-quality contributions to a Lexsi repo.",
-                "<b>Risks:</b>",
+                                "<b>Risks:</b>",
                 "&nbsp;&nbsp;- Fine-tuning and prefilling still break the model.",
                 "&nbsp;&nbsp;- Heretic's strongest attack reaches 23%.",
                 "&nbsp;&nbsp;- One model size only.",
@@ -221,8 +218,7 @@ S += [p("7. Everything that is public", H2),
           "that attack inside the model. At the same attack strength our model still refuses 100%, and Lexsi's SafeTune confirms "
           "it independently. The attacker now has to distort the model about 16 times more, and still only gets to 23%. "
           "It also survives 4-bit compression and sampling attacks. We are honest about what it doesn't stop yet: "
-          "fine-tuning and prefilling, which is our next step. Along the way we found and fixed two bugs in AuditKIT, "
-          "which the maintainers have taken in."], *BLUEBG)]
+          "fine-tuning and prefilling, which is our next step."], *BLUEBG)]
 
 
 def foot(c, d):
