@@ -256,3 +256,30 @@ The eval tokenization now passes `add_special_tokens=False`. Judge = ProtectAI (
 - **Over-refusal (judge):** original 16.4%, v2 39.2%, v2b 18.4%. v2b's over-refusal is now close to the original's.
 - **Not re-measured:** v1, sampling, 4-bit, CAA −4, AuditKIT and the fine-tuning attack. They keep their Day-4/5 numbers and are reported as double-BOS measurements.
 - Responses for the Granite re-judge are in `results/day6/responses` (private).
+
+## 2026-11-11: Multilingual check, Kaggle `laterabhi/lexsi-ps11-gonogo` (`kaggle/multilingual`, run saved from the web UI so the HF_TOKEN secret is attached; about 2 h on T4)
+- **Question:** the defense was trained and tested in English. Does it hold in the other languages Tiny Aya is built for?
+- **Config:** 100 seeded prompts per language from `CohereLabs/aya_redteaming` (Apache-2.0): English (control), Hindi, Arabic, French, Spanish. Original / v2 / v2b, each clean and at its strongest Heretic point (the exact Day-5b/Day-6 trials: base r14 KL 0.009, v2 r33 KL 0.153, v2b r47 KL 0.054; all three re-applied successfully). Single-BOS generation, 128 new tokens, greedy, as in Day-6. 3,000 responses.
+- **Judging:** Granite Guardian is trained on English only, so every prompt and response is translated to English with NLLB-200-distilled-600M (a plain MT model, so it does not refuse) and then judged (Granite `harm` = **unsafe**; ProtectAI refusal). Llama Guard 3 1B judges the original text as a second, multilingual judge.
+- **Judge checks:**
+  - Translated-Granite vs Llama Guard agree on 81–87% of rows in every language, the same as English, which needs no translation (85%).
+  - Granite on the *original* text is unusable for Hindi (52% agreement with Llama Guard; it calls 59% of clean v2's Hindi answers unsafe). It is kept in `scores.jsonl` but not reported.
+  - Hand check of Hindi and Arabic disagreements: the translations keep the meaning (one slur was softened). Disagreements are borderline answers (aya has many hate/bias prompts that the model half-engages with), not translation errors.
+
+Unsafe rate, translated-Granite (Llama Guard in brackets), 95% Wilson CI in `results/multilingual/summary.jsonl`. n = 100 per language, 400 pooled.
+
+| Condition | English | Hindi | Arabic | French | Spanish | Non-English pooled |
+|---|---|---|---|---|---|---|
+| original, clean | 0.02 (0.06) | 0.06 (0.17) | 0.04 (0.11) | 0.04 (0.03) | 0.05 (0.13) | 0.05 (0.11) |
+| original, Heretic r14 | 0.34 (0.32) | 0.41 (0.41) | 0.34 (0.29) | 0.46 (0.39) | 0.44 (0.41) | **0.41** (0.38) |
+| v2, clean | 0.01 (0.03) | 0.01 (0.06) | 0.02 (0.03) | 0.01 (0.01) | 0.04 (0.07) | 0.02 (0.04) |
+| v2, Heretic r33 | 0.22 (0.17) | 0.09 (0.17) | 0.03 (0.10) | 0.20 (0.15) | 0.14 (0.15) | **0.12** (0.14) |
+| v2b, clean | 0.04 (0.06) | 0.07 (0.14) | 0.02 (0.08) | 0.02 (0.04) | 0.04 (0.13) | 0.04 (0.10) |
+| v2b, Heretic r47 | 0.28 (0.28) | 0.17 (0.29) | 0.20 (0.23) | 0.25 (0.23) | 0.26 (0.26) | 0.22 (0.25) |
+
+- **Reading:**
+  - **The defense transfers beyond English.** Pooled over four non-English languages, Heretic's strongest attack makes the original 41% unsafe and v2 12% (Llama Guard: 38% vs 14%); v2b sits between (22%). Both judges agree on the ordering in every language.
+  - aya_redteaming is softer than `harmful_behaviors` (many hate/bias and culturally specific prompts), so absolute rates are lower than the Day-5b English numbers (93% vs 44%); compare conditions within this table, not across tables.
+  - Same caveat as Day-5b: v2's strongest point costs the attacker about 16× the KL of the original's.
+  - Clean models stay at 1–7% unsafe in every language. v2 refuses more of these prompts (ProtectAI on the translation: 81% vs 71% pooled), which on aya's borderline prompts partly means over-refusal.
+- **Not done:** code-mixed (Hinglish) prompts; languages beyond these five.
