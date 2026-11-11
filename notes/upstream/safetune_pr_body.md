@@ -12,4 +12,4 @@ The `SpectralEntropyMonitor` docstring says `scan()` returns `(prompt_idx, layer
 
 **Testing**
 
-I ran `tests/diagnostic/test_vector_extraction.py`, `test_spectral_monitor.py`, `tests/audit/test_S02_caa.py` and `test_E07_spectral.py` before and after the change, with the same results. This only changes labels and a docstring.
+I ran `tests/diagnostic/test_vector_extraction.py`, `test_spectral_monitor.py`, `tests/audit/test_S02_caa.py` and `test_E07_spectral.py` before and after the change: 25 passed in both cases (Python 3.13, Linux). This only changes labels and a docstring.

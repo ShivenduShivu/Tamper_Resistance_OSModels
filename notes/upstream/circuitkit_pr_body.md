@@ -19,7 +19,9 @@ So the example at the top of the module (`eap-ig` on `advbench`) can't run as wr
 
 **Testing**
 
-- The new test fails on current `main` and passes with this change.
-- The existing tests in `tests/data` give the same results before and after.
+- `tests/data` on current `main`: 79 passed.
+- With this change: 81 passed (the same 79, plus the 2 new tests).
+- The 2 new tests fail on the current `main` source.
+- Run on Python 3.13 (Linux).
 
 Happy to keep `"answer_contrastive"` as the default and only expose the options, if you'd rather not change the default.

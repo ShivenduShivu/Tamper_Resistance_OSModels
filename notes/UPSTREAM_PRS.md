@@ -24,3 +24,8 @@ Notes:
 - Hold: #3 and #7 (CI), unless the maintainers welcome them.
 
 - Note (Day-5c): CircuitKIT EAP discovery on tiny-aya (3.35B, 262k vocab) runs out of memory on a 16 GB T4 even with plain EAP and 8 examples. This is worth mentioning in the #4 PR description as context, not as a separate PR.
+
+## Verified on Kaggle CPU (v22/v23), 2026-11-12
+- **SafeTune** (`safetune_labels_docstring.patch`): 25/25 relevant tests pass before and after. Ready to raise.
+- **CircuitKIT** (`circuitkit_safety_pairing.patch`): `tests/data` has 79 passing before and 81 after; the 2 new tests fail on old src. Ready to raise (first).
+- **AuditKIT #35/#36:** combined by a maintainer into **#37** with our commits and authorship kept. Awaiting merge.
