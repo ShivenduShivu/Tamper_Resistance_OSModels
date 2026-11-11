@@ -20,7 +20,7 @@ Each Heretic attack below is a fresh 40-trial search run on that checkpoint, so 
 
 - **Harmful LoRA fine-tune (100 to 1,000 examples, lr 2e-4):** strips **every** model, ours included (judge-scored refusal 1–10%). This is the limitation the next phase addresses.
 - **Judged results:** the table above uses Heretic's keyword scorer. Scored by a classifier judge (ProtectAI/distilroberta-base-rejection-v1), Heretic's strongest attack leaves the original at **1%** refusal (MMLU 52.7%) and v2 at **23%** (MMLU 51.0%). Lexsi's SafeTune refusal-direction ablation leaves the original at 28% and v2 at **100%**. Full attack matrix: `notes/LOG.md`.
-- **Second judge:** a Llama Guard / Granite Guardian pass on the attacked outputs is being run by a teammate.
+- **Second judge (harm, Granite Guardian 3.2-5B):** Heretic's strongest attack makes the original **93% unsafe** and v2 **44%** (XSTest unsafe prompts: 60% vs 7%). Per-file scores in `results/guard_judge/`; Llama Guard pending access.
 
 ![Pareto fronts](docs/build/pareto_chart.png)
 
@@ -37,7 +37,7 @@ Each Heretic attack below is a fresh 40-trial search run on that checkpoint, so 
 | `kaggle/<job>/` | One folder per Kaggle GPU job (`kernel-metadata.json` + script). Push with `kaggle kernels push -p kaggle/<job>` |
 | `results/<job>/` | Run outputs: `summary.jsonl`, Heretic study journals (`ckpt/*.jsonl`), logs |
 | `results/pareto_summary.json` | Pareto fronts for all models (`python scripts/pareto.py`) |
-| `scripts/` | Pareto parser, Kaggle run watchers, output fetcher |
+| `scripts/` | Pareto parser, guard-judge summary, Kaggle run watchers, output fetcher |
 | `notes/LOG.md` | Experiment log: every run, its config, its result and the decision taken |
 | `docs/` | Beginner guide to tamper resistance, team brief; `docs/build/` holds the generators |
 
