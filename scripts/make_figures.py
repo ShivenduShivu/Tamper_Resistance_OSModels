@@ -42,8 +42,8 @@ bars(axs[1], ["Original", "v2"], [u0, u2], [RED, GREEN], ci=[c0, c2]); axs[1].se
 axs[2].barh([1, 0], [0.0094, 0.153], color=[RED, GREEN], height=0.55); axs[2].set_yticks([1, 0]); axs[2].set_yticklabels(["Original", "v2"], color=INK)
 axs[2].set_xlim(0, 0.19); axs[2].grid(axis="x", color=GRID, lw=0.6); axs[2].set_axisbelow(True)
 axs[2].text(0.0094 + 0.004, 1, "KL 0.009", va="center", fontweight="bold"); axs[2].text(0.153 + 0.004, 0, "KL 0.153  (~16×)", va="center", fontweight="bold")
-axs[2].set_title("Damage needed for that attack\n(KL divergence)", color=INK)
-save(fig, "hero", "n = 100 harmful prompts (mlabonne/harmful_behaviors test). Lower harmful = safer; higher KL = the attack visibly damages the model.")
+axs[2].set_title("Behaviour shift needed\nfor that attack (KL)", color=INK)
+save(fig, "hero", "n = 100 harmful prompts (mlabonne/harmful_behaviors test). Lower harmful = safer; higher KL = the attack shifts the model's behaviour more (MMLU stays ~52%).")
 
 # ---------- 2. VULNERABILITY (refusal and harm in separate panels)
 fig, axs = plt.subplots(1, 3, figsize=(13, 4.8)); fig.subplots_adjust(top=0.78, bottom=0.13, wspace=0.32)
@@ -76,14 +76,14 @@ for k, f in FR.items():
     ax.scatter([kl for kl, _ in f], [r * 100 for _, r in f], color=COL[k], s=18, zorder=3)
 ax.step([0] + [kl for kl, _ in F200], [100] + [r * 100 for _, r in F200], where="post", color=GREEN, lw=1.6, ls="--", label="v2, 5× longer search (200 trials)")
 ax.set_xlim(-0.003, 0.17); ax.set_ylim(0, 104); ax.grid(color=GRID, lw=0.6)
-ax.set_xlabel("Damage the attack does to normal behaviour (KL divergence)  →"); ax.set_ylabel("Harmful prompts still refused (%)")
+ax.set_xlabel("Behaviour shift caused by the attack (KL divergence)  →"); ax.set_ylabel("Harmful prompts still refused (%)")
 fig.suptitle("Every attack Heretic found: higher curve = harder to strip", fontsize=14.5, fontweight="bold", y=0.97)
 ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.13), ncol=5, frameon=False, fontsize=9, labelcolor=INK)
-save(fig, "pareto", "Each point = best attack at that damage level (Heretic's keyword refusal score; fresh search per model).")
+save(fig, "pareto", "Each point = best attack at that level of shift (Heretic's keyword refusal score; fresh search per model).")
 
 # ---------- 4. 40 vs 200 trials
 fig, axs = plt.subplots(1, 2, figsize=(12, 4.4), gridspec_kw={"width_ratios": [1.5, 1]}); fig.subplots_adjust(top=0.78, bottom=0.15, wspace=0.28)
-fig.suptitle("A 5× longer search finds cheaper partial attacks, but no stronger worst case", fontsize=14.5, fontweight="bold", y=0.97)
+fig.suptitle("A 5× longer search finds cheaper partial attacks, with similar worst-case harm", fontsize=14.5, fontweight="bold", y=0.97)
 import numpy as np
 x = np.arange(3); w = 0.36
 for i, (lab, vals, col) in enumerate([("40 trials", [1.00, 1.00, 0.96], GREEN), ("200 trials", [1.00, 1.00, 0.79], BLUE)]):
@@ -94,7 +94,7 @@ axs[0].set_title("Lowest refusal Heretic reached on v2 (keyword)", color=INK); a
 axs[0].grid(axis="y", color=GRID, lw=0.6); axs[0].set_axisbelow(True)
 bars(axs[1], ["40 trials", "200 trials"], [0.40, 0.42], [GREEN, BLUE], ci=[(0.309, 0.498), wilson(0.42, 100)])
 axs[1].set_title("Worst case: harmful answers\n(Granite, 95% CI; overlapping)", color=INK)
-save(fig, "search_budget", "One search per budget: shows no stronger worst case was found, not that none exists.")
+save(fig, "search_budget", "One search per budget; overlapping intervals are not an equivalence test.")
 
 # ---------- 5. VALIDATION DASHBOARD (harm, Granite)
 rows = [("Heretic\n(strongest)", "base_heretic_r14_harm", "v2_heretic_r33_harm", "v2b_heretic_r47_harm"),

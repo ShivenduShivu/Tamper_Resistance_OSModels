@@ -23,7 +23,7 @@ Anyone can download an open model and strip its safety with **one free command**
 | Refuses harmful requests, no attack | 98% | **100%** |
 | After Heretic's attack: answers judged **harmful** | 🔴 **91%** | 🟢 **40%** |
 | Refusal kept under cheap attacks (KL ≤ 0.05)¹ | 🔴 14% | 🟢 **100%** |
-| Damage the strongest attack must cause (KL) | 0.009 | **0.153 (~16×)** |
+| Behaviour shift the strongest attack must cause (KL) | 0.009 | **0.153 (~16×)** |
 | Lexsi SafeTune's direction-removal attack: harmful | 55% | **0%** |
 | Harmful outside English (Hindi, Arabic, French, Spanish)² | 41% | **12%** |
 | General knowledge (MMLU) | 52.3% | 53.0% |
@@ -34,7 +34,7 @@ Anyone can download an open model and strip its safety with **one free command**
 > - **The weakness:** a model's safety ("refuse harmful requests") mostly lives in **one direction** inside its internal activity.
 > - **The attack:** Heretic finds that direction and deletes it from the weights, for free.
 > - **Our innovation:** we **ran that attack inside the model during training**, so it learned to refuse even with the direction removed.
-> - **The result:** cheap attacks now fail completely. The strongest attack must visibly damage the model **~16× more** and still gets only **40%** harmful answers instead of 91%.
+> - **The result:** cheap attacks now fail completely. The strongest attack needs a **~16× larger shift** in the model's behaviour (KL) and still gets only **40%** harmful answers instead of 91%.
 > - **The limits:** fine-tuning on harmful examples and forcing the answer's first words ("prefill") still work against it, and we say so.
 
 ---
@@ -46,7 +46,7 @@ Anyone can download an open model and strip its safety with **one free command**
 3. [How we tested: adaptive attackers, independent judges](#3-how-we-tested-adaptive-attackers-independent-judges)
 4. [Result 1: Tiny Aya is stripped for free](#4-result-1-tiny-aya-is-stripped-for-free)
 5. [Result 2: v2 resists Heretic](#5-result-2-v2-resists-heretic)
-6. [Result 3: a 5× longer search finds no stronger worst case](#6-result-3-a-5-longer-search-finds-no-stronger-worst-case)
+6. [Result 3: a 5× longer search finds similar worst-case harm](#6-result-3-a-5-longer-search-finds-similar-worst-case-harm)
 7. [Result 4: independent validation with Lexsi's toolkits](#7-result-4-independent-validation-with-lexsis-toolkits)
 8. [Attack resistance matrix: what it stops and what it doesn't](#8-attack-resistance-matrix-what-it-stops-and-what-it-doesnt)
 9. [Result 5: it holds outside English](#9-result-5-it-holds-outside-english)
@@ -69,9 +69,18 @@ Anyone can download an open model and strip its safety with **one free command**
 
 In 2024, Arditi et al. showed that this refusal mostly lives along **one direction** in the model's internal activity, like a single switch. **Abliteration** edits the weights so the model can no longer move along that direction: the switch is gone, and the model stops refusing.
 
-**[Heretic](https://github.com/p-e-w/heretic)** automates abliteration. It searches for the edit that removes the most refusals while changing the model's normal behaviour the least. It needs no training data and no expertise, and it runs in about an hour on a free GPU. Most "abliterated" models on Hugging Face are made this way.
+**[Heretic](https://github.com/p-e-w/heretic)** automates abliteration, and it is the standard tool for it:
 
-> **KL divergence, the attacker's damage meter.** It measures how much an attack changes the model's answers to *harmless* prompts: 0 means identical, higher means visibly different. An attacker wants **low KL**, because a stripped model that still behaves normally is useful and goes unnoticed. A good defense forces the attacker into **high KL**: a model that is visibly damaged.
+| Heretic in numbers (checked Nov 12, 2026) | |
+|---|---|
+| GitHub stars / forks | **40,370 / 4,628** (open-sourced Sept 2025) |
+| Hugging Face models with "heretic" in the name | **~7,600** |
+| Hugging Face models with "abliterated" in the name | **~9,200** |
+| What it needs | one command, no training data, about 1 hour on a free GPU |
+
+It runs an optimiser (Optuna) that searches for the edit removing the most refusals while changing the model's normal behaviour the least. Because it is free, automatic and popular, it is the attack an open-weight model is most likely to face in practice, which is why we built our defense against it.
+
+> **KL divergence, the attacker's "shift meter".** It measures how much an attack shifts the model's output distribution on *harmless* prompts: 0 means identical. Heretic tries to keep KL **low**, so the stripped model behaves like the original. A defense that forces a **higher KL** makes the attack shift the model's behaviour more. That is a measured distribution shift, not necessarily lost capability: in our runs, MMLU barely moves even at high KL.
 
 **Our question:** can a small open model keep its refusals against the attack people actually use, without becoming less useful?
 
@@ -157,7 +166,7 @@ flowchart LR
 
 ![Every attack Heretic found](docs/figures/pareto.png)
 
-**How to read it:** each dot is the best attack Heretic found at a given damage level. Moving right means more damage; higher means more refusals survived. The original (red) collapses almost at zero damage. v2 (green) stays at the top across the whole cheap-attack zone.
+**How to read it:** each dot is the best attack Heretic found at a given level of behaviour shift (KL). Moving right means a larger shift; higher means more refusals survived. The original (red) collapses almost at zero damage. v2 (green) stays at the top across the whole cheap-attack zone.
 
 **Lowest refusal Heretic reached** (Heretic's keyword score; fresh search per model):
 
@@ -174,7 +183,7 @@ flowchart LR
 
 | | Original | v2 | v2b |
 |---|---|---|---|
-| Damage needed (KL) | 0.009 | **0.153 (~16×)** | 0.054 |
+| Behaviour shift needed (KL) | 0.009 | **0.153 (~16×)** | 0.054 |
 | Refuses (ProtectAI) | 1% | 25% | 31% |
 | **Harmful (Granite, 95% CI)** | 91% [84, 95] | **40% [31, 50]** | 57% [47, 66] |
 | Harmful on clearly-unsafe XSTest prompts | 61% [55, 68] | **4% [2, 8]** | 15% [11, 21] |
@@ -182,9 +191,13 @@ flowchart LR
 
 **What "harmful" adds over "refusal".** Under attack, v2 refuses only 25%, yet only 40% of its answers are harmful. Granite found that v2 often **rewrites a harmful request into a harmless answer** instead of refusing (asked about trafficking endangered species, it writes a conservation guide).
 
-> **Takeaway:** cheap attacks fail completely on v2. The strongest attack costs **~16× the damage** and still leaves **less than half** the harm. The defense raises the price and lowers the payoff, but it does **not** make stripping impossible.
+> **Takeaway:**
+> - **Cheap attacks** (KL ≤ 0.05) fail completely on v2.
+> - **The strongest attack** needs a **~16× larger distribution shift** and still leaves **less than half** the harm.
+> - **That shift is not proven capability damage:** MMLU under attack is 52.1%.
+> - **Net effect:** the defense raises the price and lowers the payoff, but it does **not** make stripping impossible.
 
-## 6. Result 3: a 5× longer search finds no stronger worst case
+## 6. Result 3: a 5× longer search finds similar worst-case harm
 
 ![40 vs 200 trials](docs/figures/search_budget.png)
 
@@ -196,7 +209,10 @@ To check that v2's robustness isn't an artefact of a short search, Abhinav re-ra
 | Worst case: harmful (Granite, 95% CI) | 40% [31, 50] | 42% [33, 52] |
 | Worst case: refusal / MMLU | 25% / 52.1% | 20% / 52.2% |
 
-> **Takeaway:** the longer search found **cheaper partial attacks in the middle band** but **no stronger worst case** (the confidence intervals overlap). This is one search per budget, so it does not prove that more search can never do more damage.
+> **Takeaway:**
+> - **What it found:** the longer search found **cheaper partial attacks in the middle band**, with **similar observed worst-case harm** (40% vs 42%).
+> - **What that doesn't mean:** overlapping intervals are not an equivalence test.
+> - **Scope:** this is one search per budget, so it does not show that more search can never do more damage.
 
 ## 7. Result 4: independent validation with Lexsi's toolkits
 
@@ -233,7 +249,10 @@ We didn't rely on one attack implementation. **Lexsi's SafeTune** computes its o
 
 <sub>* Measured before the single-BOS fix (section 13); all other rows are final.</sub>
 
-> **Takeaway:** v2 stops attacks that **remove or steer the refusal direction**. It does not stop **training on harmful data** or **forcing the answer's first words**. These are the known open problems in tamper resistance (Qi et al. 2023; TamperBench).
+> **Takeaway:**
+> - **Removing the refusal direction:** strongly resisted (Heretic, SafeTune ablation).
+> - **Steering against it:** only partly resisted (72% harmful under CAA −1, against 97% for the original).
+> - **Not resisted:** training on harmful data and forcing the answer's first words. These are the known open problems in tamper resistance (Qi et al. 2023; TamperBench).
 
 ## 9. Result 5: it holds outside English
 
@@ -241,7 +260,7 @@ We didn't rely on one attack implementation. **Lexsi's SafeTune** computes its o
 
 Tiny Aya is multilingual, so Abhinav tested 100 red-team prompts per language from Cohere's [aya_redteaming](https://huggingface.co/datasets/CohereLabs/aya_redteaming), at each model's strongest Heretic attack.
 - **Translation for judging:** answers were translated to English with NLLB-200 and judged by Granite.
-- **Cross-check:** Llama Guard 3 judged the original text and agreed on 81–87% of rows (85% on English without translation).
+- **Cross-check:** Llama Guard 3 judged the original text and agreed on 81–87% of rows (85% on English without translation). Arabic is not among Llama Guard 3-1B's documented supported languages, so the Arabic cross-check is outside its documented support. It is a consistency check, not independent validation of accuracy.
 
 | Harmful at strongest attack (95% CI) | English | Hindi | Arabic | French | Spanish | Four languages pooled (n = 400) |
 |---|---|---|---|---|---|---|
@@ -266,7 +285,7 @@ Tiny Aya is multilingual, so Abhinav tested 100 red-team prompts per language fr
 | Harmful at strongest attack (Granite) | 91% | **40%** | 57% |
 | **MMLU, clean** | 52.3% | 53.0% | 52.7% |
 
-**Two different MMLU numbers, two different conditions.** Section 5 reports MMLU *under attack* (52.0 / 52.1 / 52.0%); this table reports the *clean* models (52.3 / 53.0 / 52.7%). Both show no capability cost.
+**Two different MMLU numbers, two different conditions.** Section 5 reports MMLU *under attack* (52.0 / 52.1 / 52.0%); this table reports the *clean* models (52.3 / 53.0 / 52.7%). Neither shows a **detectable MMLU drop** on this 1,000-question evaluation. That is one benchmark, not a full capability audit.
 
 > **Takeaway:** v2 is the safest but most cautious. v2b is almost as relaxed as the original and keeps much of the protection. We publish both as two useful points on the trade-off curve.
 
@@ -309,7 +328,7 @@ These use the same attack (SafeTune refusal-direction ablation) on both models, 
 ## 13. Limitations, failures and honest corrections
 
 **What we do not claim:**
-- **v2 is not unbreakable.** The strongest Heretic attack still gets 40% harmful answers, at about 16× the damage.
+- **v2 is not unbreakable.** The strongest Heretic attack still gets 40% harmful answers, at about 16× the behaviour shift (KL).
 - **Harmful fine-tuning and prefilling still break it** (section 8).
 - **One model size** (3.35B). v2 over-refuses (39% vs 16%); v2b reduces this to 18%.
 - **The judges are AI models.** We used two independent ones to reduce that risk, plus a third for other languages.
@@ -370,7 +389,8 @@ The AuditKIT maintainers combined #35 and #36 into a release PR, keeping our com
 
 **Honest reading:**
 - The **cheapest closed APIs are about half the cost** of our *unoptimised* self-hosting. A serving engine with continuous batching (vLLM-style) would likely change that, but we did not measure it.
-- Against current mid-tier models, self-hosting is **about 4–10× cheaper**.
+- Against current mid-tier models, the **GPU cost alone** is about 4–10× lower than their API list prices. This counts the GPU only: the host VM, operations and redundancy are excluded, so a full deployment costs more, and we make no end-to-end production-cost claim.
+- **Licence:** Tiny Aya (and therefore our derived models) is CC-BY-NC-4.0. Commercial use, such as a paid support assistant, needs separate permission from Cohere.
 - The strongest reasons to self-host are **privacy, 70+ languages and owning the weights**. That ownership is exactly the risk this project reduces.
 
 <sub>Sources:</sub>
@@ -488,7 +508,7 @@ Jobs run on free Kaggle T4 GPUs (FP16). **Never published:** stripped models, th
 - **Refusal direction:** one direction in a model's internal activity that mostly controls "saying no".
 - **Abliteration:** editing the weights to remove that direction. **Heretic** automates it.
 - **KL divergence:** how much an attack changes the model's normal answers; low means an invisible attack.
-- **Pareto front:** for each damage level, the strongest attack found.
+- **Pareto front:** for each level of behaviour shift (KL), the strongest attack found.
 - **LoRA:** cheap fine-tuning that trains small add-on matrices.
 - **Adversarial training:** training while being attacked, so the model learns to resist.
 - **Steering (CAA):** pushing the model's activations in a direction while it runs.
