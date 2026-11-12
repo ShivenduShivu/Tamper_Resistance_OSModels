@@ -21,7 +21,7 @@ S = []
 # =========================== COVER
 S += [p("Heretic-Resistant Tiny Aya", H1),
       p("<b>Complete team brief, final results.</b> Lexsi Labs x Cohere x Hugging Face AI Safety &amp; Alignment Hackathon, "
-        "Track 2b (Tamper Resistance). Submission: 14 Nov 2026 (end of day AoE). This document explains the whole project "
+        "Track 2b (Tamper Resistance). Submission deadline: 15 Nov 2026, 11:59 PM AoE (= 16 Nov, 5:29 PM IST). This document explains the whole project "
         "from zero: what the problem is, what we built, how we tested it, what we found, what it does not do, and how to "
         "answer the judges. Technical words are explained where they first appear and again in the glossary (section 23).", B),
       box("The whole project in 8 lines", [
@@ -29,9 +29,9 @@ S += [p("Heretic-Resistant Tiny Aya", H1),
           "2. That refusal mostly lives in <b>one direction</b> inside the model. Delete it and the model stops refusing. This is <b>abliteration</b>.",
           "3. A free tool, <b>Heretic</b>, does this in one command. On Cohere's <b>Tiny Aya</b> it made <b>91%</b> of answers to harmful requests harmful (was 0%), at no loss in general knowledge.",
           "4. We trained Tiny Aya <b>while simulating that attack inside it</b> (our model <b>v2</b>), so it learned to refuse even with the direction removed.",
-          "5. Result: at the attack strength that fully broke the original, v2 still refuses <b>100%</b>. The strongest attack Heretic finds, even with <b>5x the effort</b>, needs ~<b>15x more damage</b> to the model and still gets only <b>40-42%</b> harmful answers.",
+          "5. Result: at the attack strength that fully broke the original, v2 still refuses <b>100%</b>. The strongest attack Heretic finds needs ~<b>16x more damage</b> to the model and still gets only <b>40%</b> harmful answers. A <b>5x longer search</b> found cheaper partial attacks but <b>no stronger worst case</b> (42%).",
           "6. Lexsi's own tools (<b>SafeTune</b>, <b>AuditKIT</b>) confirm it. It works in <b>Hindi, Arabic, French, Spanish</b> too (41% vs 12% harmful), and costs <b>nothing on MMLU</b>.",
-          "7. <b>Honest limits:</b> training the model on harmful examples (fine-tuning) or forcing its answer to start with \"Sure, here is\" (prefill) still break it. A pilot shows prefill can be fixed (86% -> 0% harmful).",
+          "7. <b>Honest limits:</b> training the model on harmful examples (fine-tuning) or forcing its answer to start with \"Sure, here is\" (prefill) still break it. A small, separate pilot cut prefill harm 86% -> 0% (one seed, 48-token judging, not Heretic-tested).",
           "8. Everything is public: models, data, results, code, a live demo page, and an article."], *BLUE),
       Spacer(1, 6), p("Key numbers at a glance", H3),
       table([["", "Original Tiny Aya", "Our v2", "Our v2b"],
@@ -149,15 +149,16 @@ S += [p("Part C. What we found", H1),
           "- Surprise finding (Granite): under attack, v2 often <b>rewrites</b> a harmful request into a harmless answer (asked about "
           "trafficking endangered species, it writes a conservation guide). It is safer than its refusal rate suggests."], *GREEN),
       PageBreak(),
-      p("10. Does a stronger attacker break it? (Heretic with 5x the effort)", H2),
+      p("10. A 5x longer search: cheaper partial attacks, no stronger worst case", H2),
       p("A fair critic would ask: \"maybe Heretic just didn't search long enough?\". Abhinav re-ran Heretic on v2 with <b>200 trials instead of 40</b> "
         "(229 minutes on 2 GPUs), identical settings otherwise."),
       table([["v2 under Heretic", "40 trials", "200 trials"],
              ["Lowest refusal at KL &lt;= 0.01 / 0.05 / 0.1", "100 / 100 / 96%", "100 / 100 / 79%"],
              ["Strongest point: harmful (Granite)", "40% [31, 50]", "42% [33, 52]"],
              ["Strongest point: refusal / MMLU", "25% / 52.1%", "20% / 52.2%"]], [80, 50, 50]),
-      p("<b>Meaning:</b> 5x more effort finds some cheaper partial attacks in the middle band, but the worst case does not get worse "
-        "(40% vs 42% is within the confidence interval). Nothing gets below 100% refusal at low damage."),
+      p("<b>Meaning:</b> 5x more effort finds cheaper partial attacks in the middle band, but the worst case does not get worse "
+        "(40% vs 42%, overlapping confidence intervals). Nothing gets below 100% refusal at low damage. It is one search per budget, "
+        "so it does not prove that more search can never do more damage."),
       p("11. Every other attack we tried", H2),
       table([["Attack (what it does)", "Original", "v2", "v2b"],
              ["SafeTune direction removal at run time (Lexsi's tool): refusal / harmful", "29% / 55%", "<b>100% / 0%</b>", "<b>99% / 0%</b>"],
@@ -274,13 +275,13 @@ S += [p("Part E. Pitch, judge questions and glossary", H1),
           "\"Heretic, the free tool people use to strip safety from open models, removes Tiny Aya's safety almost completely: 91% of "
           "harmful requests get harmful answers, and general knowledge is untouched. Inspired by Fool's Gold and ART, we trained Tiny Aya "
           "while simulating that attack inside the model. At the same attack strength our model still refuses 100%; Lexsi's SafeTune "
-          "confirms it independently. Even with five times the search effort, the attacker must distort the model about 15 times more and "
-          "still only gets 40% harmful answers. It works in Hindi, Arabic, French and Spanish, costs nothing on MMLU, and everything is "
-          "public. We're honest that fine-tuning and prefilling still win, and a pilot already cuts prefill harm from 86% to 0%.\""], *BLUE),
+          "confirms it independently. The attacker must distort the model about 16 times more and still only gets 40% harmful answers; "
+          "a five-times-longer search found no stronger worst case. It works in Hindi, Arabic, French and Spanish, costs nothing on MMLU, and everything is "
+          "public. We're honest that fine-tuning and prefilling still win, and a small separate pilot already cuts prefill harm from 86% to 0%.\""], *BLUE),
       p("22. Questions judges will likely ask", H2),
       table([["Question", "Short answer"],
              ["Isn't the attacker just paying more KL?", "Yes, and we say so. But it's ~16x the damage for a much worse strip (40% vs 91% harmful), and cheap attacks fail entirely."],
-             ["Did you just not search long enough?", "No: with 5x the trials (200), the worst case is unchanged (42% vs 40%)."],
+             ["Did you just not search long enough?", "We checked: 5x the trials (200) found cheaper partial attacks but no stronger worst case (42% vs 40%, overlapping uncertainty). One search each, so not proof."],
              ["Are your safety numbers just keyword counts?", "No. Two AI judges: ProtectAI (refusal) and Granite Guardian (harm), plus Llama Guard for languages. Keywords are shown only where Heretic uses them."],
              ["Does it make the model dumber?", "No: MMLU 52.3% (original) vs 53.0% (v2), within noise."],
              ["Does it refuse too much?", "v2 refuses 39% of safe-but-scary questions (original 16%); v2b brings it to 18%. We show both as a trade-off."],

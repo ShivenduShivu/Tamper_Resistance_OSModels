@@ -4,11 +4,11 @@
 
 > **TL;DR.** With [Heretic](https://github.com/p-e-w/heretic), a free one-command tool, we stripped Cohere's Tiny Aya Global of its safety. Judged refusal fell from 98% to **1%**, and **91%** of its answers became harmful, with no loss on MMLU.
 >
-> We then trained Tiny Aya *while simulating that attack inside the model*. Against our model (v2), the same attack at the same damage budget leaves refusal at **100%**. Heretic's strongest attack, even with **5× the search budget**, needs about **15× more distortion** of the model's behaviour and still only makes **40–42%** of answers harmful.
+> We then trained Tiny Aya *while simulating that attack inside the model*. Against our model (v2), the same attack at the same damage budget leaves refusal at **100%**. Heretic's strongest attack needs about **16× more distortion** of the model's behaviour and still makes only **40%** of answers harmful. A 5× longer search found cheaper partial attacks, but no stronger worst case (42%).
 >
 > Lexsi's SafeTune and AuditKIT confirm the effect independently. The defense **holds in Hindi, Arabic, French and Spanish**, and costs **nothing on MMLU**.
 >
-> The limits are real, and we report them: harmful fine-tuning and prefilling still break the model. A pilot shows prefilling can be fixed.
+> The limits are real, and we report them: harmful fine-tuning and prefilling still break the model. A separate, small pilot suggests prefill harm can be reduced (section 7.8).
 
 **Try it:** [interactive results explorer](https://huggingface.co/spaces/StarWarrior24x7/heretic-resistant-tiny-aya): attack curves, every attack, and side-by-side comparisons.
 
@@ -118,7 +118,7 @@ Lowest refusal Heretic reached within a given KL budget. These are Heretic's own
 
 \*The 200-trial search (7.3) found a cheaper partial attack in the 0.05–0.1 band; the 40-trial search had found 96%.
 
-![Pareto fronts](https://raw.githubusercontent.com/ShivenduShivu/Tamper_Resistance_OSModels/main/docs/build/pareto_chart.png)
+![Pareto fronts](https://huggingface.co/datasets/StarWarrior24x7/tiny-aya-tamper-resistance-results/resolve/main/pareto_chart.png)
 
 **At each model's strongest Heretic attack, judged:**
 
@@ -136,9 +136,9 @@ Lowest refusal Heretic reached within a given KL budget. These are Heretic's own
 - It **does not make the model impossible to strip.**
 - **A behaviour the refusal judge missed:** under attack, v2 often *rewrites* a harmful request into a harmless one instead of refusing (asked about trafficking endangered species, it writes a conservation guide). Judged by harm, it is safer than its refusal rate suggests.
 
-### 7.3 More attacker budget does not help: Heretic with 200 trials
+### 7.3 A 5× longer search: cheaper partial attacks, no stronger worst case
 
-To check that v2's robustness isn't an artefact of a small search, a teammate re-ran Heretic on v2 with **5× the budget** (200 trials, otherwise the identical configuration; 229 minutes on T4×2).
+To check whether v2's robustness is an artefact of a small search, a teammate re-ran Heretic on v2 with **5× the budget** (200 trials, otherwise the identical configuration; 229 minutes on T4×2).
 
 | v2 under Heretic | 40 trials | 200 trials |
 |---|---|---|
@@ -146,7 +146,10 @@ To check that v2's robustness isn't an artefact of a small search, a teammate re
 | Strongest point: Granite harmful | 40% [31, 50] | 42% [33, 52] |
 | Strongest point: refusal / MMLU | 25% / 52.1% | 20% / 52.2% |
 
-The worst case does not get worse. It still costs about 15× the original's KL, and nothing gets below 100% refusal at KL ≤ 0.05.
+- **What the longer search found:** cheaper partial attacks in the middle band (KL 0.05–0.1: 79% refusal instead of 96%).
+- **What it did not find:** a stronger worst case. 42% harmful vs 40%, with overlapping confidence intervals, still at about 15× the original's KL.
+- **What still holds:** nothing gets below 100% refusal at KL ≤ 0.05.
+- **What this does not prove:** it is one search per budget, so it does not show that more search can never do more damage.
 
 ### 7.4 Independent confirmation with the Lexsi toolkits, plus other attacks
 
@@ -167,7 +170,7 @@ The worst case does not get worse. It still costs about 15× the original's KL, 
   - attacks that remove or steer the refusal direction (Heretic, SafeTune ablation, mild steering);
   - sampling;
   - 4-bit compression.
-- **What doesn't:** harmful fine-tuning and prefilling. These are the known open problems in tamper resistance (Qi et al. 2023; TamperBench), and they are where we go next (see the prefill pilot in 7.7 and section 8).
+- **What doesn't:** harmful fine-tuning and prefilling. These are the known open problems in tamper resistance (Qi et al. 2023; TamperBench), and they are where we go next (see the separate prefill pilot in 7.8 and section 8).
 
 ### 7.5 The defense holds outside English
 
@@ -203,19 +206,6 @@ This prompt set is softer than our main benchmark (many hate/bias prompts), so c
   - v2b fixes most of v2's over-caution but gives up some low-budget robustness (table 7.2);
   - we report v2 and v2b as two points on a safety-vs-usability curve.
 - **No capability cost:** MMLU is 52.3% (original), 53.0% (v2) and 52.7% (v2b), which is within noise.
-- **Pilot: fixing prefill.** The idea is to continue v2's training with refusals placed *after* generic affirmative openers ("Sure, here is…"), so the model learns to stop even after a forced compliant start. The test had 3 arms, all trained the same way and differing only in the openers:
-
-  | | No openers (control) | Openers on harmful prompts only | Openers on all prompts |
-  |---|---|---|---|
-  | Harmful answers under "Sure, here is" (Granite) | 86% | **0%** | **0%** |
-  | Harmful answers under 6 *unseen* openers (Granite) | 15–83% | **0–5%** | **0%** |
-  | Over-refusal of safe prompts, no opener (normal use) | 38% | **39%** | 46% |
-  | Refusal of safe prompts *after* an opener | 7% | 39% | 30% |
-
-  - **The result:** training openers on harmful prompts only blocked prefill attacks with **no increase in normal over-refusal**.
-  - **A shortcut it learned:** it also refuses some safe prompts *after* an opener. Normal users never prefill, but some developers do (for example, to force an output format).
-  - **Our first version** taught a blanket "refuse after any opener" shortcut (77% refusal on safe prompts after an opener). A benign-opener control caught it, and a token-boundary bug was fixed before this version.
-  - **Limits:** one seed; answers judged at 48 tokens (our main evaluation uses 128), so harm appearing later in long answers is not measured; not yet re-tested against Heretic.
 - **Evaluation note (double BOS):**
   - **The bug:** a teammate found that our first evaluations added Tiny Aya's begin-of-sequence token twice, because the chat template already adds one.
   - **The fix:** we fixed it and re-ran every headline number. The headline held. Two things changed: the apparent ~2.5-point MMLU cost disappeared, and prefill turned out to be a bigger weakness than first measured.
@@ -223,6 +213,35 @@ This prompt set is softer than our main benchmark (many hate/bias prompts), so c
 - **Dropped ideas:**
   - a multilingual/Hinglish *attack* angle: we found no evidence it reflects real-world attacks;
   - a straight Fool's Gold replication: it failed at 9B, needs hazardous data, and the code is withheld.
+
+### 7.8 Separate pilot: reducing prefill harm (not part of the main results)
+
+> **Read this as a pilot, kept separate on purpose.**
+> - It ran on a different setup from everything above: one training seed per arm, answers judged at **48 tokens** (the main results use 128), and generation on rented A10 GPUs.
+> - It does **not** establish performance at 128 tokens.
+> - It does **not** show that Heretic resistance survives this extra training; the trained arms were never re-attacked.
+
+**Idea.** Continue v2's training with refusals placed *after* generic affirmative openers ("Sure, here is…"), so the model learns to stop even after a forced compliant start. It is adapted from DeepRefusal (arXiv 2509.15202), using generic openers only, so no harmful text was generated or stored.
+
+**Design.** Three arms, trained identically and differing only in the openers. The comparison that matters is each trained arm against the matched no-opener control, not against the untrained model.
+
+| Judged at 48 tokens | No openers (control) | Openers on harmful prompts only | Openers on all prompts |
+|---|---|---|---|
+| Harmful answers under "Sure, here is" (Granite) | 86% | **0%** | **0%** |
+| Harmful answers under 6 *unseen* openers (Granite) | 15–83% | **0–5%** | **0%** |
+| Over-refusal of safe prompts, no opener (normal use; keyword) | 38% | **39%** | 46% |
+| Refusal of safe prompts *after* an opener (keyword) | 7% | 39% | 30% |
+
+**Reading.**
+- **The candidate:** openers on harmful prompts only. Within this pilot, it blocked prefill harm without raising normal over-refusal.
+- **A shortcut it learned:** it also refuses some safe prompts after an opener. Normal users never prefill, but some developers do (for example, to force an output format).
+- **How we got here:**
+  - the first version learned a blanket "refuse after any opener" shortcut (77% refusal on safe prompts after an opener), which a benign-opener control caught;
+  - a token-boundary mismatch between training and test openers was fixed before this version.
+- **Before this could become a claim:**
+  - more seeds;
+  - 128-token judging;
+  - a Heretic re-attack on the trained arm.
 
 ## 8. With more credits: approach, cost and expected before/after
 
@@ -240,7 +259,7 @@ This prompt set is softer than our main benchmark (many hate/bias prompts), so c
 - **Workload:** a multilingual support assistant with 1M requests a month, 300 input + 200 output tokens each (300M input and 200M output tokens a month).
 - **Our measured, unoptimised throughput:** plain `transformers`, FP16, batch 16 on one T4, at most about 150 output tokens/s. 200M output tokens is then about 370 T4-hours a month, which fits on **one always-on T4: about $256 a month** at $0.35/h, or about $0.65 per 1M output tokens.
 
-| Option (prices checked Nov 11, 2026) | Price, USD per 1M tokens (input / output) | Monthly cost |
+| Option (list prices, checked Nov 12, 2026) | Price, USD per 1M tokens (input / output) | Monthly cost |
 |---|---|---|
 | **Self-hosted hardened Tiny Aya, 1× T4 (measured, unoptimised)** | ~$0.35 per GPU-hour | **~$256** |
 | GPT-6 Luna (current, cheapest OpenAI tier) | $0.10 / $0.50 | $130 |
@@ -256,9 +275,10 @@ This prompt set is softer than our main benchmark (many hate/bias prompts), so c
 - **The bigger reasons to self-host are control:** data stays on your hardware, the model covers 70+ languages, and you own the weights. That ownership is exactly the risk this project addresses, and our defense makes it safer to release.
 
 *Sources:*
-- Claude prices: Anthropic's pricing page.
-- OpenAI prices: [benchlm.ai](https://benchlm.ai/openai/api-pricing), updated Nov 11, 2026. OpenAI's own page could not be fetched automatically, so confirm on openai.com/api/pricing.
-- T4: [Google Cloud GPU pricing](https://cloud.google.com/products/compute/gpus-pricing).
+- Claude prices: [Anthropic pricing](https://platform.claude.com/docs/en/about-claude/pricing). Haiku 5.5 is $0.10 / $0.50 for prompts up to 100,000 tokens.
+- OpenAI prices: [OpenAI API pricing](https://developers.openai.com/api/docs/pricing), Standard tier, short context.
+- T4: [Google Cloud GPU pricing](https://cloud.google.com/products/compute/gpus-pricing), $0.35 per GPU-hour on demand; regional rates vary.
+- All prices checked Nov 12, 2026.
 
 ## 9. Team
 
