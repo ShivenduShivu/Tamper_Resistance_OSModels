@@ -2,6 +2,14 @@
 import json
 from pathlib import Path
 
+def default_template(value):
+    if isinstance(value,list):value={v['name']:v['template'] for v in value}
+    if isinstance(value,dict):
+        if 'default' not in value:raise ValueError('no default chat template')
+        return value['default']
+    if not isinstance(value,str):raise ValueError('chat template must be a string or named mapping')
+    return value
+
 def compare(repo,revision,subfolder,base_repo,base_revision,original_tokenizer=None,prompts=None):
     from huggingface_hub import hf_hub_download
     from tokenizers import Tokenizer
@@ -12,7 +20,7 @@ def compare(repo,revision,subfolder,base_repo,base_revision,original_tokenizer=N
         template=cfg.get('chat_template')
         if template is None:
             template=Path(hf_hub_download(repo,prefix+'chat_template.jinja',revision=revision)).read_text()
-        return Tokenizer.from_file(path),cfg,template
+        return Tokenizer.from_file(path),cfg,default_template(template)
     original,oc,ot=load(base_repo,base_revision,None)
     candidate,cc,ct=load(repo,revision,subfolder)
     def special(c,key):
@@ -29,7 +37,6 @@ def compare(repo,revision,subfolder,base_repo,base_revision,original_tokenizer=N
     for component in ('model','normalizer','pre_tokenizer','post_processor','decoder'):
         result['same_'+component]=oj.get(component)==cj.get(component)
     if original_tokenizer is not None and prompts is not None:
-        if isinstance(ct,list):ct={v['name']:v['template'] for v in ct}
         result['same_all_evaluation_renderings']=all(
             original_tokenizer.apply_chat_template([{'role':'user','content':p}],tokenize=True,
                 add_generation_prompt=True,chat_template=ct)==

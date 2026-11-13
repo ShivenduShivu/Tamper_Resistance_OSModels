@@ -38,6 +38,12 @@ class GeneralTests(unittest.TestCase):
                     'def add(x, y):\n    return x+y',
                     'print(1)\ndef add(a, b):\n    return a+b'):
             self.assertEqual(code_adapter.function_body(p,raw)[1],'original_completion')
+    def test_named_chat_templates(self):
+        from tokenizer_audit import default_template
+        self.assertEqual(default_template({'default':'hello','tool_use':'other'}),'hello')
+        self.assertEqual(default_template([{'name':'default','template':'hello'}]),'hello')
+        self.assertEqual(default_template('hello'),'hello')
+        with self.assertRaises(ValueError):default_template({'tool_use':'other'})
     def test_missing_complete_rejected(self):
         with tempfile.TemporaryDirectory() as td:
             Path(td,'artifact_index.json').write_text('{}')

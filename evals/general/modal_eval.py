@@ -168,12 +168,36 @@ def evaluate(panel_id,run_id,model_name,pilot):
         evidence.commit();cache.commit()
     return {'run_id':run_id,'state':manifest['state'],'n_selected':len(rows),'elapsed_seconds':manifest['elapsed_seconds']}
 
+@app.function(image=image,cpu=2,memory=4096,timeout=300,retries=0,
+    volumes={'/evidence':evidence,'/cache':cache},secrets=[modal.Secret.from_name('huggingface-secret')])
+def preflight(panel_id):
+    import sys
+    sys.path[:0]=['/general','/suite']
+    import tokenizer_audit
+    import run as old
+    from transformers import AutoTokenizer
+    lock=json.loads(Path('/general/lock.json').read_text())
+    rows=[json.loads(l) for l in Path('/evidence',panel_id,'items.jsonl').read_text().splitlines()]
+    tok=AutoTokenizer.from_pretrained(old.MODELS['base'][0],revision=lock['models']['base'])
+    report={}
+    for name in ('base','v2','v2b'):
+        repo,sub=old.MODELS[name]
+        report[name]=tokenizer_audit.compare(repo,lock['models'][name],sub,
+            old.MODELS['base'][0],lock['models']['base'],tok,[r['prompt'] for r in rows])
+    cache.commit()
+    return report
+
 @app.local_entrypoint()
-def main(panel_id:str,run_id:str,model:str='v2',pilot:bool=True):
-    call=evaluate.spawn(panel_id,run_id,model,pilot)
-    try:
-        result=call.get(timeout=3000)
-    except TimeoutError:
-        call.cancel(terminate_containers=True)
-        raise RuntimeError('evaluation exceeded wall-clock allowance; cancelled')
-    print(json.dumps(result,indent=2))
+def main(panel_id:str,run_id:str='',model:str='v2',pilot:bool=True,preflight_only:bool=False):
+    if preflight_only:
+        print(json.dumps(preflight.remote(panel_id),indent=2));return
+    models=['base','v2','v2b'] if model=='all' else [model]
+    for name in models:
+        current_run=run_id+'-'+name if model=='all' else run_id
+        call=evaluate.spawn(panel_id,current_run,name,pilot)
+        try:
+            result=call.get(timeout=3000)
+        except TimeoutError:
+            call.cancel(terminate_containers=True)
+            raise RuntimeError('evaluation exceeded wall-clock allowance; cancelled')
+        print(json.dumps(result,indent=2),flush=True)
