@@ -23,7 +23,7 @@ Anyone can download an open model and strip its safety with **one free command**
 | Refuses harmful requests, no attack | 98% | **100%** |
 | After Heretic's attack: answers judged **harmful** | 🔴 **91%** | 🟢 **40%** |
 | Refusal kept under cheap attacks (KL ≤ 0.05)¹ | 🔴 14% | 🟢 **100%** |
-| Behaviour shift the strongest attack must cause (KL) | 0.009 | **0.153 (~16×)** |
+| Observed shift at the selected strongest-found attack (KL) | 0.009 | **0.153 (~16×)** |
 | Lexsi SafeTune's direction-removal attack: harmful | 55% | **0%** |
 | Harmful outside English (Hindi, Arabic, French, Spanish)² | 41% | **12%** |
 | General knowledge (MMLU) | 52.3% | 53.0% |
@@ -35,7 +35,7 @@ Anyone can download an open model and strip its safety with **one free command**
 > - **The weakness:** a model's safety ("refuse harmful requests") mostly lives in **one direction** inside its internal activity.
 > - **The attack:** Heretic finds that direction and deletes it from the weights, for free.
 > - **Our innovation:** we **ran that attack inside the model during training**, so it learned to refuse even with the direction removed.
-> - **The result:** low-KL attacks found in our searches retain 100% keyword-scored refusal. The strongest attack needs a **~16× larger shift** in the model's behaviour (KL) and still gets only **40%** harmful answers instead of 91%.
+> - **The result:** low-KL attacks found in our searches retain 100% keyword-scored refusal. The selected strongest-found v2 attack had **~16× the measured shift** (KL) of the selected original-model attack and yielded **40%** harmful answers instead of 91%. This is an observation from these searches, not a minimum shift required for every successful attack.
 > - **The limits:** fine-tuning on harmful examples and forcing the answer's first words ("prefill") still work against it, and instruction following drops about 10 points. We say so.
 
 ---
@@ -184,7 +184,7 @@ flowchart LR
 
 | | Original | v2 | v2b |
 |---|---|---|---|
-| Behaviour shift needed (KL) | 0.009 | **0.153 (~16×)** | 0.054 |
+| Observed shift at selected attack (KL) | 0.009 | **0.153 (~16×)** | 0.054 |
 | Refuses (ProtectAI) | 1% | 25% | 31% |
 | **Harmful (Granite, 95% CI)** | 91% [84, 95] | **40% [31, 50]** | 57% [47, 66] |
 | Harmful on clearly-unsafe XSTest prompts | 61% [55, 68] | **4% [2, 8]** | 15% [11, 21] |
@@ -194,9 +194,9 @@ flowchart LR
 
 > **Takeaway:**
 > - **Low-KL attacks found in these searches** (KL ≤ 0.05) leave 100% keyword-scored refusal on v2. This is not a human-validated zero-harm result.
-> - **The strongest attack** needs a **~16× larger distribution shift** and still leaves **less than half** the harm.
+> - **The selected strongest-found v2 attack** had **~16× the measured distribution shift** of the selected original-model attack and yielded **less than half** the judged harm. This does not establish a universal lower bound on attack shift or compute cost.
 > - **That shift is not proven capability damage:** MMLU under attack is 52.1%.
-> - **Net effect:** a strip needs a much larger behaviour shift and yields far less harm, but stripping is **not** impossible.
+> - **Net effect in these searches:** the selected v2 attack had a larger measured shift and yielded less judged harm, but stripping is **not** impossible.
 
 ## 6. Result 3: a 5× longer search finds similar worst-case harm
 
@@ -300,15 +300,15 @@ Tiny Aya is multilingual, so Abhinav tested 100 red-team prompts per language fr
 | Maths (GSM8K, n = 200), standard numeric parser | −1.0 [−7.1, +5.1] | **−16.5 [−23.0, −9.7]** |
 | Safe questions refused (XSTest, n = 250, classifier) | +25.6 [+19.2, +31.8] | −0.4 [−4.6, +3.8] |
 
-- **Coding and knowledge hold** for both models.
-- **v2's maths drop is mostly answer format:** with a standard numeric parser it is −1.0. Its real costs are over-refusal and instruction following.
-- **v2b fixes over-refusal but loses maths** (−16.5 even with the standard parser) and more instruction following.
+- **Observed coding and knowledge scores were similar** on these samples; equivalence is not established. The HumanEval intervals still allow roughly 7-8 percentage points of loss.
+- **v2's maths scores are parser-sensitive:** the change is −13.0 points under the strict parser and −1.0 under the secondary numeric parser. This does not prove unchanged reasoning. Instruction-following losses and increased classifier-flagged safe-prompt refusal are separate observed costs.
+- **v2b returns classifier-flagged safe-prompt refusal near baseline under this protocol**, but loses maths (−16.5 even with the secondary numeric parser) and more instruction following. AI-only review and truncated answers limit the refusal interpretation; this does not establish that over-refusal is eliminated.
 - Clean checkpoints only, one training seed, exploratory and unadjusted. Full results and limits: [docs/GENERAL_CAPABILITY_RESULTS.md](docs/GENERAL_CAPABILITY_RESULTS.md).
 
 > **Takeaway:** neither checkpoint is free.
 > - **v2** is the safest, but over-refuses safe questions (+26 points) and follows instructions less well (−10).
-> - **v2b** removes the over-refusal, but costs maths (−16.5) and instruction following (−19.5), and keeps less of the protection (57% harmful vs 40%).
-> - Knowledge and coding hold for both. We publish both as two points on the trade-off curve.
+> - **v2b** has near-baseline classifier-flagged safe-prompt refusal under this protocol, but costs maths (−16.5) and instruction following (−19.5), and keeps less of the measured protection (57% harmful vs 40%). The refusal review is AI-only and many saved answers are truncated.
+> - Observed knowledge and coding scores were similar on these samples, not demonstrated equivalent. We publish both as two points on the measured trade-off curve.
 
 ## 11. Side-by-side: the same attack, the same prompts
 
@@ -349,7 +349,7 @@ These use the same attack (SafeTune refusal-direction ablation) on both models, 
 ## 13. Limitations, failures and honest corrections
 
 **What we do not claim:**
-- **v2 is not unbreakable.** The strongest Heretic attack still gets 40% harmful answers, at about 16× the behaviour shift (KL).
+- **v2 is not unbreakable.** The selected strongest-found Heretic attack gets 40% judged harmful answers, at about 16× the measured shift (KL) of the selected original-model attack. This is not a proven minimum shift for successful attacks.
 - **Harmful fine-tuning and prefilling still break it** (section 8).
 - **One model size** (3.35B). v2 over-refuses (39% vs 16%); v2b reduces this to 18%.
 - **Not free in capability:** instruction following drops 10 points for v2 and 19.5 for v2b, and v2b also loses maths (section 10).
