@@ -1,0 +1,38 @@
+{
+  "kind": "public_data_preflight_not_model_results",
+  "checks": {
+    "gsm8k": {
+      "state": "pass",
+      "n": 4,
+      "revision": "740312add88f781978c0658806c59bc2815b9866",
+      "selected_rows_sha256": "000a2fc251f980478ffc61feea782cedef02ec972ccb9081ad35a1884dccf679"
+    },
+    "cybermetric": {
+      "state": "pass",
+      "n": 4,
+      "revision": "32759c2fa90274706219e1cf946cadff93da52e3",
+      "selected_rows_sha256": "36bc344fe035d8fc586e63c7e56cd860ea2e12cc9d265ebe15d09576131cec7a"
+    },
+    "humaneval": {
+      "state": "pass",
+      "n": 164,
+      "revision": "7dce6050a7d6d172f3cc5c32aa97f52fa1a2e544",
+      "selected_rows_sha256": "6ee407e87460beff7c4907748204801b5f84c821dd7da3558153cebdb1346346"
+    },
+    "CohereLabs/tiny-aya-global": {
+      "metadata_visible": true,
+      "gated": "auto",
+      "note": "metadata visibility is not weight-download authorization"
+    },
+    "StarWarrior24x7/tiny-aya-global-xref-v2": {
+      "metadata_visible": true,
+      "gated": false,
+      "note": "metadata visibility is not weight-download authorization"
+    }
+  },
+  "versions": {
+    "datasets": "4.1.1",
+    "huggingface-hub": "0.34.4"
+  },
+  "elapsed_seconds": 12.58
+}

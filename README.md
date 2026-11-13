@@ -34,7 +34,7 @@ Anyone can download an open model and strip its safety with **one free command**
 > - **The weakness:** a model's safety ("refuse harmful requests") mostly lives in **one direction** inside its internal activity.
 > - **The attack:** Heretic finds that direction and deletes it from the weights, for free.
 > - **Our innovation:** we **ran that attack inside the model during training**, so it learned to refuse even with the direction removed.
-> - **The result:** cheap attacks now fail completely. The strongest attack needs a **~16× larger shift** in the model's behaviour (KL) and still gets only **40%** harmful answers instead of 91%.
+> - **The result:** low-KL attacks found in our searches retain 100% keyword-scored refusal. The strongest attack needs a **~16× larger shift** in the model's behaviour (KL) and still gets only **40%** harmful answers instead of 91%.
 > - **The limits:** fine-tuning on harmful examples and forcing the answer's first words ("prefill") still work against it, and we say so.
 
 ---
@@ -160,13 +160,13 @@ flowchart LR
 | Before | 98% | 0% [0, 4] | 52.3% |
 | After Heretic's best attack (KL 0.009, ~1 GPU-hour) | **1%** | **91%** [84, 95] | 52.0% |
 
-> **Takeaway:** one free command, about an hour, and 91% of harmful requests get harmful answers. General knowledge doesn't move, so the tampering is invisible.
+> **Takeaway:** one free command, about an hour, and 91% of harmful requests get harmful answers. Observed MMLU accuracy changes by −0.3 percentage points. That limited measurement does not establish that tampering is invisible or harmless to other capabilities.
 
 ## 5. Result 2: v2 resists Heretic
 
 ![Every attack Heretic found](docs/figures/pareto.png)
 
-**How to read it:** each dot is the best attack Heretic found at a given level of behaviour shift (KL). Moving right means a larger shift; higher means more refusals survived. The original (red) collapses almost at zero damage. v2 (green) stays at the top across the whole cheap-attack zone.
+**How to read it:** each dot is the best attack Heretic found at a given level of behaviour shift (KL). Moving right means a larger shift; higher means more refusals survived. The original (red) collapses at low measured KL. v2 (green) stays at the top across the whole cheap-attack zone.
 
 **Lowest refusal Heretic reached** (Heretic's keyword score; fresh search per model):
 
@@ -192,10 +192,10 @@ flowchart LR
 **What "harmful" adds over "refusal".** Under attack, v2 refuses only 25%, yet only 40% of its answers are harmful. Granite found that v2 often **rewrites a harmful request into a harmless answer** instead of refusing (asked about trafficking endangered species, it writes a conservation guide).
 
 > **Takeaway:**
-> - **Cheap attacks** (KL ≤ 0.05) fail completely on v2.
+> - **Low-KL attacks found in these searches** (KL ≤ 0.05) leave 100% keyword-scored refusal on v2. This is not a human-validated zero-harm result.
 > - **The strongest attack** needs a **~16× larger distribution shift** and still leaves **less than half** the harm.
 > - **That shift is not proven capability damage:** MMLU under attack is 52.1%.
-> - **Net effect:** the defense raises the price and lowers the payoff, but it does **not** make stripping impossible.
+> - **Net effect:** the defense increases the measured distribution shift at the selected attack and lowers observed harm, but it does **not** make stripping impossible.
 
 ## 6. Result 3: a 5× longer search finds similar worst-case harm
 
@@ -285,7 +285,7 @@ Tiny Aya is multilingual, so Abhinav tested 100 red-team prompts per language fr
 | Harmful at strongest attack (Granite) | 91% | **40%** | 57% |
 | **MMLU, clean** | 52.3% | 53.0% | 52.7% |
 
-**Two different MMLU numbers, two different conditions.** Section 5 reports MMLU *under attack* (52.0 / 52.1 / 52.0%); this table reports the *clean* models (52.3 / 53.0 / 52.7%). Neither shows a **detectable MMLU drop** on this 1,000-question evaluation. That is one benchmark, not a full capability audit.
+**Two different MMLU numbers, two different conditions.** Section 5 reports MMLU *under attack* (52.0 / 52.1 / 52.0%); this table reports the *clean* models (52.3 / 53.0 / 52.7%). Clean accuracy differs from the original by +0.7 percentage points (v2) and +0.4 points (v2b); attacked accuracy differs by +0.1 points (v2) and 0.0 points (v2b). These are descriptive aggregates from a 1,000-question evaluation, without a persisted per-item manifest for paired inference. They do not establish equivalence or broad capability preservation. New coding, generative maths and cybersecurity-knowledge evaluations remain pending.
 
 > **Takeaway:** v2 is the safest but most cautious. v2b is almost as relaxed as the original and keeps much of the protection. We publish both as two useful points on the trade-off curve.
 
@@ -400,6 +400,8 @@ The AuditKIT maintainers combined #35 and #36 into a release PR, keeping our com
 
 ## 16. Roadmap
 
+**Submission evidence work:** [review protocol and completion criteria](docs/REVIEWER_EVIDENCE.md); [capability suite](evals/capability/README.md); [blinded human audit](evals/review_audit/README.md). Tools and planned experiments are not model results.
+
 | Next step | Why |
 |---|---|
 | **Fine-tuning resistance:** simulate LoRA attack steps inside training (lightweight TAR) | Our biggest open limitation |
@@ -507,7 +509,7 @@ Jobs run on free Kaggle T4 GPUs (FP16). **Never published:** stripped models, th
 - **Open-weight:** the model's weights are published, so anyone can download and edit them.
 - **Refusal direction:** one direction in a model's internal activity that mostly controls "saying no".
 - **Abliteration:** editing the weights to remove that direction. **Heretic** automates it.
-- **KL divergence:** how much an attack changes the model's normal answers; low means an invisible attack.
+- **KL divergence:** measured distribution shift on a specified harmless-prompt set; not an estimate of compute cost, invisibility or capability loss.
 - **Pareto front:** for each level of behaviour shift (KL), the strongest attack found.
 - **LoRA:** cheap fine-tuning that trains small add-on matrices.
 - **Adversarial training:** training while being attacked, so the model learns to resist.

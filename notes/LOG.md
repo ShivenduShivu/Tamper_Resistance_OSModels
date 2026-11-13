@@ -326,3 +326,32 @@ Unsafe rate (lower is safer), 95% Wilson CI in the summary file; refusal = Prote
   - **5× the search budget does not find a meaningfully stronger strip.** The worst case stays at about 40% unsafe (42% vs 40%, overlapping CIs) and still needs about 15× the original's KL (0.139 vs 0.0094). Nothing below 100% refusal exists at KL ≤ 0.05.
   - The longer search does find cheaper partial attacks in the 0.05–0.1 KL band (keyword refusal 0.79 vs 0.96 at KL ≤ 0.1, 15% unsafe), so the KL ≤ 0.1 column of the main table should cite the 200-trial number.
   - One search per budget and one seed each; a different seed could land elsewhere on the front.
+
+## 2026-11-13: Submission evidence audit and public Modal preflight
+
+- Started from team main `33317059`; imported the bounded capability suite from
+  fork commit `3634ca92`. No new model scores or human annotations are claimed.
+- Tightened article/model-card claims: descriptive MMLU deltas, keyword-scored
+  low-KL refusal, pre-single-BOS fine-tuning caveat, classifier-only overrefusal.
+  Existing fine-tuning, steering and prefill failures remain visible.
+- Added `docs/REVIEWER_EVIDENCE.md`: completion criteria, untouched holdout versus
+  attack-search prompts, matched attack budgets, noninferiority decision still
+  requiring a frozen endpoint/margin, clean/attacked matrix and budget limits.
+- Added offline blinded two-human-review sampling with separate random and
+  disagreement strata, mandatory adjudication, hashes, and explicit uncertain
+  labels. No inference that AI review is ground truth.
+- Modal public CPU preflight: pinned GSM8K (4 rows), CyberMetric (4 rows), HumanEval
+  (164 rows) all loaded and passed schema validation. Result and selected-row
+  hashes: `results/capability_preflight/public_data.json`.
+  Run: https://modal.com/apps/thewildofficial/main/ap-ZgmT2bYBS4FJAPthmWBv1N
+  Function time 12.58 seconds; image build/overhead additional; no measured bill.
+  No GPU, model generations, coding execution or model capability results.
+- Modal account is configured; no secrets were configured at inspection.
+  Base-model metadata reports gated access; v2 metadata is public. Metadata
+  visibility does not prove weight access. User deferred HF secret setup.
+  Matched base/defended model runs remain pending; do not substitute another base.
+- Local validation uncovered fixture portability issues: fully mocked main tests
+  still imported a real Modal SDK, and macOS default spawn did not match the
+  Linux Python 3.13 target. Tests now mock SDK metadata and the fixture-only local
+  backend explicitly uses fork. The production Modal backend and vendored
+  HumanEval module remain unchanged. See PR validation for final test outcomes.

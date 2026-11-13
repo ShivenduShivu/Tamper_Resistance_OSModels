@@ -22,3 +22,9 @@ results/**/*.pt
 
 # personal side work, kept out of the shared repo
 private/
+
+# human-review artifacts contain raw responses and the private blinding key
+PRIVATE_*
+reviewer_A.jsonl
+reviewer_B.jsonl
+adjudication.jsonl
