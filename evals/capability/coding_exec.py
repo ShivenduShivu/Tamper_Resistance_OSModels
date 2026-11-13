@@ -86,7 +86,7 @@ FRAME_INFRA = "HEINFRA::"
 REFERENCE_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                               "reference", "human_eval_execution.py")
 REFERENCE_SHA256 = "79901c6f5b59701c465b164aed290fa53abc35abc80a5378fc10f4dac1f9a84c"
-REQUIRED_MODAL_VERSION = "1.4.2"      # requirements-coding-exec.txt; UNEXERCISED
+REQUIRED_MODAL_VERSION = "1.4.2"      # requirements-coding-exec.txt; live gate recorded in results/general_audit
                                       # offline - import-check at first authorized run
 
 # Modal SANDBOX per-second list rates (modal.com/pricing, Sandbox section,
@@ -456,7 +456,7 @@ class SandboxBackend:
         # create the sandbox IDLE (sleep); the driver runs via exec only after
         # all three files are in place. The Modal binding (Sandbox.create exec/
         # open semantics, caps, block_network, terminate) is code-reviewed but
-        # UNEXERCISED offline - live-verified at the first authorized run.
+        # Live backend gate verifies this path before accepting model results.
         sb = modal.Sandbox.create(
             "sleep", str(SANDBOX_LIFETIME_SEC),
             image=image, app=app,

@@ -1,0 +1,16 @@
+{
+  "kind": "parser_disagreement_ai_review",
+  "n": 36,
+  "n_inputs": 36,
+  "missing": [],
+  "evidence_errors": [],
+  "by_model": {
+    "v2": {
+      "clear_gold": 32
+    },
+    "base": {
+      "clear_gold": 4
+    }
+  },
+  "limitation": "All parser disagreements for original and v2 English GSM8K were AI-reviewed. These are provisional labels, not human validation, and do not replace either automatic score."
+}

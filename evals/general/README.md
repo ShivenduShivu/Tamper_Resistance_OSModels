@@ -17,7 +17,7 @@ The v2 frozen panel contains 2,004 items per checkpoint:
 | Official IFEval sample | 200 | Prompt-level strict instruction compliance, not answer quality |
 | Aya human-authored everyday set | 20 × 7 languages | Answer collection; useful-answer scoring requires review |
 | HumanEval | 164 | Pass@1 through isolated pinned upstream scorer, after live gate |
-| XSTest | 250 safe + 200 unsafe | Provisional refusal classifier; human review pending |
+| XSTest | 250 safe + 200 unsafe | Provisional refusal classifier; paired Luna diagnostic, no human validation |
 
 Sampling is seed 0, before any generations. Related maths datasets are correlated;
 never combine them as independent evidence. Keep per-domain results separate.
@@ -59,7 +59,7 @@ classifier revision. Refusal labels are **provisional**, with classifier-input
 truncation and uncertainty limitations. Correctness and refusal can coexist.
 No claim that unsuccessful responses imply inability, or that classifier agreement
 is human validation. Generated-letter parse failure is not lost knowledge.
-Everyday quality and harmfulness stay pending actual human review.
+The frozen 50-prompt paired diagnostic sample receives GPT-6 Luna judgments only. No human validation is performed or planned; quality outside that sample remains unscored.
 
 `modal_coding.py` uses fresh network-blocked, secret-free sandboxes with resource
 caps. Authored fixtures, network/secret checks and all 164 canonical solutions
@@ -72,7 +72,7 @@ Download complete directories into **pre-existing local directories**, then
 verify every indexed size/hash externally before accepting results. Check panel
 hash, selected-item hash, coverage, duplicate IDs, expected conditions, infra
 failures and scoring state. Raw outputs/keys/review sheets remain private; only
-aggregate reports and code may be committed. Never publish answers from attacked
+answer-free per-item verdicts, aggregate reports and code may be committed. Never publish answers from attacked
 models or claim all raw outputs are publicly released.
 
 ## Analysis
@@ -81,10 +81,7 @@ Use paired candidate-minus-original deltas and intervals per task. The imported
 Newcombe/McNemar helpers are available; they test differences, not preservation.
 All panel comparisons are exploratory; no confirmatory noninferiority margin was
 frozen. Report denominators, discordances, exclusions, truncations, parsing failures
-and classifier disagreement. A human-audited refusal/error breakdown remains
-pending two independent reviewers and adjudication. Keep random samples separate
-from disagreement enrichment. Human-review only a subset does not validate all
-machine labels. Budget ceiling: $18 Modal plus separate $19 Hugging Face credits;
+and classifier disagreement. The planned human review was cancelled by the user. The preselected prompts are reused for blinded GPT-6 Luna diagnostics (`ai_review_plan.json`); the original frozen selection record remains intact. AI judgment and classifier disagreement are not human validation or measured detector accuracy. Keep random samples separate from disagreement enrichment. Budget ceiling: $18 Modal plus separate $19 Hugging Face credits;
 execution estimates are not provider billing caps.
 
 ### Secondary maths-parser sensitivity
@@ -100,3 +97,7 @@ first), so ambiguous text can still be mis-scored. It is not human ground truth.
 Arabic uses the same rule with the dataset's answer prefix, not an official
 simple-evals Arabic configuration. Report both endpoints and their disagreement;
 do not choose whichever gives a favorable retention conclusion.
+
+## Completed results and offline reproduction
+
+[Results and limitations](../../docs/GENERAL_CAPABILITY_RESULTS.md) accompany answer-free per-item verdicts, selected identities/content hashes and full run provenance in `results/general_audit/`. Run `export_public.py --panel <panel-dir> --base <base-run> --v2 <v2-run> --v2b <v2b-run> --out <out-dir>` after downloading all three generation/scoring/coding directories. The exporter independently checks hashes, coverage and matched protocols before writing. See `luna_judge_contract.json` and `ai_review_plan.json` for subjective-label limits. The model alias is recorded; an immutable judge revision is not exposed.

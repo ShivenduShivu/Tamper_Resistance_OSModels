@@ -1,8 +1,6 @@
 # Submission evidence contract
 
-Status: protocol and tools, **not new coding/security model results**. Freeze a
-run-specific manifest before model outputs are inspected. Public-data preflight,
-offline tests and synthetic fixtures establish machinery only.
+Status: [new clean-checkpoint results](GENERAL_CAPABILITY_RESULTS.md) complete: 6,012 answers and 4,242 objective verdicts across original/v2/v2b. This contract distinguishes completed exploratory evidence from remaining confirmation/attack gaps. Subjective review is GPT-6 Luna only; no human validation is performed or planned.
 
 ## Question and success criteria
 
@@ -23,11 +21,11 @@ or endpoint based on favorable test results. Pilots cannot become confirmation.
 
 | Thread | Minimum measurements | Current state |
 |---|---|---|
-| Functional coding | HumanEval 164, executed pass@1, base/v2/v2b on same problems | Harness imported; no scored model run |
-| Generative maths | GSM8K frozen 200, exact-match plus extraction/truncation counts | Harness imported; no scored model run |
-| Cybersecurity knowledge | CyberMetric frozen 500, forced-choice accuracy | Harness imported; no scored model run; not operational skill |
+| Functional coding | HumanEval 164, executed pass@1, base/v2/v2b on same problems | 164 per model scored; zero infrastructure errors |
+| Generative maths | GSM8K frozen 200, exact-match plus extraction/truncation counts | 200 per model scored; both strict and secondary parser reported |
+| Cybersecurity knowledge | CyberMetric frozen 500, forced-choice accuracy | 500 per model scored; generated and forced-choice endpoints; not operational skill |
 | Benign security help | Human-reviewed authorized defensive questions; correctness and refusal separate | Missing; MCQ cannot substitute |
-| Overrefusal | XSTest safe and unsafe contrasts; held-out OR-Bench; random human audit | AI-classified aggregates exist; human audit missing |
+| Overrefusal | XSTest safe and unsafe contrasts; held-out OR-Bench; random human audit | All 450 XSTest answers per model saved/classified; paired Luna diagnostic on 30 prompts; no human validation or new held-out OR-Bench |
 | Safety under tampering | Harmful assistance and refusal separately, clean and attacked | Existing AI-judged evidence; human calibration missing |
 | Fine-tuning failure | Corrected single-BOS repeat with matched base control | Recorded pre-fix failure retained; corrected repeat missing |
 
@@ -63,7 +61,7 @@ checkpoints; the current capability runner does not reconstruct attacks.
    discordant counts and exact sample sizes. Report exclusions and common-item
    coverage. Do not infer equivalence from overlapping intervals or p > .05.
    Keep non-primary comparisons exploratory or use a declared multiplicity plan.
-7. Human-check a random subset plus separate disagreement enrichment, blinded
+7. Stronger future validation would human-check a random subset plus separate disagreement enrichment, blinded
    to model and machine verdict. Two reviewers, adjudication, explicit uncertain
    labels, both classifier error directions. Audit harm labels as well as refusal.
    Human subset validation does not validate all AI labels.

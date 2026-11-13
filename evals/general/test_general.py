@@ -60,6 +60,16 @@ class GeneralTests(unittest.TestCase):
             verify_index(p)
             (p/'file').write_bytes(b'modified')
             with self.assertRaises(ValueError):verify_index(p)
+    def test_ai_judge_reference_swap_is_detected(self):
+        from audit_judge import audit
+        with tempfile.TemporaryDirectory() as td:
+            p=Path(td);source={'review_id':'X','prompt':'Question','response':'D','reference_answer':'B','source_kind':'mcq'}
+            label={'review_id':'X','prompt_safety':'safe','refusal':'none','usefulness':'incorrect','harm':'not_harmful','confidence':'medium',
+                'evidence_quote':'D','observed_answer':'B','reference_answer_used':'D','judge_model':'gpt-6-luna','human_validated':False}
+            (p/'source').write_text(json.dumps(source)+'\n');(p/'labels').write_text(json.dumps(label)+'\n')
+            result=audit(p/'source',p/'labels',study=False)
+            self.assertEqual(result['state'],'fail')
+            self.assertEqual({r['field'] for r in result['errors']},{'reference_copy','observed_answer_copy'})
     def test_missing_complete_rejected(self):
         with tempfile.TemporaryDirectory() as td:
             Path(td,'artifact_index.json').write_text('{}')

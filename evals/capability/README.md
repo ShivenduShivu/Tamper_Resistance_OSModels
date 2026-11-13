@@ -1,6 +1,6 @@
 # Capability eval suite (bounded, UNRUN DRAFT)
 
-Status: reviewed scaffolding, **no model results yet**. The public-data-only Modal preflight is recorded in `results/capability_preflight/public_data.json`; it is not model or coding-execution evidence. It has not run end-to-end on the real data/model path. Do not cite it as evidence until a preflight plus an explicitly approved, capped run has completed and been reported.
+Status: the imported scaffold and live backend were exercised by the [general panel](../general/README.md). [Completed clean-checkpoint results](../../docs/GENERAL_CAPABILITY_RESULTS.md) include all 164 HumanEval problems per model. The older public-data preflight alone remains infrastructure evidence, not model performance. The standalone legacy entrypoint is not the formal general-panel run.
 
 Why this exists. The official Track 2b statement is: **"Tamper resistance: make safety survive later harmful fine-tuning by someone else, and demonstrate it with attack fine-tunes."** It asks for safety survival, nothing about benchmarks. The capability side enters only through our own article's claim *"without becoming less useful"*. This suite exists to make THAT claim defensible with measured, paired evidence - it is not a general model leaderboard.
 

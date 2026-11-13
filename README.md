@@ -285,7 +285,7 @@ Tiny Aya is multilingual, so Abhinav tested 100 red-team prompts per language fr
 | Harmful at strongest attack (Granite) | 91% | **40%** | 57% |
 | **MMLU, clean** | 52.3% | 53.0% | 52.7% |
 
-**Two different MMLU numbers, two different conditions.** Section 5 reports MMLU *under attack* (52.0 / 52.1 / 52.0%); this table reports the *clean* models (52.3 / 53.0 / 52.7%). Clean accuracy differs from the original by +0.7 percentage points (v2) and +0.4 points (v2b); attacked accuracy differs by +0.1 points (v2) and 0.0 points (v2b). These are descriptive aggregates from a 1,000-question evaluation, without a persisted per-item manifest for paired inference. They do not establish equivalence or broad capability preservation. New coding, generative maths and cybersecurity-knowledge evaluations remain pending.
+**Two different MMLU numbers, two different conditions.** Section 5 reports MMLU *under attack* (52.0 / 52.1 / 52.0%); this table reports the *clean* models (52.3 / 53.0 / 52.7%). Clean accuracy differs from the original by +0.7 percentage points (v2) and +0.4 points (v2b); attacked accuracy differs by +0.1 points (v2) and 0.0 points (v2b). These are descriptive aggregates from a 1,000-question evaluation, without a persisted per-item manifest for paired inference. They do not establish equivalence or broad capability preservation. New matched clean-checkpoint coding, maths, security-knowledge and instruction-following results are reported in [the capability results](docs/GENERAL_CAPABILITY_RESULTS.md). They show task-specific costs and do not support blanket capability preservation.
 
 > **Takeaway:** v2 is the safest but most cautious. v2b is almost as relaxed as the original and keeps much of the protection. We publish both as two useful points on the trade-off curve.
 
@@ -400,7 +400,9 @@ The AuditKIT maintainers combined #35 and #36 into a release PR, keeping our com
 
 ## 16. Roadmap
 
-**Submission evidence work:** [review protocol and completion criteria](docs/REVIEWER_EVIDENCE.md); [capability suite](evals/capability/README.md); [blinded human audit](evals/review_audit/README.md). Tools and planned experiments are not model results.
+**New measured capability evidence:** [clean-checkpoint results and limitations](docs/GENERAL_CAPABILITY_RESULTS.md). All 6,012 answers are collected and the objective endpoints are scored. Subjective review uses GPT-6 Luna without human validation.
+
+**Submission evidence work:** [review protocol and completion criteria](docs/REVIEWER_EVIDENCE.md); [capability suite](evals/capability/README.md); [optional human-audit tooling](evals/review_audit/README.md). Historical preflights and remaining planned experiments are distinct from the completed results linked above.
 
 | Next step | Why |
 |---|---|

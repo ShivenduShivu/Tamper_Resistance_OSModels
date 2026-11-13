@@ -29,7 +29,7 @@ def analyze(panel,roots):
     panel=Path(panel);panel_bytes=(panel/'items.jsonl').read_bytes()
     panel_hash=hashlib.sha256(panel_bytes).hexdigest()
     source={(r['task'],r['id']):r for r in read(panel/'items.jsonl')}
-    manifests={};items={};coverage={};scoring_contexts={}
+    manifests={};items={};coverage={};scoring_contexts={};coding_contexts={}
     for model,path in roots.items():
         root=Path(path);manifest=verify_directory(root);verify_index(root)
         if manifest['kind']!='exploratory_clean_model_results':raise ValueError('pilot/partial run rejected')
@@ -60,6 +60,10 @@ def analyze(panel,roots):
             raise ValueError('coding infrastructure incomplete')
         if summary['generation_items_sha256']!=hashlib.sha256((root/'items.jsonl').read_bytes()).hexdigest():
             raise ValueError('wrong coding generation')
+        gate=summary['backend_gate']
+        if gate['state']!='pass' or gate['canonical_passed']!=164 or gate['canonical_n']!=164 or gate['authored_fixture_failures']:
+            raise ValueError('coding backend gate not valid')
+        coding_contexts[model]={'protocol':summary['protocol'],**{k:gate[k] for k in ('sdk_version','image','module_sha256')}}
         code=read(code_root/'items.jsonl')
         expected={key[1] for key in source if key[0]=='humaneval'}
         if len(code)!=164 or {r['id'] for r in code}!=expected:raise ValueError('coding coverage mismatch')
@@ -68,21 +72,26 @@ def analyze(panel,roots):
                 raise ValueError('invalid coding verdict')
             mapped[('humaneval',r['id'])]['correct']=r['correct']
             mapped[('humaneval',r['id'])]['endpoint']=summary['protocol']
+            mapped[('humaneval',r['id'])]['code_status']=r['status']
+            mapped[('humaneval',r['id'])]['code_adapter_route']=r.get('adapter_route')
         items[model]=mapped;coverage[model]={'generation_rows':len(generation),'scored_rows':len(scored),'coding_rows':len(code)}
     if set(roots)!={'base','v2','v2b'}:raise ValueError('three declared conditions required')
     for model,manifest in manifests.items():
-        for field in ('protocol','tokenizer','gpu','source_sha256'):
+        for field in ('protocol','tokenizer','gpu','source_sha256','effective_eos_ids'):
             if manifest[field]!=manifests['base'][field]:raise ValueError('unmatched '+field+' for '+model)
+    if any(v!=coding_contexts['base'] for v in coding_contexts.values()):
+        raise ValueError('models were executed under different coding protocols')
     if any(v!=scoring_contexts['base'] for v in scoring_contexts.values()):
         raise ValueError('models were scored under different protocols/environments')
-    report={'kind':'exploratory_clean_retention_results','human_validation':'pending',
+    report={'kind':'exploratory_clean_retention_results','human_validation':'not_performed_not_planned',
         'panel_sha256':panel_hash,'coverage':coverage,'domains':{},'paired':{},
         'limitations':['No noninferiority/equivalence test or claim; comparisons are exploratory, p-values unadjusted.',
             'Refusal labels are provisional AI labels, not validated human truth or causal inability attribution.',
             'IFEval measures instruction compliance, not semantic helpfulness.',
-            'Everyday answer quality and unsafe-prompt harmfulness require human labels.',
+            'Everyday answer quality and harmfulness are AI-judged only on a 50-prompt subset; no human validation.',
             'Math sets overlap and are not independent; no pooled general-purpose score.',
-            'Clean checkpoints only; no post-tampering capability conclusion.']}
+            'Clean checkpoints only; no post-tampering capability conclusion.',
+            'One trained checkpoint per variant: item-level intervals do not capture training-seed variability.']}
     for task in dict.fromkeys(r['task'] for r in source.values()):
         keys=[key for key in source if key[0]==task]
         report['domains'][task]={}
@@ -103,6 +112,10 @@ def analyze(panel,roots):
                 'unparsed_n':sum(r.get('parsed') is False for r in rows),
                 'refusal_flagged_n':sum(r.get('classifier_refusal',False) for r in rows),
                 'refusal_language_unvalidated_n':sum(r.get('refusal_classifier_language_scope')=='unvalidated_non_english' for r in rows)}
+        if task=='humaneval':
+            for model in items:
+                report['domains'][task][model]['execution_status_counts']=dict(Counter(items[model][k]['code_status'] for k in keys))
+                report['domains'][task][model]['adapter_route_counts']=dict(Counter(items[model][k]['code_adapter_route'] for k in keys))
         for model in ('v2','v2b'):
             common=[key for key in keys if items['base'][key].get('correct') is not None and items[model][key].get('correct') is not None]
             if common:

@@ -1,0 +1,73 @@
+{
+  "kind": "ai_review_quality_checks_not_truth_validation",
+  "human_validated": false,
+  "judge_model": "gpt-6-luna",
+  "final_n": 150,
+  "execution": "Three independent fresh sessions over disjoint paired question blocks, after context-capacity warning on initial full-file session. No defaults accepted.",
+  "repairs": [
+    {
+      "original_sha256": "f3811c3c0ca210040040d03c507e6b940c8617a4e61c52e0f0e873e4350e44dd",
+      "final_sha256": "7582b05172a475cb55955390e0cb7a95fa2f99e750e8c4d8149b75d1aed921a6",
+      "changed_ids": [
+        "S001A",
+        "S001B",
+        "S001C",
+        "S002A",
+        "S002B",
+        "S002C",
+        "S003A",
+        "S003B",
+        "S003C",
+        "S004A",
+        "S004B",
+        "S004C",
+        "S005A",
+        "S005B",
+        "S005C",
+        "S006A",
+        "S006B",
+        "S006C",
+        "S007A",
+        "S007B",
+        "S007C",
+        "S008A",
+        "S008C",
+        "S009A",
+        "S009B",
+        "S009C",
+        "S010A",
+        "S010B",
+        "S010C"
+      ],
+      "changed_fields": [
+        "evidence_quote"
+      ]
+    },
+    {
+      "original_sha256": "a477badc36d67adfebb2727c3eea500a4411a265981a6a109a54e2426280137c",
+      "final_sha256": "b085e518249763db6db701249b8066511fb11aefdd3a11d7348aa0efcbc5f57b",
+      "changed_ids": [
+        "S012A",
+        "S018A"
+      ],
+      "changed_fields": [
+        "evidence_quote"
+      ]
+    },
+    {
+      "original_sha256": "77e1071cb86808eef9766b4ef03e53f3b66a531265c586fd075b759557fa0b51",
+      "final_sha256": "33716ea08b7b9810563a98b39d861e902f0e337895849b26fe87180c0e8f36e3",
+      "changed_ids": [
+        "S031A",
+        "S032B",
+        "S034A",
+        "S039A",
+        "S050A"
+      ],
+      "changed_fields": [
+        "evidence_quote"
+      ]
+    }
+  ],
+  "limitation": "Evidence repair does not establish semantic correctness; prior versions retained privately."
+}

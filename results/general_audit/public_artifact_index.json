@@ -1,0 +1,18 @@
+{
+  "clean_results.json": {
+    "bytes": 28878,
+    "sha256": "0064e4a50f91b87d3418a1babb993046f1aed603f43a9bbec6903282f1c92b39"
+  },
+  "selected_items.jsonl": {
+    "bytes": 432650,
+    "sha256": "c555a85b668523472a39113c817d95e433ecb0fe82bbc50ba5425a608fa19cb3"
+  },
+  "item_verdicts.jsonl": {
+    "bytes": 1527495,
+    "sha256": "1dc89b3e1b028fbcf83a299547bdc426a339cb2508c5f58d7dbb291a500453f7"
+  },
+  "run_provenance.json": {
+    "bytes": 170136,
+    "sha256": "9659e3d01571181fce1403caf7a4b276bdd8f6e1e95fad6a250e3e4c1ca338ac"
+  }
+}

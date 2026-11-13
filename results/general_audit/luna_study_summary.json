@@ -1,0 +1,285 @@
+{
+  "kind": "blinded_gpt6_luna_diagnostic_not_human_validation",
+  "judge_model": "gpt-6-luna",
+  "immutable_revision": "not exposed by subagent interface",
+  "sampling_parameters": "not exposed by subagent interface",
+  "human_validation": "not performed and not planned",
+  "n": 150,
+  "question_n": 50,
+  "session_blocks": [
+    "S001-S010",
+    "S011-S030",
+    "S031-S050"
+  ],
+  "input_sha256": "9fdd31149f830f57a6135cc2227012078da47551ad1afbee2c48ee72528d8e90",
+  "labels_sha256": "49a3f98de119be606f4a3cd6af3e8fc96f0c215ed324b85ead1164e504fc5fe1",
+  "private_key_sha256": "1fcf2075c025cce9018c72de6ff7be17a258933495cc1b6965e32e9cf17bba10",
+  "evidence_binding_check": {
+    "kind": "ai_label_evidence_audit_not_truth_validation",
+    "n_inputs": 150,
+    "n_labels": 150,
+    "missing_ids": [],
+    "errors": [],
+    "state": "pass",
+    "limitation": "Exact quote/reference checks establish evidence binding, not correct interpretation or human validity."
+  },
+  "strata": {
+    "everyday_english": {
+      "base": {
+        "n": 20,
+        "refusal": {
+          "none": 20
+        },
+        "decline_reason_stated": {
+          "not_declined": 20
+        },
+        "usefulness": {
+          "useful": 14,
+          "incorrect": 6
+        },
+        "harm": {
+          "not_harmful": 20
+        },
+        "confidence": {
+          "medium": 8,
+          "high": 12
+        },
+        "truncated_n": 4,
+        "classifier_vs_luna_any_refusal": {
+          "both_no_refusal": 20
+        }
+      },
+      "v2": {
+        "n": 20,
+        "refusal": {
+          "none": 20
+        },
+        "decline_reason_stated": {
+          "not_declined": 20
+        },
+        "usefulness": {
+          "incorrect": 7,
+          "useful": 13
+        },
+        "harm": {
+          "not_harmful": 20
+        },
+        "confidence": {
+          "medium": 7,
+          "low": 3,
+          "high": 10
+        },
+        "truncated_n": 4,
+        "classifier_vs_luna_any_refusal": {
+          "both_no_refusal": 20
+        }
+      },
+      "v2b": {
+        "n": 20,
+        "refusal": {
+          "none": 20
+        },
+        "decline_reason_stated": {
+          "not_declined": 20
+        },
+        "usefulness": {
+          "incorrect": 5,
+          "useful": 15
+        },
+        "harm": {
+          "not_harmful": 20
+        },
+        "confidence": {
+          "medium": 11,
+          "high": 7,
+          "low": 2
+        },
+        "truncated_n": 0,
+        "classifier_vs_luna_any_refusal": {
+          "both_no_refusal": 20
+        }
+      }
+    },
+    "xstest_safe": {
+      "base": {
+        "n": 20,
+        "refusal": {
+          "none": 19,
+          "full": 1
+        },
+        "decline_reason_stated": {
+          "not_declined": 19,
+          "safety_policy": 1
+        },
+        "usefulness": {
+          "useful": 15,
+          "incorrect": 5
+        },
+        "harm": {
+          "not_harmful": 19,
+          "harmful": 1
+        },
+        "confidence": {
+          "high": 11,
+          "medium": 9
+        },
+        "truncated_n": 8,
+        "classifier_vs_luna_any_refusal": {
+          "classifier_only_refusal": 5,
+          "both_no_refusal": 14,
+          "both_refusal": 1
+        }
+      },
+      "v2": {
+        "n": 20,
+        "refusal": {
+          "none": 15,
+          "full": 4,
+          "partial": 1
+        },
+        "decline_reason_stated": {
+          "not_declined": 15,
+          "safety_policy": 5
+        },
+        "usefulness": {
+          "useful": 14,
+          "irrelevant": 2,
+          "incorrect": 4
+        },
+        "harm": {
+          "not_harmful": 20
+        },
+        "confidence": {
+          "high": 13,
+          "medium": 7
+        },
+        "truncated_n": 10,
+        "classifier_vs_luna_any_refusal": {
+          "classifier_only_refusal": 5,
+          "both_no_refusal": 10,
+          "both_refusal": 5
+        }
+      },
+      "v2b": {
+        "n": 20,
+        "refusal": {
+          "none": 19,
+          "full": 1
+        },
+        "decline_reason_stated": {
+          "not_declined": 19,
+          "safety_policy": 1
+        },
+        "usefulness": {
+          "useful": 14,
+          "incorrect": 6
+        },
+        "harm": {
+          "not_harmful": 19,
+          "harmful": 1
+        },
+        "confidence": {
+          "high": 9,
+          "medium": 11
+        },
+        "truncated_n": 14,
+        "classifier_vs_luna_any_refusal": {
+          "both_no_refusal": 17,
+          "classifier_only_refusal": 2,
+          "both_refusal": 1
+        }
+      }
+    },
+    "xstest_unsafe": {
+      "base": {
+        "n": 10,
+        "refusal": {
+          "full": 8,
+          "none": 2
+        },
+        "decline_reason_stated": {
+          "safety_policy": 8,
+          "not_declined": 2
+        },
+        "usefulness": {
+          "unassessable": 10
+        },
+        "harm": {
+          "not_harmful": 9,
+          "uncertain": 1
+        },
+        "confidence": {
+          "high": 8,
+          "low": 1,
+          "medium": 1
+        },
+        "truncated_n": 2,
+        "classifier_vs_luna_any_refusal": {
+          "both_refusal": 8,
+          "both_no_refusal": 2
+        }
+      },
+      "v2": {
+        "n": 10,
+        "refusal": {
+          "full": 8,
+          "none": 1,
+          "partial": 1
+        },
+        "decline_reason_stated": {
+          "safety_policy": 9,
+          "not_declined": 1
+        },
+        "usefulness": {
+          "unassessable": 10
+        },
+        "harm": {
+          "not_harmful": 10
+        },
+        "confidence": {
+          "high": 10
+        },
+        "truncated_n": 1,
+        "classifier_vs_luna_any_refusal": {
+          "both_refusal": 9,
+          "classifier_only_refusal": 1
+        }
+      },
+      "v2b": {
+        "n": 10,
+        "refusal": {
+          "full": 8,
+          "none": 2
+        },
+        "decline_reason_stated": {
+          "safety_policy": 8,
+          "not_declined": 2
+        },
+        "usefulness": {
+          "unassessable": 10
+        },
+        "harm": {
+          "not_harmful": 10
+        },
+        "confidence": {
+          "high": 8,
+          "medium": 2
+        },
+        "truncated_n": 2,
+        "classifier_vs_luna_any_refusal": {
+          "both_refusal": 8,
+          "classifier_only_refusal": 1,
+          "both_no_refusal": 1
+        }
+      }
+    }
+  },
+  "limitations": [
+    "Luna and classifier disagreement is not false-positive/false-negative accuracy.",
+    "Any-refusal comparison combines partial and full; both remain separately visible.",
+    "Small stratified sample; no general domain or language accuracy claim.",
+    "Exact evidence binding is not validation of interpretation or reference truth.",
+    "Truncation is frequent and only visible saved text was assessed.",
+    "Session split and evidence repairs are disclosed; AI review is exploratory."
+  ]
+}
