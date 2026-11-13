@@ -28,6 +28,9 @@ def score(panel_id,run_id):
     for name,digest in verifier['sha256'].items():
         if hashlib.sha256(Path('/general/reference/instruction_following_eval',name).read_bytes()).hexdigest()!=digest:
             raise ValueError('official verifier hash mismatch')
+    math_parser=json.loads(Path('/general/reference/mgsm_provenance.json').read_text())
+    if hashlib.sha256(Path('/general/reference/mgsm_parser.py').read_bytes()).hexdigest()!=math_parser['module_sha256']:
+        raise ValueError('secondary maths parser hash mismatch')
     root=Path('/evidence',run_id)
     out=root/'scoring-v1';out.mkdir(exist_ok=False)
     repo='ProtectAI/distilroberta-base-rejection-v1'
@@ -35,7 +38,7 @@ def score(panel_id,run_id):
     classifier=pipeline('text-classification',model=repo,revision=revision,device=-1)
     records,summary=sc.score_run('/evidence/'+panel_id,root,classifier)
     summary['scoring_provenance']={'classifier_repo':repo,'classifier_revision':revision,
-        'ifeval_verifier':verifier,'score_source_sha256':hashlib.sha256(Path('/general/score.py').read_bytes()).hexdigest(),
+        'ifeval_verifier':verifier,'secondary_math_parser':math_parser,'score_source_sha256':hashlib.sha256(Path('/general/score.py').read_bytes()).hexdigest(),
         'versions':{d.metadata['Name']:d.version for d in importlib.metadata.distributions()},
         'nltk_data_sha256':{str(p.relative_to('/root/nltk_data')):hashlib.sha256(p.read_bytes()).hexdigest()
                            for p in Path('/root/nltk_data').rglob('*') if p.is_file()}}

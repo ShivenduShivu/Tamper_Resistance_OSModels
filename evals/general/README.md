@@ -86,3 +86,17 @@ pending two independent reviewers and adjudication. Keep random samples separate
 from disagreement enrichment. Human-review only a subset does not validate all
 machine labels. Budget ceiling: $18 Modal plus separate $19 Hugging Face credits;
 execution estimates are not provider billing caps.
+
+### Secondary maths-parser sensitivity
+
+The baseline pilot showed numerically meaningful answers that failed strict
+format checks (e.g. a final number followed by units). After the pilot and before
+full-run scoring, we pinned the published `openai/simple-evals` MGSM numeric
+parser as a **secondary sensitivity endpoint**, uniformly applied to all models.
+The primary strict parsers are unchanged. The extracted functions, upstream
+revision, hashes and MIT licence are in `reference/`. The published parser takes
+the last number following the answer prefix (despite its internal comment saying
+first), so ambiguous text can still be mis-scored. It is not human ground truth.
+Arabic uses the same rule with the dataset's answer prefix, not an official
+simple-evals Arabic configuration. Report both endpoints and their disagreement;
+do not choose whichever gives a favorable retention conclusion.

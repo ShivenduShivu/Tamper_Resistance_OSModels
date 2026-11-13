@@ -403,3 +403,21 @@ Unsafe rate (lower is safer), 95% Wilson CI in the summary file; refusal = Prote
   separately; all formal models use the same fixed batch-by-task protocol.
 - All new results remain exploratory. Human usefulness/refusal/harm labels and
   post-tampering general-purpose comparisons remain separate unfinished work.
+- Confirmed the named/default chat-template formats in a CPU preflight on **all
+  2,004 selected inputs for all three models**; vocabulary, tokenization backend
+  components, special tokens and rendered inputs match. Full baseline attempt v1
+  failed this checker's dict-handling bug before answers; fixed and preserved as
+  failed. Formal matched run prefix is `full-20261113-v2` (base/v2/v2b sequential
+  calls on the same GPU worker). Model-generation source is commit `3241725`.
+- Adapted baseline coding pilot: 5/6 pass, zero infrastructure errors. The earlier
+  strict completion-format 0/6 remains recorded separately. Neither is a full
+  HumanEval capability estimate. Human-review sample fixed before full answers
+  were inspected: 50 shared prompts, 150 responses per reviewer, seed 73.
+- After the pilot, before full scoring, froze a secondary published MGSM-parser
+  sensitivity endpoint alongside the unchanged primary strict parser. Its known
+  last-number extraction quirk is retained and documented; apply both uniformly
+  and never choose the favorable result. See reference/mgsm_provenance.json.
+- Independent downloaded-panel checks found zero duplicate task IDs, duplicated
+  MCQ choice strings, unparseable math golds, malformed IFEval structures, or full
+  canonical/test strings in coding prompts. These are structural checks, not
+  semantic validation of the gold labels.

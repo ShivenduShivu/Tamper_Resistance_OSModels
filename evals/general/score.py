@@ -64,6 +64,12 @@ def score_run(panel,run_dir,classifier=None):
         if 'skipped' in g:
             out.append(dict(g,correct=None));continue
         r=source[identity];d=score_one(r,g['response'])
+        if r['kind']=='math':
+            from reference.mgsm_parser import parse_answer,score_mgsm
+            extracted=parse_answer(g['response'],r.get('answer_prefix','Answer'))
+            d.update(published_parser_correct=int(score_mgsm(str(r['answer']),extracted)),
+                     published_parser_extracted=extracted,
+                     published_parser_status='secondary_post_pilot_sensitivity_primary_unchanged')
         out.append(dict(g,**d,language=r.get('language','en'),
             refusal_classifier_language_scope='unvalidated_non_english' if r.get('language','en') not in ('en','eng') else 'provisional_english',
             empty=not bool(g['response'].strip()),truncated=not g['eos_reached']))

@@ -81,7 +81,7 @@ def run(panel_id,run_id,preflight):
         raise ValueError('selected coding content is not bound to generation')
     answers=[r for r in generated if r['task']=='humaneval']
     if len(answers)!=generation_manifest['tasks']['humaneval']:raise ValueError('coding coverage mismatch')
-    out=root/'coding-adapted-v1';out.mkdir(exist_ok=False)
+    out=root/'coding-adapted-v2';out.mkdir(exist_ok=False)
     ctx={'expected_python':'3.13','model':generation_manifest['model'],
         'model_revision':generation_manifest['revision'],
         'generation_manifest_sha256':hashlib.sha256((root/'manifest.json').read_bytes()).hexdigest(),
@@ -129,7 +129,10 @@ def run(panel_id,run_id,preflight):
         'state':'complete_valid' if infra==0 and len(records)==len(answers) else 'invalid',
         'protocol':cx.CODING_PROTOCOL_VERSION+'+declared-single-function-adapter-v1','backend_gate':gate,
         'generation_items_sha256':hashlib.sha256((root/'items.jsonl').read_bytes()).hexdigest()}
-    (out/'summary.json').write_text(json.dumps(result,indent=2));volume.commit();return result
+    (out/'summary.json').write_text(json.dumps(result,indent=2))
+    index={p.name:{'sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'bytes':p.stat().st_size}
+           for p in out.iterdir() if p.is_file()}
+    (out/'artifact_index.json').write_text(json.dumps(index,indent=2));volume.commit();return result
 @app.function(image=image,cpu=1,memory=1024,timeout=120,retries=0)
 def diagnose():
     import sys
