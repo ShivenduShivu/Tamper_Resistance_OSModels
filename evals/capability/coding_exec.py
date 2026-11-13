@@ -86,7 +86,7 @@ FRAME_INFRA = "HEINFRA::"
 REFERENCE_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                               "reference", "human_eval_execution.py")
 REFERENCE_SHA256 = "79901c6f5b59701c465b164aed290fa53abc35abc80a5378fc10f4dac1f9a84c"
-REQUIRED_MODAL_VERSION = "1.6.4"      # requirements-coding-exec.txt; UNEXERCISED
+REQUIRED_MODAL_VERSION = "1.4.2"      # requirements-coding-exec.txt; UNEXERCISED
                                       # offline - import-check at first authorized run
 
 # Modal SANDBOX per-second list rates (modal.com/pricing, Sandbox section,
@@ -478,12 +478,9 @@ class SandboxBackend:
             p.wait()
             if p.returncode != 0:
                 raise RuntimeError(f"sandbox mkdir rc={p.returncode}")
-            with sb.open("/work/driver.py", "w") as f:
-                f.write(driver_src)
-            with sb.open("/work/he_upstream.py", "wb") as f:
-                f.write(module_bytes)
-            with sb.open("/work/item.json", "w") as f:
-                f.write(item_json)
+            sb.filesystem.write_text(driver_src, "/work/driver.py")
+            sb.filesystem.write_text(module_bytes.decode("utf-8"), "/work/he_upstream.py")
+            sb.filesystem.write_text(item_json, "/work/item.json")
             proc = sb.exec("python3", "/work/driver.py")
             out = proc.stdout.read()
             proc.wait()

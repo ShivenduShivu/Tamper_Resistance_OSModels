@@ -382,7 +382,7 @@ def main():
                 txt = [tok.apply_chat_template([{"role": "user", "content": build_prompt(task, r)}],
                                                tokenize=False, add_generation_prompt=True)
                        for _, r in chunk]
-                enc = tok(txt, return_tensors="pt", padding=True, add_special_tokens=False)
+                enc = tok(txt, return_tensors="pt", padding=True, add_special_tokens=False, return_token_type_ids=False)
                 lens = enc["attention_mask"].sum(1).tolist()
                 keep = [j for j, L in enumerate(lens) if L <= MAX_PROMPT_TOKENS]
                 counters["skipped_overlong_prompt"] += len(chunk) - len(keep)
@@ -432,7 +432,7 @@ def main():
                 txt = [tok.apply_chat_template([{"role": "user", "content": build_prompt(task, r)}],
                                                tokenize=False, add_generation_prompt=True)
                        for r in batch]
-                enc = tok(txt, return_tensors="pt", padding=True, add_special_tokens=False)
+                enc = tok(txt, return_tensors="pt", padding=True, add_special_tokens=False, return_token_type_ids=False)
                 lens = enc["attention_mask"].sum(1).tolist()
                 keep = [j for j, L in enumerate(lens) if L <= MAX_PROMPT_TOKENS]
                 counters["skipped_overlong_prompt"] += len(batch) - len(keep)

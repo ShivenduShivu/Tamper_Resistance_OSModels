@@ -1,0 +1,326 @@
+{
+  "kind": "access_audit_not_capability_results",
+  "models": {
+    "base": {
+      "revision": "af89d219b53ed9b13b8a4645f9c8028973510324",
+      "repo": "CohereLabs/tiny-aya-global",
+      "subfolder": null,
+      "files": {
+        "config.json": {
+          "accessible": true,
+          "sha256": "458a9265b6a96e5ad4bbe1857716bd69e434f062f8b32fae48f5f06197d26384"
+        },
+        "tokenizer_config.json": {
+          "accessible": true,
+          "sha256": "fb56a3ef7659346aae196a2ab877355f1e7fd871c36843f709bb2e23c606d972"
+        },
+        "tokenizer.json": {
+          "accessible": true,
+          "sha256": "2227ea9c52e8afb3f98bfed2679008b275f2664de69dfde174b374389eb0225d"
+        },
+        "model.safetensors.index.json": {
+          "accessible": true,
+          "sha256": "5e87be717ff88ed7fd1e03aa1de1399daef2f2d2e3ee539c3ad1b0ed9d1ae74e"
+        },
+        "model-00001-of-00002.safetensors": {
+          "head_accessible": true,
+          "size": 4992396352,
+          "etag": "0590022d0efe06f12e08e1e94302f069dff404341b426f7435c6303725635fb1"
+        },
+        "model-00002-of-00002.safetensors": {
+          "head_accessible": true,
+          "size": 1706092176,
+          "etag": "2ac3809931d113785058809f27775620e0b8aec6fbc7e163c9c09c08b5f90dab"
+        }
+      }
+    },
+    "v2": {
+      "revision": "14b4675f635b48f670bd42bd8ccea69ed6dec6ad",
+      "repo": "StarWarrior24x7/tiny-aya-global-xref-v2",
+      "subfolder": null,
+      "files": {
+        "config.json": {
+          "accessible": true,
+          "sha256": "5bc1fc38e204d2de6b172f168c6893a8c23c5236f724b8c1eb7aea49e28c6eeb"
+        },
+        "tokenizer_config.json": {
+          "accessible": true,
+          "sha256": "cd98275e0786e6fca40f6f062e28b136483be6a4b784dab3fb6d2f053a79045e"
+        },
+        "tokenizer.json": {
+          "accessible": true,
+          "sha256": "9f00620b242e1bf3f9970c15611f289d8311cf25f1bd9935a44e84bd76e73c42"
+        },
+        "model.safetensors.index.json": {
+          "accessible": true,
+          "sha256": "d1d43d920d72b43ee8f813e04d91e702a99587b5a935b88d6e362bc16cc89f4e"
+        },
+        "model-00001-of-00002.safetensors": {
+          "head_accessible": true,
+          "size": 4979817088,
+          "etag": "e5886d882c35baef83ad8fdafa2c2dcadb586522aecd83c0bc9b8d06355a7e82"
+        },
+        "model-00002-of-00002.safetensors": {
+          "head_accessible": true,
+          "size": 1718671152,
+          "etag": "d3c1844691c77b2d49ba90ef71b6e6811ef8f515e5f51ec5e6adc6564d73fe9a"
+        }
+      }
+    },
+    "v2b": {
+      "revision": "14b4675f635b48f670bd42bd8ccea69ed6dec6ad",
+      "repo": "StarWarrior24x7/tiny-aya-global-xref-v2",
+      "subfolder": "v2b/",
+      "files": {
+        "config.json": {
+          "accessible": true,
+          "sha256": "5bc1fc38e204d2de6b172f168c6893a8c23c5236f724b8c1eb7aea49e28c6eeb"
+        },
+        "tokenizer_config.json": {
+          "accessible": true,
+          "sha256": "cd98275e0786e6fca40f6f062e28b136483be6a4b784dab3fb6d2f053a79045e"
+        },
+        "tokenizer.json": {
+          "accessible": true,
+          "sha256": "9f00620b242e1bf3f9970c15611f289d8311cf25f1bd9935a44e84bd76e73c42"
+        },
+        "model.safetensors.index.json": {
+          "accessible": true,
+          "sha256": "d1d43d920d72b43ee8f813e04d91e702a99587b5a935b88d6e362bc16cc89f4e"
+        },
+        "model-00001-of-00002.safetensors": {
+          "head_accessible": true,
+          "size": 4979817088,
+          "etag": "913d7f00a12b69bbdf2a2bafdfc29e2a7198fa94bdec43fcc627367aee696d30"
+        },
+        "model-00002-of-00002.safetensors": {
+          "head_accessible": true,
+          "size": 1718671152,
+          "etag": "4fa19f9ca67aa7299cb7069c66725f31935f2f5d764fd17a0d9706157be8adf8"
+        }
+      }
+    }
+  },
+  "datasets": {
+    "StarWarrior24x7/tiny-aya-extended-refusal": {
+      "revision": "1157b26cff32d367b53987a760ca0468a701e098",
+      "files": [
+        ".gitattributes",
+        "README.md",
+        "train.jsonl"
+      ]
+    },
+    "CohereLabs/aya_evaluation_suite": {
+      "revision": "e69f652e99144bf9e5019caa6c940fa1e9a24ba3",
+      "files": [
+        ".gitattributes",
+        "README.md",
+        "aya_header.png",
+        "aya_human_annotated/test-00000-of-00001.parquet",
+        "dolly_human_edited/test-00000-of-00001.parquet",
+        "dolly_machine_translated/test-00000-of-00001.parquet"
+      ]
+    },
+    "CohereLabs/global-mgsm": {
+      "revision": "29087245a1a9788d4e0413f4927e994d49633bbb",
+      "files": [
+        ".gitattributes",
+        "README.md",
+        "am/test.parquet",
+        "ar/test.parquet",
+        "bn/test.parquet",
+        "ca/test.parquet",
+        "cs/test.parquet",
+        "cy/test.parquet",
+        "de/test.parquet",
+        "el/test.parquet",
+        "en/test.parquet",
+        "es/test.parquet",
+        "eu/test.parquet",
+        "fr/test.parquet",
+        "gl/test.parquet",
+        "gu/test.parquet",
+        "ha/test.parquet",
+        "hu/test.parquet",
+        "ja/test.parquet",
+        "km/test.parquet",
+        "kn/test.parquet",
+        "ko/test.parquet",
+        "ky/test.parquet",
+        "lg/test.parquet",
+        "my/test.parquet",
+        "ne/test.parquet",
+        "ru/test.parquet",
+        "si/test.parquet",
+        "sn/test.parquet",
+        "sr/test.parquet",
+        "st/test.parquet",
+        "sw/test.parquet",
+        "ta/test.parquet",
+        "te/test.parquet",
+        "th/test.parquet",
+        "ur/test.parquet",
+        "uz/test.parquet",
+        "vi/test.parquet",
+        "wo/test.parquet",
+        "xh/test.parquet",
+        "yo/test.parquet",
+        "zh/test.parquet",
+        "zu/test.parquet"
+      ]
+    },
+    "CohereLabs/Global-MMLU": {
+      "revision": "0e619dbeb34206cd48705a1a0ea7fb21cae09993",
+      "files": [
+        ".gitattributes",
+        "README.md",
+        "am/dev-00000-of-00001.parquet",
+        "am/test-00000-of-00001.parquet",
+        "ar/dev-00000-of-00001.parquet",
+        "ar/test-00000-of-00001.parquet",
+        "bn/dev-00000-of-00001.parquet",
+        "bn/test-00000-of-00001.parquet",
+        "cs/dev-00000-of-00001.parquet",
+        "cs/test-00000-of-00001.parquet",
+        "de/dev-00000-of-00001.parquet",
+        "de/test-00000-of-00001.parquet",
+        "el/dev-00000-of-00001.parquet",
+        "el/test-00000-of-00001.parquet",
+        "en/dev-00000-of-00001.parquet",
+        "en/test-00000-of-00001.parquet",
+        "es/dev-00000-of-00001.parquet",
+        "es/test-00000-of-00001.parquet",
+        "fa/dev-00000-of-00001.parquet",
+        "fa/test-00000-of-00001.parquet",
+        "fil/dev-00000-of-00001.parquet",
+        "fil/test-00000-of-00001.parquet",
+        "fr/dev-00000-of-00001.parquet",
+        "fr/test-00000-of-00001.parquet",
+        "global_mmlu.jpg",
+        "ha/dev-00000-of-00001.parquet",
+        "ha/test-00000-of-00001.parquet",
+        "he/dev-00000-of-00001.parquet",
+        "he/test-00000-of-00001.parquet",
+        "hi/dev-00000-of-00001.parquet",
+        "hi/test-00000-of-00001.parquet",
+        "id/dev-00000-of-00001.parquet",
+        "id/test-00000-of-00001.parquet",
+        "ig/dev-00000-of-00001.parquet",
+        "ig/test-00000-of-00001.parquet",
+        "it/dev-00000-of-00001.parquet",
+        "it/test-00000-of-00001.parquet",
+        "ja/dev-00000-of-00001.parquet",
+        "ja/test-00000-of-00001.parquet",
+        "ko/dev-00000-of-00001.parquet",
+        "ko/test-00000-of-00001.parquet",
+        "ky/dev-00000-of-00001.parquet",
+        "ky/test-00000-of-00001.parquet",
+        "lt/dev-00000-of-00001.parquet",
+        "lt/test-00000-of-00001.parquet",
+        "mg/dev-00000-of-00001.parquet",
+        "mg/test-00000-of-00001.parquet",
+        "ms/dev-00000-of-00001.parquet",
+        "ms/test-00000-of-00001.parquet",
+        "ne/dev-00000-of-00001.parquet",
+        "ne/test-00000-of-00001.parquet",
+        "nl/dev-00000-of-00001.parquet",
+        "nl/test-00000-of-00001.parquet",
+        "ny/dev-00000-of-00001.parquet",
+        "ny/test-00000-of-00001.parquet",
+        "pl/dev-00000-of-00001.parquet",
+        "pl/test-00000-of-00001.parquet",
+        "pt/dev-00000-of-00001.parquet",
+        "pt/test-00000-of-00001.parquet",
+        "ro/dev-00000-of-00001.parquet",
+        "ro/test-00000-of-00001.parquet",
+        "ru/dev-00000-of-00001.parquet",
+        "ru/test-00000-of-00001.parquet",
+        "si/dev-00000-of-00001.parquet",
+        "si/test-00000-of-00001.parquet",
+        "sn/dev-00000-of-00001.parquet",
+        "sn/test-00000-of-00001.parquet",
+        "so/dev-00000-of-00001.parquet",
+        "so/test-00000-of-00001.parquet",
+        "sr/dev-00000-of-00001.parquet",
+        "sr/test-00000-of-00001.parquet",
+        "sv/dev-00000-of-00001.parquet",
+        "sv/test-00000-of-00001.parquet",
+        "sw/dev-00000-of-00001.parquet",
+        "sw/test-00000-of-00001.parquet",
+        "te/dev-00000-of-00001.parquet",
+        "te/test-00000-of-00001.parquet",
+        "tr/dev-00000-of-00001.parquet",
+        "tr/test-00000-of-00001.parquet",
+        "uk/dev-00000-of-00001.parquet",
+        "uk/test-00000-of-00001.parquet",
+        "vi/dev-00000-of-00001.parquet",
+        "vi/test-00000-of-00001.parquet",
+        "yo/dev-00000-of-00001.parquet",
+        "yo/test-00000-of-00001.parquet",
+        "zh/dev-00000-of-00001.parquet",
+        "zh/test-00000-of-00001.parquet"
+      ]
+    },
+    "google/IFEval": {
+      "revision": "966cd89545d6b6acfd7638bc708b98261ca58e84",
+      "files": [
+        ".gitattributes",
+        "README.md",
+        "ifeval_input_data.jsonl"
+      ]
+    },
+    "natolambert/xstest-v2-copy": {
+      "revision": "b71afe2a6d10e5a6254ea8bcb006c48b095a15d5",
+      "files": [
+        ".gitattributes",
+        "README.md",
+        "build_dataset.ipynb",
+        "data/gpt4-00000-of-00001.parquet",
+        "data/llama2new-00000-of-00001.parquet",
+        "data/llama2orig-00000-of-00001.parquet",
+        "data/mistralguard-00000-of-00001.parquet",
+        "data/mistralinstruct-00000-of-00001.parquet",
+        "data/prompts-00000-of-00001.parquet"
+      ]
+    },
+    "bench-llm/or-bench": {
+      "revision": "e36d8b80e81837c8a8f264bbb2a49f1b32c7e272",
+      "files": [
+        ".gitattributes",
+        ".gitignore",
+        "README.md",
+        "images/Claude-2.1.png",
+        "images/Claude-3-haiku.png",
+        "images/Claude-3-opus.png",
+        "images/Claude-3-sonnet.png",
+        "images/GPT-3.5-turbo-0125.png",
+        "images/GPT-3.5-turbo-0301.png",
+        "images/GPT-3.5-turbo-0613.png",
+        "images/GPT-4-0125-preview.png",
+        "images/GPT-4-1106-preview.png",
+        "images/GPT-4-turbo-2024-04-09.png",
+        "images/GPT-4o.png",
+        "images/Gemini-1.0-pro.png",
+        "images/Gemini-1.5-flash-latest.png",
+        "images/Gemini-1.5-pro-latest.png",
+        "images/Gemma-7b.png",
+        "images/Llama-2-13b.png",
+        "images/Llama-2-70b.png",
+        "images/Llama-2-7b.png",
+        "images/Llama-3-70b.png",
+        "images/Llama-3-8b.png",
+        "images/Mistral-large-latest.png",
+        "images/Mistral-medium-latest.png",
+        "images/Mistral-small-latest.png",
+        "images/Qwen-1.5-32B.png",
+        "images/Qwen-1.5-72B.png",
+        "images/Qwen-1.5-7B.png",
+        "images/overall_workflow.png",
+        "images/overall_x_y_plot.png",
+        "or-bench-80k.csv",
+        "or-bench-hard-1k.csv",
+        "or-bench-toxic.csv"
+      ]
+    }
+  }
+}

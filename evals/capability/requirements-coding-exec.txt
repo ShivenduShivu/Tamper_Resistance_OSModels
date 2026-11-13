@@ -2,4 +2,4 @@
 # Pinned 2026-11-13 (PyPI latest at pin time). UNEXERCISED offline: the Modal
 # binding is code-reviewed only - import + behavior checks are part of the
 # first authorized run's bring-up probes, before any model answers.
-modal==1.6.4
+modal==1.4.2

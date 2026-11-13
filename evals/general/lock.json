@@ -1,0 +1,22 @@
+{
+  "datasets": {
+    "cais/mmlu": "c30699e8356da336a370243923dbaf21066bb9fe",
+    "openai/gsm8k": "740312add88f781978c0658806c59bc2815b9866",
+    "google/IFEval": "966cd89545d6b6acfd7638bc708b98261ca58e84",
+    "CohereLabs/Global-MMLU": "0e619dbeb34206cd48705a1a0ea7fb21cae09993",
+    "tihanyin/CyberMetric": "32759c2fa90274706219e1cf946cadff93da52e3",
+    "openai/openai_humaneval": "7dce6050a7d6d172f3cc5c32aa97f52fa1a2e544",
+    "StarWarrior24x7/tiny-aya-extended-refusal": "1157b26cff32d367b53987a760ca0468a701e098",
+    "CohereLabs/aya_evaluation_suite": "e69f652e99144bf9e5019caa6c940fa1e9a24ba3",
+    "CohereLabs/global-mgsm": "29087245a1a9788d4e0413f4927e994d49633bbb",
+    "natolambert/xstest-v2-copy": "b71afe2a6d10e5a6254ea8bcb006c48b095a15d5",
+    "bench-llm/or-bench": "e36d8b80e81837c8a8f264bbb2a49f1b32c7e272"
+  },
+  "models": {
+    "base": "af89d219b53ed9b13b8a4645f9c8028973510324",
+    "v1": "ca0294449d2fb11f3c002609507bd5c9cd62df8d",
+    "v2": "14b4675f635b48f670bd42bd8ccea69ed6dec6ad",
+    "v2b": "14b4675f635b48f670bd42bd8ccea69ed6dec6ad"
+  },
+  "notes": "Exploratory clean-model panel. Frozen before any generations. No preservation decision."
+}

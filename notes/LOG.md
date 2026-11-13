@@ -355,3 +355,51 @@ Unsafe rate (lower is safer), 95% Wilson CI in the summary file; refusal = Prote
   Linux Python 3.13 target. Tests now mock SDK metadata and the fixture-only local
   backend explicitly uses fork. The production Modal backend and vendored
   HumanEval module remain unchanged. See PR validation for final test outcomes.
+
+## 2026-11-13: General-purpose panel and live infrastructure audit
+
+- User authorized actual evaluations with ceilings of $18 Modal and $19 HF.
+  Original pinned checkpoint access was verified after configuring Modal secret
+  `huggingface-secret`. No credential values are stored in this repository.
+- Frozen exploratory panel v2: 2,004 items/checkpoint. Aggregates and hashes are
+  in `results/general_audit/data_audit.json`; full rows and generations are private.
+  Published defense data: 2,355 rows (1,200 refusals, 1,155 benign), two normalized
+  prompt duplicates. No selected train overlap under the declared lexical checks.
+  Exact accepted v2b border data and original pretraining data remain unavailable.
+- Retained all 164 HumanEval problems: punctuation normalization flags a pair
+  of distinct code specifications; it must not remove standard benchmark cases.
+  Four English maths questions recur across GSM8K/GlobalMGSM; no pooled score.
+- L4/A10/T4 requests waited for capacity and were stopped/cancelled. L40S probe
+  succeeded. A baseline pilot produced 60 saved answers. Pilot scores are not
+  confirmatory and must not be promoted to full-panel evidence.
+- Live execution revealed tokenizer `token_type_ids` rejected by generation;
+  fixed by explicitly requesting no token-type IDs, also in the imported runner.
+- Defended tokenizer metadata was saved under a newer wrapper class/schema;
+  loading it with Transformers 4.57.1 fails. The audit compares serialized backend
+  vocabulary/components/encoding and actual evaluation input renderings instead.
+  Inference always uses the original pinned tokenizer; wrapper metadata is not
+  silently reinterpreted. Saved template strings differ, but evaluated single-user
+  inputs must match token-for-token. Full-run manifests recheck every selected row.
+- Live coding backend initially failed: Modal injected SDK 1.4.2 rather than the
+  requested 1.6.4, and the legacy Sandbox.open filesystem endpoint is retired.
+  Pinned the actual SDK and migrated to filesystem.write_text, retaining network
+  blocking, secret isolation, hard caps and module-hash checks.
+- Live gate now passes all 164 canonical solutions, all 18 authored fixtures,
+  and an explicit network-denial/secret-absence probe. See coding_backend.json.
+  These are harness-validation results, not model ability results.
+- Strict baseline pilot coding was 0/6 because complete function definitions were
+  rejected by the body-only extraction protocol. Raw answers were preserved.
+  Before full runs, declared a single matching-function AST-to-body adapter;
+  helpers/decorators/renamed parameters/module side effects do not get converted.
+  Original strict pilot results remain distinct. Report the full-run endpoint
+  as HumanEval with this declared adapter, never imply identical formatting rules.
+- An adapted pilot scoring worker was preempted; replay refused the existing
+  directory. Its partial verdicts/creation ledgers remain private. Subsequent
+  CPU coding workers use nonpreemptible execution; no discarded partial run is
+  called complete, and no infrastructure failure counts as an incorrect answer.
+- Throughput-only v2 probe (64 output tokens, repeated short input, not scored):
+  batch 8/16/32/64 = 188.53/462.94/805.51/1245.14 output tokens/s,
+  peak allocated 6.739/7.233/8.212/10.179 GiB. Actual task throughput is recorded
+  separately; all formal models use the same fixed batch-by-task protocol.
+- All new results remain exploratory. Human usefulness/refusal/harm labels and
+  post-tampering general-purpose comparisons remain separate unfinished work.
