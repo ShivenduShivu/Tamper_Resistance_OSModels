@@ -20,5 +20,5 @@
     "a1": "c9cc2c739430c4597a766a8be9a0b529ec85c4f5",
     "a2": "ac4c7c485ea0293e80fe149417b432b269af9ed0"
   },
-  "notes": "Exploratory clean-model panel. Frozen before any generations. No preservation decision."
+  "notes": "Exploratory clean-model panel. Frozen before any generations. No preservation decision. The a1/a2 model pins were appended on 2026-11-14, after the base/v2/v2b runs, on the same frozen panel; the dataset pins and panel hash are unchanged."
 }
