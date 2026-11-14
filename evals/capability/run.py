@@ -62,6 +62,8 @@ MODELS = {
     "v1": ("StarWarrior24x7/tiny-aya-global-xref-v1", None),
     "v2": ("StarWarrior24x7/tiny-aya-global-xref-v2", None),
     "v2b": ("StarWarrior24x7/tiny-aya-global-xref-v2", "v2b"),
+    "a1": ("StarWarrior24x7/tiny-aya-global-phaseA-v2-repnoise", None),
+    "a2": ("StarWarrior24x7/tiny-aya-global-phaseA-v2-booster", None),
 }
 DEFAULT_N = {"mmlu": 1000, "gsm8k": 200, "ifeval_custom": 200, "global_mmlu": 200,
              "cybermetric": 500, "humaneval": 164}

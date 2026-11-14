@@ -180,7 +180,7 @@ def preflight(panel_id):
     rows=[json.loads(l) for l in Path('/evidence',panel_id,'items.jsonl').read_text().splitlines()]
     tok=AutoTokenizer.from_pretrained(old.MODELS['base'][0],revision=lock['models']['base'])
     report={}
-    for name in ('base','v2','v2b'):
+    for name in ('base','v2','v2b','a1','a2'):
         repo,sub=old.MODELS[name]
         report[name]=tokenizer_audit.compare(repo,lock['models'][name],sub,
             old.MODELS['base'][0],lock['models']['base'],tok,[r['prompt'] for r in rows])
