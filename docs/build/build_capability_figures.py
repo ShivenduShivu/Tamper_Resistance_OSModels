@@ -1,5 +1,6 @@
 # Rebuilds docs/figures/tradeoff.png and docs/figures/capability_cost.png (README section 10).
-# Numbers: XSTest/Granite from Day-6 (single BOS); paired capability changes from results/general_audit/clean_results.json (PR #7).
+# Numbers: harm (y) from Granite, Day-6 (single BOS); over-refusal (x) and paired capability changes from
+# results/general_audit/clean_results.json (PR #7): ProtectAI classifier on 250 safe XSTest prompts (43 / 107 / 42).
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
@@ -16,24 +17,25 @@ def frame(fig, ax):
 
 # ---- 1. safety vs usability, with the capability cost written on each defended point
 fig, ax = plt.subplots(figsize=(16.15, 9.18), dpi=100); frame(fig, ax)
-pts = [("Original", 16.4, 91, RED, ""), ("v2", 39.2, 40, GREEN, "IFEval −10"),
-       ("v2b", 18.4, 57, BLUE, "IFEval −19.5 · GSM8K −16.5")]
+pts = [("Original", 17.2, 91, RED, ""), ("v2", 42.8, 40, GREEN, "IFEval −10"),
+       ("v2b", 16.8, 57, BLUE, "IFEval −19.5 · GSM8K −16.5")]
 for name, x, y, c, cost in pts:
     ax.scatter(x, y, s=1300, color=c, edgecolor="white", linewidth=2.5, zorder=3)
     ax.annotate(name, (x, y), xytext=(22, 14), textcoords="offset points", fontsize=22, fontweight="bold", zorder=4)
     if cost:
         off = (-60, -52) if name == "v2b" else (22, -24)
         ax.annotate(cost, (x, y), xytext=off, textcoords="offset points", fontsize=15, color="#ffb86b", zorder=4)
-ax.annotate("", xy=(19.0, 56.6), xytext=(38.6, 40.4), arrowprops=dict(arrowstyle="->", color=MUTED, lw=2))
-ax.text(30.5, 36, "v2b: less cautious,\nless robust, larger capability cost", ha="center", fontsize=15, color=MUTED)
+ax.annotate("", xy=(17.4, 56.6), xytext=(42.2, 40.4), arrowprops=dict(arrowstyle="->", color=MUTED, lw=2))
+ax.text(31.5, 36, "v2b: less cautious,\nless robust, larger capability cost", ha="center", fontsize=15, color=MUTED)
 ax.text(2, 4, "ideal corner", fontsize=17, color=GREEN)
 ax.set_xlim(0, 50); ax.set_ylim(0, 100); ax.tick_params(labelsize=17)
-ax.set_xlabel("Over-refusal: safe questions refused (XSTest, %)  →  less useful", fontsize=18)
+ax.set_xlabel("Over-refusal: safe XSTest questions flagged as refused (%, n = 250)  →  less useful", fontsize=18)
 ax.set_ylabel("Harmful answers at strongest attack (%)  →  less safe", fontsize=18)
 ax.set_title("Safety vs usability: no free point", fontsize=24, fontweight="bold", pad=24)
 fig.text(0.01, 0.015, "Orange = capability change vs original (percentage points, paired 95% CI excludes zero). "
-         "MMLU, coding and security knowledge hold. Details: section 10.", fontsize=13.5, color=MUTED)
-fig.subplots_adjust(left=0.11, right=0.9, top=0.86, bottom=0.14)
+         "No change detected for MMLU, coding or security knowledge.\n"
+         "Over-refusal = provisional ProtectAI classifier labels, 128-token answers. Details: section 10.", fontsize=13.5, color=MUTED)
+fig.subplots_adjust(left=0.11, right=0.9, top=0.86, bottom=0.16)
 fig.savefig("docs/figures/tradeoff.png", facecolor=BG); plt.close(fig)
 
 # ---- 2. capability cost: paired change vs original with 95% intervals
@@ -55,7 +57,7 @@ for i, (label, a, b) in enumerate(tasks):
 ax.set_yticks(range(len(tasks))); ax.set_yticklabels([t[0] for t in tasks], fontsize=16)
 ax.set_xlim(-32, 12); ax.tick_params(axis="x", labelsize=15)
 ax.set_xlabel("Change vs original (percentage points, paired 95% interval)   ←  worse     better  →", fontsize=16)
-ax.set_title("Capability cost: knowledge and coding hold; instructions and maths drop", fontsize=21, fontweight="bold", pad=20)
+ax.set_title("Capability cost: instruction following and maths drop", fontsize=21, fontweight="bold", pad=20)
 ax.scatter([], [], s=170, color=GREEN, label="v2"); ax.scatter([], [], s=170, color=BLUE, label="v2b")
 ax.scatter([], [], s=170, color=PANEL, edgecolor=MUTED, linewidth=2.5, label="interval includes zero")
 leg = ax.legend(loc="upper right", fontsize=14, facecolor=BG, edgecolor=GRID, labelcolor=TXT)
