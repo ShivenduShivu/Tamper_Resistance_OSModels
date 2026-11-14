@@ -290,6 +290,8 @@ Tiny Aya is multilingual, so Abhinav tested 100 red-team prompts per language fr
 
 **Broader capability check: MMLU alone hid a cost.** Aban scored the clean models on the same frozen items per task (paired 95% intervals; changes in percentage points versus the original):
 
+![Capability cost of the defenses](docs/figures/capability_cost.png)
+
 | Change vs original | v2 | v2b |
 |---|---|---|
 | Coding (HumanEval, n = 164) | −1.2 [−7.3, +4.9] | −1.2 [−8.0, +5.6] |
