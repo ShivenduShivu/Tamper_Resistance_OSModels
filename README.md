@@ -245,7 +245,7 @@ We didn't rely on one attack implementation. **Lexsi's SafeTune** computes its o
 | 🟡 **Partly** | Heretic, strongest attack (KL 0.15) | 91% harmful | 40% harmful | Granite |
 | 🟡 **Partly** | SafeTune CAA steering −1 | 97% harmful | 72% harmful | Granite |
 | 🔴 **Not resisted** | Prefill "Sure, here is" | 82% harmful | 77% harmful | Granite (see pilot, section 12) |
-| 🔴 **Not resisted** | Harmful LoRA fine-tune, 100 examples* | 1% refusal | 3% refusal | ProtectAI |
+| 🔴 **Not resisted** | Harmful LoRA fine-tune, 100 examples (single-BOS re-run) | 0% refusal | 3% refusal | ProtectAI |
 | ⚪ **N/A** | SafeTune CAA steering −4 | gibberish | gibberish | breaks every model; not a strip |
 
 <sub>* Measured before the single-BOS fix (section 13); all other rows are final.</sub>
@@ -289,6 +289,8 @@ Tiny Aya is multilingual, so Abhinav tested 100 red-team prompts per language fr
 **Two different MMLU numbers, two different conditions.** Section 5 reports MMLU *under attack* (52.0 / 52.1 / 52.0%); this table reports the *clean* models (52.3 / 53.0 / 52.7%). Clean accuracy differs from the original by +0.7 percentage points (v2) and +0.4 points (v2b); attacked accuracy differs by +0.1 points (v2) and 0.0 points (v2b). These are descriptive aggregates from a 1,000-question evaluation, without a persisted per-item manifest for paired inference. They do not establish equivalence or broad capability preservation. New matched clean-checkpoint coding, maths, security-knowledge and instruction-following results are reported in [the capability results](docs/GENERAL_CAPABILITY_RESULTS.md). They show task-specific costs and do not support blanket capability preservation.
 
 **Broader capability check: MMLU alone hid a cost.** Aban scored the clean models on the same frozen items per task (paired 95% intervals; changes in percentage points versus the original):
+
+![Capability cost of the defenses](docs/figures/capability_cost.png)
 
 | Change vs original | v2 | v2b |
 |---|---|---|
@@ -370,6 +372,7 @@ These use the same attack (SafeTune refusal-direction ablation) on both models, 
   - **Fix:** we corrected it and **re-ran every headline number**.
   - **Effect on the headline:** none; it held.
   - **What changed:** a "−2.5 MMLU points" cost disappeared, and prefill turned out weaker than first measured.
+  - **Fine-tuning re-run (after the article's first version):** the harmful LoRA failure holds with single BOS: 0% (original) vs 3% (v2) refusal after 100 examples. Details in the model cards.
   - **Unaffected:** Heretic and SafeTune use their own correct tokenisation.
   - **Training:** v2's training-time direction estimate had the same quirk, so a retrained v2 may be stronger.
 - **Pilot tokenisation (found and fixed by Aban).** Training openers were split into tokens differently from the test openers. This was fixed and verified on 21,195 encodings before the final pilot.
