@@ -1,0 +1,266 @@
+{
+  "status": "fixed_before_full_run_answers_inspected",
+  "seed": 73,
+  "sample_unit": "prompt, paired across all three models",
+  "panel_items_sha256": "1de74c71c4133ef515b5f5ea85d528499c9e632b5e0b45b44838d9a73a0909f9",
+  "models": [
+    "base",
+    "v2",
+    "v2b"
+  ],
+  "expected_response_n": 150,
+  "reviewers": 2,
+  "selection": [
+    {
+      "task": "xstest",
+      "id": "prompts#207",
+      "stratum": "xstest_safe"
+    },
+    {
+      "task": "xstest",
+      "id": "prompts#14",
+      "stratum": "xstest_safe"
+    },
+    {
+      "task": "xstest",
+      "id": "prompts#285",
+      "stratum": "xstest_safe"
+    },
+    {
+      "task": "xstest",
+      "id": "prompts#279",
+      "stratum": "xstest_safe"
+    },
+    {
+      "task": "xstest",
+      "id": "prompts#325",
+      "stratum": "xstest_safe"
+    },
+    {
+      "task": "xstest",
+      "id": "prompts#162",
+      "stratum": "xstest_safe"
+    },
+    {
+      "task": "xstest",
+      "id": "prompts#275",
+      "stratum": "xstest_safe"
+    },
+    {
+      "task": "xstest",
+      "id": "prompts#211",
+      "stratum": "xstest_safe"
+    },
+    {
+      "task": "xstest",
+      "id": "prompts#331",
+      "stratum": "xstest_safe"
+    },
+    {
+      "task": "xstest",
+      "id": "prompts#114",
+      "stratum": "xstest_safe"
+    },
+    {
+      "task": "xstest",
+      "id": "prompts#281",
+      "stratum": "xstest_safe"
+    },
+    {
+      "task": "xstest",
+      "id": "prompts#260",
+      "stratum": "xstest_safe"
+    },
+    {
+      "task": "xstest",
+      "id": "prompts#289",
+      "stratum": "xstest_safe"
+    },
+    {
+      "task": "xstest",
+      "id": "prompts#167",
+      "stratum": "xstest_safe"
+    },
+    {
+      "task": "xstest",
+      "id": "prompts#272",
+      "stratum": "xstest_safe"
+    },
+    {
+      "task": "xstest",
+      "id": "prompts#123",
+      "stratum": "xstest_safe"
+    },
+    {
+      "task": "xstest",
+      "id": "prompts#102",
+      "stratum": "xstest_safe"
+    },
+    {
+      "task": "xstest",
+      "id": "prompts#201",
+      "stratum": "xstest_safe"
+    },
+    {
+      "task": "xstest",
+      "id": "prompts#262",
+      "stratum": "xstest_safe"
+    },
+    {
+      "task": "xstest",
+      "id": "prompts#404",
+      "stratum": "xstest_safe"
+    },
+    {
+      "task": "xstest",
+      "id": "prompts#246",
+      "stratum": "xstest_unsafe"
+    },
+    {
+      "task": "xstest",
+      "id": "prompts#181",
+      "stratum": "xstest_unsafe"
+    },
+    {
+      "task": "xstest",
+      "id": "prompts#366",
+      "stratum": "xstest_unsafe"
+    },
+    {
+      "task": "xstest",
+      "id": "prompts#360",
+      "stratum": "xstest_unsafe"
+    },
+    {
+      "task": "xstest",
+      "id": "prompts#426",
+      "stratum": "xstest_unsafe"
+    },
+    {
+      "task": "xstest",
+      "id": "prompts#196",
+      "stratum": "xstest_unsafe"
+    },
+    {
+      "task": "xstest",
+      "id": "prompts#357",
+      "stratum": "xstest_unsafe"
+    },
+    {
+      "task": "xstest",
+      "id": "prompts#26",
+      "stratum": "xstest_unsafe"
+    },
+    {
+      "task": "xstest",
+      "id": "prompts#431",
+      "stratum": "xstest_unsafe"
+    },
+    {
+      "task": "xstest",
+      "id": "prompts#143",
+      "stratum": "xstest_unsafe"
+    },
+    {
+      "task": "everyday_aya",
+      "id": "test#260",
+      "stratum": "everyday_english"
+    },
+    {
+      "task": "everyday_aya",
+      "id": "test#1135",
+      "stratum": "everyday_english"
+    },
+    {
+      "task": "everyday_aya",
+      "id": "test#743",
+      "stratum": "everyday_english"
+    },
+    {
+      "task": "everyday_aya",
+      "id": "test#723",
+      "stratum": "everyday_english"
+    },
+    {
+      "task": "everyday_aya",
+      "id": "test#1576",
+      "stratum": "everyday_english"
+    },
+    {
+      "task": "everyday_aya",
+      "id": "test#1731",
+      "stratum": "everyday_english"
+    },
+    {
+      "task": "everyday_aya",
+      "id": "test#1197",
+      "stratum": "everyday_english"
+    },
+    {
+      "task": "everyday_aya",
+      "id": "test#276",
+      "stratum": "everyday_english"
+    },
+    {
+      "task": "everyday_aya",
+      "id": "test#1076",
+      "stratum": "everyday_english"
+    },
+    {
+      "task": "everyday_aya",
+      "id": "test#483",
+      "stratum": "everyday_english"
+    },
+    {
+      "task": "everyday_aya",
+      "id": "test#1595",
+      "stratum": "everyday_english"
+    },
+    {
+      "task": "everyday_aya",
+      "id": "test#834",
+      "stratum": "everyday_english"
+    },
+    {
+      "task": "everyday_aya",
+      "id": "test#8",
+      "stratum": "everyday_english"
+    },
+    {
+      "task": "everyday_aya",
+      "id": "test#303",
+      "stratum": "everyday_english"
+    },
+    {
+      "task": "everyday_aya",
+      "id": "test#1063",
+      "stratum": "everyday_english"
+    },
+    {
+      "task": "everyday_aya",
+      "id": "test#767",
+      "stratum": "everyday_english"
+    },
+    {
+      "task": "everyday_aya",
+      "id": "test#1106",
+      "stratum": "everyday_english"
+    },
+    {
+      "task": "everyday_aya",
+      "id": "test#309",
+      "stratum": "everyday_english"
+    },
+    {
+      "task": "everyday_aya",
+      "id": "test#382",
+      "stratum": "everyday_english"
+    },
+    {
+      "task": "everyday_aya",
+      "id": "test#371",
+      "stratum": "everyday_english"
+    }
+  ],
+  "note": "Random XSTest sample plus all 20 sampled everyday-English questions. Report per stratum. Not multilingual human validation. Additional disagreements stay separate."
+}

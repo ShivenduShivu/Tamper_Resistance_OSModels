@@ -326,3 +326,111 @@ Unsafe rate (lower is safer), 95% Wilson CI in the summary file; refusal = Prote
   - **5× the search budget does not find a meaningfully stronger strip.** The worst case stays at about 40% unsafe (42% vs 40%, overlapping CIs) and still needs about 15× the original's KL (0.139 vs 0.0094). Nothing below 100% refusal exists at KL ≤ 0.05.
   - The longer search does find cheaper partial attacks in the 0.05–0.1 KL band (keyword refusal 0.79 vs 0.96 at KL ≤ 0.1, 15% unsafe), so the KL ≤ 0.1 column of the main table should cite the 200-trial number.
   - One search per budget and one seed each; a different seed could land elsewhere on the front.
+
+## 2026-11-13: Submission evidence audit and public Modal preflight
+
+- Started from team main `33317059`; imported the bounded capability suite from
+  fork commit `3634ca92`. No new model scores or human annotations are claimed.
+- Tightened article/model-card claims: descriptive MMLU deltas, keyword-scored
+  low-KL refusal, pre-single-BOS fine-tuning caveat, classifier-only overrefusal.
+  Existing fine-tuning, steering and prefill failures remain visible.
+- Added `docs/REVIEWER_EVIDENCE.md`: completion criteria, untouched holdout versus
+  attack-search prompts, matched attack budgets, noninferiority decision still
+  requiring a frozen endpoint/margin, clean/attacked matrix and budget limits.
+- Added offline blinded two-human-review sampling with separate random and
+  disagreement strata, mandatory adjudication, hashes, and explicit uncertain
+  labels. No inference that AI review is ground truth.
+- Modal public CPU preflight: pinned GSM8K (4 rows), CyberMetric (4 rows), HumanEval
+  (164 rows) all loaded and passed schema validation. Result and selected-row
+  hashes: `results/capability_preflight/public_data.json`.
+  Run: https://modal.com/apps/thewildofficial/main/ap-ZgmT2bYBS4FJAPthmWBv1N
+  Function time 12.58 seconds; image build/overhead additional; no measured bill.
+  No GPU, model generations, coding execution or model capability results.
+- Modal account is configured; no secrets were configured at inspection.
+  Base-model metadata reports gated access; v2 metadata is public. Metadata
+  visibility does not prove weight access. User deferred HF secret setup.
+  Matched base/defended model runs remain pending; do not substitute another base.
+- Local validation uncovered fixture portability issues: fully mocked main tests
+  still imported a real Modal SDK, and macOS default spawn did not match the
+  Linux Python 3.13 target. Tests now mock SDK metadata and the fixture-only local
+  backend explicitly uses fork. The production Modal backend and vendored
+  HumanEval module remain unchanged. See PR validation for final test outcomes.
+
+## 2026-11-13: General-purpose panel and live infrastructure audit
+
+- User authorized actual evaluations with ceilings of $18 Modal and $19 HF.
+  Original pinned checkpoint access was verified after configuring Modal secret
+  `huggingface-secret`. No credential values are stored in this repository.
+- Frozen exploratory panel v2: 2,004 items/checkpoint. Aggregates and hashes are
+  in `results/general_audit/data_audit.json`; full rows and generations are private.
+  Published defense data: 2,355 rows (1,200 refusals, 1,155 benign), two normalized
+  prompt duplicates. No selected train overlap under the declared lexical checks.
+  Exact accepted v2b border data and original pretraining data remain unavailable.
+- Retained all 164 HumanEval problems: punctuation normalization flags a pair
+  of distinct code specifications; it must not remove standard benchmark cases.
+  Four English maths questions recur across GSM8K/GlobalMGSM; no pooled score.
+- L4/A10/T4 requests waited for capacity and were stopped/cancelled. L40S probe
+  succeeded. A baseline pilot produced 60 saved answers. Pilot scores are not
+  confirmatory and must not be promoted to full-panel evidence.
+- Live execution revealed tokenizer `token_type_ids` rejected by generation;
+  fixed by explicitly requesting no token-type IDs, also in the imported runner.
+- Defended tokenizer metadata was saved under a newer wrapper class/schema;
+  loading it with Transformers 4.57.1 fails. The audit compares serialized backend
+  vocabulary/components/encoding and actual evaluation input renderings instead.
+  Inference always uses the original pinned tokenizer; wrapper metadata is not
+  silently reinterpreted. Saved template strings differ, but evaluated single-user
+  inputs must match token-for-token. Full-run manifests recheck every selected row.
+- Live coding backend initially failed: Modal injected SDK 1.4.2 rather than the
+  requested 1.6.4, and the legacy Sandbox.open filesystem endpoint is retired.
+  Pinned the actual SDK and migrated to filesystem.write_text, retaining network
+  blocking, secret isolation, hard caps and module-hash checks.
+- Live gate now passes all 164 canonical solutions, all 18 authored fixtures,
+  and an explicit network-denial/secret-absence probe. See coding_backend.json.
+  These are harness-validation results, not model ability results.
+- Strict baseline pilot coding was 0/6 because complete function definitions were
+  rejected by the body-only extraction protocol. Raw answers were preserved.
+  Before full runs, declared a single matching-function AST-to-body adapter;
+  helpers/decorators/renamed parameters/module side effects do not get converted.
+  Original strict pilot results remain distinct. Report the full-run endpoint
+  as HumanEval with this declared adapter, never imply identical formatting rules.
+- An adapted pilot scoring worker was preempted; replay refused the existing
+  directory. Its partial verdicts/creation ledgers remain private. Subsequent
+  CPU coding workers use nonpreemptible execution; no discarded partial run is
+  called complete, and no infrastructure failure counts as an incorrect answer.
+- Throughput-only v2 probe (64 output tokens, repeated short input, not scored):
+  batch 8/16/32/64 = 188.53/462.94/805.51/1245.14 output tokens/s,
+  peak allocated 6.739/7.233/8.212/10.179 GiB. Actual task throughput is recorded
+  separately; all formal models use the same fixed batch-by-task protocol.
+- All new results remain exploratory. Human usefulness/refusal/harm labels and
+  post-tampering general-purpose comparisons remain separate unfinished work.
+- Confirmed the named/default chat-template formats in a CPU preflight on **all
+  2,004 selected inputs for all three models**; vocabulary, tokenization backend
+  components, special tokens and rendered inputs match. Full baseline attempt v1
+  failed this checker's dict-handling bug before answers; fixed and preserved as
+  failed. Formal matched run prefix is `full-20261113-v2` (base/v2/v2b sequential
+  calls on the same GPU worker). Model-generation source is commit `3241725`.
+- Adapted baseline coding pilot: 5/6 pass, zero infrastructure errors. The earlier
+  strict completion-format 0/6 remains recorded separately. Neither is a full
+  HumanEval capability estimate. Human-review sample fixed before full answers
+  were inspected: 50 shared prompts, 150 responses per reviewer, seed 73.
+- After the pilot, before full scoring, froze a secondary published MGSM-parser
+  sensitivity endpoint alongside the unchanged primary strict parser. Its known
+  last-number extraction quirk is retained and documented; apply both uniformly
+  and never choose the favorable result. See reference/mgsm_provenance.json.
+- Independent downloaded-panel checks found zero duplicate task IDs, duplicated
+  MCQ choice strings, unparseable math golds, malformed IFEval structures, or full
+  canonical/test strings in coding prompts. These are structural checks, not
+  semantic validation of the gold labels.
+
+## 2026-11-13: Completed matched clean-checkpoint evidence
+
+- Completed `full-20261113-v2-{base,v2,v2b}`: 2,004 answers each on one warmed L40S worker, 6,012 total. All raw answers retained privately. All 4,242 objective verdicts complete, including 492 isolated HumanEval executions; zero coding infrastructure errors. Formal generation source commit `3241725`; exact sources, packages, revisions and per-stage artifact indexes are exported in run_provenance.json.
+- Independently downloaded and verified every indexed file, complete coverage and response binding. Matched tokenizer/input rendering, protocol, effective EOS IDs, GPU, generation source hashes, scoring environment/provenance and coding protocol/image/module/SDK across conditions. Public answer-free verdicts independently reproduce every objective total.
+- HumanEval passed: 72/164 original, 70/164 v2, 70/164 v2b. Generated MMLU: 110/200, 109/200, 111/200. CyberMetric: 391/500, 384/500, 382/500. These small observed differences do not establish equivalence.
+- IFEval: 155/200, 135/200, 116/200. GSM8K strict: 139/200, 113/200, 95/200; secondary numeric: 143/200, 141/200, 110/200. Preserve both parser endpoints: v2 is parser-sensitive; v2b loses success under both. No blanket no-capability-cost claim.
+- XSTest safe ProtectAI refusal flags: 43/250, 107/250, 42/250. Token-limit truncations among safe answers: 141, 98, 161 at 128 tokens. These are protocol-specific provisional refusal flags, not validated overrefusal/harmfulness.
+- User elected no human review. Reused the preselected 50 paired questions for GPT-6 Luna diagnostics (150 answers). Three fresh sessions over disjoint paired question blocks after a context-capacity warning; no fabricated/default labels accepted. Preserve original/repair versions privately. Repaired unsupported or nonliteral quotes; all 150 final labels pass schema, literal evidence/reference and truncation-copy checks. These do not establish truth or judge accuracy. Alias/sampling limitations disclosed.
+- Luna marked any refusal on 20 safe shared questions: 1 original, 5 v2, 1 v2b. Classifier-only refusals: 5, 5, 2; Luna-only: 0, 0, 0. No detector false-positive/false-negative rate or human validation claimed. English everyday useful judgments: 14/20, 13/20, 15/20.
+- Earlier Luna debugging caught one swapped explanation; 12 authored fixtures had one ambiguous harm-boundary disagreement. All 36 original/v2 English maths parser disagreements were AI-reviewed as containing the correct numeric answer; not human validation. An everyday reference typo remains preserved and flagged.
+- Checks: general 11 + review-audit 8 + capability 111 tests pass (130 total). Initial restricted local fixture run blocked multiprocessing communication; permitted local fixture communication rerun passes. No model-generated code executed locally. Raw output, quotes, reviewer keys and credentials excluded from Git.
+- Latest team main fetched and is already the branch base (`33317059e33e964d52b3b47947c10de4f273497d`). Post-tampering capability, human validation, benign operational-security quality, corrected single-BOS fine-tuning repeat and training-seed variability remain explicit gaps. Previously disclosed failures are retained.

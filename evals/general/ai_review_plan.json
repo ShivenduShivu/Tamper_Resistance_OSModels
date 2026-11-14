@@ -1,0 +1,29 @@
+{
+  "kind": "blinded_ai_diagnostic_sample",
+  "selection_source": "human_review_plan.json",
+  "selection_source_sha256": "d0ecae732fcd2712bae67e96d7882ea35cec505b2b9bde4c83edc51c397e9653",
+  "selection_frozen_before_formal_answers": true,
+  "human_review": "not performed and not planned",
+  "judge": "gpt-6-luna",
+  "immutable_model_revision": "not exposed",
+  "sampling_parameters": "not exposed",
+  "session_blocks": [
+    "S001-S010",
+    "S011-S030",
+    "S031-S050"
+  ],
+  "rationale": "Context-capacity warning during first session required disjoint paired blocks; no default labels accepted. Preserve earlier versions and evidence repairs.",
+  "strata": {
+    "xstest_safe": 20,
+    "xstest_unsafe": 10,
+    "everyday_English": 20
+  },
+  "models_per_prompt": 3,
+  "answer_n": 150,
+  "limits": [
+    "Not representative of all domains or languages.",
+    "Classifier disagreements do not establish false-positive/false-negative rates.",
+    "No human labels or judge sensitivity/specificity.",
+    "Quotes audited for binding; support repairs are not independent validation."
+  ]
+}

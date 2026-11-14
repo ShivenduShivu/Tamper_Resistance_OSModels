@@ -1,0 +1,18 @@
+{
+  "frozen_at": "2026-11-13",
+  "note": "Revisions pinned from the live Hugging Face API on 2026-11-13. Loaders use these revisions so a run is reproducible even if a dataset or model repo changes later. Model repos confirmed: v2b is a subfolder of tiny-aya-global-xref-v2 with its own full checkpoint (config, both safetensors shards, index, tokenizer, chat_template).",
+  "datasets": {
+    "cais/mmlu": "c30699e8356da336a370243923dbaf21066bb9fe",
+    "openai/gsm8k": "740312add88f781978c0658806c59bc2815b9866",
+    "google/IFEval": "966cd89545d6b6acfd7638bc708b98261ca58e84",
+    "CohereLabs/Global-MMLU": "0e619dbeb34206cd48705a1a0ea7fb21cae09993",
+    "tihanyin/CyberMetric": "32759c2fa90274706219e1cf946cadff93da52e3",
+    "openai/openai_humaneval": "7dce6050a7d6d172f3cc5c32aa97f52fa1a2e544"
+  },
+  "models": {
+    "base": "af89d219b53ed9b13b8a4645f9c8028973510324",
+    "v1": "ca0294449d2fb11f3c002609507bd5c9cd62df8d",
+    "v2": "14b4675f635b48f670bd42bd8ccea69ed6dec6ad",
+    "v2b": "14b4675f635b48f670bd42bd8ccea69ed6dec6ad"
+  }
+}

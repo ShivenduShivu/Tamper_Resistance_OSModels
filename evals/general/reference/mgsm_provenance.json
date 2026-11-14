@@ -1,0 +1,12 @@
+{
+  "repo": "openai/simple-evals",
+  "revision": "5e623c2b400af62a1278e23595f95b0853d7fe8a",
+  "path": "mgsm_eval.py",
+  "upstream_sha256": "97297bb6d61d7353012eed610fa5830fe6028b7794afb7e8783d4a7a97ac30d3",
+  "extracted_functions": [
+    "parse_answer",
+    "score_mgsm"
+  ],
+  "module_sha256": "f2c93dd7285f95821aaac6e3db488a58374aa6004fce27a879ee0741635c34e5",
+  "note": "Secondary parser sensitivity after pilot, uniformly applied to every model; primary strict parser unchanged. Arabic uses the same rule with the dataset prefix, not an official simple-evals Arabic task."
+}

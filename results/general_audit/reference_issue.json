@@ -1,0 +1,12 @@
+{
+  "kind": "benchmark_reference_issue_not_silent_correction",
+  "dataset": "CohereLabs/aya_evaluation_suite",
+  "revision": "e69f652e99144bf9e5019caa6c940fa1e9a24ba3",
+  "config": "aya_human_annotated",
+  "blind_question": "S045",
+  "issue": "Reference for the meaning of frank appears to contain a typo (host instead of honest).",
+  "discovered_by": "gpt-6-luna, blinded AI review; checked against dictionary definition by the primary agent",
+  "primary_source": "https://www.merriam-webster.com/dictionary/frank",
+  "handling": "Preserve original reference and all answers. Flag this question across every model; do not silently repair gold or use it as an unquestioned correctness target. Human adjudication remains pending.",
+  "human_validated": false
+}

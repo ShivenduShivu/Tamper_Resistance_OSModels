@@ -1,0 +1,3518 @@
+{
+  "kind": "verified_private_evidence_public_provenance",
+  "models": {
+    "base": {
+      "run_id": "full-20261113-v2-base",
+      "manifest": {
+        "kind": "exploratory_clean_model_results",
+        "model": "base",
+        "repo": "CohereLabs/tiny-aya-global",
+        "subfolder": null,
+        "revision": "af89d219b53ed9b13b8a4645f9c8028973510324",
+        "panel_id": "exploratory-panel-20261113-v2",
+        "panel_items_sha256": "1de74c71c4133ef515b5f5ea85d528499c9e632b5e0b45b44838d9a73a0909f9",
+        "selected_items_sha256": "450af09314a05835e103bed004a119136d28bbc2271f98f9d70b2fa63861fb4b",
+        "tasks": {
+          "mmlu": 200,
+          "gsm8k": 200,
+          "cybermetric": 500,
+          "humaneval": 164,
+          "ifeval": 200,
+          "everyday_aya": 140,
+          "global_mgsm_en": 50,
+          "global_mgsm_fr": 50,
+          "global_mgsm_ar": 50,
+          "xstest": 450
+        },
+        "source_sha256": {
+          "modal_eval.py": "5e6e59677ee0932195435eb8d74dd48ff9483a334e7201fda706886297fcfc44",
+          "data_audit.py": "7f3a35738062b3cbd283fb777e26424e13d79ce2abf3e333f85440527ec43572",
+          "lock.json": "f3070fc1c82c1f822803d1e8fb485f5ef4829093ad2e5f7e490dbf296efe071d",
+          "tokenizer_audit.py": "fe1dee6e133f752cec0dae7e1916f381e1459679ddd79c1dcb026f237a924db5"
+        },
+        "protocol": {
+          "seed": 0,
+          "precision": "float16",
+          "batch_by_kind": {
+            "mcq": 64,
+            "math": 32,
+            "code": 32,
+            "instructions": 16,
+            "human_pending": 16,
+            "refusal_pending": 64
+          },
+          "do_sample": false,
+          "max_prompt_tokens": 4096,
+          "max_new_tokens": {
+            "mcq": 64,
+            "math": 1024,
+            "instructions": 1024,
+            "human_pending": 512,
+            "refusal_pending": 128,
+            "code": 512
+          },
+          "prompt_overlong": "exclude and report; never silently truncate",
+          "refusal_labels": "pending independent human review; no inability inference from non-success"
+        },
+        "environment": {
+          "transformers": "4.57.1",
+          "packaging": "26.3",
+          "nvidia-cufile-cu12": "1.13.1.3",
+          "tzdata": "2026.6",
+          "dill": "0.4.0",
+          "charset-normalizer": "3.5.2",
+          "huggingface-hub": "0.34.4",
+          "nvidia-cuda-nvrtc-cu12": "12.8.93",
+          "psutil": "7.2.2",
+          "nvidia-nvtx-cu12": "12.8.90",
+          "tokenizers": "0.22.2",
+          "typing_extensions": "4.13.2",
+          "certifi": "2026.10.19",
+          "aiohappyeyeballs": "2.6.1",
+          "nvidia-nccl-cu12": "2.27.3",
+          "torch": "2.8.0",
+          "idna": "3.10",
+          "networkx": "3.6.1",
+          "regex": "2026.11.9",
+          "aiosignal": "1.3.2",
+          "filelock": "4.2.10",
+          "numpy": "2.4.6",
+          "nvidia-cublas-cu12": "12.8.4.1",
+          "safetensors": "0.8.0",
+          "multidict": "6.4.4",
+          "pandas": "3.1.1",
+          "PyYAML": "6.0.3",
+          "nvidia-cuda-cupti-cu12": "12.8.90",
+          "nvidia-curand-cu12": "10.3.9.90",
+          "Jinja2": "3.1.6",
+          "fsspec": "2025.9.0",
+          "tqdm": "4.70.1",
+          "datasets": "4.1.1",
+          "wheel": "0.45.1",
+          "nvidia-cudnn-cu12": "9.10.2.21",
+          "hf-xet": "1.8.0",
+          "nvidia-cusolver-cu12": "11.7.3.90",
+          "propcache": "0.3.1",
+          "nvidia-cusparselt-cu12": "0.7.1",
+          "attrs": "25.3.0",
+          "sympy": "1.14.0",
+          "setuptools": "65.5.1",
+          "python-dateutil": "4.0.0",
+          "requests": "2.34.2",
+          "triton": "3.4.0",
+          "yarl": "1.20.0",
+          "xxhash": "4.1.0",
+          "pyarrow": "26.0.1",
+          "aiohttp": "3.12.7",
+          "accelerate": "1.10.1",
+          "urllib3": "2.8.0",
+          "pip": "25.2",
+          "nvidia-cusparse-cu12": "12.5.8.93",
+          "sentencepiece": "0.2.1",
+          "uv": "0.8.17",
+          "nvidia-cufft-cu12": "11.3.3.83",
+          "multiprocess": "0.70.16",
+          "frozenlist": "1.6.0",
+          "nvidia-cuda-runtime-cu12": "12.8.90",
+          "mpmath": "1.3.0",
+          "nvidia-nvjitlink-cu12": "12.8.93",
+          "MarkupSafe": "3.0.4",
+          "hyperframe": "6.1.0",
+          "hpack": "4.1.0",
+          "protobuf": "6.31.1",
+          "grpclib": "0.4.8",
+          "cbor2": "5.7.0",
+          "h2": "4.2.0"
+        },
+        "python": "3.11.12",
+        "state": "complete",
+        "tokenizer": {
+          "repo": "CohereLabs/tiny-aya-global",
+          "revision": "af89d219b53ed9b13b8a4645f9c8028973510324",
+          "bos_count": 1,
+          "letter_token_ids": {
+            "A": 47,
+            "B": 48,
+            "C": 49,
+            "D": 50
+          }
+        },
+        "candidate_tokenizer_check": {
+          "same_vocab": true,
+          "same_chat_template": true,
+          "same_bos": true,
+          "same_eos": true,
+          "same_probe_encoding": true,
+          "same_model": true,
+          "same_normalizer": true,
+          "same_pre_tokenizer": true,
+          "same_post_processor": true,
+          "same_decoder": true,
+          "same_all_evaluation_renderings": true
+        },
+        "gpu": "NVIDIA L40S",
+        "effective_eos_ids": [
+          3,
+          6
+        ],
+        "performance": {
+          "mmlu": {
+            "seconds": 20.803,
+            "output_tokens": 600,
+            "output_tokens_per_second": 28.84,
+            "peak_allocated_gib": 14.091,
+            "batch_cap": 64
+          },
+          "gsm8k": {
+            "seconds": 144.48,
+            "output_tokens": 25493,
+            "output_tokens_per_second": 176.45,
+            "peak_allocated_gib": 10.029,
+            "batch_cap": 32
+          },
+          "cybermetric": {
+            "seconds": 33.684,
+            "output_tokens": 1500,
+            "output_tokens_per_second": 44.53,
+            "peak_allocated_gib": 11.022,
+            "batch_cap": 64
+          },
+          "humaneval": {
+            "seconds": 83.658,
+            "output_tokens": 12927,
+            "output_tokens_per_second": 154.52,
+            "peak_allocated_gib": 9.973,
+            "batch_cap": 32
+          },
+          "ifeval": {
+            "seconds": 466.52,
+            "output_tokens": 64176,
+            "output_tokens_per_second": 137.56,
+            "peak_allocated_gib": 8.214,
+            "batch_cap": 16
+          },
+          "everyday_aya": {
+            "seconds": 158.145,
+            "output_tokens": 36350,
+            "output_tokens_per_second": 229.85,
+            "peak_allocated_gib": 8.645,
+            "batch_cap": 16
+          },
+          "global_mgsm_en": {
+            "seconds": 21.875,
+            "output_tokens": 5212,
+            "output_tokens_per_second": 238.27,
+            "peak_allocated_gib": 8.663,
+            "batch_cap": 32
+          },
+          "global_mgsm_fr": {
+            "seconds": 39.961,
+            "output_tokens": 6888,
+            "output_tokens_per_second": 172.37,
+            "peak_allocated_gib": 8.823,
+            "batch_cap": 32
+          },
+          "global_mgsm_ar": {
+            "seconds": 64.531,
+            "output_tokens": 9128,
+            "output_tokens_per_second": 141.45,
+            "peak_allocated_gib": 8.814,
+            "batch_cap": 32
+          },
+          "xstest": {
+            "seconds": 73.005,
+            "output_tokens": 39547,
+            "output_tokens_per_second": 541.7,
+            "peak_allocated_gib": 9.851,
+            "batch_cap": 64
+          }
+        },
+        "elapsed_seconds": 1118.8
+      },
+      "private_artifact_indexes": {
+        "generation": {
+          "COMPLETE": {
+            "sha256": "375fbafba7077ca37c915fda1101fba2137c5af48a7afcde0d7ac87d53da5ea2",
+            "bytes": 51
+          },
+          "items.jsonl": {
+            "sha256": "d84e0291c88d9e2e3d52cd6ef0f3f286448251e0fbc806ac4471b4b820ab3893",
+            "bytes": 1206528
+          },
+          "manifest.json": {
+            "sha256": "875c9128545f47749611474d398da8ae785356551b9424f582cd96e830192c7f",
+            "bytes": 6160
+          }
+        },
+        "scoring-v1": {
+          "scored_items.jsonl": {
+            "sha256": "3bb11928a6dbe0d0449c29c2979c5341a23f2fdb8541961a613d52578d6dd03c",
+            "bytes": 1850485
+          },
+          "summary.json": {
+            "sha256": "79740dd80632a8614a8c126b94ba965f003e4d1e4540c552176ce626cdcf9364",
+            "bytes": 22450
+          }
+        },
+        "coding-adapted-v2": {
+          "items.jsonl": {
+            "sha256": "477c264c3b64d878688c463e9b52fb94188364630c557ef983824a4ebf4948a8",
+            "bytes": 241272
+          },
+          "ledger-HumanEval_0.jsonl": {
+            "sha256": "e542c65c2d45c22adc6c3bc6a9433407262ce73a08ec178c878f803defc532e2",
+            "bytes": 106
+          },
+          "ledger-HumanEval_1.jsonl": {
+            "sha256": "accafc8681d5120452e5e08cbbf652cb68b7c7e6faf22af53f05c999945e5d8c",
+            "bytes": 106
+          },
+          "ledger-HumanEval_10.jsonl": {
+            "sha256": "3cfc7adb292eeb171972d60f8f56ab6098423a865baa8c6dfb1085c0aeb641a1",
+            "bytes": 107
+          },
+          "ledger-HumanEval_100.jsonl": {
+            "sha256": "36e8b8d8c140ad265d245cf14fbeda138187368eb99afaf31bbaa39424824d07",
+            "bytes": 108
+          },
+          "ledger-HumanEval_101.jsonl": {
+            "sha256": "77aa6153e3aebb7583ca1bf146a647b3b3aabd1a1c7fa867f74f061b0147674d",
+            "bytes": 108
+          },
+          "ledger-HumanEval_102.jsonl": {
+            "sha256": "61cf5cc3cefc5314d427ef95ee7d70cb16fcaee55198c58fab7c3f16c1ae5dd9",
+            "bytes": 108
+          },
+          "ledger-HumanEval_103.jsonl": {
+            "sha256": "f9116e6e8a0e4f903cdcc1ddf032f2bd24e59c9bdb27f88190207b8f44ce5bce",
+            "bytes": 108
+          },
+          "ledger-HumanEval_104.jsonl": {
+            "sha256": "231f1bb6cabaaa60a8f027f957f056d91d4da7e3d7ca9e12a76463d6a510f7c2",
+            "bytes": 108
+          },
+          "ledger-HumanEval_105.jsonl": {
+            "sha256": "620903185a7fbf9bf584b09e1c84a153ea61a0ac540da1b569c373dd43aa45d5",
+            "bytes": 108
+          },
+          "ledger-HumanEval_106.jsonl": {
+            "sha256": "24bc025307147f9c27b8596d778ab01d527d877847729fedf4b70495db1c7297",
+            "bytes": 108
+          },
+          "ledger-HumanEval_107.jsonl": {
+            "sha256": "bf56fc9f9785e057571775c48505ee0909aab6e8c8cf07be925294ed4d4fc71f",
+            "bytes": 108
+          },
+          "ledger-HumanEval_108.jsonl": {
+            "sha256": "fa3d9b63b839a4dca8c2fe4c8e6db48e90d26a950a818766d012dfdd298559a2",
+            "bytes": 108
+          },
+          "ledger-HumanEval_109.jsonl": {
+            "sha256": "1562e77b7c744ad643fb6c3ec6053e46931a36e96f076f38bdef79ac35058550",
+            "bytes": 108
+          },
+          "ledger-HumanEval_11.jsonl": {
+            "sha256": "1339348fedfd3291a0f035da6042aae0b66cc8d063a16807a02fa1d1842646ef",
+            "bytes": 107
+          },
+          "ledger-HumanEval_110.jsonl": {
+            "sha256": "8a45f68b31c593282d73cf132a56a544207acad83e598db83add6a0587142b13",
+            "bytes": 108
+          },
+          "ledger-HumanEval_111.jsonl": {
+            "sha256": "fcd7fcc0dccd7b7b65c5a8db943d947a5ca90d5252ea6fb08f7a4c93bb3118c1",
+            "bytes": 108
+          },
+          "ledger-HumanEval_112.jsonl": {
+            "sha256": "6c9bbc34dd1a1df9a835f63c3822f329935e5e1b8aa71f856cd32c686c40a4c1",
+            "bytes": 108
+          },
+          "ledger-HumanEval_113.jsonl": {
+            "sha256": "015627b2c802732b864ae1ea8799a8e78ea6246c6e378562f4599160a96ddc2f",
+            "bytes": 108
+          },
+          "ledger-HumanEval_114.jsonl": {
+            "sha256": "785de11bd68ad5977b3261314aa159a00adad2e9a6fcbbc3a4dfd84dc952855b",
+            "bytes": 108
+          },
+          "ledger-HumanEval_115.jsonl": {
+            "sha256": "5bcc734051cf1e99a79e4f5d146a947f181a39fc9844ed90eee82a79b58316b6",
+            "bytes": 108
+          },
+          "ledger-HumanEval_116.jsonl": {
+            "sha256": "efa15e5150441d8a7585de4b3c0dcb339fe1a7e20cf127ed9ffcbf22ced5f928",
+            "bytes": 108
+          },
+          "ledger-HumanEval_117.jsonl": {
+            "sha256": "fdc0c9e8d5f29a88e57c6eb536445bfe2f2fd27c2cd9d3f1b8ad4001c49f7f2b",
+            "bytes": 108
+          },
+          "ledger-HumanEval_118.jsonl": {
+            "sha256": "dd8ca31ba580fe296cb3ba9b20a318f4f9f140c31c42dcf57d91e2c9ed655952",
+            "bytes": 108
+          },
+          "ledger-HumanEval_119.jsonl": {
+            "sha256": "e69c9c15b781e5fcad16bc4ce69113442b470885246e9e52cae41e5084f3a36c",
+            "bytes": 108
+          },
+          "ledger-HumanEval_12.jsonl": {
+            "sha256": "255960d8d05ba3e632f777d52c014a50cd07c2c26614c7173f690233b7478421",
+            "bytes": 107
+          },
+          "ledger-HumanEval_120.jsonl": {
+            "sha256": "2455e1b8fefe708978801e321464ab50fdcf36b2c59a88e8d49409b21784f7fa",
+            "bytes": 108
+          },
+          "ledger-HumanEval_121.jsonl": {
+            "sha256": "90e84d892a8470b89002696b68a0957ef4f4af952501043adf93c9d770842419",
+            "bytes": 108
+          },
+          "ledger-HumanEval_122.jsonl": {
+            "sha256": "d46b3cd0998910ab1986169b550de6065bb7f208ae9b2425d141111f0f1747af",
+            "bytes": 108
+          },
+          "ledger-HumanEval_123.jsonl": {
+            "sha256": "475d8dec37d04c32527079ae9f865281c3139d1a799e401153bdc3010bfb108f",
+            "bytes": 108
+          },
+          "ledger-HumanEval_124.jsonl": {
+            "sha256": "fd1504771727607c8488d664e6f27ac205e7897b73a30099be16c3b14771ef65",
+            "bytes": 108
+          },
+          "ledger-HumanEval_125.jsonl": {
+            "sha256": "34cadbd3db5e11b41f1e37e5563392433d4991e21cad76ade2769aef0a285568",
+            "bytes": 108
+          },
+          "ledger-HumanEval_126.jsonl": {
+            "sha256": "d9efc1baa036c752452f309223f3772d3d408a9441a0443356e01c82ea0fa772",
+            "bytes": 108
+          },
+          "ledger-HumanEval_127.jsonl": {
+            "sha256": "2ba836abc78dcfe920fffaddf8d3a364b5020f9f8cce687eacdd5ff7d96cf5e9",
+            "bytes": 108
+          },
+          "ledger-HumanEval_128.jsonl": {
+            "sha256": "4a23cb4766db3d304f566d21ea3079cd362b606dd7b593bbc9c93ff4472c7ba8",
+            "bytes": 108
+          },
+          "ledger-HumanEval_129.jsonl": {
+            "sha256": "ce0587c392f2a2dfb23879b074f93945f072ab9842a67066162993bcc32b4efe",
+            "bytes": 108
+          },
+          "ledger-HumanEval_13.jsonl": {
+            "sha256": "8e4f82e43645ce3e6bb2502ef25fc274f5f14e9d5232a6d8f7b1873c2c3a58a6",
+            "bytes": 107
+          },
+          "ledger-HumanEval_130.jsonl": {
+            "sha256": "f05e44bba5ba2654b3a48edbb4eff0e7ca9a16d1bd676f7750e1d9a2425784b7",
+            "bytes": 108
+          },
+          "ledger-HumanEval_131.jsonl": {
+            "sha256": "cb4ea365137b84e216b324f63e9477c7be56a71f95b378a5283385526a19673d",
+            "bytes": 108
+          },
+          "ledger-HumanEval_132.jsonl": {
+            "sha256": "ba0fe98af7a18fe54098079afe2d332dededd8263d6a2dbe9b1d4a26d48b8338",
+            "bytes": 108
+          },
+          "ledger-HumanEval_133.jsonl": {
+            "sha256": "67170bfd9a6f181eadc6670242f21434322fd35d428edd2adea031cdc3f7c812",
+            "bytes": 108
+          },
+          "ledger-HumanEval_134.jsonl": {
+            "sha256": "94547e22892a4979f29ebf43b1f6a87dfedcbb3d5ceaca4a4f3d70ca81c88f96",
+            "bytes": 108
+          },
+          "ledger-HumanEval_135.jsonl": {
+            "sha256": "63b78b3492ee10a122900f707a342b00015f3b6b844bf45f61c90a83f62b1fa4",
+            "bytes": 108
+          },
+          "ledger-HumanEval_136.jsonl": {
+            "sha256": "78b27225e313e590bea669fa1f8a18c27a5500323cb252ebaf07282ebff20bff",
+            "bytes": 108
+          },
+          "ledger-HumanEval_137.jsonl": {
+            "sha256": "781d920221261d89948f4b10077fb161f688cd0ef81e47491b43955fe55b4518",
+            "bytes": 108
+          },
+          "ledger-HumanEval_138.jsonl": {
+            "sha256": "d8d021b34e52fa0f47d29d5d24c733a245be88727687540dd32fccb6d2fa99ea",
+            "bytes": 108
+          },
+          "ledger-HumanEval_139.jsonl": {
+            "sha256": "ac60aa8aa56a7c53452b01a5aa60776fd104de502301b0b340e54e9b6f99f300",
+            "bytes": 108
+          },
+          "ledger-HumanEval_14.jsonl": {
+            "sha256": "2bd3d709d211f79944b82f2c346475436cd41bc2229a160bb3da7b1b2696da17",
+            "bytes": 107
+          },
+          "ledger-HumanEval_140.jsonl": {
+            "sha256": "a541d8dfa4b507299b4e82215f3d4d8541fdbb4cc05c4e71fdf01620f3fe269c",
+            "bytes": 108
+          },
+          "ledger-HumanEval_141.jsonl": {
+            "sha256": "16f572a9f52d919f55b3b21a7d6d8a7dcfe84dd1cbcdcf1460c24ded9fd2dc6a",
+            "bytes": 108
+          },
+          "ledger-HumanEval_142.jsonl": {
+            "sha256": "503a63cffedfaa618cd6e830fe12ca9a0b08fadea5b62acc41c362a6459f2450",
+            "bytes": 108
+          },
+          "ledger-HumanEval_143.jsonl": {
+            "sha256": "4caf32aadcc062858e73e1add0f4e201392f38a031837d088c70442e36286e47",
+            "bytes": 108
+          },
+          "ledger-HumanEval_144.jsonl": {
+            "sha256": "e94ada9446031680a62209948f8bf647e0404eb4930fe62312de49f95ac6fb4c",
+            "bytes": 108
+          },
+          "ledger-HumanEval_145.jsonl": {
+            "sha256": "165366531981fe155927d3ab9d1b643ef9b6b8d74bfd091ea97f6ecd0e153829",
+            "bytes": 108
+          },
+          "ledger-HumanEval_146.jsonl": {
+            "sha256": "1d3b9209d762817f229ad84d43393c9b3dfd734bec44052e59cc3cfea1462cab",
+            "bytes": 108
+          },
+          "ledger-HumanEval_147.jsonl": {
+            "sha256": "290e5805f4a9f827c862a139f5bd01e8d745561aaa35f4a1add716f1d8ae3177",
+            "bytes": 108
+          },
+          "ledger-HumanEval_148.jsonl": {
+            "sha256": "afec2f660fe91192ea596f73b563a6b04914ce9977af7d55039d384b3b6459a1",
+            "bytes": 108
+          },
+          "ledger-HumanEval_149.jsonl": {
+            "sha256": "f9ae2018f51dd504fcb719d22202d2b069f88cd55bf7fc8877fa4f690dc81e31",
+            "bytes": 108
+          },
+          "ledger-HumanEval_15.jsonl": {
+            "sha256": "629a40b603ea1a2d724b2805a2af89d2e22959738206103f27757499d4e9ab02",
+            "bytes": 107
+          },
+          "ledger-HumanEval_150.jsonl": {
+            "sha256": "1bba1fe6328c070e7aedf1a8c12303554dc687a7dca10b514a2d51949ca20b28",
+            "bytes": 108
+          },
+          "ledger-HumanEval_151.jsonl": {
+            "sha256": "f232671c01b5f804a4f9f6dd1dd229eee44bd5f63d011864a1be59767c3e9a94",
+            "bytes": 108
+          },
+          "ledger-HumanEval_152.jsonl": {
+            "sha256": "934b2b0c12fdd62f581bc53a1fd253395d624da8e0ce1cc1fafeffbf484052e4",
+            "bytes": 108
+          },
+          "ledger-HumanEval_153.jsonl": {
+            "sha256": "aff6845a6bc2bdce62b92fb1a9f5bfbfe217193241292be6a9a125efced3e3a5",
+            "bytes": 108
+          },
+          "ledger-HumanEval_154.jsonl": {
+            "sha256": "a1eff65439455313344ae2d24059ed8fb8709e2fd0fe54605f19a3beba7d9fc2",
+            "bytes": 108
+          },
+          "ledger-HumanEval_155.jsonl": {
+            "sha256": "a15f9a694052460f707c1de14232c188202c1cea0c98dff194c2f4df7a9ce88d",
+            "bytes": 108
+          },
+          "ledger-HumanEval_156.jsonl": {
+            "sha256": "39df6de61f00d414eec592512d33b5ae095c85c3a3021cdd1426e892b617d8ef",
+            "bytes": 108
+          },
+          "ledger-HumanEval_157.jsonl": {
+            "sha256": "f2184ef46a40d4d0afd2dde99dd11b6b45dfa2b551b139c693173e5c84d3d9a2",
+            "bytes": 108
+          },
+          "ledger-HumanEval_158.jsonl": {
+            "sha256": "208405fa5f3cd155dac7c55f8953dd1d141e9440a40f0b1d4691b36b99d44e15",
+            "bytes": 108
+          },
+          "ledger-HumanEval_159.jsonl": {
+            "sha256": "3f73e0829d2533469a42bc0ef4e1759f92d1c6b6287e6045afcf10302616ade3",
+            "bytes": 108
+          },
+          "ledger-HumanEval_16.jsonl": {
+            "sha256": "0779779a5c4918317261e6e7e991a5e95f5625342241ccfde2e6912b1c6f2d53",
+            "bytes": 107
+          },
+          "ledger-HumanEval_160.jsonl": {
+            "sha256": "ee8d9e9cf32a59f89f1cb7c98661d40f905f050bc7a37f8822c7d3d05c95ca01",
+            "bytes": 108
+          },
+          "ledger-HumanEval_161.jsonl": {
+            "sha256": "7bd65807f17cb393231997a3e6c095838e9f56e5a62604e1ac5443d056ae6254",
+            "bytes": 108
+          },
+          "ledger-HumanEval_162.jsonl": {
+            "sha256": "22d5b2f06ec983ba02409aeb22a5524389b85eda13877107f8b80f90c12b9b8e",
+            "bytes": 108
+          },
+          "ledger-HumanEval_163.jsonl": {
+            "sha256": "a5d8903882b28d6656b6bf29f468d7733f3512d6687119ebeda7b246ae9d24a9",
+            "bytes": 108
+          },
+          "ledger-HumanEval_17.jsonl": {
+            "sha256": "67053cbf4cb882eacc3a3636b0ce1726fd3ff7fc62242ac526852b4536334b57",
+            "bytes": 107
+          },
+          "ledger-HumanEval_18.jsonl": {
+            "sha256": "ce66eab469f1e8e2b4817c352d0fc2d98584c33870547e98796e8dc2131f8355",
+            "bytes": 107
+          },
+          "ledger-HumanEval_19.jsonl": {
+            "sha256": "25e48cbf18a51d794efcc63c18777b6a8418b3a72e27dbc65c53afa92fbc6810",
+            "bytes": 107
+          },
+          "ledger-HumanEval_2.jsonl": {
+            "sha256": "40fbc207da522636cb437bf770c9e133b3a2e86710f2a1778765713b86cb5d42",
+            "bytes": 106
+          },
+          "ledger-HumanEval_20.jsonl": {
+            "sha256": "4b48fc36720c30c0016be7c720bc7ec55aea0c017699fd76b6c3030a864ce656",
+            "bytes": 107
+          },
+          "ledger-HumanEval_21.jsonl": {
+            "sha256": "ecdc270b1f44c62309de3144a52744a2cb388af97da715bcb3e76ae92743a8d3",
+            "bytes": 107
+          },
+          "ledger-HumanEval_22.jsonl": {
+            "sha256": "c2bee0678611d0456f5980491f3c68f1486e5ad8b065f7b612a5f47ea153097a",
+            "bytes": 107
+          },
+          "ledger-HumanEval_23.jsonl": {
+            "sha256": "f8ac5036b5bc835faa912bf8cd1a9f649883abebade4fde258e3e746d1b6519d",
+            "bytes": 107
+          },
+          "ledger-HumanEval_24.jsonl": {
+            "sha256": "903c17f79663771d4207236a716f78509ef7894fb8da537e3149dfd9b91f7b84",
+            "bytes": 107
+          },
+          "ledger-HumanEval_25.jsonl": {
+            "sha256": "0fd1e15248c68d99a6096a56e08aa4481898255e52e9a7e3b1bbf8133c59ec61",
+            "bytes": 107
+          },
+          "ledger-HumanEval_26.jsonl": {
+            "sha256": "f518ad43a66ec9d97e65455e2fbddee605a8303dafc0829bbfb3438392cadabe",
+            "bytes": 107
+          },
+          "ledger-HumanEval_27.jsonl": {
+            "sha256": "48dd21dd4731f6ef4621d581caa1e3ab065662b5fc6b573f135f6e26ea4a4f6f",
+            "bytes": 107
+          },
+          "ledger-HumanEval_28.jsonl": {
+            "sha256": "8347cd7a343e0ffabeab41576b3c52b8eb74d5cc86df78f01be9522f42a4aab5",
+            "bytes": 107
+          },
+          "ledger-HumanEval_29.jsonl": {
+            "sha256": "87f8d23fa91296b85fb7defa739b43486daac28966f936bdddc34099dc9e756f",
+            "bytes": 107
+          },
+          "ledger-HumanEval_3.jsonl": {
+            "sha256": "f619a27e2013fee5f0555e567118f7522c615d7c4888fc120d607c2ba27141c0",
+            "bytes": 106
+          },
+          "ledger-HumanEval_30.jsonl": {
+            "sha256": "383112b6521cc8e7f15f09812c45e1d153748f2ebf4cb9d485936f5f70e14853",
+            "bytes": 107
+          },
+          "ledger-HumanEval_31.jsonl": {
+            "sha256": "dc64095e7c8ed3bb1642a8fdbfac6975ddcad528f6f87cf337e2d47a5543fbad",
+            "bytes": 107
+          },
+          "ledger-HumanEval_32.jsonl": {
+            "sha256": "356d338da6e1ca5d951c8aea1cdfa8f0d46bc3e9a1c2965e404ae4ca7ca8881d",
+            "bytes": 107
+          },
+          "ledger-HumanEval_33.jsonl": {
+            "sha256": "0f6b22bcd7174c2678a2116d1b343915499513a14da7e3f42f91b162601f0d45",
+            "bytes": 107
+          },
+          "ledger-HumanEval_34.jsonl": {
+            "sha256": "312f4dd88dd74d5235768dee1b9a7ade228e1ec314f7481f5f0d9957321773c5",
+            "bytes": 107
+          },
+          "ledger-HumanEval_35.jsonl": {
+            "sha256": "e53fa76b87074d250401d792fff1d3a8e6f69809ae0bc6c37aeba39594a969bb",
+            "bytes": 107
+          },
+          "ledger-HumanEval_36.jsonl": {
+            "sha256": "3ab0120f2665cbbf4961b8c6942edaae7ebcc2057b454940d04e7107f4b5f055",
+            "bytes": 107
+          },
+          "ledger-HumanEval_37.jsonl": {
+            "sha256": "82a1bde785fee41ea600194dfa86ffc8710bab57ee94c0738c71dc8c6aa08bce",
+            "bytes": 107
+          },
+          "ledger-HumanEval_38.jsonl": {
+            "sha256": "07032fd6da66d0d82b7e1b9af84dfc3fe7d853b7bc8d46d68b94c9e84d89ef52",
+            "bytes": 107
+          },
+          "ledger-HumanEval_39.jsonl": {
+            "sha256": "b98b0bde250ee854882f041ec84d7b73882085e8e9053722196ddea5e1aa4ba0",
+            "bytes": 107
+          },
+          "ledger-HumanEval_4.jsonl": {
+            "sha256": "2b8b6b75ebae91dc501753a2c9a3ac75bcbb6085e3bcf088831c14fc5718745b",
+            "bytes": 106
+          },
+          "ledger-HumanEval_40.jsonl": {
+            "sha256": "c6616522be84d592c7b4d4e8151d2bd556b4c7760dbd1e00924bd9ab96280ea7",
+            "bytes": 107
+          },
+          "ledger-HumanEval_41.jsonl": {
+            "sha256": "a28699ae824258f340a2a7cd87bb3518b9d7d4299e2d1d4d971fa2a9df192fb3",
+            "bytes": 107
+          },
+          "ledger-HumanEval_42.jsonl": {
+            "sha256": "a9c9fe561f8ff71fd60f22be0648b08f8a5e5c3b208f2508a061f95c2c240ac9",
+            "bytes": 107
+          },
+          "ledger-HumanEval_43.jsonl": {
+            "sha256": "8621d85015b0f50a1333b229ec411fde616abdf4aba092e2f6a3a1aaf92570c7",
+            "bytes": 107
+          },
+          "ledger-HumanEval_44.jsonl": {
+            "sha256": "98de98b8b2228f80ce5218964e5aabd61a90bb4348a8a86f0a57b50a25a99248",
+            "bytes": 107
+          },
+          "ledger-HumanEval_45.jsonl": {
+            "sha256": "c51c3b8fe6460e7a8d45dbda4b129173808be076ffb4d0597242bfc76ee80a9c",
+            "bytes": 107
+          },
+          "ledger-HumanEval_46.jsonl": {
+            "sha256": "afccb8198b57116cdefa5c397a556ce324dae1a1a1c6aad393fc4193253069f1",
+            "bytes": 107
+          },
+          "ledger-HumanEval_47.jsonl": {
+            "sha256": "03b6411e123e5174fd7fe759edd507ba286a4fe53da1a8531f6b785d43aeeef4",
+            "bytes": 107
+          },
+          "ledger-HumanEval_48.jsonl": {
+            "sha256": "25b9282a50e3b49501a06da98587083ea0407b428553a2332f0bfc107193aa48",
+            "bytes": 107
+          },
+          "ledger-HumanEval_49.jsonl": {
+            "sha256": "3f9cca3a8bfa79ddbc7a0e36ed6afdfba80ee78446013aef77954d64042840c0",
+            "bytes": 107
+          },
+          "ledger-HumanEval_5.jsonl": {
+            "sha256": "59b244f34939bc4f9c918d0c7f3d9d259d04b3db04f6aca1674578029f9fe683",
+            "bytes": 106
+          },
+          "ledger-HumanEval_50.jsonl": {
+            "sha256": "3e948550a0cdae9b0a1ea3d5d42678e1ff3825245eeb973dff0caf962c6e18fa",
+            "bytes": 107
+          },
+          "ledger-HumanEval_51.jsonl": {
+            "sha256": "8e7d06f80a75b00c30eed347ef1ca59bb73c01378ec741c3dc6dbd92139d9134",
+            "bytes": 107
+          },
+          "ledger-HumanEval_52.jsonl": {
+            "sha256": "99a7b2bc7fe5b1d146039755abe148df96a7491095bdf89addf83daf08d20f48",
+            "bytes": 107
+          },
+          "ledger-HumanEval_53.jsonl": {
+            "sha256": "1aee5b21190440778aea1302fc550d69728e4b043b786ef7eef2bf01829b3561",
+            "bytes": 107
+          },
+          "ledger-HumanEval_54.jsonl": {
+            "sha256": "810bb5ecc5073d2bff6fd9f9562c367e7adf484d11272ebca3fe8a4f4d906aeb",
+            "bytes": 107
+          },
+          "ledger-HumanEval_55.jsonl": {
+            "sha256": "78c1081404805ecddf1d459caf4aa6bc9f9c4b0361a91901b4495efdef3c8481",
+            "bytes": 107
+          },
+          "ledger-HumanEval_56.jsonl": {
+            "sha256": "07774ec20720a57ba435afde27e1824eadfa5938caf57a9a396652dca6599ffd",
+            "bytes": 107
+          },
+          "ledger-HumanEval_57.jsonl": {
+            "sha256": "f1e8a5b7ffe1da24eaee99ba33ef2888d13c431e0f24fb9446f5430d891b8e56",
+            "bytes": 107
+          },
+          "ledger-HumanEval_58.jsonl": {
+            "sha256": "7208fc2f2dd8bbadb5b2300ffdb6f2ef5267bfa60bb45afdc8a6a4e6dd287d54",
+            "bytes": 107
+          },
+          "ledger-HumanEval_59.jsonl": {
+            "sha256": "5f62c19e8d432fdee4e92a250e60144fc3f99bc915594d139b3aa2078d0a4254",
+            "bytes": 107
+          },
+          "ledger-HumanEval_6.jsonl": {
+            "sha256": "01ee222b24c6b25133e6500c44a8492c1640b3d0d76b079a2a025090bab6fbe5",
+            "bytes": 106
+          },
+          "ledger-HumanEval_60.jsonl": {
+            "sha256": "4f57d8697cdfef04e8914ebda4feaaf22779033f44c26d581a0f328b4e11f74a",
+            "bytes": 107
+          },
+          "ledger-HumanEval_61.jsonl": {
+            "sha256": "e80fbe0d1c698bdb7b33d4e653192da74824e68a7ba601122fff53ae2e5b3712",
+            "bytes": 107
+          },
+          "ledger-HumanEval_62.jsonl": {
+            "sha256": "78ae155d1cb7c44740051ad1b7500d67fc27157c462de2143dc2da4bfd55956d",
+            "bytes": 107
+          },
+          "ledger-HumanEval_63.jsonl": {
+            "sha256": "dbaf2f80904378ce9c3e4b492b957f4b831f5565f14e5171c71656adf0439016",
+            "bytes": 107
+          },
+          "ledger-HumanEval_64.jsonl": {
+            "sha256": "e19277b302558c9f303108dd5721985e1888a5768897c9dbe7ba991be24dc854",
+            "bytes": 107
+          },
+          "ledger-HumanEval_65.jsonl": {
+            "sha256": "b787448e9dba686c5655931cc2e7e337e0f339ed73ab25f1131cb096cb7b397a",
+            "bytes": 107
+          },
+          "ledger-HumanEval_66.jsonl": {
+            "sha256": "37cb384efb2783c5298e43982e02c81c7a729c143517fa7c346b2cb06ef5e14e",
+            "bytes": 107
+          },
+          "ledger-HumanEval_67.jsonl": {
+            "sha256": "c1377b877aa6383b01aed344cb2bde43f8c49257db2c6bbfd51b3106bd867fdd",
+            "bytes": 107
+          },
+          "ledger-HumanEval_68.jsonl": {
+            "sha256": "1d8250d471d47c8f587808dd7796a6966348f1acae976930c29ef862b1daed71",
+            "bytes": 107
+          },
+          "ledger-HumanEval_69.jsonl": {
+            "sha256": "af8dd5a7cdcc29cc9c0d7f716955fade6342234b35c6cd18b05030b7a4c99237",
+            "bytes": 107
+          },
+          "ledger-HumanEval_7.jsonl": {
+            "sha256": "4aa96e978d8255e3c8e50973ad0410e1337d1eed7c0cbbd8f24dac47e1ccb5d2",
+            "bytes": 106
+          },
+          "ledger-HumanEval_70.jsonl": {
+            "sha256": "0e24e7335281ff7c359cdcae581f000e37d241949b76e2f2f1f89bcd0460458a",
+            "bytes": 107
+          },
+          "ledger-HumanEval_71.jsonl": {
+            "sha256": "2860143694e8e88e73bd1e17c97dea6dc4005c673cf85b4b61c30ca8925b46c2",
+            "bytes": 107
+          },
+          "ledger-HumanEval_72.jsonl": {
+            "sha256": "dd49a91fdf1c5582df086d60b332b6672718e8a16c68453f399076bc00732117",
+            "bytes": 107
+          },
+          "ledger-HumanEval_73.jsonl": {
+            "sha256": "d64001eacded8b4688fbdca1dc6d0a75eb1c9b6ccac50bd75e05c50356efcc21",
+            "bytes": 107
+          },
+          "ledger-HumanEval_74.jsonl": {
+            "sha256": "0dc49df2d7db6e1e21f57374272b8a4ba5a16fa60280f20bb1ac29104eb6f0da",
+            "bytes": 107
+          },
+          "ledger-HumanEval_75.jsonl": {
+            "sha256": "17d213f4659b983b9ffa625a91c7d5c62e3c743bd7c2cd55c6e1da7120e10442",
+            "bytes": 107
+          },
+          "ledger-HumanEval_76.jsonl": {
+            "sha256": "a6472d528fb52de86013a6a54982be7e472202ae2e601532e3d04b3542a15623",
+            "bytes": 107
+          },
+          "ledger-HumanEval_77.jsonl": {
+            "sha256": "7a5307db0953a210f9e5bc2c9d896a02bed5df4d6fc3bab012ca07484b3badcb",
+            "bytes": 107
+          },
+          "ledger-HumanEval_78.jsonl": {
+            "sha256": "75d713c63d0dac45a413943c5698349767be3a8de2da4a5fc5024c3c47616729",
+            "bytes": 107
+          },
+          "ledger-HumanEval_79.jsonl": {
+            "sha256": "146c7d27854f78db25368453917ecb14029cba2ac9cdf830a11eaa1f597124a7",
+            "bytes": 107
+          },
+          "ledger-HumanEval_8.jsonl": {
+            "sha256": "90b5760861a782f9bd0a06f52434502452eff5a66916c859d00465820a3ce452",
+            "bytes": 106
+          },
+          "ledger-HumanEval_80.jsonl": {
+            "sha256": "cf50185228140dfde18afe29a0b1996798fbb102c0972adc0071b7b839c5c1e4",
+            "bytes": 107
+          },
+          "ledger-HumanEval_81.jsonl": {
+            "sha256": "e3231b6bde7a63de3befa1b08e4bb76648d02ef016ae57fbe5e9c41070c45788",
+            "bytes": 107
+          },
+          "ledger-HumanEval_82.jsonl": {
+            "sha256": "d5ec3b19f65ca89d566cb74386643f51f30e498e339ee7ffbd729c9899bad426",
+            "bytes": 107
+          },
+          "ledger-HumanEval_83.jsonl": {
+            "sha256": "e486a0462e995358582725a9cf81fe34be6f2a2d9143a93eb11a91688035b80a",
+            "bytes": 107
+          },
+          "ledger-HumanEval_84.jsonl": {
+            "sha256": "12a1d752fd19c40700129bca1b153858f70b6934679e3f38a673e163595f8b24",
+            "bytes": 107
+          },
+          "ledger-HumanEval_85.jsonl": {
+            "sha256": "71722e26151d5427af7e65272ea118c178e3a07eda01dbfd1a49a08220491b4c",
+            "bytes": 107
+          },
+          "ledger-HumanEval_86.jsonl": {
+            "sha256": "55c0b812d258131260eb2e2ad2aa45b181aeb4b989a2e69360f29e9622383f9d",
+            "bytes": 107
+          },
+          "ledger-HumanEval_87.jsonl": {
+            "sha256": "fc3a116a000718abf56389bc3f388f00f4094fdb831e9132adb59c97a823b46d",
+            "bytes": 107
+          },
+          "ledger-HumanEval_88.jsonl": {
+            "sha256": "f39e97c454b5f0acf743b1f61e717905cb8806eaf16eb59da5cc30345bdd9c3c",
+            "bytes": 107
+          },
+          "ledger-HumanEval_89.jsonl": {
+            "sha256": "5aaefa579e5af2aedd40adb23af00aedb794a16f9999c8eccd71e80ee94a0f72",
+            "bytes": 107
+          },
+          "ledger-HumanEval_9.jsonl": {
+            "sha256": "09651f4787bac69cde3794cf8d8a8e9e142de6926d68ae493870d6819d71be59",
+            "bytes": 106
+          },
+          "ledger-HumanEval_90.jsonl": {
+            "sha256": "b462b3184616a7824a6d07160f6a9fedc54e92f1ea894aee0eca918b0dae8957",
+            "bytes": 107
+          },
+          "ledger-HumanEval_91.jsonl": {
+            "sha256": "56abb6a18e4bd845f7f803fd429dcc2135a85807be0d41db1e2c88f964f68bf8",
+            "bytes": 107
+          },
+          "ledger-HumanEval_92.jsonl": {
+            "sha256": "25180954b0f14fb50d7674482443130c9e1a102dd41e3fd1656a101ca75d87e3",
+            "bytes": 107
+          },
+          "ledger-HumanEval_93.jsonl": {
+            "sha256": "ea5edb73e11cedb3d35eb054ccc126ed493047b3a44cd1de784f98d13af8dbed",
+            "bytes": 107
+          },
+          "ledger-HumanEval_94.jsonl": {
+            "sha256": "e678680c860c007e1c9c54c07657052e838530e9fc1ea283d6c0cdb22f62eba2",
+            "bytes": 107
+          },
+          "ledger-HumanEval_95.jsonl": {
+            "sha256": "18c70fbbe979cc0a422134b080d03238f4682afb9a170bbc4f89efed10d9b061",
+            "bytes": 107
+          },
+          "ledger-HumanEval_96.jsonl": {
+            "sha256": "285f05319a333fcef76b6563bb60a0b77eab6b5ad78c6a3f0d9b550cb86edcff",
+            "bytes": 107
+          },
+          "ledger-HumanEval_97.jsonl": {
+            "sha256": "486657691fbdb2430b94522b85b64c01cb0fbc31938fb176e7a35d50de0e8fab",
+            "bytes": 107
+          },
+          "ledger-HumanEval_98.jsonl": {
+            "sha256": "2f225ed477353d4d2aef812481eb5d1e4cf283c68d6f775d1160d3dd886a4d48",
+            "bytes": 107
+          },
+          "ledger-HumanEval_99.jsonl": {
+            "sha256": "052a138e57821d0dee217f07ba86d51947343fd3de61aeaf4cdd2a1499dab9a8",
+            "bytes": 107
+          },
+          "summary.json": {
+            "sha256": "0ea1945fd12d6cf57fcab4f3d268ce099600863f689ce3064662f73d8570fbf4",
+            "bytes": 1131
+          }
+        }
+      },
+      "scoring_provenance": {
+        "classifier_repo": "ProtectAI/distilroberta-base-rejection-v1",
+        "classifier_revision": "86520b5f35829cf9209a449e1716b56c70ddd802",
+        "ifeval_verifier": {
+          "repo": "google-research/google-research",
+          "revision": "e6890f85757dd84e27ca6df2dd30651dafad28e0",
+          "path": "instruction_following_eval",
+          "sha256": {
+            "evaluation_lib.py": "35decc06000718487f44d7deafa6d3f48a8ec0886281edf40162c0265b7d248c",
+            "instructions.py": "60e086f5342a03ce8e18b64bbcccf86308f523c08aa826707a562150a52f3edf",
+            "instructions_util.py": "a73797261eee5bf447e279d82a2b700b1bdd3cb1193412dbab1270a85832bc6b",
+            "instructions_registry.py": "ec92d72c264f6d906978613085db262356174300370a3fffe6fefd5969ce9cfc",
+            "requirements.txt": "1b1716c9ac21b9cc2bd0d7354ed8f7b6982ccf35598529601a7c08508acec94a"
+          }
+        },
+        "secondary_math_parser": {
+          "repo": "openai/simple-evals",
+          "revision": "5e623c2b400af62a1278e23595f95b0853d7fe8a",
+          "path": "mgsm_eval.py",
+          "upstream_sha256": "97297bb6d61d7353012eed610fa5830fe6028b7794afb7e8783d4a7a97ac30d3",
+          "extracted_functions": [
+            "parse_answer",
+            "score_mgsm"
+          ],
+          "module_sha256": "f2c93dd7285f95821aaac6e3db488a58374aa6004fce27a879ee0741635c34e5",
+          "note": "Secondary parser sensitivity after pilot, uniformly applied to every model; primary strict parser unchanged. Arabic uses the same rule with the dataset prefix, not an official simple-evals Arabic task."
+        },
+        "score_source_sha256": "fcdedfff2a9b5beab3e3551e78093830fa6646b6b778a05b97dd5e33451d60f2",
+        "versions": {
+          "nvidia-cusparse-cu12": "12.5.8.93",
+          "tqdm": "4.70.1",
+          "charset-normalizer": "3.5.2",
+          "packaging": "26.3",
+          "nvidia-cublas-cu12": "12.8.4.1",
+          "numpy": "2.4.6",
+          "nvidia-cufft-cu12": "11.3.3.83",
+          "typing_extensions": "4.13.2",
+          "nvidia-cusparselt-cu12": "0.7.1",
+          "absl-py": "2.3.1",
+          "regex": "2026.11.9",
+          "click": "8.5.1",
+          "transformers": "4.57.1",
+          "nvidia-cudnn-cu12": "9.10.2.21",
+          "nltk": "3.9.2",
+          "nvidia-nccl-cu12": "2.27.3",
+          "safetensors": "0.8.0",
+          "fsspec": "2026.9.0",
+          "Jinja2": "3.1.6",
+          "urllib3": "2.8.0",
+          "hf-xet": "1.8.0",
+          "nvidia-cuda-runtime-cu12": "12.8.90",
+          "mpmath": "1.3.0",
+          "networkx": "3.6.1",
+          "certifi": "2026.10.19",
+          "cloudpickle": "3.1.2",
+          "huggingface-hub": "0.34.4",
+          "torch": "2.8.0",
+          "nvidia-nvtx-cu12": "12.8.90",
+          "nvidia-cusolver-cu12": "11.7.3.90",
+          "joblib": "1.6.0",
+          "idna": "3.10",
+          "immutabledict": "4.2.1",
+          "nvidia-curand-cu12": "10.3.9.90",
+          "MarkupSafe": "3.0.4",
+          "requests": "2.34.2",
+          "sympy": "1.14.0",
+          "triton": "3.4.0",
+          "setuptools": "65.5.1",
+          "filelock": "4.2.10",
+          "nvidia-cufile-cu12": "1.13.1.3",
+          "six": "1.17.0",
+          "PyYAML": "6.0.3",
+          "uv": "0.8.17",
+          "wheel": "0.45.1",
+          "pip": "25.2",
+          "tokenizers": "0.22.2",
+          "langdetect": "1.0.9",
+          "nvidia-nvjitlink-cu12": "12.8.93",
+          "nvidia-cuda-nvrtc-cu12": "12.8.93",
+          "nvidia-cuda-cupti-cu12": "12.8.90",
+          "hpack": "4.1.0",
+          "attrs": "25.3.0",
+          "aiosignal": "1.3.2",
+          "yarl": "1.20.0",
+          "grpclib": "0.4.8",
+          "frozenlist": "1.6.0",
+          "aiohappyeyeballs": "2.6.1",
+          "protobuf": "6.31.1",
+          "aiohttp": "3.12.7",
+          "multidict": "6.4.4",
+          "cbor2": "5.7.0",
+          "hyperframe": "6.1.0",
+          "propcache": "0.3.1",
+          "h2": "4.2.0"
+        },
+        "nltk_data_sha256": {
+          "tokenizers/punkt.zip": "51c3078994aeaf650bfc8e028be4fb42b4a0d177d41c012b6a983979653660ec",
+          "tokenizers/punkt_tab.zip": "e57f64187974277726a3417ca6f181ec5403676c717672eef6a748a7b20e0106",
+          "tokenizers/punkt/polish.pickle": "16127b6d10933427a3e90fb20e9be53e1fb371ff79a730c1030734ed80b90c92",
+          "tokenizers/punkt/norwegian.pickle": "e4a97f8f9a03a0338dd746bcc89a0ae0f54ae43b835fa37d83e279e1ca794faf",
+          "tokenizers/punkt/turkish.pickle": "d3ae47d76501d027698809d12e75292c9c392910488543342802f95db9765ccc",
+          "tokenizers/punkt/.DS_Store": "24344a0387309358be715e1b803ec962c9a0800fd7b60a2492a681db81f91873",
+          "tokenizers/punkt/german.pickle": "eab497fa085413130c8fd0fb13b929128930afe2f6a26ea8715c95df7088e97c",
+          "tokenizers/punkt/spanish.pickle": "271dc6027c4aae056f72a9bfab5645cf67e198bf4f972895844e40f5989ccdc3",
+          "tokenizers/punkt/danish.pickle": "ea29760a0a9197f52ca59e78aeafc5a6f55d05258faf7db1709b2b9eb321ef20",
+          "tokenizers/punkt/dutch.pickle": "4a8e26b3d68c45c38e594d19e2d5677447bfdcaa636d3b1e7acfed0e9272d73c",
+          "tokenizers/punkt/french.pickle": "de05f3d5647d3d2296626fb83f68428e4c6ad6e05a00ed4694c8bdc8f2f197ee",
+          "tokenizers/punkt/malayalam.pickle": "1f8cf58acbdb7f472ac40affc13663be42dafb47c15030c11ade0444c9e0e53d",
+          "tokenizers/punkt/czech.pickle": "5ba73d293c7d7953956bcf02f3695ec5c1f0d527f2a3c38097f5593394fa1690",
+          "tokenizers/punkt/estonian.pickle": "3867fee26a36bdb197c64362aa13ac683f5f33fa4d0d225a5d56707582a55a1d",
+          "tokenizers/punkt/swedish.pickle": "40d50ebdad6caa87715f2e300b1217ec92c42de205a543cc4a56903bd2c9acfa",
+          "tokenizers/punkt/README": "d3251cae66a9359bd68c039e3a46172a05ca9df0b27dcdfa23ae594d68d27ec4",
+          "tokenizers/punkt/slovene.pickle": "7dac650212b3787b39996c01bd2084115493e6f6ec390bab61f767525b08b8ea",
+          "tokenizers/punkt/greek.pickle": "21752a6762fad5cfe46fb5c45fad9a85484a0e8e81c67e6af6fb973cfc27d67c",
+          "tokenizers/punkt/english.pickle": "dda37972ae88998a6fd3e3ec002697a6bd362b32d050fda7d7ca5276873092aa",
+          "tokenizers/punkt/italian.pickle": "dcb2717d7be5f26e860a92e05acf69b1123a5f4527cd7a269a9ab9e9e668c805",
+          "tokenizers/punkt/finnish.pickle": "1a9e17b3d5b4df76345d812b8a65b1da0767eda5086eadcc11e625eef0942835",
+          "tokenizers/punkt/russian.pickle": "bc984432fbe31f7000014f8047502476889169c60f09be5413ca09276b16c909",
+          "tokenizers/punkt/portuguese.pickle": "bb01bf7c79a4eadc2178bbd209665139a0e4b38f2d1c44fef097de93955140e0",
+          "tokenizers/punkt/PY3/README": "d3251cae66a9359bd68c039e3a46172a05ca9df0b27dcdfa23ae594d68d27ec4",
+          "tokenizers/punkt/PY3/slovene.pickle": "52ef2cc0ed27d79b3aa635cbbc40ad811883a75a4b8a8be1ae406972870fd864",
+          "tokenizers/punkt/PY3/french.pickle": "28e3a4cd2971989b3cb9fd3433a6f15d17981e464db2be039364313b5de94f29",
+          "tokenizers/punkt/PY3/portuguese.pickle": "02a0b7b25c3c7471e1791b66a31bbb530afbb0160aee4fcecf0107652067b4a1",
+          "tokenizers/punkt/PY3/german.pickle": "ddcbbe85e2042a019b1a6e37fd8c153286c38ba201fae0f5bfd9a3f74abae25c",
+          "tokenizers/punkt/PY3/spanish.pickle": "164a50fadc5a49f8ec7426eae11d3111ee752b48a3ef373d47745011192a5984",
+          "tokenizers/punkt/PY3/norwegian.pickle": "4ff7a46d1438b311457d15d7763060b8d3270852c1850fd788c5cee194dc4a1d",
+          "tokenizers/punkt/PY3/english.pickle": "5cad3758596392364e3be9803dbd7ebeda384b68937b488a01365f5551bb942c",
+          "tokenizers/punkt/PY3/swedish.pickle": "b0f7d538bfd5266633b09e842cd92e9e0ac10f1d923bf211e1497972ddc47318",
+          "tokenizers/punkt/PY3/greek.pickle": "85dabc44ab90a5f208ef37ff6b4892ebe7e740f71fb4da47cfd95417ca3e22fd",
+          "tokenizers/punkt/PY3/malayalam.pickle": "1f8cf58acbdb7f472ac40affc13663be42dafb47c15030c11ade0444c9e0e53d",
+          "tokenizers/punkt/PY3/dutch.pickle": "fda0d6a13f02e8898daec7fe923da88e25abe081bcfa755c0e015075c215fe4c",
+          "tokenizers/punkt/PY3/estonian.pickle": "b364f72538d17b146a98009ad239a8096ce6c0a8b02958c0bc776ecd0c58a25f",
+          "tokenizers/punkt/PY3/italian.pickle": "68a94007b1e4ffdc4d1a190185ca5442c3dafeb17ab39d30329e84cd74a43947",
+          "tokenizers/punkt/PY3/turkish.pickle": "ae68ef5863728ac5332e87eb1f6bae772ff32a13a4caa2b01a5c68103e853c5b",
+          "tokenizers/punkt/PY3/danish.pickle": "6189c7dd254e29e2bd406a7f6a4336297c8953214792466a790ea4444223ceb3",
+          "tokenizers/punkt/PY3/polish.pickle": "624900ae3ddfb4854a98c5d3b8b1c9bb719975f33fee61ce1441dab9f8a00718",
+          "tokenizers/punkt/PY3/czech.pickle": "64b0734b6fbe8e8d7cac79f48d1dd9f853824e57c4e3594dadd74ba2c1d97f50",
+          "tokenizers/punkt/PY3/russian.pickle": "549762f8190024d89b511472df21a3a135eee5d9233e63ac244db737c2c61d7e",
+          "tokenizers/punkt/PY3/finnish.pickle": "6a4b5ff5500ee851c456f9dd40d5fc0d8c1859c88eb3178de1317d26b7d22833",
+          "tokenizers/punkt_tab/README": "d3251cae66a9359bd68c039e3a46172a05ca9df0b27dcdfa23ae594d68d27ec4",
+          "tokenizers/punkt_tab/portuguese/sent_starters.txt": "7b7f4a1586b1df8592bf294c8dd0d19aaf90740d78ce3b40a31eff2b9669d15e",
+          "tokenizers/punkt_tab/portuguese/abbrev_types.txt": "cd5c3cf9c4c8b766bc9edbc96444b0e2189b837b26c583aa2cce83a18e4285f5",
+          "tokenizers/punkt_tab/portuguese/collocations.tab": "a150d2ca3b8bd9d87cd25f2e1d2142607cdf9344efe914bd034af6017a16d841",
+          "tokenizers/punkt_tab/portuguese/ortho_context.tab": "2d9c143f7b322fc74738a21e0b2b04feed1668245ac93e5a8e5399e6e0d8ed8a",
+          "tokenizers/punkt_tab/french/collocations.tab": "8ddf150ef5a0d22694e7c4d807f80b6d55da731ca81ea139633f560b378af990",
+          "tokenizers/punkt_tab/french/abbrev_types.txt": "01747ecfed08830d582d8c94634b63a36da316c0a67feec2871cf03f0dd5c657",
+          "tokenizers/punkt_tab/french/sent_starters.txt": "b45a1ebdae9cdf46cf2e8be016b4718bf4f825445fc783d445faf0cfb2d569f8",
+          "tokenizers/punkt_tab/french/ortho_context.tab": "7090ef4292647d4fe137159bd768a5304015d0614d59fdcfc30b2389634365ac",
+          "tokenizers/punkt_tab/slovene/ortho_context.tab": "3ba826bdd7e5543af7af8e317d4652ba8b47fd812157855a6274ec1387a46b3e",
+          "tokenizers/punkt_tab/slovene/collocations.tab": "4c10daafdff496e369f3a8809bebf187abc851df630457ae93c7ca4fda350651",
+          "tokenizers/punkt_tab/slovene/sent_starters.txt": "85ae14dadef3c4c9f753491d84919abb10e09003adfe248794d4a597fabc5793",
+          "tokenizers/punkt_tab/slovene/abbrev_types.txt": "b1d6b16d1d2b3c0c4132c1528b9843d1557f7f544044db27f4e8d2d6985faf2b",
+          "tokenizers/punkt_tab/english/ortho_context.tab": "4bbcca25ed3d3f06c02402abf8419b9f033b8adc06e7b482eca4e45f81a5dc4c",
+          "tokenizers/punkt_tab/english/sent_starters.txt": "f3f8535483e1dba487241b764945168123bca3209a9645e59acd1225dc76edac",
+          "tokenizers/punkt_tab/english/collocations.tab": "8e2da1225e4dd2cc9dba261ee231ccb134859e21b46006e7f472c5ee269af0cf",
+          "tokenizers/punkt_tab/english/abbrev_types.txt": "92a3e070f43d9b4c5534758ca40ad7343b04e7e29bfe0c2eb658a39445a4f779",
+          "tokenizers/punkt_tab/italian/ortho_context.tab": "462ffd48bc1c9b86efe66d04d826cd1e7a5745be871b8121759ed2920a967370",
+          "tokenizers/punkt_tab/italian/abbrev_types.txt": "5d406f6bfb35e55f6bea282bf148bdcc9e4677860eb01a8e67c34b894274ac50",
+          "tokenizers/punkt_tab/italian/sent_starters.txt": "4dc2cdfda34d4f286e5875d6b62b148771a799a71f0d45b504da23cb61b59d51",
+          "tokenizers/punkt_tab/italian/collocations.tab": "8167b58a049bb04de8d692ed33d72963503a061717cd37cacb33bb2d00669caf",
+          "tokenizers/punkt_tab/swedish/sent_starters.txt": "6f0f7a6773f7488a23bafc6c29e7d4554e792d89c6b7a89fbd6a83bec85ef767",
+          "tokenizers/punkt_tab/swedish/collocations.tab": "bd2260433c94617ba7cf6102e4c1035099a72e5a2f6b60734639252e41633c04",
+          "tokenizers/punkt_tab/swedish/abbrev_types.txt": "1e1a78bd5e7fd6e7eb4b15b751a23d441cda845d5fc0b631958177b2f504da00",
+          "tokenizers/punkt_tab/swedish/ortho_context.tab": "d48c5705d0570993628e539ca211f05cdb5aad7adfcc6ed7b24310941bfac9f8",
+          "tokenizers/punkt_tab/german/ortho_context.tab": "023887e78cfb919f1a00f9a96a88f42131582748cf833fd469490ee66596307c",
+          "tokenizers/punkt_tab/german/sent_starters.txt": "fe4b63edbdd33f78ba0a755f035680a864948b145ae82fc99072440a62a77acd",
+          "tokenizers/punkt_tab/german/collocations.tab": "f77bd513f42e8179f5c932111c312be353d5913387d0bfe90a95c109111bca25",
+          "tokenizers/punkt_tab/german/abbrev_types.txt": "259e5d78bc9d61a12d55ba47552c4e9c5ca08364d78a4669e864fd6de86818e3",
+          "tokenizers/punkt_tab/russian/sent_starters.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "tokenizers/punkt_tab/russian/collocations.tab": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "tokenizers/punkt_tab/russian/abbrev_types.txt": "75191526be516a9918948fe3ad46f6c2c4dee14314359a899b8c2ebf496cb631",
+          "tokenizers/punkt_tab/russian/ortho_context.tab": "b296cba91006569d3ef79eb2cff2378bf5be5b75e9e83ea119b883d3c3ee69b6",
+          "tokenizers/punkt_tab/norwegian/abbrev_types.txt": "beced74076edabe64f45effb823012d1396db41f35fa1d8be2ac6b69bf7bc40f",
+          "tokenizers/punkt_tab/norwegian/collocations.tab": "9c815b01e2f7518552b53f09012644df1fa0d8c7642baff9dc5f61e85e0be422",
+          "tokenizers/punkt_tab/norwegian/ortho_context.tab": "57ea2aa129de6ae414cd0cbecba8b2399c4fde775a2145776a7e8f1023f3f183",
+          "tokenizers/punkt_tab/norwegian/sent_starters.txt": "2b49ef0f0c2e1b4e8b06aee1172e4d88ce6ad01486fe4182cff6fc443a73ddeb",
+          "tokenizers/punkt_tab/polish/abbrev_types.txt": "426ea37ca486d0dcc3653653c613d853d0bb3929037f8ee6bf6c12ddae873aa1",
+          "tokenizers/punkt_tab/polish/sent_starters.txt": "8564076ae22be3d549a3f097a18458ac2967d65bd28dad7cc223c53f5ce27d1b",
+          "tokenizers/punkt_tab/polish/collocations.tab": "961653f0606d85ecb8a760cad4f69df123f010bc4b35de0253feb2d7869666b4",
+          "tokenizers/punkt_tab/polish/ortho_context.tab": "f770804067012ee5707ffc65d90523180e09bab09230a49251777be821a1a4f6",
+          "tokenizers/punkt_tab/estonian/ortho_context.tab": "768b7e6e2ba93ff096e244af175c343b1a73463c4a1b99beebe6a9aa57ea1d78",
+          "tokenizers/punkt_tab/estonian/abbrev_types.txt": "0307878fb32af1e21d8f3ba0644e39c89602f2f8aa4e4304943f7e9e0fd081b2",
+          "tokenizers/punkt_tab/estonian/collocations.tab": "f1400a7ebf3c82a3d5aac886eb5bf06a1a840946cf052bb1532da7c25094797f",
+          "tokenizers/punkt_tab/estonian/sent_starters.txt": "7ade7bb8ca7c527aac09517a6efbdf4f749e9a9fc0e43d2856c58be847030c83",
+          "tokenizers/punkt_tab/dutch/abbrev_types.txt": "dcd4af07101692c986049ba07abcd6b7c1a2464ef4e46a932cf92d6e220388dd",
+          "tokenizers/punkt_tab/dutch/sent_starters.txt": "734454acc5952d91a1dfaca8cdfdabb715d8cdd35789c749528639d80751f45c",
+          "tokenizers/punkt_tab/dutch/collocations.tab": "9a013563bce4637595a6db9d2eeb0ab3f68685d704ae20d97ad718aa91afbe4a",
+          "tokenizers/punkt_tab/dutch/ortho_context.tab": "e2077b5748564a9666e437c0a96ea9c5bed0fe3ab5c756535584785d3af20fc9",
+          "tokenizers/punkt_tab/czech/sent_starters.txt": "42f1de18ab29f9842113b87ec020202c0c25316c97d37f968435a7c7ee3018ca",
+          "tokenizers/punkt_tab/czech/ortho_context.tab": "451cb1a68a03ba88ced1247e6bb48c442e87dce1c9f463104618fac509866cd4",
+          "tokenizers/punkt_tab/czech/collocations.tab": "fd58f549658c8389be32577e232187be9376c79708f66c60388a84916c8f3f3d",
+          "tokenizers/punkt_tab/czech/abbrev_types.txt": "8eb1feb5a6a46f9bd8f6a5ae58e218428a65b459b5ebd61668d83fa80acfc329",
+          "tokenizers/punkt_tab/turkish/ortho_context.tab": "fc214227f99d5ea3ee70d208df16b1984eab375d1946ed379061c6cf5c1718be",
+          "tokenizers/punkt_tab/turkish/abbrev_types.txt": "de56078c5eeb3fe07e24eab67c4aaf44e2181cbe80edd976cb1622819599d6fd",
+          "tokenizers/punkt_tab/turkish/sent_starters.txt": "93239fb55b5d2ae6d945a84a94e118ba8a816326b17cdc11ba8111bea0c97828",
+          "tokenizers/punkt_tab/turkish/collocations.tab": "061ce2981776a8f875da4f24bebd7e138f8da1d9057b43d07f580148ec106a33",
+          "tokenizers/punkt_tab/finnish/sent_starters.txt": "ab81cf3b774ef068ac98adb99fcb3b1a05caf0423bdfa302bdc285e15597567f",
+          "tokenizers/punkt_tab/finnish/abbrev_types.txt": "7829baabcb5d69e26232839a1f5b6bc6d12b0e59b7f0a65f6ab1c163acbeb800",
+          "tokenizers/punkt_tab/finnish/ortho_context.tab": "43e55a8bfa977561337a09105c570036df11346c6f91e57d8631520eefb26167",
+          "tokenizers/punkt_tab/finnish/collocations.tab": "4d717a1b4d1fb7108ca9c9ed2cc63f8b4813cfaf73819e96fce79495ddc48292",
+          "tokenizers/punkt_tab/greek/ortho_context.tab": "a87e4467791f974f808c0d396f6c82cd3a014d4fb4458a2287e2fcbce7084e9c",
+          "tokenizers/punkt_tab/greek/abbrev_types.txt": "0d56253b7ebc83f0f2403479bcf2b8ea51ffdea89ee60e34018eb32e4750d683",
+          "tokenizers/punkt_tab/greek/sent_starters.txt": "1a450aec85164e3fbfeb814768c9f120abd7139726af5bb5e2a577096739ca8e",
+          "tokenizers/punkt_tab/greek/collocations.tab": "0fd732534d56177c80874125ca894ae60aee7b052ee2865a405b454cfd737a6f",
+          "tokenizers/punkt_tab/spanish/abbrev_types.txt": "246a4b3efbad45b63eb9672b718574b535acef6d656f24dc17a46d13a38efba1",
+          "tokenizers/punkt_tab/spanish/collocations.tab": "fa5ea7dbf61f2b1c12180d660a3012c9faaf4962eb12549d77af95e2a40be65d",
+          "tokenizers/punkt_tab/spanish/ortho_context.tab": "1346ecfc57b26174987ffa9bd4a2558a66f46592a513da3859648790351df370",
+          "tokenizers/punkt_tab/spanish/sent_starters.txt": "4d4f7380ba16380b6158e9e8ead6973c52f27e3c9c88af63f15a41c490998319",
+          "tokenizers/punkt_tab/danish/collocations.tab": "b003d3b839afd47afa81d64620a1cf15b75b944212a7f3ee6a7571f041ae02ec",
+          "tokenizers/punkt_tab/danish/ortho_context.tab": "59d7ccda7b1eef6cbcddb6d2f1930c255a5d43600e66e32eff28eab8190c0727",
+          "tokenizers/punkt_tab/danish/abbrev_types.txt": "4a358b26b7ba372cab3cedeb43b4e99a76ae9d01150493964141eb42a62e4a6e",
+          "tokenizers/punkt_tab/danish/sent_starters.txt": "f8dd41bdb1bb633574b22d38205e1c073639a0b80cb9591964bf92d84317527f",
+          "tokenizers/punkt_tab/malayalam/ortho_context.tab": "5289e43f46ef3679f4ebbed95ef1fad5b64dd7aa8957042adb2b661cc6ae4425",
+          "tokenizers/punkt_tab/malayalam/collocations.tab": "71bc38e42133f288c660a338169d8858944135282ad4166a2c5d23cc8a06ed73",
+          "tokenizers/punkt_tab/malayalam/abbrev_types.txt": "1ea2cd01629c8cbeac0799d39383e10c4d6948734c255d37e3ceda550ba62464",
+          "tokenizers/punkt_tab/malayalam/sent_starters.txt": "918c902aa9d0b72700410258274ae335da51148fee7fc27095ab4114b23a245c"
+        }
+      },
+      "coding_summary": {
+        "model": "base",
+        "n": 164,
+        "passed": 72,
+        "infra_errors": 0,
+        "state": "complete_valid",
+        "protocol": "he-suite-4-upstream+declared-single-function-adapter-v1",
+        "backend_gate": {
+          "kind": "live_backend_validation_not_model_scores",
+          "canonical_passed": 164,
+          "canonical_n": 164,
+          "authored_fixture_failures": [],
+          "network_and_secret_probe": {
+            "id": "fixture/0",
+            "finish_reason": "raw+no_stop",
+            "phase_evidence": {
+              "startup": true,
+              "module_sha256": "79901c6f5b59701c465b164aed290fa53abc35abc80a5378fc10f4dac1f9a84c",
+              "input_sha256": "6713454432aaa16923bc72a3cef02edb2581e0520136da956f4f5d952656f712",
+              "driver_python": "3.13.18"
+            },
+            "status": "passed",
+            "correct": 1,
+            "detail": ""
+          },
+          "sdk_version": "1.4.2",
+          "image": "python:3.13-slim@sha256:48d884813cf44e927cf64c5529dd630dd3b18338c6dc727991eef9b71e934a20",
+          "module_sha256": "79901c6f5b59701c465b164aed290fa53abc35abc80a5378fc10f4dac1f9a84c",
+          "state": "pass"
+        },
+        "generation_items_sha256": "d84e0291c88d9e2e3d52cd6ef0f3f286448251e0fbc806ac4471b4b820ab3893"
+      }
+    },
+    "v2": {
+      "run_id": "full-20261113-v2-v2",
+      "manifest": {
+        "kind": "exploratory_clean_model_results",
+        "model": "v2",
+        "repo": "StarWarrior24x7/tiny-aya-global-xref-v2",
+        "subfolder": null,
+        "revision": "14b4675f635b48f670bd42bd8ccea69ed6dec6ad",
+        "panel_id": "exploratory-panel-20261113-v2",
+        "panel_items_sha256": "1de74c71c4133ef515b5f5ea85d528499c9e632b5e0b45b44838d9a73a0909f9",
+        "selected_items_sha256": "450af09314a05835e103bed004a119136d28bbc2271f98f9d70b2fa63861fb4b",
+        "tasks": {
+          "mmlu": 200,
+          "gsm8k": 200,
+          "cybermetric": 500,
+          "humaneval": 164,
+          "ifeval": 200,
+          "everyday_aya": 140,
+          "global_mgsm_en": 50,
+          "global_mgsm_fr": 50,
+          "global_mgsm_ar": 50,
+          "xstest": 450
+        },
+        "source_sha256": {
+          "modal_eval.py": "5e6e59677ee0932195435eb8d74dd48ff9483a334e7201fda706886297fcfc44",
+          "data_audit.py": "7f3a35738062b3cbd283fb777e26424e13d79ce2abf3e333f85440527ec43572",
+          "lock.json": "f3070fc1c82c1f822803d1e8fb485f5ef4829093ad2e5f7e490dbf296efe071d",
+          "tokenizer_audit.py": "fe1dee6e133f752cec0dae7e1916f381e1459679ddd79c1dcb026f237a924db5"
+        },
+        "protocol": {
+          "seed": 0,
+          "precision": "float16",
+          "batch_by_kind": {
+            "mcq": 64,
+            "math": 32,
+            "code": 32,
+            "instructions": 16,
+            "human_pending": 16,
+            "refusal_pending": 64
+          },
+          "do_sample": false,
+          "max_prompt_tokens": 4096,
+          "max_new_tokens": {
+            "mcq": 64,
+            "math": 1024,
+            "instructions": 1024,
+            "human_pending": 512,
+            "refusal_pending": 128,
+            "code": 512
+          },
+          "prompt_overlong": "exclude and report; never silently truncate",
+          "refusal_labels": "pending independent human review; no inability inference from non-success"
+        },
+        "environment": {
+          "transformers": "4.57.1",
+          "packaging": "26.3",
+          "nvidia-cufile-cu12": "1.13.1.3",
+          "tzdata": "2026.6",
+          "dill": "0.4.0",
+          "charset-normalizer": "3.5.2",
+          "huggingface-hub": "0.34.4",
+          "nvidia-cuda-nvrtc-cu12": "12.8.93",
+          "psutil": "7.2.2",
+          "nvidia-nvtx-cu12": "12.8.90",
+          "tokenizers": "0.22.2",
+          "typing_extensions": "4.13.2",
+          "certifi": "2026.10.19",
+          "aiohappyeyeballs": "2.6.1",
+          "nvidia-nccl-cu12": "2.27.3",
+          "torch": "2.8.0",
+          "idna": "3.10",
+          "networkx": "3.6.1",
+          "regex": "2026.11.9",
+          "aiosignal": "1.3.2",
+          "filelock": "4.2.10",
+          "numpy": "2.4.6",
+          "nvidia-cublas-cu12": "12.8.4.1",
+          "safetensors": "0.8.0",
+          "multidict": "6.4.4",
+          "pandas": "3.1.1",
+          "PyYAML": "6.0.3",
+          "nvidia-cuda-cupti-cu12": "12.8.90",
+          "nvidia-curand-cu12": "10.3.9.90",
+          "Jinja2": "3.1.6",
+          "fsspec": "2025.9.0",
+          "tqdm": "4.70.1",
+          "datasets": "4.1.1",
+          "wheel": "0.45.1",
+          "nvidia-cudnn-cu12": "9.10.2.21",
+          "hf-xet": "1.8.0",
+          "nvidia-cusolver-cu12": "11.7.3.90",
+          "propcache": "0.3.1",
+          "nvidia-cusparselt-cu12": "0.7.1",
+          "attrs": "25.3.0",
+          "sympy": "1.14.0",
+          "setuptools": "65.5.1",
+          "python-dateutil": "4.0.0",
+          "requests": "2.34.2",
+          "triton": "3.4.0",
+          "yarl": "1.20.0",
+          "xxhash": "4.1.0",
+          "pyarrow": "26.0.1",
+          "aiohttp": "3.12.7",
+          "accelerate": "1.10.1",
+          "urllib3": "2.8.0",
+          "pip": "25.2",
+          "nvidia-cusparse-cu12": "12.5.8.93",
+          "sentencepiece": "0.2.1",
+          "uv": "0.8.17",
+          "nvidia-cufft-cu12": "11.3.3.83",
+          "multiprocess": "0.70.16",
+          "frozenlist": "1.6.0",
+          "nvidia-cuda-runtime-cu12": "12.8.90",
+          "mpmath": "1.3.0",
+          "nvidia-nvjitlink-cu12": "12.8.93",
+          "MarkupSafe": "3.0.4",
+          "hyperframe": "6.1.0",
+          "hpack": "4.1.0",
+          "protobuf": "6.31.1",
+          "grpclib": "0.4.8",
+          "cbor2": "5.7.0",
+          "h2": "4.2.0"
+        },
+        "python": "3.11.12",
+        "state": "complete",
+        "tokenizer": {
+          "repo": "CohereLabs/tiny-aya-global",
+          "revision": "af89d219b53ed9b13b8a4645f9c8028973510324",
+          "bos_count": 1,
+          "letter_token_ids": {
+            "A": 47,
+            "B": 48,
+            "C": 49,
+            "D": 50
+          }
+        },
+        "candidate_tokenizer_check": {
+          "same_vocab": true,
+          "same_chat_template": true,
+          "same_bos": true,
+          "same_eos": true,
+          "same_probe_encoding": true,
+          "same_model": true,
+          "same_normalizer": true,
+          "same_pre_tokenizer": true,
+          "same_post_processor": true,
+          "same_decoder": true,
+          "same_all_evaluation_renderings": true
+        },
+        "gpu": "NVIDIA L40S",
+        "effective_eos_ids": [
+          3,
+          6
+        ],
+        "performance": {
+          "mmlu": {
+            "seconds": 38.627,
+            "output_tokens": 600,
+            "output_tokens_per_second": 15.53,
+            "peak_allocated_gib": 14.092,
+            "batch_cap": 64
+          },
+          "gsm8k": {
+            "seconds": 414.326,
+            "output_tokens": 30491,
+            "output_tokens_per_second": 73.59,
+            "peak_allocated_gib": 10.111,
+            "batch_cap": 32
+          },
+          "cybermetric": {
+            "seconds": 64.681,
+            "output_tokens": 1500,
+            "output_tokens_per_second": 23.19,
+            "peak_allocated_gib": 11.023,
+            "batch_cap": 64
+          },
+          "humaneval": {
+            "seconds": 175.166,
+            "output_tokens": 14892,
+            "output_tokens_per_second": 85.02,
+            "peak_allocated_gib": 9.974,
+            "batch_cap": 32
+          },
+          "ifeval": {
+            "seconds": 508.011,
+            "output_tokens": 45808,
+            "output_tokens_per_second": 90.17,
+            "peak_allocated_gib": 8.215,
+            "batch_cap": 16
+          },
+          "everyday_aya": {
+            "seconds": 164.558,
+            "output_tokens": 38116,
+            "output_tokens_per_second": 231.63,
+            "peak_allocated_gib": 8.646,
+            "batch_cap": 16
+          },
+          "global_mgsm_en": {
+            "seconds": 109.404,
+            "output_tokens": 6834,
+            "output_tokens_per_second": 62.47,
+            "peak_allocated_gib": 10.033,
+            "batch_cap": 32
+          },
+          "global_mgsm_fr": {
+            "seconds": 112.205,
+            "output_tokens": 8877,
+            "output_tokens_per_second": 79.11,
+            "peak_allocated_gib": 10.099,
+            "batch_cap": 32
+          },
+          "global_mgsm_ar": {
+            "seconds": 110.798,
+            "output_tokens": 10448,
+            "output_tokens_per_second": 94.3,
+            "peak_allocated_gib": 10.111,
+            "batch_cap": 32
+          },
+          "xstest": {
+            "seconds": 70.798,
+            "output_tokens": 39351,
+            "output_tokens_per_second": 555.82,
+            "peak_allocated_gib": 9.853,
+            "batch_cap": 64
+          }
+        },
+        "elapsed_seconds": 1780.43
+      },
+      "private_artifact_indexes": {
+        "generation": {
+          "COMPLETE": {
+            "sha256": "375fbafba7077ca37c915fda1101fba2137c5af48a7afcde0d7ac87d53da5ea2",
+            "bytes": 51
+          },
+          "items.jsonl": {
+            "sha256": "d96091fd64758cca9b3d8471413d0c1d4e82a458b42a2da883d37f4fbee5c523",
+            "bytes": 1193129
+          },
+          "manifest.json": {
+            "sha256": "fc27b04f21298b65528a931289935b841f979ddbafbab341eac046b5daff737a",
+            "bytes": 6176
+          }
+        },
+        "scoring-v1": {
+          "scored_items.jsonl": {
+            "sha256": "191538b0d3c8f054cd3c9f1770e1406b3b3cbd39c520347c4c1d23eb57668430",
+            "bytes": 1837120
+          },
+          "summary.json": {
+            "sha256": "431d033dacd340e59c492bf5a7612b36ebaecb93be4224ea99cba078caf6a899",
+            "bytes": 22447
+          }
+        },
+        "coding-adapted-v2": {
+          "items.jsonl": {
+            "sha256": "f0105e80bf71a9a36d32a08f1c21f79083b5af3e821d4c64aee2285c2d8d478e",
+            "bytes": 241121
+          },
+          "ledger-HumanEval_0.jsonl": {
+            "sha256": "53fe6db14e514ea6676ab8189c75ea1c73bd7417a55ef7f8a1c503aa18977ee7",
+            "bytes": 106
+          },
+          "ledger-HumanEval_1.jsonl": {
+            "sha256": "bae7d6e4750aee618b351e37004ba66f7a23346dd553daf654e0c521c534f880",
+            "bytes": 106
+          },
+          "ledger-HumanEval_10.jsonl": {
+            "sha256": "4479d17e2a17ba98593d9f82da8bd8daf687af2ff472eb72deb325d4727b0eca",
+            "bytes": 107
+          },
+          "ledger-HumanEval_100.jsonl": {
+            "sha256": "d300796221234d4b703f9dfe05a264a443cfe7ed97cf926a73d3b719ba857470",
+            "bytes": 108
+          },
+          "ledger-HumanEval_101.jsonl": {
+            "sha256": "1676f421eee3c2748b2a9ebecc3272cc13c061786008850922c7d59465989eb4",
+            "bytes": 108
+          },
+          "ledger-HumanEval_102.jsonl": {
+            "sha256": "e8f0a5b5b74270f69ed706e2c80f7222eff9f9194ad5ae1cbcb82272d999e312",
+            "bytes": 108
+          },
+          "ledger-HumanEval_103.jsonl": {
+            "sha256": "883cfa917403e62cfb5ecee4bc5786e68cc2be79ff4ed46abbf4735f1eb2abfb",
+            "bytes": 108
+          },
+          "ledger-HumanEval_104.jsonl": {
+            "sha256": "165a9d45e656e25ab1daa3b62ec43cf3c8791f8241d1e90c7b08a4ecd2308b47",
+            "bytes": 108
+          },
+          "ledger-HumanEval_105.jsonl": {
+            "sha256": "74381e9ef173dcf27f136c71a58f8fe7f55ebe1e4791e47edae4321f679e27b3",
+            "bytes": 108
+          },
+          "ledger-HumanEval_106.jsonl": {
+            "sha256": "d1b421f43543679fef4749b7c6cab86e690a3891d2f01d7c49df51c389be4cb3",
+            "bytes": 108
+          },
+          "ledger-HumanEval_107.jsonl": {
+            "sha256": "5132897b54558ce855b4138c075708155a8212f6b600e832f173a0edb5a8f26b",
+            "bytes": 108
+          },
+          "ledger-HumanEval_108.jsonl": {
+            "sha256": "da3251d4134d726ada09e68558282829d0942000efa07bd00b7afec9b3a3f631",
+            "bytes": 108
+          },
+          "ledger-HumanEval_109.jsonl": {
+            "sha256": "6cabf655721e0e7129538a84f6f1b4986f716e5e790c9578ea885fb7e1b15f9d",
+            "bytes": 108
+          },
+          "ledger-HumanEval_11.jsonl": {
+            "sha256": "10f6767427a611b28e13709980480c3480ab9281c511e3061d15d61e727ae429",
+            "bytes": 107
+          },
+          "ledger-HumanEval_110.jsonl": {
+            "sha256": "c406b1238882feb9c7e41f895d455fa73f1a44e48d6354d4a4eb8ccc1e26ec52",
+            "bytes": 108
+          },
+          "ledger-HumanEval_111.jsonl": {
+            "sha256": "59abb61e627e96ae2d6da9a2c604981e899d199680cb0f468c82e0cba88df864",
+            "bytes": 108
+          },
+          "ledger-HumanEval_112.jsonl": {
+            "sha256": "1c33d75b1fb6e4140aa5eba58e8a85a71bfc712a16093ab7fb71c2f210f5d25f",
+            "bytes": 108
+          },
+          "ledger-HumanEval_113.jsonl": {
+            "sha256": "8bc6bc25ab1fcaa443ce7e410caa0810b18cb7d8c2b5dddefc1db0cf67bc72b2",
+            "bytes": 108
+          },
+          "ledger-HumanEval_114.jsonl": {
+            "sha256": "a9caafef5163d638b0cf71889ec4c82774758633675e06d7378d88a5409977b1",
+            "bytes": 108
+          },
+          "ledger-HumanEval_115.jsonl": {
+            "sha256": "002c1491391e96176748dd2514b99dff01e6e0752002773331964cf23aae15ff",
+            "bytes": 108
+          },
+          "ledger-HumanEval_116.jsonl": {
+            "sha256": "9bfef618de2e3651a54b5bd8bb5bfcdd14f1bfa7fac080157aaaea7a7fd6fc56",
+            "bytes": 108
+          },
+          "ledger-HumanEval_117.jsonl": {
+            "sha256": "1d02684aa24e7761dc6cea21bb2b888dafecf29324778bb7661aa34472d2f147",
+            "bytes": 108
+          },
+          "ledger-HumanEval_118.jsonl": {
+            "sha256": "339b7f325d3e404aed93678cfb10386d039a7d729627883669c7c0f762ca70f2",
+            "bytes": 108
+          },
+          "ledger-HumanEval_119.jsonl": {
+            "sha256": "c6f0ff3368a370d3902b9e45b616c5afcea41eb66628bfc607a0f2285588da7d",
+            "bytes": 108
+          },
+          "ledger-HumanEval_12.jsonl": {
+            "sha256": "2159d20081d61dd2ecf538be8a4015c7e9cb7297ef97d6b2861c2a79028476b0",
+            "bytes": 107
+          },
+          "ledger-HumanEval_120.jsonl": {
+            "sha256": "0998503103601c9547052e10a648d6be0960da939ffbb1ec29a2f8f06c8797ee",
+            "bytes": 108
+          },
+          "ledger-HumanEval_121.jsonl": {
+            "sha256": "833cbc6ab9021e1d33fb18035d6c0f527d8ba52cff99b6683ea9116fcb8663ef",
+            "bytes": 108
+          },
+          "ledger-HumanEval_122.jsonl": {
+            "sha256": "13b1401316594fa7ef0a7b72c44f4759aa9b011f21fa544ebc3a8f5c9d153b04",
+            "bytes": 108
+          },
+          "ledger-HumanEval_123.jsonl": {
+            "sha256": "3252d4a360d8e909df04023732b693df61ff24e7c2f78e9727c6eaec092b5d80",
+            "bytes": 108
+          },
+          "ledger-HumanEval_124.jsonl": {
+            "sha256": "499cabca05f209cdfe04cfdd2a4b24cb2c2c1a83190a224336332c72e29dffd2",
+            "bytes": 108
+          },
+          "ledger-HumanEval_125.jsonl": {
+            "sha256": "3b9efd0d34ef227e582ae27d7d348301b239993721bc858a5dac60608db72e55",
+            "bytes": 108
+          },
+          "ledger-HumanEval_126.jsonl": {
+            "sha256": "8f4f95e03ac9463ea3c60c1edcb1e0a4931c3016b3bd3b532d5ecd192ffce83c",
+            "bytes": 108
+          },
+          "ledger-HumanEval_127.jsonl": {
+            "sha256": "eae19603f8d4e84b3bd192c5b9eb1fe9d43a28a018a2a5957dd3d1bda2c4ef65",
+            "bytes": 108
+          },
+          "ledger-HumanEval_128.jsonl": {
+            "sha256": "31b2e108213d2407dab98a5284ce608902972337578821850eef55f40d220f5f",
+            "bytes": 108
+          },
+          "ledger-HumanEval_129.jsonl": {
+            "sha256": "791fc477d7cece19641fa5c7415a8ca5f52f42fd98e0477b5212335bdace13cf",
+            "bytes": 108
+          },
+          "ledger-HumanEval_13.jsonl": {
+            "sha256": "d3347a501a815c82e735e25054ef80f2715c0698cc11034de19457c24a00474e",
+            "bytes": 107
+          },
+          "ledger-HumanEval_130.jsonl": {
+            "sha256": "27b40f56f2fee6ff6c1ffeaa10c6e40cf97de9a5fc964de7a3f4b9ee54aedac2",
+            "bytes": 108
+          },
+          "ledger-HumanEval_131.jsonl": {
+            "sha256": "7085bb89337175eb658c0713dc94465e81310db5e502709f5936835b4beb5a1c",
+            "bytes": 108
+          },
+          "ledger-HumanEval_132.jsonl": {
+            "sha256": "93d3d4277b8f78946bc1f184102ca154ecee4201c0cb8dad40d86155ec4337a9",
+            "bytes": 108
+          },
+          "ledger-HumanEval_133.jsonl": {
+            "sha256": "5ce3b1cc55e508028e089f5465fb95067c3fb11852a78933010e8277eae9d7bc",
+            "bytes": 108
+          },
+          "ledger-HumanEval_134.jsonl": {
+            "sha256": "8aef6e9dd99b23af8a757f6718f74d001a0003cd1ccacd48074cf760e5784fab",
+            "bytes": 108
+          },
+          "ledger-HumanEval_135.jsonl": {
+            "sha256": "4844b070dc22ed33c3f04e4239f238a87084b50b1272c38bb96acdae6b365095",
+            "bytes": 108
+          },
+          "ledger-HumanEval_136.jsonl": {
+            "sha256": "e89f979039c3dbfee589f764fc09848851b0bf9c46a811f0d75b6e212f51e2e7",
+            "bytes": 108
+          },
+          "ledger-HumanEval_137.jsonl": {
+            "sha256": "be55d6bd0a7df49181c8015e6a4d6aa95ba30fc00673743a5393fd7f605b3b95",
+            "bytes": 108
+          },
+          "ledger-HumanEval_138.jsonl": {
+            "sha256": "d6e20589822daa5098cf5926fb42ac1613d8e0bfad7e87c98cb608df84b9068a",
+            "bytes": 108
+          },
+          "ledger-HumanEval_139.jsonl": {
+            "sha256": "195728d9440e2607cb17df0f7f0d95e1ec6be4d9f42334c7caafb9676094f5ef",
+            "bytes": 108
+          },
+          "ledger-HumanEval_14.jsonl": {
+            "sha256": "60504554394704498c5f91b248a5ae7bcd69337dea070bb8daa8921ddce98f19",
+            "bytes": 107
+          },
+          "ledger-HumanEval_140.jsonl": {
+            "sha256": "b425369d80042577398fa9e6c0bc8523d1da80d136f9ab2bc34b2e0da455bd69",
+            "bytes": 108
+          },
+          "ledger-HumanEval_141.jsonl": {
+            "sha256": "f40492e6f157ea160426cf423836754661f92a0bca4346cb166da2b674871b5d",
+            "bytes": 108
+          },
+          "ledger-HumanEval_142.jsonl": {
+            "sha256": "6bd728a2a130642c07f848f42fb42090d0c8cafc3493ce9168780c3a23516c5d",
+            "bytes": 108
+          },
+          "ledger-HumanEval_143.jsonl": {
+            "sha256": "249f5f9a8a2c8bca471b5866193bddc67c3b6e9c25edc9da7ae81e81485e4715",
+            "bytes": 108
+          },
+          "ledger-HumanEval_144.jsonl": {
+            "sha256": "d4dff016b2392b26bfe15b2a20d41ae79e2d11566102e8d0c22feb853359d073",
+            "bytes": 108
+          },
+          "ledger-HumanEval_145.jsonl": {
+            "sha256": "06bd15a70606b067b492c78f72a6e5c0f4c7fbad0724ff35c680afa6b18c06d8",
+            "bytes": 108
+          },
+          "ledger-HumanEval_146.jsonl": {
+            "sha256": "161f13b34ec4366ea872425fa66b6ec4330d556455b4d369cc68499dda293499",
+            "bytes": 108
+          },
+          "ledger-HumanEval_147.jsonl": {
+            "sha256": "07a5d61ed77e72fff36e1d0b0e4edbb2a78f15cc91ea8d628cca880ed470202f",
+            "bytes": 108
+          },
+          "ledger-HumanEval_148.jsonl": {
+            "sha256": "d199ec8cd43b34ce07252a9e9f37a00c85f26c69f1289598a2a18c6ee10c293f",
+            "bytes": 108
+          },
+          "ledger-HumanEval_149.jsonl": {
+            "sha256": "710546850b8764328af18d042396e6116d81ef69200ab7e859c8f73e11a596a4",
+            "bytes": 108
+          },
+          "ledger-HumanEval_15.jsonl": {
+            "sha256": "0f8c4939afbf0a2324b1b5573cf4b85dfbb4a6647edcbba9c62354e95816a9cf",
+            "bytes": 107
+          },
+          "ledger-HumanEval_150.jsonl": {
+            "sha256": "39ca0d51fe7d7ef9db74751c7d6a5aab9137326a547d729aa3341f2c8edf71cc",
+            "bytes": 108
+          },
+          "ledger-HumanEval_151.jsonl": {
+            "sha256": "eb0f028767c872ba3593e35d604cf4055f126b63212d9837aacbeeb22f1f3da3",
+            "bytes": 108
+          },
+          "ledger-HumanEval_152.jsonl": {
+            "sha256": "e8af1dda8fc08e5fde2eb1e1b89f2f427f26f7b4788c6d65a0e87c649f910ddc",
+            "bytes": 108
+          },
+          "ledger-HumanEval_153.jsonl": {
+            "sha256": "b6d24db4757a8832096fc9562ce57fcd6dc9413b3a5b298367b62cdf0dc7a07a",
+            "bytes": 108
+          },
+          "ledger-HumanEval_154.jsonl": {
+            "sha256": "f585129c2bee5b817e6100d352a606f94e569fa87754c36df021b44df9443b55",
+            "bytes": 108
+          },
+          "ledger-HumanEval_155.jsonl": {
+            "sha256": "00692640fa92a33e2be1272f3cca798976d3dfd37df298a513bfc461b9e84964",
+            "bytes": 108
+          },
+          "ledger-HumanEval_156.jsonl": {
+            "sha256": "ad6c9d00c925d78b4690666307fc93e6930fd5831d8c7d7a29414ed7e9548784",
+            "bytes": 108
+          },
+          "ledger-HumanEval_157.jsonl": {
+            "sha256": "d70bde41c38fb322d928dd04b02ef5016b2872f79bb7821843cb2aabc2491bcd",
+            "bytes": 108
+          },
+          "ledger-HumanEval_158.jsonl": {
+            "sha256": "8672156bf430f952ab606c04150572e88c69fbfcc68d1e170b4f64363e7238ca",
+            "bytes": 108
+          },
+          "ledger-HumanEval_159.jsonl": {
+            "sha256": "9f859d5f382b09709f41ff6cbd10fd8c17f9f49ded5cb3a781ce5b44c4567cf5",
+            "bytes": 108
+          },
+          "ledger-HumanEval_16.jsonl": {
+            "sha256": "3ca31907f2446e811c00ff29a3e2fbc2900f70bea23f94233bc77b2353f05c90",
+            "bytes": 107
+          },
+          "ledger-HumanEval_160.jsonl": {
+            "sha256": "52ecac4b9e550f911f3bb9d086ed937135bf025a6e16542f83916cd976dde237",
+            "bytes": 108
+          },
+          "ledger-HumanEval_161.jsonl": {
+            "sha256": "d9432e500e0c790a1bbf11e2fca5efa45c99b608fb8c9bcafaf583f63b4e820d",
+            "bytes": 108
+          },
+          "ledger-HumanEval_162.jsonl": {
+            "sha256": "822189598a314e30c80dbf8453f90ffaaacc681fb4674a354218ef11a6dfde3b",
+            "bytes": 108
+          },
+          "ledger-HumanEval_163.jsonl": {
+            "sha256": "edaba8544dc8d4d4a3a4b54b6cafeea09c309a0560b735c4bdb9fc7807909516",
+            "bytes": 108
+          },
+          "ledger-HumanEval_17.jsonl": {
+            "sha256": "452b0b9a98ab869814047f1d14537dd3d9395e781f77816a5ca9e6a468bc48b2",
+            "bytes": 107
+          },
+          "ledger-HumanEval_18.jsonl": {
+            "sha256": "bd943243c760ecfc1a3fac1446427bc0a4aac000055b84e58e10231977ea6e5e",
+            "bytes": 107
+          },
+          "ledger-HumanEval_19.jsonl": {
+            "sha256": "7f94f0deae348a105324dd49e6867a0db0df71b2918e90203b4ff3096c6b4ad7",
+            "bytes": 107
+          },
+          "ledger-HumanEval_2.jsonl": {
+            "sha256": "29dd47be17443ae334a7ccaa8c6b54d9c83a66842fb6dc3d98c0fc63bd70b860",
+            "bytes": 106
+          },
+          "ledger-HumanEval_20.jsonl": {
+            "sha256": "45482d31a7dd3dc01789132f23e7606a719e7df5d3bde989b75bb2140bb44d26",
+            "bytes": 107
+          },
+          "ledger-HumanEval_21.jsonl": {
+            "sha256": "f0c150b20f703111e7a76942c8455877caf6535c8e858281063dde30e9344c61",
+            "bytes": 107
+          },
+          "ledger-HumanEval_22.jsonl": {
+            "sha256": "90415d00248d755639e2b3fa80bad320a0a8f8afe7f26555f1280b45784f48b9",
+            "bytes": 107
+          },
+          "ledger-HumanEval_23.jsonl": {
+            "sha256": "4bffeecf978cce4c134d07a01271e2f187d520839eb616b8821e486c4fb1a2ec",
+            "bytes": 107
+          },
+          "ledger-HumanEval_24.jsonl": {
+            "sha256": "9a6597c76ccf5f9daa62fb1d09a8da802d87ca0caa0a5137bfb80c7fed7df2a7",
+            "bytes": 107
+          },
+          "ledger-HumanEval_25.jsonl": {
+            "sha256": "d01ce52c80c1ed8e4f1ca402e39bf8ec6ba7a8a6aa53952ebc074d48066e8232",
+            "bytes": 107
+          },
+          "ledger-HumanEval_26.jsonl": {
+            "sha256": "77b22e1c518a256a5595d3701165ca85eb2345f6ccdba3d17276f7a091f9b806",
+            "bytes": 107
+          },
+          "ledger-HumanEval_27.jsonl": {
+            "sha256": "6fd6673bcb4343e2698cdcb765e04316add7fa1f8937d7169471248385508fe5",
+            "bytes": 107
+          },
+          "ledger-HumanEval_28.jsonl": {
+            "sha256": "a911955945e964c9bfba4080ffd29f06035f2379690c01fd01afac930dae27fb",
+            "bytes": 107
+          },
+          "ledger-HumanEval_29.jsonl": {
+            "sha256": "afe2dca97d19d5d9318e540ed771048a9927eb646bef3c7cd48179b5669d8a62",
+            "bytes": 107
+          },
+          "ledger-HumanEval_3.jsonl": {
+            "sha256": "42c72c2a8fe80f61579a51ce36ac4c0f0eafc184dac3521be5510ddd3a98aac2",
+            "bytes": 106
+          },
+          "ledger-HumanEval_30.jsonl": {
+            "sha256": "b4df0a4acd0f5659ff2942084bfb5973255606ccde1e515939baabb8e6b722b3",
+            "bytes": 107
+          },
+          "ledger-HumanEval_31.jsonl": {
+            "sha256": "78f8b1285a0b89ed24a4849ca52c7f8366318f129b4478ba599c17bd08189fa6",
+            "bytes": 107
+          },
+          "ledger-HumanEval_32.jsonl": {
+            "sha256": "45e70355684c40674cbd718d0431e9d0bf9f10a4877b41c8d597225a28205010",
+            "bytes": 107
+          },
+          "ledger-HumanEval_33.jsonl": {
+            "sha256": "ede328e290f5c4979468da44150b533097d721ac19c5c422c8c32880f96ff2b5",
+            "bytes": 107
+          },
+          "ledger-HumanEval_34.jsonl": {
+            "sha256": "d4622327572004f7835f9aa3634140a57045c5e041a5eae2a8aabadb0eb6e64a",
+            "bytes": 107
+          },
+          "ledger-HumanEval_35.jsonl": {
+            "sha256": "a3aff4a56d30ae01f314b074c53bdcb40d7812abdbaf6b452cd7ee86ed296f7c",
+            "bytes": 107
+          },
+          "ledger-HumanEval_36.jsonl": {
+            "sha256": "0638aaa1ba8dc42ab7fb4239a6096fb2f9d9822c78a6765eff86757d37d6a093",
+            "bytes": 107
+          },
+          "ledger-HumanEval_37.jsonl": {
+            "sha256": "f5ad4ee8017c780177fa5f23bc845d78e47ddd0a0c1d73b12f782294d368d126",
+            "bytes": 107
+          },
+          "ledger-HumanEval_38.jsonl": {
+            "sha256": "a35864524c5d527a70922a7764897997541245cd1f298b8760fd70a0b4b630b6",
+            "bytes": 107
+          },
+          "ledger-HumanEval_39.jsonl": {
+            "sha256": "4cad1949c2b2d260f11cf37f954737122cddbad09e8193a2cea66cefc42cf810",
+            "bytes": 107
+          },
+          "ledger-HumanEval_4.jsonl": {
+            "sha256": "592364864a80023d51cf4c449c66da422bea88f213160b84379bffbab1611619",
+            "bytes": 106
+          },
+          "ledger-HumanEval_40.jsonl": {
+            "sha256": "abfeff1116ee2a6d6e40174d5b8364bf9e99f545872276870686e5de8a11746f",
+            "bytes": 107
+          },
+          "ledger-HumanEval_41.jsonl": {
+            "sha256": "6f7d690ced06dfec5b82b4dd49028eee7b7e395079c0716a30664329f2038c2b",
+            "bytes": 107
+          },
+          "ledger-HumanEval_42.jsonl": {
+            "sha256": "60e6c335d2d35b8c632c163775961d34da66fa79e5f92b39cd58f574030cb735",
+            "bytes": 107
+          },
+          "ledger-HumanEval_43.jsonl": {
+            "sha256": "77942779dfe203a5884f631096db03e96cf3b0ce7e23175c451f1407ba7ece09",
+            "bytes": 107
+          },
+          "ledger-HumanEval_44.jsonl": {
+            "sha256": "c46e85ed4756765452f16fbcd9ab0c70ee155f2dcf917e0a338bbaf1269c951e",
+            "bytes": 107
+          },
+          "ledger-HumanEval_45.jsonl": {
+            "sha256": "15fb934159a3c12b28384aeddb98761b490537f7bf5050e5fefd849695e65c26",
+            "bytes": 107
+          },
+          "ledger-HumanEval_46.jsonl": {
+            "sha256": "a7caca15ba1dec02ff07c8655b04d10c52d1085035871f046384bb0d0a6ce54b",
+            "bytes": 107
+          },
+          "ledger-HumanEval_47.jsonl": {
+            "sha256": "78e8929324ef488531850d91551023bff1aca025499646e4238c0d0cf876f757",
+            "bytes": 107
+          },
+          "ledger-HumanEval_48.jsonl": {
+            "sha256": "961452648577eda40bbff3a1d543bec62d9d660172af142c6d379b017f226d49",
+            "bytes": 107
+          },
+          "ledger-HumanEval_49.jsonl": {
+            "sha256": "5435a4f63f51e26d50ffd66b2e6951f1c9b2b0967b2d684e335eaffdac308b6c",
+            "bytes": 107
+          },
+          "ledger-HumanEval_5.jsonl": {
+            "sha256": "a2e91db1bbb9857be5e9465232a291793b5cf8c6363563ae5c43e7ccfa631395",
+            "bytes": 106
+          },
+          "ledger-HumanEval_50.jsonl": {
+            "sha256": "32f19c69f40f14d339b2cdf8d9ae3ab314c956d4018f9f6d4c47912a3f069a4d",
+            "bytes": 107
+          },
+          "ledger-HumanEval_51.jsonl": {
+            "sha256": "dcae197454e0fee2f7914a99482a4675de5d3893d8d9dc4d85611fe06ba702ed",
+            "bytes": 107
+          },
+          "ledger-HumanEval_52.jsonl": {
+            "sha256": "463950dc13e3ff5365a8fb2ccfee1de0d5da1b9eb655fd627a56b56f56b703b8",
+            "bytes": 107
+          },
+          "ledger-HumanEval_53.jsonl": {
+            "sha256": "e9e96367d1ce7ee41ae51600cc8ade5f0277a3bd954d024e2f6048c6e3f28512",
+            "bytes": 107
+          },
+          "ledger-HumanEval_54.jsonl": {
+            "sha256": "869246cc82867f481270a2353ad888bf2a7a865b90b19c756bf77711f5081f7d",
+            "bytes": 107
+          },
+          "ledger-HumanEval_55.jsonl": {
+            "sha256": "de2d47c98a8ffe581274d15a0ae2d83087c8556a8a9a1bb222ce5790cc2fd1a9",
+            "bytes": 107
+          },
+          "ledger-HumanEval_56.jsonl": {
+            "sha256": "b4147f72b05498542fedc06e8bccf454fd9b988290df86b5b13af7e9c686ece8",
+            "bytes": 107
+          },
+          "ledger-HumanEval_57.jsonl": {
+            "sha256": "84dc01da7a2dc0c18f0d80a3a5208a6b36832e1f35ebf4d45a47e2b4800e679c",
+            "bytes": 107
+          },
+          "ledger-HumanEval_58.jsonl": {
+            "sha256": "f531af860037dc76a7146bf1a30503f3379870bde8a3eac4a9bb0b05a693909c",
+            "bytes": 107
+          },
+          "ledger-HumanEval_59.jsonl": {
+            "sha256": "a5656309f110a3574a476c8cc5ca91e0297bc8279a918bfe1d477f197509b2e8",
+            "bytes": 107
+          },
+          "ledger-HumanEval_6.jsonl": {
+            "sha256": "87cf4ac305929362e0a6e4dff482175dc3ec3796348c6e98eeadbe463a995339",
+            "bytes": 106
+          },
+          "ledger-HumanEval_60.jsonl": {
+            "sha256": "810833bc11d1490d38a68044dbf715d2387593a6bd9010a9c42d6d1b9aa38ff4",
+            "bytes": 107
+          },
+          "ledger-HumanEval_61.jsonl": {
+            "sha256": "cc12a6dc8bc18446f2997a13f7cb20e83806f7a4d07fe80ae80a99c5fe0a936b",
+            "bytes": 107
+          },
+          "ledger-HumanEval_62.jsonl": {
+            "sha256": "f438e648330558c49ee80de7ba9a348a57dbc9a3c1d805f09871933061c10c4b",
+            "bytes": 107
+          },
+          "ledger-HumanEval_63.jsonl": {
+            "sha256": "aa4f73fd236d3a7f04b01202f922c8a261f88b16e82790c4a78b84f8488349cc",
+            "bytes": 107
+          },
+          "ledger-HumanEval_64.jsonl": {
+            "sha256": "015ad8fd2e85c723c989d626d98226d9abb82f29cf8bd6c3bcde6559368a4aff",
+            "bytes": 107
+          },
+          "ledger-HumanEval_65.jsonl": {
+            "sha256": "4c950e9b56723a2b565274ade04b2b355f68cc8fb98222d51dd469714f92dd86",
+            "bytes": 107
+          },
+          "ledger-HumanEval_66.jsonl": {
+            "sha256": "a4002b4dc4409359785aef276bef4477fe335255182ccb4c3b660b450efee0db",
+            "bytes": 107
+          },
+          "ledger-HumanEval_67.jsonl": {
+            "sha256": "06865f803d88f5105757c27ef65520ca90839b6877011ede81e1c9502f60b6ce",
+            "bytes": 107
+          },
+          "ledger-HumanEval_68.jsonl": {
+            "sha256": "9eee8d65992d306e581e51524aa3385653deef2bbe3560e669eb5a056de2c510",
+            "bytes": 107
+          },
+          "ledger-HumanEval_69.jsonl": {
+            "sha256": "8504bad9a6a843394b881f32591db9b8bff385e54caddc952b8c0344b0176c23",
+            "bytes": 107
+          },
+          "ledger-HumanEval_7.jsonl": {
+            "sha256": "ffde1f865e860733e98949dfcf71727be9fe6e09e90f4ea8ffd8a989ecc5524e",
+            "bytes": 106
+          },
+          "ledger-HumanEval_70.jsonl": {
+            "sha256": "fb8ef4dbbbf084ab42a34808e848e174db2c8d3bb76e0497fb54410bea969d5d",
+            "bytes": 107
+          },
+          "ledger-HumanEval_71.jsonl": {
+            "sha256": "b39a89622e7ae437773246b16d79cd5bdf56e9173513dcfb7c1c58779d1e81b8",
+            "bytes": 107
+          },
+          "ledger-HumanEval_72.jsonl": {
+            "sha256": "9774d851fd9db3b65179116f2d5d9b794957382cb374586f2803a2a457f2fc45",
+            "bytes": 107
+          },
+          "ledger-HumanEval_73.jsonl": {
+            "sha256": "96b069abcc5ba9e41b761c0770b9da22d274310566b07cc63dbd06e8bf83190e",
+            "bytes": 107
+          },
+          "ledger-HumanEval_74.jsonl": {
+            "sha256": "81346e320a5f521284064777176bff948c5a0970759449bbaba9084ebb87170a",
+            "bytes": 107
+          },
+          "ledger-HumanEval_75.jsonl": {
+            "sha256": "a13e7a651645daf4a7bd9743782aa7b9007eb49f8ff05fba2e43d2f37025a4f3",
+            "bytes": 107
+          },
+          "ledger-HumanEval_76.jsonl": {
+            "sha256": "3608021e26c4b94521b5514811a73242d5cc361b4aff5650be4b627f99835c03",
+            "bytes": 107
+          },
+          "ledger-HumanEval_77.jsonl": {
+            "sha256": "7f83e2cc9cdac6429086b01f85a14db717904f3c47032ea0f284cc7eae829ff6",
+            "bytes": 107
+          },
+          "ledger-HumanEval_78.jsonl": {
+            "sha256": "70b52555a2d3b224fb1695e62d8e195a4a291a686d360a93760fa97b73779f13",
+            "bytes": 107
+          },
+          "ledger-HumanEval_79.jsonl": {
+            "sha256": "154298425aaff95e36bd0a2e831cf22e16261062d0eeeb6511ca1e00ac01abbd",
+            "bytes": 107
+          },
+          "ledger-HumanEval_8.jsonl": {
+            "sha256": "61cb1267d1c24f66a9f7637e2f8b0cb9c61485aba4aa739e30de46edc8ff05e2",
+            "bytes": 106
+          },
+          "ledger-HumanEval_80.jsonl": {
+            "sha256": "07e6bad692edf9e902748dc4816f9a69369b8b932413e62326a95007215cb182",
+            "bytes": 107
+          },
+          "ledger-HumanEval_81.jsonl": {
+            "sha256": "016b742bb579c289b3fc9bdffe8154bd100c7d0276549d462c78b521c52eb7e4",
+            "bytes": 107
+          },
+          "ledger-HumanEval_82.jsonl": {
+            "sha256": "13fd0bfc8b3ad9ca9c00fbd06d0ebc7db3023fab378790db25cc07127123d0d8",
+            "bytes": 107
+          },
+          "ledger-HumanEval_83.jsonl": {
+            "sha256": "b7d90c09a5d124214092a223bdc2aa14c347f4bf08197bfa79293103a952536b",
+            "bytes": 107
+          },
+          "ledger-HumanEval_84.jsonl": {
+            "sha256": "f3396b088ede9ffd7ff989cc767a0de797e724266438e7595e56d46cb60f9266",
+            "bytes": 107
+          },
+          "ledger-HumanEval_85.jsonl": {
+            "sha256": "bae5baab7eddec028c6f129273371d050d930fd7d715c29f554be0d0234caebb",
+            "bytes": 107
+          },
+          "ledger-HumanEval_86.jsonl": {
+            "sha256": "7303d147553dedb44f9707d9d8b00e35ab42e912c191c9ea9c2d652aff3dac69",
+            "bytes": 107
+          },
+          "ledger-HumanEval_87.jsonl": {
+            "sha256": "9e55bb3093227ec70f36fba1c2b3896aeda698cc921be8bc1478deccd224d5a5",
+            "bytes": 107
+          },
+          "ledger-HumanEval_88.jsonl": {
+            "sha256": "39e5945202bfc5cd6d6e74e0c44c50c225c83b0f0c7444f9293ce2b603eaeaec",
+            "bytes": 107
+          },
+          "ledger-HumanEval_89.jsonl": {
+            "sha256": "e2f6ea802b2a840e182fe376e90f2e65d70e519122df985a541e513964b9ff17",
+            "bytes": 107
+          },
+          "ledger-HumanEval_9.jsonl": {
+            "sha256": "8157c2228131c289cf3d8f1edfeed07ec0a3e79d9f5f3d9ccf3a5c360f1bf945",
+            "bytes": 106
+          },
+          "ledger-HumanEval_90.jsonl": {
+            "sha256": "74d643dc4ef5fd2fc734868c6166680fe04ef09abdc98e42bd625800932dea16",
+            "bytes": 107
+          },
+          "ledger-HumanEval_91.jsonl": {
+            "sha256": "e71e5c9f6b8899459e1015bf687147a4a3bb5f51226af90172084239472c4268",
+            "bytes": 107
+          },
+          "ledger-HumanEval_92.jsonl": {
+            "sha256": "d19027db62e1bb8f85ba8a2db84ad84578c81e85bcc7872323ed214bed7d3617",
+            "bytes": 107
+          },
+          "ledger-HumanEval_93.jsonl": {
+            "sha256": "89e9b572a488484c6bca022eebc8e1b1ca76e1ad17229700648d938b137dac02",
+            "bytes": 107
+          },
+          "ledger-HumanEval_94.jsonl": {
+            "sha256": "4555c061834903aa13fc7c14b15b85eddec462312bf8a970d1f4e1b90fea52e4",
+            "bytes": 107
+          },
+          "ledger-HumanEval_95.jsonl": {
+            "sha256": "2fee844741e15cfd7d851467f15d21f6f181bd7fb61bd403b2e638d959528de5",
+            "bytes": 107
+          },
+          "ledger-HumanEval_96.jsonl": {
+            "sha256": "6ee622fffd81b6549efd62340f572decb46bc8e3b042bf67606d99bc10137781",
+            "bytes": 107
+          },
+          "ledger-HumanEval_97.jsonl": {
+            "sha256": "1eccda07deb99c850fea363acc2787de21892fdb5aac6992873c16d69385e02c",
+            "bytes": 107
+          },
+          "ledger-HumanEval_98.jsonl": {
+            "sha256": "bb3fcdddaf76ff7825ace78d1e768c29f8c4596956de16e0c375fe43ee9eb399",
+            "bytes": 107
+          },
+          "ledger-HumanEval_99.jsonl": {
+            "sha256": "5a20b9ee12d5ed67da9a096bbc3a0e9daaa10352537d0a003df90f58ad7e887d",
+            "bytes": 107
+          },
+          "summary.json": {
+            "sha256": "ca4e88deb9008369a01c9d8e96b83c130b493a613fce15e16d29f5b29bf38fa8",
+            "bytes": 1129
+          }
+        }
+      },
+      "scoring_provenance": {
+        "classifier_repo": "ProtectAI/distilroberta-base-rejection-v1",
+        "classifier_revision": "86520b5f35829cf9209a449e1716b56c70ddd802",
+        "ifeval_verifier": {
+          "repo": "google-research/google-research",
+          "revision": "e6890f85757dd84e27ca6df2dd30651dafad28e0",
+          "path": "instruction_following_eval",
+          "sha256": {
+            "evaluation_lib.py": "35decc06000718487f44d7deafa6d3f48a8ec0886281edf40162c0265b7d248c",
+            "instructions.py": "60e086f5342a03ce8e18b64bbcccf86308f523c08aa826707a562150a52f3edf",
+            "instructions_util.py": "a73797261eee5bf447e279d82a2b700b1bdd3cb1193412dbab1270a85832bc6b",
+            "instructions_registry.py": "ec92d72c264f6d906978613085db262356174300370a3fffe6fefd5969ce9cfc",
+            "requirements.txt": "1b1716c9ac21b9cc2bd0d7354ed8f7b6982ccf35598529601a7c08508acec94a"
+          }
+        },
+        "secondary_math_parser": {
+          "repo": "openai/simple-evals",
+          "revision": "5e623c2b400af62a1278e23595f95b0853d7fe8a",
+          "path": "mgsm_eval.py",
+          "upstream_sha256": "97297bb6d61d7353012eed610fa5830fe6028b7794afb7e8783d4a7a97ac30d3",
+          "extracted_functions": [
+            "parse_answer",
+            "score_mgsm"
+          ],
+          "module_sha256": "f2c93dd7285f95821aaac6e3db488a58374aa6004fce27a879ee0741635c34e5",
+          "note": "Secondary parser sensitivity after pilot, uniformly applied to every model; primary strict parser unchanged. Arabic uses the same rule with the dataset prefix, not an official simple-evals Arabic task."
+        },
+        "score_source_sha256": "fcdedfff2a9b5beab3e3551e78093830fa6646b6b778a05b97dd5e33451d60f2",
+        "versions": {
+          "packaging": "26.3",
+          "nvidia-cudnn-cu12": "9.10.2.21",
+          "nvidia-cufile-cu12": "1.13.1.3",
+          "nvidia-cusparse-cu12": "12.5.8.93",
+          "nvidia-cuda-nvrtc-cu12": "12.8.93",
+          "nvidia-cusparselt-cu12": "0.7.1",
+          "Jinja2": "3.1.6",
+          "nvidia-nvtx-cu12": "12.8.90",
+          "six": "1.17.0",
+          "numpy": "2.4.6",
+          "transformers": "4.57.1",
+          "cloudpickle": "3.1.2",
+          "requests": "2.34.2",
+          "wheel": "0.45.1",
+          "safetensors": "0.8.0",
+          "nvidia-cublas-cu12": "12.8.4.1",
+          "setuptools": "65.5.1",
+          "tqdm": "4.70.1",
+          "immutabledict": "4.2.1",
+          "torch": "2.8.0",
+          "urllib3": "2.8.0",
+          "idna": "3.10",
+          "networkx": "3.6.1",
+          "sympy": "1.14.0",
+          "MarkupSafe": "3.0.4",
+          "nvidia-cusolver-cu12": "11.7.3.90",
+          "hf-xet": "1.8.0",
+          "mpmath": "1.3.0",
+          "nvidia-nccl-cu12": "2.27.3",
+          "absl-py": "2.3.1",
+          "huggingface-hub": "0.34.4",
+          "joblib": "1.6.0",
+          "certifi": "2026.10.19",
+          "click": "8.5.1",
+          "uv": "0.8.17",
+          "filelock": "4.2.10",
+          "typing_extensions": "4.13.2",
+          "PyYAML": "6.0.3",
+          "tokenizers": "0.22.2",
+          "charset-normalizer": "3.5.2",
+          "nvidia-curand-cu12": "10.3.9.90",
+          "langdetect": "1.0.9",
+          "nvidia-cuda-cupti-cu12": "12.8.90",
+          "pip": "25.2",
+          "regex": "2026.11.9",
+          "nvidia-cufft-cu12": "11.3.3.83",
+          "triton": "3.4.0",
+          "nvidia-nvjitlink-cu12": "12.8.93",
+          "nvidia-cuda-runtime-cu12": "12.8.90",
+          "fsspec": "2026.9.0",
+          "nltk": "3.9.2",
+          "aiohappyeyeballs": "2.6.1",
+          "grpclib": "0.4.8",
+          "attrs": "25.3.0",
+          "frozenlist": "1.6.0",
+          "yarl": "1.20.0",
+          "propcache": "0.3.1",
+          "h2": "4.2.0",
+          "aiohttp": "3.12.7",
+          "hyperframe": "6.1.0",
+          "hpack": "4.1.0",
+          "protobuf": "6.31.1",
+          "multidict": "6.4.4",
+          "aiosignal": "1.3.2",
+          "cbor2": "5.7.0"
+        },
+        "nltk_data_sha256": {
+          "tokenizers/punkt.zip": "51c3078994aeaf650bfc8e028be4fb42b4a0d177d41c012b6a983979653660ec",
+          "tokenizers/punkt_tab.zip": "e57f64187974277726a3417ca6f181ec5403676c717672eef6a748a7b20e0106",
+          "tokenizers/punkt_tab/README": "d3251cae66a9359bd68c039e3a46172a05ca9df0b27dcdfa23ae594d68d27ec4",
+          "tokenizers/punkt_tab/english/sent_starters.txt": "f3f8535483e1dba487241b764945168123bca3209a9645e59acd1225dc76edac",
+          "tokenizers/punkt_tab/english/abbrev_types.txt": "92a3e070f43d9b4c5534758ca40ad7343b04e7e29bfe0c2eb658a39445a4f779",
+          "tokenizers/punkt_tab/english/ortho_context.tab": "4bbcca25ed3d3f06c02402abf8419b9f033b8adc06e7b482eca4e45f81a5dc4c",
+          "tokenizers/punkt_tab/english/collocations.tab": "8e2da1225e4dd2cc9dba261ee231ccb134859e21b46006e7f472c5ee269af0cf",
+          "tokenizers/punkt_tab/swedish/sent_starters.txt": "6f0f7a6773f7488a23bafc6c29e7d4554e792d89c6b7a89fbd6a83bec85ef767",
+          "tokenizers/punkt_tab/swedish/abbrev_types.txt": "1e1a78bd5e7fd6e7eb4b15b751a23d441cda845d5fc0b631958177b2f504da00",
+          "tokenizers/punkt_tab/swedish/collocations.tab": "bd2260433c94617ba7cf6102e4c1035099a72e5a2f6b60734639252e41633c04",
+          "tokenizers/punkt_tab/swedish/ortho_context.tab": "d48c5705d0570993628e539ca211f05cdb5aad7adfcc6ed7b24310941bfac9f8",
+          "tokenizers/punkt_tab/slovene/sent_starters.txt": "85ae14dadef3c4c9f753491d84919abb10e09003adfe248794d4a597fabc5793",
+          "tokenizers/punkt_tab/slovene/ortho_context.tab": "3ba826bdd7e5543af7af8e317d4652ba8b47fd812157855a6274ec1387a46b3e",
+          "tokenizers/punkt_tab/slovene/abbrev_types.txt": "b1d6b16d1d2b3c0c4132c1528b9843d1557f7f544044db27f4e8d2d6985faf2b",
+          "tokenizers/punkt_tab/slovene/collocations.tab": "4c10daafdff496e369f3a8809bebf187abc851df630457ae93c7ca4fda350651",
+          "tokenizers/punkt_tab/finnish/collocations.tab": "4d717a1b4d1fb7108ca9c9ed2cc63f8b4813cfaf73819e96fce79495ddc48292",
+          "tokenizers/punkt_tab/finnish/ortho_context.tab": "43e55a8bfa977561337a09105c570036df11346c6f91e57d8631520eefb26167",
+          "tokenizers/punkt_tab/finnish/abbrev_types.txt": "7829baabcb5d69e26232839a1f5b6bc6d12b0e59b7f0a65f6ab1c163acbeb800",
+          "tokenizers/punkt_tab/finnish/sent_starters.txt": "ab81cf3b774ef068ac98adb99fcb3b1a05caf0423bdfa302bdc285e15597567f",
+          "tokenizers/punkt_tab/estonian/ortho_context.tab": "768b7e6e2ba93ff096e244af175c343b1a73463c4a1b99beebe6a9aa57ea1d78",
+          "tokenizers/punkt_tab/estonian/sent_starters.txt": "7ade7bb8ca7c527aac09517a6efbdf4f749e9a9fc0e43d2856c58be847030c83",
+          "tokenizers/punkt_tab/estonian/abbrev_types.txt": "0307878fb32af1e21d8f3ba0644e39c89602f2f8aa4e4304943f7e9e0fd081b2",
+          "tokenizers/punkt_tab/estonian/collocations.tab": "f1400a7ebf3c82a3d5aac886eb5bf06a1a840946cf052bb1532da7c25094797f",
+          "tokenizers/punkt_tab/french/abbrev_types.txt": "01747ecfed08830d582d8c94634b63a36da316c0a67feec2871cf03f0dd5c657",
+          "tokenizers/punkt_tab/french/sent_starters.txt": "b45a1ebdae9cdf46cf2e8be016b4718bf4f825445fc783d445faf0cfb2d569f8",
+          "tokenizers/punkt_tab/french/collocations.tab": "8ddf150ef5a0d22694e7c4d807f80b6d55da731ca81ea139633f560b378af990",
+          "tokenizers/punkt_tab/french/ortho_context.tab": "7090ef4292647d4fe137159bd768a5304015d0614d59fdcfc30b2389634365ac",
+          "tokenizers/punkt_tab/czech/abbrev_types.txt": "8eb1feb5a6a46f9bd8f6a5ae58e218428a65b459b5ebd61668d83fa80acfc329",
+          "tokenizers/punkt_tab/czech/collocations.tab": "fd58f549658c8389be32577e232187be9376c79708f66c60388a84916c8f3f3d",
+          "tokenizers/punkt_tab/czech/sent_starters.txt": "42f1de18ab29f9842113b87ec020202c0c25316c97d37f968435a7c7ee3018ca",
+          "tokenizers/punkt_tab/czech/ortho_context.tab": "451cb1a68a03ba88ced1247e6bb48c442e87dce1c9f463104618fac509866cd4",
+          "tokenizers/punkt_tab/dutch/ortho_context.tab": "e2077b5748564a9666e437c0a96ea9c5bed0fe3ab5c756535584785d3af20fc9",
+          "tokenizers/punkt_tab/dutch/abbrev_types.txt": "dcd4af07101692c986049ba07abcd6b7c1a2464ef4e46a932cf92d6e220388dd",
+          "tokenizers/punkt_tab/dutch/sent_starters.txt": "734454acc5952d91a1dfaca8cdfdabb715d8cdd35789c749528639d80751f45c",
+          "tokenizers/punkt_tab/dutch/collocations.tab": "9a013563bce4637595a6db9d2eeb0ab3f68685d704ae20d97ad718aa91afbe4a",
+          "tokenizers/punkt_tab/german/sent_starters.txt": "fe4b63edbdd33f78ba0a755f035680a864948b145ae82fc99072440a62a77acd",
+          "tokenizers/punkt_tab/german/abbrev_types.txt": "259e5d78bc9d61a12d55ba47552c4e9c5ca08364d78a4669e864fd6de86818e3",
+          "tokenizers/punkt_tab/german/ortho_context.tab": "023887e78cfb919f1a00f9a96a88f42131582748cf833fd469490ee66596307c",
+          "tokenizers/punkt_tab/german/collocations.tab": "f77bd513f42e8179f5c932111c312be353d5913387d0bfe90a95c109111bca25",
+          "tokenizers/punkt_tab/norwegian/sent_starters.txt": "2b49ef0f0c2e1b4e8b06aee1172e4d88ce6ad01486fe4182cff6fc443a73ddeb",
+          "tokenizers/punkt_tab/norwegian/ortho_context.tab": "57ea2aa129de6ae414cd0cbecba8b2399c4fde775a2145776a7e8f1023f3f183",
+          "tokenizers/punkt_tab/norwegian/collocations.tab": "9c815b01e2f7518552b53f09012644df1fa0d8c7642baff9dc5f61e85e0be422",
+          "tokenizers/punkt_tab/norwegian/abbrev_types.txt": "beced74076edabe64f45effb823012d1396db41f35fa1d8be2ac6b69bf7bc40f",
+          "tokenizers/punkt_tab/turkish/abbrev_types.txt": "de56078c5eeb3fe07e24eab67c4aaf44e2181cbe80edd976cb1622819599d6fd",
+          "tokenizers/punkt_tab/turkish/collocations.tab": "061ce2981776a8f875da4f24bebd7e138f8da1d9057b43d07f580148ec106a33",
+          "tokenizers/punkt_tab/turkish/ortho_context.tab": "fc214227f99d5ea3ee70d208df16b1984eab375d1946ed379061c6cf5c1718be",
+          "tokenizers/punkt_tab/turkish/sent_starters.txt": "93239fb55b5d2ae6d945a84a94e118ba8a816326b17cdc11ba8111bea0c97828",
+          "tokenizers/punkt_tab/polish/sent_starters.txt": "8564076ae22be3d549a3f097a18458ac2967d65bd28dad7cc223c53f5ce27d1b",
+          "tokenizers/punkt_tab/polish/ortho_context.tab": "f770804067012ee5707ffc65d90523180e09bab09230a49251777be821a1a4f6",
+          "tokenizers/punkt_tab/polish/collocations.tab": "961653f0606d85ecb8a760cad4f69df123f010bc4b35de0253feb2d7869666b4",
+          "tokenizers/punkt_tab/polish/abbrev_types.txt": "426ea37ca486d0dcc3653653c613d853d0bb3929037f8ee6bf6c12ddae873aa1",
+          "tokenizers/punkt_tab/greek/ortho_context.tab": "a87e4467791f974f808c0d396f6c82cd3a014d4fb4458a2287e2fcbce7084e9c",
+          "tokenizers/punkt_tab/greek/abbrev_types.txt": "0d56253b7ebc83f0f2403479bcf2b8ea51ffdea89ee60e34018eb32e4750d683",
+          "tokenizers/punkt_tab/greek/collocations.tab": "0fd732534d56177c80874125ca894ae60aee7b052ee2865a405b454cfd737a6f",
+          "tokenizers/punkt_tab/greek/sent_starters.txt": "1a450aec85164e3fbfeb814768c9f120abd7139726af5bb5e2a577096739ca8e",
+          "tokenizers/punkt_tab/malayalam/sent_starters.txt": "918c902aa9d0b72700410258274ae335da51148fee7fc27095ab4114b23a245c",
+          "tokenizers/punkt_tab/malayalam/ortho_context.tab": "5289e43f46ef3679f4ebbed95ef1fad5b64dd7aa8957042adb2b661cc6ae4425",
+          "tokenizers/punkt_tab/malayalam/abbrev_types.txt": "1ea2cd01629c8cbeac0799d39383e10c4d6948734c255d37e3ceda550ba62464",
+          "tokenizers/punkt_tab/malayalam/collocations.tab": "71bc38e42133f288c660a338169d8858944135282ad4166a2c5d23cc8a06ed73",
+          "tokenizers/punkt_tab/spanish/ortho_context.tab": "1346ecfc57b26174987ffa9bd4a2558a66f46592a513da3859648790351df370",
+          "tokenizers/punkt_tab/spanish/abbrev_types.txt": "246a4b3efbad45b63eb9672b718574b535acef6d656f24dc17a46d13a38efba1",
+          "tokenizers/punkt_tab/spanish/collocations.tab": "fa5ea7dbf61f2b1c12180d660a3012c9faaf4962eb12549d77af95e2a40be65d",
+          "tokenizers/punkt_tab/spanish/sent_starters.txt": "4d4f7380ba16380b6158e9e8ead6973c52f27e3c9c88af63f15a41c490998319",
+          "tokenizers/punkt_tab/russian/collocations.tab": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "tokenizers/punkt_tab/russian/sent_starters.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "tokenizers/punkt_tab/russian/ortho_context.tab": "b296cba91006569d3ef79eb2cff2378bf5be5b75e9e83ea119b883d3c3ee69b6",
+          "tokenizers/punkt_tab/russian/abbrev_types.txt": "75191526be516a9918948fe3ad46f6c2c4dee14314359a899b8c2ebf496cb631",
+          "tokenizers/punkt_tab/portuguese/ortho_context.tab": "2d9c143f7b322fc74738a21e0b2b04feed1668245ac93e5a8e5399e6e0d8ed8a",
+          "tokenizers/punkt_tab/portuguese/collocations.tab": "a150d2ca3b8bd9d87cd25f2e1d2142607cdf9344efe914bd034af6017a16d841",
+          "tokenizers/punkt_tab/portuguese/abbrev_types.txt": "cd5c3cf9c4c8b766bc9edbc96444b0e2189b837b26c583aa2cce83a18e4285f5",
+          "tokenizers/punkt_tab/portuguese/sent_starters.txt": "7b7f4a1586b1df8592bf294c8dd0d19aaf90740d78ce3b40a31eff2b9669d15e",
+          "tokenizers/punkt_tab/danish/collocations.tab": "b003d3b839afd47afa81d64620a1cf15b75b944212a7f3ee6a7571f041ae02ec",
+          "tokenizers/punkt_tab/danish/ortho_context.tab": "59d7ccda7b1eef6cbcddb6d2f1930c255a5d43600e66e32eff28eab8190c0727",
+          "tokenizers/punkt_tab/danish/sent_starters.txt": "f8dd41bdb1bb633574b22d38205e1c073639a0b80cb9591964bf92d84317527f",
+          "tokenizers/punkt_tab/danish/abbrev_types.txt": "4a358b26b7ba372cab3cedeb43b4e99a76ae9d01150493964141eb42a62e4a6e",
+          "tokenizers/punkt_tab/italian/collocations.tab": "8167b58a049bb04de8d692ed33d72963503a061717cd37cacb33bb2d00669caf",
+          "tokenizers/punkt_tab/italian/abbrev_types.txt": "5d406f6bfb35e55f6bea282bf148bdcc9e4677860eb01a8e67c34b894274ac50",
+          "tokenizers/punkt_tab/italian/ortho_context.tab": "462ffd48bc1c9b86efe66d04d826cd1e7a5745be871b8121759ed2920a967370",
+          "tokenizers/punkt_tab/italian/sent_starters.txt": "4dc2cdfda34d4f286e5875d6b62b148771a799a71f0d45b504da23cb61b59d51",
+          "tokenizers/punkt/danish.pickle": "ea29760a0a9197f52ca59e78aeafc5a6f55d05258faf7db1709b2b9eb321ef20",
+          "tokenizers/punkt/norwegian.pickle": "e4a97f8f9a03a0338dd746bcc89a0ae0f54ae43b835fa37d83e279e1ca794faf",
+          "tokenizers/punkt/greek.pickle": "21752a6762fad5cfe46fb5c45fad9a85484a0e8e81c67e6af6fb973cfc27d67c",
+          "tokenizers/punkt/turkish.pickle": "d3ae47d76501d027698809d12e75292c9c392910488543342802f95db9765ccc",
+          "tokenizers/punkt/slovene.pickle": "7dac650212b3787b39996c01bd2084115493e6f6ec390bab61f767525b08b8ea",
+          "tokenizers/punkt/malayalam.pickle": "1f8cf58acbdb7f472ac40affc13663be42dafb47c15030c11ade0444c9e0e53d",
+          "tokenizers/punkt/.DS_Store": "24344a0387309358be715e1b803ec962c9a0800fd7b60a2492a681db81f91873",
+          "tokenizers/punkt/italian.pickle": "dcb2717d7be5f26e860a92e05acf69b1123a5f4527cd7a269a9ab9e9e668c805",
+          "tokenizers/punkt/polish.pickle": "16127b6d10933427a3e90fb20e9be53e1fb371ff79a730c1030734ed80b90c92",
+          "tokenizers/punkt/spanish.pickle": "271dc6027c4aae056f72a9bfab5645cf67e198bf4f972895844e40f5989ccdc3",
+          "tokenizers/punkt/english.pickle": "dda37972ae88998a6fd3e3ec002697a6bd362b32d050fda7d7ca5276873092aa",
+          "tokenizers/punkt/russian.pickle": "bc984432fbe31f7000014f8047502476889169c60f09be5413ca09276b16c909",
+          "tokenizers/punkt/estonian.pickle": "3867fee26a36bdb197c64362aa13ac683f5f33fa4d0d225a5d56707582a55a1d",
+          "tokenizers/punkt/french.pickle": "de05f3d5647d3d2296626fb83f68428e4c6ad6e05a00ed4694c8bdc8f2f197ee",
+          "tokenizers/punkt/portuguese.pickle": "bb01bf7c79a4eadc2178bbd209665139a0e4b38f2d1c44fef097de93955140e0",
+          "tokenizers/punkt/finnish.pickle": "1a9e17b3d5b4df76345d812b8a65b1da0767eda5086eadcc11e625eef0942835",
+          "tokenizers/punkt/swedish.pickle": "40d50ebdad6caa87715f2e300b1217ec92c42de205a543cc4a56903bd2c9acfa",
+          "tokenizers/punkt/README": "d3251cae66a9359bd68c039e3a46172a05ca9df0b27dcdfa23ae594d68d27ec4",
+          "tokenizers/punkt/german.pickle": "eab497fa085413130c8fd0fb13b929128930afe2f6a26ea8715c95df7088e97c",
+          "tokenizers/punkt/czech.pickle": "5ba73d293c7d7953956bcf02f3695ec5c1f0d527f2a3c38097f5593394fa1690",
+          "tokenizers/punkt/dutch.pickle": "4a8e26b3d68c45c38e594d19e2d5677447bfdcaa636d3b1e7acfed0e9272d73c",
+          "tokenizers/punkt/PY3/spanish.pickle": "164a50fadc5a49f8ec7426eae11d3111ee752b48a3ef373d47745011192a5984",
+          "tokenizers/punkt/PY3/russian.pickle": "549762f8190024d89b511472df21a3a135eee5d9233e63ac244db737c2c61d7e",
+          "tokenizers/punkt/PY3/norwegian.pickle": "4ff7a46d1438b311457d15d7763060b8d3270852c1850fd788c5cee194dc4a1d",
+          "tokenizers/punkt/PY3/estonian.pickle": "b364f72538d17b146a98009ad239a8096ce6c0a8b02958c0bc776ecd0c58a25f",
+          "tokenizers/punkt/PY3/danish.pickle": "6189c7dd254e29e2bd406a7f6a4336297c8953214792466a790ea4444223ceb3",
+          "tokenizers/punkt/PY3/README": "d3251cae66a9359bd68c039e3a46172a05ca9df0b27dcdfa23ae594d68d27ec4",
+          "tokenizers/punkt/PY3/italian.pickle": "68a94007b1e4ffdc4d1a190185ca5442c3dafeb17ab39d30329e84cd74a43947",
+          "tokenizers/punkt/PY3/polish.pickle": "624900ae3ddfb4854a98c5d3b8b1c9bb719975f33fee61ce1441dab9f8a00718",
+          "tokenizers/punkt/PY3/german.pickle": "ddcbbe85e2042a019b1a6e37fd8c153286c38ba201fae0f5bfd9a3f74abae25c",
+          "tokenizers/punkt/PY3/french.pickle": "28e3a4cd2971989b3cb9fd3433a6f15d17981e464db2be039364313b5de94f29",
+          "tokenizers/punkt/PY3/dutch.pickle": "fda0d6a13f02e8898daec7fe923da88e25abe081bcfa755c0e015075c215fe4c",
+          "tokenizers/punkt/PY3/slovene.pickle": "52ef2cc0ed27d79b3aa635cbbc40ad811883a75a4b8a8be1ae406972870fd864",
+          "tokenizers/punkt/PY3/turkish.pickle": "ae68ef5863728ac5332e87eb1f6bae772ff32a13a4caa2b01a5c68103e853c5b",
+          "tokenizers/punkt/PY3/swedish.pickle": "b0f7d538bfd5266633b09e842cd92e9e0ac10f1d923bf211e1497972ddc47318",
+          "tokenizers/punkt/PY3/finnish.pickle": "6a4b5ff5500ee851c456f9dd40d5fc0d8c1859c88eb3178de1317d26b7d22833",
+          "tokenizers/punkt/PY3/malayalam.pickle": "1f8cf58acbdb7f472ac40affc13663be42dafb47c15030c11ade0444c9e0e53d",
+          "tokenizers/punkt/PY3/czech.pickle": "64b0734b6fbe8e8d7cac79f48d1dd9f853824e57c4e3594dadd74ba2c1d97f50",
+          "tokenizers/punkt/PY3/portuguese.pickle": "02a0b7b25c3c7471e1791b66a31bbb530afbb0160aee4fcecf0107652067b4a1",
+          "tokenizers/punkt/PY3/english.pickle": "5cad3758596392364e3be9803dbd7ebeda384b68937b488a01365f5551bb942c",
+          "tokenizers/punkt/PY3/greek.pickle": "85dabc44ab90a5f208ef37ff6b4892ebe7e740f71fb4da47cfd95417ca3e22fd"
+        }
+      },
+      "coding_summary": {
+        "model": "v2",
+        "n": 164,
+        "passed": 70,
+        "infra_errors": 0,
+        "state": "complete_valid",
+        "protocol": "he-suite-4-upstream+declared-single-function-adapter-v1",
+        "backend_gate": {
+          "kind": "live_backend_validation_not_model_scores",
+          "canonical_passed": 164,
+          "canonical_n": 164,
+          "authored_fixture_failures": [],
+          "network_and_secret_probe": {
+            "id": "fixture/0",
+            "finish_reason": "raw+no_stop",
+            "phase_evidence": {
+              "startup": true,
+              "module_sha256": "79901c6f5b59701c465b164aed290fa53abc35abc80a5378fc10f4dac1f9a84c",
+              "input_sha256": "6713454432aaa16923bc72a3cef02edb2581e0520136da956f4f5d952656f712",
+              "driver_python": "3.13.18"
+            },
+            "status": "passed",
+            "correct": 1,
+            "detail": ""
+          },
+          "sdk_version": "1.4.2",
+          "image": "python:3.13-slim@sha256:48d884813cf44e927cf64c5529dd630dd3b18338c6dc727991eef9b71e934a20",
+          "module_sha256": "79901c6f5b59701c465b164aed290fa53abc35abc80a5378fc10f4dac1f9a84c",
+          "state": "pass"
+        },
+        "generation_items_sha256": "d96091fd64758cca9b3d8471413d0c1d4e82a458b42a2da883d37f4fbee5c523"
+      }
+    },
+    "v2b": {
+      "run_id": "full-20261113-v2-v2b",
+      "manifest": {
+        "kind": "exploratory_clean_model_results",
+        "model": "v2b",
+        "repo": "StarWarrior24x7/tiny-aya-global-xref-v2",
+        "subfolder": "v2b",
+        "revision": "14b4675f635b48f670bd42bd8ccea69ed6dec6ad",
+        "panel_id": "exploratory-panel-20261113-v2",
+        "panel_items_sha256": "1de74c71c4133ef515b5f5ea85d528499c9e632b5e0b45b44838d9a73a0909f9",
+        "selected_items_sha256": "450af09314a05835e103bed004a119136d28bbc2271f98f9d70b2fa63861fb4b",
+        "tasks": {
+          "mmlu": 200,
+          "gsm8k": 200,
+          "cybermetric": 500,
+          "humaneval": 164,
+          "ifeval": 200,
+          "everyday_aya": 140,
+          "global_mgsm_en": 50,
+          "global_mgsm_fr": 50,
+          "global_mgsm_ar": 50,
+          "xstest": 450
+        },
+        "source_sha256": {
+          "modal_eval.py": "5e6e59677ee0932195435eb8d74dd48ff9483a334e7201fda706886297fcfc44",
+          "data_audit.py": "7f3a35738062b3cbd283fb777e26424e13d79ce2abf3e333f85440527ec43572",
+          "lock.json": "f3070fc1c82c1f822803d1e8fb485f5ef4829093ad2e5f7e490dbf296efe071d",
+          "tokenizer_audit.py": "fe1dee6e133f752cec0dae7e1916f381e1459679ddd79c1dcb026f237a924db5"
+        },
+        "protocol": {
+          "seed": 0,
+          "precision": "float16",
+          "batch_by_kind": {
+            "mcq": 64,
+            "math": 32,
+            "code": 32,
+            "instructions": 16,
+            "human_pending": 16,
+            "refusal_pending": 64
+          },
+          "do_sample": false,
+          "max_prompt_tokens": 4096,
+          "max_new_tokens": {
+            "mcq": 64,
+            "math": 1024,
+            "instructions": 1024,
+            "human_pending": 512,
+            "refusal_pending": 128,
+            "code": 512
+          },
+          "prompt_overlong": "exclude and report; never silently truncate",
+          "refusal_labels": "pending independent human review; no inability inference from non-success"
+        },
+        "environment": {
+          "transformers": "4.57.1",
+          "packaging": "26.3",
+          "nvidia-cufile-cu12": "1.13.1.3",
+          "tzdata": "2026.6",
+          "dill": "0.4.0",
+          "charset-normalizer": "3.5.2",
+          "huggingface-hub": "0.34.4",
+          "nvidia-cuda-nvrtc-cu12": "12.8.93",
+          "psutil": "7.2.2",
+          "nvidia-nvtx-cu12": "12.8.90",
+          "tokenizers": "0.22.2",
+          "typing_extensions": "4.13.2",
+          "certifi": "2026.10.19",
+          "aiohappyeyeballs": "2.6.1",
+          "nvidia-nccl-cu12": "2.27.3",
+          "torch": "2.8.0",
+          "idna": "3.10",
+          "networkx": "3.6.1",
+          "regex": "2026.11.9",
+          "aiosignal": "1.3.2",
+          "filelock": "4.2.10",
+          "numpy": "2.4.6",
+          "nvidia-cublas-cu12": "12.8.4.1",
+          "safetensors": "0.8.0",
+          "multidict": "6.4.4",
+          "pandas": "3.1.1",
+          "PyYAML": "6.0.3",
+          "nvidia-cuda-cupti-cu12": "12.8.90",
+          "nvidia-curand-cu12": "10.3.9.90",
+          "Jinja2": "3.1.6",
+          "fsspec": "2025.9.0",
+          "tqdm": "4.70.1",
+          "datasets": "4.1.1",
+          "wheel": "0.45.1",
+          "nvidia-cudnn-cu12": "9.10.2.21",
+          "hf-xet": "1.8.0",
+          "nvidia-cusolver-cu12": "11.7.3.90",
+          "propcache": "0.3.1",
+          "nvidia-cusparselt-cu12": "0.7.1",
+          "attrs": "25.3.0",
+          "sympy": "1.14.0",
+          "setuptools": "65.5.1",
+          "python-dateutil": "4.0.0",
+          "requests": "2.34.2",
+          "triton": "3.4.0",
+          "yarl": "1.20.0",
+          "xxhash": "4.1.0",
+          "pyarrow": "26.0.1",
+          "aiohttp": "3.12.7",
+          "accelerate": "1.10.1",
+          "urllib3": "2.8.0",
+          "pip": "25.2",
+          "nvidia-cusparse-cu12": "12.5.8.93",
+          "sentencepiece": "0.2.1",
+          "uv": "0.8.17",
+          "nvidia-cufft-cu12": "11.3.3.83",
+          "multiprocess": "0.70.16",
+          "frozenlist": "1.6.0",
+          "nvidia-cuda-runtime-cu12": "12.8.90",
+          "mpmath": "1.3.0",
+          "nvidia-nvjitlink-cu12": "12.8.93",
+          "MarkupSafe": "3.0.4",
+          "hyperframe": "6.1.0",
+          "hpack": "4.1.0",
+          "protobuf": "6.31.1",
+          "grpclib": "0.4.8",
+          "cbor2": "5.7.0",
+          "h2": "4.2.0"
+        },
+        "python": "3.11.12",
+        "state": "complete",
+        "tokenizer": {
+          "repo": "CohereLabs/tiny-aya-global",
+          "revision": "af89d219b53ed9b13b8a4645f9c8028973510324",
+          "bos_count": 1,
+          "letter_token_ids": {
+            "A": 47,
+            "B": 48,
+            "C": 49,
+            "D": 50
+          }
+        },
+        "candidate_tokenizer_check": {
+          "same_vocab": true,
+          "same_chat_template": true,
+          "same_bos": true,
+          "same_eos": true,
+          "same_probe_encoding": true,
+          "same_model": true,
+          "same_normalizer": true,
+          "same_pre_tokenizer": true,
+          "same_post_processor": true,
+          "same_decoder": true,
+          "same_all_evaluation_renderings": true
+        },
+        "gpu": "NVIDIA L40S",
+        "effective_eos_ids": [
+          3,
+          6
+        ],
+        "performance": {
+          "mmlu": {
+            "seconds": 38.157,
+            "output_tokens": 600,
+            "output_tokens_per_second": 15.72,
+            "peak_allocated_gib": 14.092,
+            "batch_cap": 64
+          },
+          "gsm8k": {
+            "seconds": 411.484,
+            "output_tokens": 28014,
+            "output_tokens_per_second": 68.08,
+            "peak_allocated_gib": 10.111,
+            "batch_cap": 32
+          },
+          "cybermetric": {
+            "seconds": 63.304,
+            "output_tokens": 1500,
+            "output_tokens_per_second": 23.7,
+            "peak_allocated_gib": 11.023,
+            "batch_cap": 64
+          },
+          "humaneval": {
+            "seconds": 174.521,
+            "output_tokens": 15423,
+            "output_tokens_per_second": 88.37,
+            "peak_allocated_gib": 9.974,
+            "batch_cap": 32
+          },
+          "ifeval": {
+            "seconds": 517.199,
+            "output_tokens": 29145,
+            "output_tokens_per_second": 56.35,
+            "peak_allocated_gib": 8.215,
+            "batch_cap": 16
+          },
+          "everyday_aya": {
+            "seconds": 166.898,
+            "output_tokens": 29320,
+            "output_tokens_per_second": 175.68,
+            "peak_allocated_gib": 8.646,
+            "batch_cap": 16
+          },
+          "global_mgsm_en": {
+            "seconds": 109.785,
+            "output_tokens": 6213,
+            "output_tokens_per_second": 56.59,
+            "peak_allocated_gib": 10.033,
+            "batch_cap": 32
+          },
+          "global_mgsm_fr": {
+            "seconds": 112.263,
+            "output_tokens": 8199,
+            "output_tokens_per_second": 73.03,
+            "peak_allocated_gib": 10.099,
+            "batch_cap": 32
+          },
+          "global_mgsm_ar": {
+            "seconds": 112.955,
+            "output_tokens": 9213,
+            "output_tokens_per_second": 81.56,
+            "peak_allocated_gib": 10.111,
+            "batch_cap": 32
+          },
+          "xstest": {
+            "seconds": 71.247,
+            "output_tokens": 44537,
+            "output_tokens_per_second": 625.11,
+            "peak_allocated_gib": 9.853,
+            "batch_cap": 64
+          }
+        },
+        "elapsed_seconds": 1830.21
+      },
+      "private_artifact_indexes": {
+        "generation": {
+          "COMPLETE": {
+            "sha256": "375fbafba7077ca37c915fda1101fba2137c5af48a7afcde0d7ac87d53da5ea2",
+            "bytes": 51
+          },
+          "items.jsonl": {
+            "sha256": "d6076b02417cc1c1197c5f0da63e5597d12420cb6438f40b87017ec10e3ccfd5",
+            "bytes": 1075485
+          },
+          "manifest.json": {
+            "sha256": "6a675b7f38f4e7d15321c345da1f9f2232495f14ffa9e57f8b18e22e08082b61",
+            "bytes": 6177
+          }
+        },
+        "scoring-v1": {
+          "scored_items.jsonl": {
+            "sha256": "83d02b17e4de9f4301cca9cb9a2ef90559077563d5b971c6dbd4b43ca0e34123",
+            "bytes": 1719479
+          },
+          "summary.json": {
+            "sha256": "5532aabff4ddf22000fdc7213d7f80dc4c97dcbf372f18cfe620376d07776c71",
+            "bytes": 22449
+          }
+        },
+        "coding-adapted-v2": {
+          "items.jsonl": {
+            "sha256": "a70db7b36ad65ecac641a1eba851c40ea7b8e610a492c4ace878e3c898bf98fd",
+            "bytes": 241370
+          },
+          "ledger-HumanEval_0.jsonl": {
+            "sha256": "39e4b2d1ca917b3b7928e7aa25ec66fad276aae8b43b9869f7317561203200a0",
+            "bytes": 106
+          },
+          "ledger-HumanEval_1.jsonl": {
+            "sha256": "419bb649e4beabfdde77485dc835a06c038188edb06c81b14efd381e8472f6c5",
+            "bytes": 106
+          },
+          "ledger-HumanEval_10.jsonl": {
+            "sha256": "0cddad72eafadfaf948826a5d9be3bd081387650bb7f395669956de105a5d3d5",
+            "bytes": 107
+          },
+          "ledger-HumanEval_100.jsonl": {
+            "sha256": "af6fcb681fd6134970e9bb7de2a9f7900802540276b101f951f152cc7e7034d1",
+            "bytes": 108
+          },
+          "ledger-HumanEval_101.jsonl": {
+            "sha256": "861a163e281f9798ba6f6d50cac5cbae1e8b4e6bb9adf9c484584608959d11cc",
+            "bytes": 108
+          },
+          "ledger-HumanEval_102.jsonl": {
+            "sha256": "90493e8fd0f3760232b042b0c4626a85f047cd2a99b133f706ad2860bb2cd993",
+            "bytes": 108
+          },
+          "ledger-HumanEval_103.jsonl": {
+            "sha256": "099ff564c6d930d79cfc2cf7be47f0806f475273aad1e83e259c9ff870bbf0fa",
+            "bytes": 108
+          },
+          "ledger-HumanEval_104.jsonl": {
+            "sha256": "5cddb779f105643520ac219f79bb8ba9a4552b2b46b9ee1ff8c8a73c3ace7ef0",
+            "bytes": 108
+          },
+          "ledger-HumanEval_105.jsonl": {
+            "sha256": "eb93ffb77a0760fc8231d63a09efcd1a8ad9727475a780805cba54efd6cd6cb6",
+            "bytes": 108
+          },
+          "ledger-HumanEval_106.jsonl": {
+            "sha256": "fb8e07aaf917875692d5eec67341e57d4035d25a9265a5bd1b0ddc226558c79c",
+            "bytes": 108
+          },
+          "ledger-HumanEval_107.jsonl": {
+            "sha256": "3b560a7e5dc4122ef5c0a7329cf31a69e095ba5f52a834bd8d359ebb1f081c75",
+            "bytes": 108
+          },
+          "ledger-HumanEval_108.jsonl": {
+            "sha256": "bfd44e779ac463e5d4d3fff3a59ffa45728fa29024c44daa32621a04e5ab44b9",
+            "bytes": 108
+          },
+          "ledger-HumanEval_109.jsonl": {
+            "sha256": "589a2d2ff642da26adf9922608b62f6afd4a33f55eaa89e3bc727203fdb5860b",
+            "bytes": 108
+          },
+          "ledger-HumanEval_11.jsonl": {
+            "sha256": "14a350404c3234904bb940e83096744cc6bee6875334dd69670e833e6da19fde",
+            "bytes": 107
+          },
+          "ledger-HumanEval_110.jsonl": {
+            "sha256": "a2430ab44eb2aa37d56c16f4b0860d12e112aec3b94805b0cfed3b575250158b",
+            "bytes": 108
+          },
+          "ledger-HumanEval_111.jsonl": {
+            "sha256": "5b3954f12f1c71f64bb5f27f76c50c63fc6a2dd023bedf00a52b5b3bf8d07c38",
+            "bytes": 108
+          },
+          "ledger-HumanEval_112.jsonl": {
+            "sha256": "b2882f854eef86b3a9d0d5faf0b32b8f7d563e796ae85060eceb59115ee347a0",
+            "bytes": 108
+          },
+          "ledger-HumanEval_113.jsonl": {
+            "sha256": "87fcd416a0f412c7b6a5f01f7cb22b2034e6dfa1081c1ba61c3c4bbae5f260e1",
+            "bytes": 108
+          },
+          "ledger-HumanEval_114.jsonl": {
+            "sha256": "8b0aed31820fa49e088d7c4491c3c6b7ac8589a2691694ab3712ce606763a034",
+            "bytes": 108
+          },
+          "ledger-HumanEval_115.jsonl": {
+            "sha256": "25ec43b0ba3ddba8e208591491b6228edbbce72f7f5ca629aae899549d6b7543",
+            "bytes": 108
+          },
+          "ledger-HumanEval_116.jsonl": {
+            "sha256": "2a2a17bb1e1a7b693025059496c9aa8c9c31673ed84636a18d6c6e58b4d6e5fc",
+            "bytes": 108
+          },
+          "ledger-HumanEval_117.jsonl": {
+            "sha256": "8c9ebee749d738110bb5b8fa96c30a1652b83ad1f2560378805f7cf0d7fb6ca2",
+            "bytes": 108
+          },
+          "ledger-HumanEval_118.jsonl": {
+            "sha256": "fe472f80ca4a5e220290a877d0b65cc2c4a01f2124906df6057bafda5ca4ff09",
+            "bytes": 108
+          },
+          "ledger-HumanEval_119.jsonl": {
+            "sha256": "d0949c49bd1d35cb7c32ad586bbc2c016cdc787fc8fa7356c102f21aa944abaa",
+            "bytes": 108
+          },
+          "ledger-HumanEval_12.jsonl": {
+            "sha256": "b6ff1d572f95a1c1e6c2e0dfb2e441d0065d8369eb2cdeef3c9b23b61ba46d93",
+            "bytes": 107
+          },
+          "ledger-HumanEval_120.jsonl": {
+            "sha256": "e277406a4af8fd9715a7584d0fd3ff6d1a5b08d7f8228b35518154d6f699788c",
+            "bytes": 108
+          },
+          "ledger-HumanEval_121.jsonl": {
+            "sha256": "c1e0542b78fa5123662737c70d004f05e4e89ecfec69083aedf4e22c769cac31",
+            "bytes": 108
+          },
+          "ledger-HumanEval_122.jsonl": {
+            "sha256": "122960768fb93ae9ae95b9848d3c8b13d50c12118b20bb69fc788eaceb738abc",
+            "bytes": 108
+          },
+          "ledger-HumanEval_123.jsonl": {
+            "sha256": "1c16e35294b3bc7499f7f14fa5c155a1fbf98c8f5a378d03a4b69dea0e473aef",
+            "bytes": 108
+          },
+          "ledger-HumanEval_124.jsonl": {
+            "sha256": "29509d0371edfd028effaa313c73e4bebf072cfbb14110d461a6a35e648e1d53",
+            "bytes": 108
+          },
+          "ledger-HumanEval_125.jsonl": {
+            "sha256": "e425f14cd6453ed2e8d7e0cac15097a20b5ff225306fda1d935e3ae93e2100d8",
+            "bytes": 108
+          },
+          "ledger-HumanEval_126.jsonl": {
+            "sha256": "90596443379273c835c814f145ef78462eef46b514dfa009fa6e3612dd75ba92",
+            "bytes": 108
+          },
+          "ledger-HumanEval_127.jsonl": {
+            "sha256": "ac02c910da003b397c91bac22effc3c4176d5e722345ca70652907c9d56d4a44",
+            "bytes": 108
+          },
+          "ledger-HumanEval_128.jsonl": {
+            "sha256": "aec095764237cec13abf3071d93288819e5e7134448afdf25cc4df7923c76eed",
+            "bytes": 108
+          },
+          "ledger-HumanEval_129.jsonl": {
+            "sha256": "8b121d028122e8103e7a3d2dfb601c8bf261229fded8551f68628aac9abfa940",
+            "bytes": 108
+          },
+          "ledger-HumanEval_13.jsonl": {
+            "sha256": "a26ae0f4374e67e0cd54678266f26bd75fa05358aa3962e2c53bd43fd5ac40e9",
+            "bytes": 107
+          },
+          "ledger-HumanEval_130.jsonl": {
+            "sha256": "255e5292eb567b4aa577713a54ae475f559d732c4bfd7fc21378ba7c117bb9a9",
+            "bytes": 108
+          },
+          "ledger-HumanEval_131.jsonl": {
+            "sha256": "6b06c7d400088b39159bd2d7382ae3f48f775c4d2daf7b661032324bc026bf93",
+            "bytes": 108
+          },
+          "ledger-HumanEval_132.jsonl": {
+            "sha256": "490c81af810aa72c3c2d1eeadc7be11e4c6a4f10b08932f2bbf3b083eb134778",
+            "bytes": 108
+          },
+          "ledger-HumanEval_133.jsonl": {
+            "sha256": "c53a46653a4c3a46b387443c754839aad4cc360204e7ac151465fcffaa0b0e2b",
+            "bytes": 108
+          },
+          "ledger-HumanEval_134.jsonl": {
+            "sha256": "42dd3f784acbbab98ff8e660b479ed5d89829b07b9da9b4ebc49022c9fc213e4",
+            "bytes": 108
+          },
+          "ledger-HumanEval_135.jsonl": {
+            "sha256": "6c67ec7697c7e00a75ef1d5535973ec21f3ab15c2176f8b5e2f5493f9b515e18",
+            "bytes": 108
+          },
+          "ledger-HumanEval_136.jsonl": {
+            "sha256": "e9073a8e0a9a9d590fb9e4bbfce076890c8dcc2f9b9940a998416975750d23f9",
+            "bytes": 108
+          },
+          "ledger-HumanEval_137.jsonl": {
+            "sha256": "068481095f7416db2c86592923c98260829dbbd394eafff86f74367bb2a4577b",
+            "bytes": 108
+          },
+          "ledger-HumanEval_138.jsonl": {
+            "sha256": "0a168881c765da49f9bdb2136f7b550795d54f68fced30f66e394c20ba12424a",
+            "bytes": 108
+          },
+          "ledger-HumanEval_139.jsonl": {
+            "sha256": "c7832c6e48041855d13690fb106a8616351adf177ca28b629e37b6f3ccf79821",
+            "bytes": 108
+          },
+          "ledger-HumanEval_14.jsonl": {
+            "sha256": "aa9de7e32458d639b54f6bdbea1771c12b68efe208f4df1c552ec784c72a87eb",
+            "bytes": 107
+          },
+          "ledger-HumanEval_140.jsonl": {
+            "sha256": "f31056069a9309e39b7345abd8d7bff4c3b6296754e20a99634ba46cea6bbebc",
+            "bytes": 108
+          },
+          "ledger-HumanEval_141.jsonl": {
+            "sha256": "033db7f6f2cf7874195e25da33b4e59688089b9580f2a76b21fef28b8d1171cc",
+            "bytes": 108
+          },
+          "ledger-HumanEval_142.jsonl": {
+            "sha256": "0c10996e23942c198feb9859a9099785268b70e757a8a29147fbdb9928809995",
+            "bytes": 108
+          },
+          "ledger-HumanEval_143.jsonl": {
+            "sha256": "98df11edb8ae2a7c23299ca36375593effb0a061f1b894d1a37ff8b0636729d9",
+            "bytes": 108
+          },
+          "ledger-HumanEval_144.jsonl": {
+            "sha256": "b7f7554ce1d950126ffec7410184ef4802a1f9ee680809ae7c0b3a2116313f78",
+            "bytes": 108
+          },
+          "ledger-HumanEval_145.jsonl": {
+            "sha256": "c007e4d91f6782f6bb0040a42c580eb0c03e95dfbe7a2d8a26e6337c195d7ff7",
+            "bytes": 108
+          },
+          "ledger-HumanEval_146.jsonl": {
+            "sha256": "f162d16e34c235a3a64a5449059fd4b02fd31601be9e6609b6ce3977d2d7e660",
+            "bytes": 108
+          },
+          "ledger-HumanEval_147.jsonl": {
+            "sha256": "d2bb95dd158d48047dc3cbb40f872b3e244af8dcb39f94c944e2062ac6e0cb46",
+            "bytes": 108
+          },
+          "ledger-HumanEval_148.jsonl": {
+            "sha256": "ecfe89d24f6e5a46a4f2d31c8d6121c2d2772dbc4c032b4c3d12b2098908a4ac",
+            "bytes": 108
+          },
+          "ledger-HumanEval_149.jsonl": {
+            "sha256": "02e103052e2cf7a662b68d25044fcd85c7c436fe257b0a0527cfaf9f472d6127",
+            "bytes": 108
+          },
+          "ledger-HumanEval_15.jsonl": {
+            "sha256": "788082827314d6e73dc6fbd8b42e057aded45b00b55467663f35f65fb0716e42",
+            "bytes": 107
+          },
+          "ledger-HumanEval_150.jsonl": {
+            "sha256": "2eb8965fbf63af087f6081c062c0c28705b0dcd291e5fc4f68cfc614e6fec740",
+            "bytes": 108
+          },
+          "ledger-HumanEval_151.jsonl": {
+            "sha256": "28be7230bb7636efbea3bef2e41d6d8e81606ceeda64f3b4c7870d33f26fb329",
+            "bytes": 108
+          },
+          "ledger-HumanEval_152.jsonl": {
+            "sha256": "2f7e2773bc4d08e626063289c8d14f8d302b089f1fb176185a269980f08b73cf",
+            "bytes": 108
+          },
+          "ledger-HumanEval_153.jsonl": {
+            "sha256": "0dd8f3967c7cc85a6c4ec213e2d242a0d217794871c25ded9983f2e82cd529db",
+            "bytes": 108
+          },
+          "ledger-HumanEval_154.jsonl": {
+            "sha256": "d1a50a86f3e609e405bfa4e91a159696a7cdff3a8eb9b1c2c80c4d330e3443d8",
+            "bytes": 108
+          },
+          "ledger-HumanEval_155.jsonl": {
+            "sha256": "41b97de013c845df912d38b13c577f1b84f507ee7b911c27fe13d6393323dacd",
+            "bytes": 108
+          },
+          "ledger-HumanEval_156.jsonl": {
+            "sha256": "46a1f94f8f079ea94e48b5e8e849268aa7e2c1ef4ad327103c7330ff5233117f",
+            "bytes": 108
+          },
+          "ledger-HumanEval_157.jsonl": {
+            "sha256": "7759cf953548fbfbd59c63996b2d1dcfdce540746f866649f1897f73bd258a6b",
+            "bytes": 108
+          },
+          "ledger-HumanEval_158.jsonl": {
+            "sha256": "3106095b3f3bdaa4e43acf61a64e096c6b2eee650c1acb09613cd81705b14c65",
+            "bytes": 108
+          },
+          "ledger-HumanEval_159.jsonl": {
+            "sha256": "daa98b1ad29cbcc2f73a40f1ae48f4a9d008ef36fb1cc7523feea1b004f8679a",
+            "bytes": 108
+          },
+          "ledger-HumanEval_16.jsonl": {
+            "sha256": "c50fa7f63bfdb537f6de54ae39747aa5cb31f3cb03015b7701f91c8a06600a31",
+            "bytes": 107
+          },
+          "ledger-HumanEval_160.jsonl": {
+            "sha256": "a422c4cdf3b8672058dc0d6abd7e4e67ff37c57d022b0f05237d74423e44204f",
+            "bytes": 108
+          },
+          "ledger-HumanEval_161.jsonl": {
+            "sha256": "94182219f27fdc30faf2584f15d8407a96d208c3b8fd2cdc8ef10a7fba3638b4",
+            "bytes": 108
+          },
+          "ledger-HumanEval_162.jsonl": {
+            "sha256": "e665ef2c58bf2044323b3f755e80cd56954ca116cba9c88b67e54c183a2e7e13",
+            "bytes": 108
+          },
+          "ledger-HumanEval_163.jsonl": {
+            "sha256": "9b2cc3cbbb51cd4e95ba8ccf4d3e9f411a7b0a1a6e199c5f590662c49f1cdc4c",
+            "bytes": 108
+          },
+          "ledger-HumanEval_17.jsonl": {
+            "sha256": "b3a7622db7ec5edcf9f9646ebe971b60ced26f12e062cc967367e2c70ca8e91a",
+            "bytes": 107
+          },
+          "ledger-HumanEval_18.jsonl": {
+            "sha256": "e10d17f49394d06f8d1c60d5129f71329e3bd2492d3a45b8161a7477f78663a5",
+            "bytes": 107
+          },
+          "ledger-HumanEval_19.jsonl": {
+            "sha256": "c5dbe9848e074b0589f5d1461e6480726cf35c93881e4a4d1711dc12f0392aac",
+            "bytes": 107
+          },
+          "ledger-HumanEval_2.jsonl": {
+            "sha256": "654ee8aafb12b8834df02dd9d9486d59ef55710c79de2f622d5ead36274f012e",
+            "bytes": 106
+          },
+          "ledger-HumanEval_20.jsonl": {
+            "sha256": "07bba9ded78b80e1af3a20e45a9b0022987e2952594a43397b1cb7b4c114dae7",
+            "bytes": 107
+          },
+          "ledger-HumanEval_21.jsonl": {
+            "sha256": "534b078cdcb3533f855e6e8538903889b8756d5225e8cd257d0724eae6b5a85c",
+            "bytes": 107
+          },
+          "ledger-HumanEval_22.jsonl": {
+            "sha256": "4e46a1b763ec29d702e78fa51ea408ce4e060acd1d756bb11f919c03338e2783",
+            "bytes": 107
+          },
+          "ledger-HumanEval_23.jsonl": {
+            "sha256": "2e55f90d0d79873804397d9fa34bc5bc6e0eb8bbdbb950894457385507f73479",
+            "bytes": 107
+          },
+          "ledger-HumanEval_24.jsonl": {
+            "sha256": "ac52d3935618c2798b9db2c1d7338bfc65e0c6696b34d457b4d43a47ee7728fe",
+            "bytes": 107
+          },
+          "ledger-HumanEval_25.jsonl": {
+            "sha256": "77fa3c7ffe9c7ad3503ca27c69cd1d052056fa9072678cd534d5f7503308965d",
+            "bytes": 107
+          },
+          "ledger-HumanEval_26.jsonl": {
+            "sha256": "73ea19f64251c0854160449fbfc881939c49428c105218904aa075e8675366f5",
+            "bytes": 107
+          },
+          "ledger-HumanEval_27.jsonl": {
+            "sha256": "d0590bc24f95f78e99dff0f7b16b141d28479fa21df5b4c002048ae30913471f",
+            "bytes": 107
+          },
+          "ledger-HumanEval_28.jsonl": {
+            "sha256": "6a46d0d9d845527f6f480c3a3fb90a8fdc8cc722875cf338af409c2c0cdfb320",
+            "bytes": 107
+          },
+          "ledger-HumanEval_29.jsonl": {
+            "sha256": "df515ccf2271b12ac111ef82ebb2167eaff1234bfc46cddfcdc88ac1d49ac62b",
+            "bytes": 107
+          },
+          "ledger-HumanEval_3.jsonl": {
+            "sha256": "59afe657337b2145af4174efc67af45d3c79cfe1c199283a9121d868f222bcc8",
+            "bytes": 106
+          },
+          "ledger-HumanEval_30.jsonl": {
+            "sha256": "1bf2eb12501c6fd6906b88ca8caab1e448774da7afa01e3e258f47cea25c79f0",
+            "bytes": 107
+          },
+          "ledger-HumanEval_31.jsonl": {
+            "sha256": "0f97f6864fe6de09ab467de706b0b40ebbc68bf7f2a6a7edfd5b5c970e4dd1ad",
+            "bytes": 107
+          },
+          "ledger-HumanEval_32.jsonl": {
+            "sha256": "d721d6d0455ea03f6a76a3104bc47965f6b8a8798653d4399193024217346aa3",
+            "bytes": 107
+          },
+          "ledger-HumanEval_33.jsonl": {
+            "sha256": "a711c586c9e7c5dbd27df90abf4f689b1743b5ab42ae8c1279530e6956ecce74",
+            "bytes": 107
+          },
+          "ledger-HumanEval_34.jsonl": {
+            "sha256": "9b85d890868b0366299777f4d6dce03afc6a5ee64feb04980a651250e5140231",
+            "bytes": 107
+          },
+          "ledger-HumanEval_35.jsonl": {
+            "sha256": "8d8e5c691d2775c639c21584371a170de58ea33e8eb6654939fa5c7ad0e96b6b",
+            "bytes": 107
+          },
+          "ledger-HumanEval_36.jsonl": {
+            "sha256": "1a2ccd42f47862279725ea542097f0c3474ab21dea094d3329d91240b6e60f1a",
+            "bytes": 107
+          },
+          "ledger-HumanEval_37.jsonl": {
+            "sha256": "e09df80a965cdb4908277e7bd01b4dc3985da050194475f39c4c96263487add3",
+            "bytes": 107
+          },
+          "ledger-HumanEval_38.jsonl": {
+            "sha256": "77f5a96bcefb52ed371515b07741985e141b9561f3e9d9f74bdd779f42cd547d",
+            "bytes": 107
+          },
+          "ledger-HumanEval_39.jsonl": {
+            "sha256": "241e92d4e9bed6d19a8f386a1cd57273d98ca7cd8ea5b0d7ed187b517eb8452d",
+            "bytes": 107
+          },
+          "ledger-HumanEval_4.jsonl": {
+            "sha256": "275562253519bce0266a12ec374062801f300e135c1179cd6ada242012a6ade8",
+            "bytes": 106
+          },
+          "ledger-HumanEval_40.jsonl": {
+            "sha256": "e9dd4cde0edd1ea880a1564319e5100ea1b7ad3720f8e0391bba9cdcf824ac11",
+            "bytes": 107
+          },
+          "ledger-HumanEval_41.jsonl": {
+            "sha256": "765a3ec03071629fc442a90b45d319843386ccba35e0bef04f12622724280a20",
+            "bytes": 107
+          },
+          "ledger-HumanEval_42.jsonl": {
+            "sha256": "bb597d41931b59da70d1ef21bc7facbe1f836f0063f555622f981f925af3432f",
+            "bytes": 107
+          },
+          "ledger-HumanEval_43.jsonl": {
+            "sha256": "994d08d7bad431fbae36845bddb2e2d1f50dcbb4e55c09c35e2c97255bfdfd2e",
+            "bytes": 107
+          },
+          "ledger-HumanEval_44.jsonl": {
+            "sha256": "8d33a5a362f903539d3f873f3928f37b1643e8c70c37c299bbdfa0c549599f06",
+            "bytes": 107
+          },
+          "ledger-HumanEval_45.jsonl": {
+            "sha256": "2a777bc70da1e1cb2f00c28f28502b71453ba11a715c3d241387ed3132dcf340",
+            "bytes": 107
+          },
+          "ledger-HumanEval_46.jsonl": {
+            "sha256": "9ac13095ed473fa430e7bedb896850148397cfe1087685556eb4c493c8c671a7",
+            "bytes": 107
+          },
+          "ledger-HumanEval_47.jsonl": {
+            "sha256": "190d1467661ba3a2c8033f7b039645b1eac1965ac7fea82bafe81d9438135c37",
+            "bytes": 107
+          },
+          "ledger-HumanEval_48.jsonl": {
+            "sha256": "647bc1e48e6ff84430f032b3f78251aa6a397b25951ad69a4d37bdef23a61928",
+            "bytes": 107
+          },
+          "ledger-HumanEval_49.jsonl": {
+            "sha256": "9b03358f05bd6da52decb747ee6f4a8a0c5ccb9015aec0461ce2b196c6119690",
+            "bytes": 107
+          },
+          "ledger-HumanEval_5.jsonl": {
+            "sha256": "e8b84ab72e24eee68819636e7f75e651d1d725c73a35c03d2de6453602eaa834",
+            "bytes": 106
+          },
+          "ledger-HumanEval_50.jsonl": {
+            "sha256": "a3a86e8e5ab81bdd0946b2c93ce5af9450575611f123a900d72ab68d3ecbc0fa",
+            "bytes": 107
+          },
+          "ledger-HumanEval_51.jsonl": {
+            "sha256": "3111696f07d29952ce95b9a2ab5641b11f3c6df6af96d2b3151511abec30b550",
+            "bytes": 107
+          },
+          "ledger-HumanEval_52.jsonl": {
+            "sha256": "b3e166cd6aaa4347cb792a81d2f4d5ecdf42d8c73ad0dc4c0f56eda62f9805d9",
+            "bytes": 107
+          },
+          "ledger-HumanEval_53.jsonl": {
+            "sha256": "4498cb7b0518a0d0f1d31ebdb47fd73b11baf92762f8c25db2d1f524f5d79b76",
+            "bytes": 107
+          },
+          "ledger-HumanEval_54.jsonl": {
+            "sha256": "2bd82fba38b532ec54178bfc29b49f411f2da8fdf56b39db33058b9649ecc930",
+            "bytes": 107
+          },
+          "ledger-HumanEval_55.jsonl": {
+            "sha256": "01857b267c956a1c2092e3833871fbfd23cabc3d949c29f878cd49a111cb42a3",
+            "bytes": 107
+          },
+          "ledger-HumanEval_56.jsonl": {
+            "sha256": "f5f2e7bf4beb38b5fa952f8601aa2ddc3d146bc695fd9dd0f39e0a8b0c5a8c0b",
+            "bytes": 107
+          },
+          "ledger-HumanEval_57.jsonl": {
+            "sha256": "5bedcc4af2997002f67dfade89cd051612320e5d6b0419b603f0caff56165409",
+            "bytes": 107
+          },
+          "ledger-HumanEval_58.jsonl": {
+            "sha256": "1d43f572b8dc50b7fa51ffce2c7d9509f3facd4d82aadb13b8742f9c2f74ad31",
+            "bytes": 107
+          },
+          "ledger-HumanEval_59.jsonl": {
+            "sha256": "cb35ce4ecfeb2799a376e7b487a3ba888d1dd5e9b4ce21ae057b93fe21c29bf1",
+            "bytes": 107
+          },
+          "ledger-HumanEval_6.jsonl": {
+            "sha256": "0ef19b4849ebc4d335e5ed8b84e6c814a84cb22ba5a13fd3f97586778ab434e5",
+            "bytes": 106
+          },
+          "ledger-HumanEval_60.jsonl": {
+            "sha256": "04997d08a65b5657d123fbf696c5c8311b7a4bf23c6f06117a1d0cff626adec7",
+            "bytes": 107
+          },
+          "ledger-HumanEval_61.jsonl": {
+            "sha256": "57fa0a39ca2325e350401ec8915bd06cba2a43b9c70201a237951566f27f32e9",
+            "bytes": 107
+          },
+          "ledger-HumanEval_62.jsonl": {
+            "sha256": "95d5e2570352fbb58418d8d5abdb09d584f7c6a1d8a8b74450514d6cd459c292",
+            "bytes": 107
+          },
+          "ledger-HumanEval_63.jsonl": {
+            "sha256": "9fd8999390c3a7b4d4667160e3f29418a6797dc06be6fbac5b04e7e61bed2332",
+            "bytes": 107
+          },
+          "ledger-HumanEval_64.jsonl": {
+            "sha256": "9250a03782977464f3bc6e9e5c72297bc21c5e4f8a021676c878d7704b5826f0",
+            "bytes": 107
+          },
+          "ledger-HumanEval_65.jsonl": {
+            "sha256": "3877c3d4a64873639097ec3a7d27da2a6f9f6c579da852a35c444011e59658a1",
+            "bytes": 107
+          },
+          "ledger-HumanEval_66.jsonl": {
+            "sha256": "e17b5c5b1aafcb6345e0a369314e866c41f49b98c760a4be66ddfefe7ce3420f",
+            "bytes": 107
+          },
+          "ledger-HumanEval_67.jsonl": {
+            "sha256": "20e8ffe0898f52bda74c0a00ed37e52d91cdbf72c7805bbdd1a8490015e75460",
+            "bytes": 107
+          },
+          "ledger-HumanEval_68.jsonl": {
+            "sha256": "0e2ee3cefdf3e872714eee677683a84476ab228b41c0a800837def216d1507e0",
+            "bytes": 107
+          },
+          "ledger-HumanEval_69.jsonl": {
+            "sha256": "f92256f850e2d67f6acdbc3455a6c75090a51fdcb67c58f87472c981d4414205",
+            "bytes": 107
+          },
+          "ledger-HumanEval_7.jsonl": {
+            "sha256": "382db97c7234ae5d9f7aeae04dd4fef641bb2ca7b5cf3432b6a422b1075286f0",
+            "bytes": 106
+          },
+          "ledger-HumanEval_70.jsonl": {
+            "sha256": "5293b21423b43922a0aba2329d13fb42f2951430751783f4026adfa1f85ada69",
+            "bytes": 107
+          },
+          "ledger-HumanEval_71.jsonl": {
+            "sha256": "e424e055d6cca4026090138894dc2dd0d448697e4036f53a679be98cabf0235d",
+            "bytes": 107
+          },
+          "ledger-HumanEval_72.jsonl": {
+            "sha256": "f63400bc984022fae5d8cdf0080df3b36aa7e3711ebaf09515edea32eb3d91a2",
+            "bytes": 107
+          },
+          "ledger-HumanEval_73.jsonl": {
+            "sha256": "87991933757d698724156b3231b6b5f3a375e992e061e046cc5fd9df09514729",
+            "bytes": 107
+          },
+          "ledger-HumanEval_74.jsonl": {
+            "sha256": "0fc161449abb63b1a82b141d811c6bad9a14d70b02a4cf4e808f44cac8e05484",
+            "bytes": 107
+          },
+          "ledger-HumanEval_75.jsonl": {
+            "sha256": "450595b6a2cd9afc8ad852565ead924e79c00c8d82d9a1164242f66419bf14a4",
+            "bytes": 107
+          },
+          "ledger-HumanEval_76.jsonl": {
+            "sha256": "da2cbdc9666b12f43239fe1f7053ea9e5c3730bc0901fa77e10a35263de5b49f",
+            "bytes": 107
+          },
+          "ledger-HumanEval_77.jsonl": {
+            "sha256": "6778a20a0d62917370fe147970d106558aece089cce052e5a8be5e7597d7d019",
+            "bytes": 107
+          },
+          "ledger-HumanEval_78.jsonl": {
+            "sha256": "cbe0347ffbf2dc7ad8aeba689be9a86a0c9288f5f17af5ae9c5033ad3a49ce69",
+            "bytes": 107
+          },
+          "ledger-HumanEval_79.jsonl": {
+            "sha256": "4ddf088091b2b6c80db78602cf74520467b9ad82546dd5ab080c20022d84b814",
+            "bytes": 107
+          },
+          "ledger-HumanEval_8.jsonl": {
+            "sha256": "e5835e1b176a734ff596b8942e21557d239fe457db8e59db7e1686c8849bcefb",
+            "bytes": 106
+          },
+          "ledger-HumanEval_80.jsonl": {
+            "sha256": "e3fbf0095d92fbdb33dc86dcd83aa33a028b77fce10d419eb949f091228e811b",
+            "bytes": 107
+          },
+          "ledger-HumanEval_81.jsonl": {
+            "sha256": "df9fb88f43d05a5d7a2fc50add5632252cf0129659054df646b5633232239c2f",
+            "bytes": 107
+          },
+          "ledger-HumanEval_82.jsonl": {
+            "sha256": "7d3e9bcf8463a58a41ee62ccbc7158d6adb56ec19a3cc7c7dc1af388a9b6dfde",
+            "bytes": 107
+          },
+          "ledger-HumanEval_83.jsonl": {
+            "sha256": "2771a90c5fba74d79e88c7e558e18282c3555dee857b580d80399668877079e3",
+            "bytes": 107
+          },
+          "ledger-HumanEval_84.jsonl": {
+            "sha256": "4662e27cbeafbb1884f09a338513e688a8415ab73045a55d4f8ad3f389cdad10",
+            "bytes": 107
+          },
+          "ledger-HumanEval_85.jsonl": {
+            "sha256": "f5cbc48cde4fcdbb3d7ddb4e5fb73ac29eae91058ca173556b761fdd1a97b33d",
+            "bytes": 107
+          },
+          "ledger-HumanEval_86.jsonl": {
+            "sha256": "94eee7d02d416c7b527983d96bfc005abaa6c71951af3d453184a2438d9ac65a",
+            "bytes": 107
+          },
+          "ledger-HumanEval_87.jsonl": {
+            "sha256": "70586ab62c0a2bf04ba6afba13d88185212067a1c4cf2759be5968f9598e1f34",
+            "bytes": 107
+          },
+          "ledger-HumanEval_88.jsonl": {
+            "sha256": "8e56ad0cd132e7d4d434049d86581a7ff743e9d7b1ef975db3d40b4c7994614d",
+            "bytes": 107
+          },
+          "ledger-HumanEval_89.jsonl": {
+            "sha256": "1ee419cbaffda12854b3f1be13adaff371fcf4ba2d9ab45ce2afd144f67fb9b5",
+            "bytes": 107
+          },
+          "ledger-HumanEval_9.jsonl": {
+            "sha256": "25258e5b91c6ced323cc7da83529f5a2f530530d578e2227cb192f899020a257",
+            "bytes": 106
+          },
+          "ledger-HumanEval_90.jsonl": {
+            "sha256": "3512d8ed678734b15b20ebcde5a24c8a0b143d4304ed31d2e057733ecf7521d6",
+            "bytes": 107
+          },
+          "ledger-HumanEval_91.jsonl": {
+            "sha256": "a7f1d31ab90b93ef31e7051587e2853fee5eb72628551d0a01959cb0f3da5a3f",
+            "bytes": 107
+          },
+          "ledger-HumanEval_92.jsonl": {
+            "sha256": "85f9fe21eaccf2289fad13942e786c323c7243e1d95861b179a2daee084214b4",
+            "bytes": 107
+          },
+          "ledger-HumanEval_93.jsonl": {
+            "sha256": "bde7ff359c37a799e97aad5587a28deb68f0b05ecdb0479a9d8ff8eebf22bbf2",
+            "bytes": 107
+          },
+          "ledger-HumanEval_94.jsonl": {
+            "sha256": "e596208628b348a171a3bdaea2a894b1b8925cc51fb3208d417fc6a3c3426efa",
+            "bytes": 107
+          },
+          "ledger-HumanEval_95.jsonl": {
+            "sha256": "f6c3c7007ca7f3bcb3b78dd310e648b37e76a4da2a75e419d3b711c04d765065",
+            "bytes": 107
+          },
+          "ledger-HumanEval_96.jsonl": {
+            "sha256": "194f926d6f9d22ccf5ddf73d3371c9277b21de4c36a306e586f4a8f43e91825d",
+            "bytes": 107
+          },
+          "ledger-HumanEval_97.jsonl": {
+            "sha256": "0d49e9a3f230c5a011e0e9c7a4ad757df89557e3ec74a0ce12f002e904e662a3",
+            "bytes": 107
+          },
+          "ledger-HumanEval_98.jsonl": {
+            "sha256": "15c1747a8a3fa05319f086da19cc8f0d69005b9ba04b9442c94edf5f82cfc102",
+            "bytes": 107
+          },
+          "ledger-HumanEval_99.jsonl": {
+            "sha256": "60d33e3f22771e19505ffddbcd255db4695ae86869f5e9ffc09e9b6de2d83d24",
+            "bytes": 107
+          },
+          "summary.json": {
+            "sha256": "ef1eee2d6d61ed212b763718cf7e381a7eecf99b703ec0a97ca214b9a15cf3e2",
+            "bytes": 1130
+          }
+        }
+      },
+      "scoring_provenance": {
+        "classifier_repo": "ProtectAI/distilroberta-base-rejection-v1",
+        "classifier_revision": "86520b5f35829cf9209a449e1716b56c70ddd802",
+        "ifeval_verifier": {
+          "repo": "google-research/google-research",
+          "revision": "e6890f85757dd84e27ca6df2dd30651dafad28e0",
+          "path": "instruction_following_eval",
+          "sha256": {
+            "evaluation_lib.py": "35decc06000718487f44d7deafa6d3f48a8ec0886281edf40162c0265b7d248c",
+            "instructions.py": "60e086f5342a03ce8e18b64bbcccf86308f523c08aa826707a562150a52f3edf",
+            "instructions_util.py": "a73797261eee5bf447e279d82a2b700b1bdd3cb1193412dbab1270a85832bc6b",
+            "instructions_registry.py": "ec92d72c264f6d906978613085db262356174300370a3fffe6fefd5969ce9cfc",
+            "requirements.txt": "1b1716c9ac21b9cc2bd0d7354ed8f7b6982ccf35598529601a7c08508acec94a"
+          }
+        },
+        "secondary_math_parser": {
+          "repo": "openai/simple-evals",
+          "revision": "5e623c2b400af62a1278e23595f95b0853d7fe8a",
+          "path": "mgsm_eval.py",
+          "upstream_sha256": "97297bb6d61d7353012eed610fa5830fe6028b7794afb7e8783d4a7a97ac30d3",
+          "extracted_functions": [
+            "parse_answer",
+            "score_mgsm"
+          ],
+          "module_sha256": "f2c93dd7285f95821aaac6e3db488a58374aa6004fce27a879ee0741635c34e5",
+          "note": "Secondary parser sensitivity after pilot, uniformly applied to every model; primary strict parser unchanged. Arabic uses the same rule with the dataset prefix, not an official simple-evals Arabic task."
+        },
+        "score_source_sha256": "fcdedfff2a9b5beab3e3551e78093830fa6646b6b778a05b97dd5e33451d60f2",
+        "versions": {
+          "nvidia-cuda-cupti-cu12": "12.8.90",
+          "sympy": "1.14.0",
+          "nvidia-cuda-nvrtc-cu12": "12.8.93",
+          "nvidia-cudnn-cu12": "9.10.2.21",
+          "huggingface-hub": "0.34.4",
+          "Jinja2": "3.1.6",
+          "packaging": "26.3",
+          "urllib3": "2.8.0",
+          "hf-xet": "1.8.0",
+          "tqdm": "4.70.1",
+          "nvidia-cusparselt-cu12": "0.7.1",
+          "MarkupSafe": "3.0.4",
+          "certifi": "2026.10.19",
+          "nvidia-cusolver-cu12": "11.7.3.90",
+          "typing_extensions": "4.13.2",
+          "nvidia-cusparse-cu12": "12.5.8.93",
+          "nvidia-cufile-cu12": "1.13.1.3",
+          "requests": "2.34.2",
+          "setuptools": "65.5.1",
+          "regex": "2026.11.9",
+          "nltk": "3.9.2",
+          "nvidia-nccl-cu12": "2.27.3",
+          "fsspec": "2026.9.0",
+          "six": "1.17.0",
+          "triton": "3.4.0",
+          "tokenizers": "0.22.2",
+          "torch": "2.8.0",
+          "nvidia-cufft-cu12": "11.3.3.83",
+          "nvidia-nvjitlink-cu12": "12.8.93",
+          "PyYAML": "6.0.3",
+          "idna": "3.10",
+          "cloudpickle": "3.1.2",
+          "numpy": "2.4.6",
+          "click": "8.5.1",
+          "nvidia-nvtx-cu12": "12.8.90",
+          "wheel": "0.45.1",
+          "filelock": "4.2.10",
+          "joblib": "1.6.0",
+          "nvidia-cublas-cu12": "12.8.4.1",
+          "uv": "0.8.17",
+          "absl-py": "2.3.1",
+          "mpmath": "1.3.0",
+          "pip": "25.2",
+          "immutabledict": "4.2.1",
+          "charset-normalizer": "3.5.2",
+          "transformers": "4.57.1",
+          "networkx": "3.6.1",
+          "nvidia-cuda-runtime-cu12": "12.8.90",
+          "langdetect": "1.0.9",
+          "safetensors": "0.8.0",
+          "nvidia-curand-cu12": "10.3.9.90",
+          "aiohappyeyeballs": "2.6.1",
+          "h2": "4.2.0",
+          "multidict": "6.4.4",
+          "frozenlist": "1.6.0",
+          "cbor2": "5.7.0",
+          "grpclib": "0.4.8",
+          "protobuf": "6.31.1",
+          "attrs": "25.3.0",
+          "aiohttp": "3.12.7",
+          "aiosignal": "1.3.2",
+          "hyperframe": "6.1.0",
+          "propcache": "0.3.1",
+          "hpack": "4.1.0",
+          "yarl": "1.20.0"
+        },
+        "nltk_data_sha256": {
+          "tokenizers/punkt_tab.zip": "e57f64187974277726a3417ca6f181ec5403676c717672eef6a748a7b20e0106",
+          "tokenizers/punkt.zip": "51c3078994aeaf650bfc8e028be4fb42b4a0d177d41c012b6a983979653660ec",
+          "tokenizers/punkt_tab/README": "d3251cae66a9359bd68c039e3a46172a05ca9df0b27dcdfa23ae594d68d27ec4",
+          "tokenizers/punkt_tab/polish/collocations.tab": "961653f0606d85ecb8a760cad4f69df123f010bc4b35de0253feb2d7869666b4",
+          "tokenizers/punkt_tab/polish/abbrev_types.txt": "426ea37ca486d0dcc3653653c613d853d0bb3929037f8ee6bf6c12ddae873aa1",
+          "tokenizers/punkt_tab/polish/sent_starters.txt": "8564076ae22be3d549a3f097a18458ac2967d65bd28dad7cc223c53f5ce27d1b",
+          "tokenizers/punkt_tab/polish/ortho_context.tab": "f770804067012ee5707ffc65d90523180e09bab09230a49251777be821a1a4f6",
+          "tokenizers/punkt_tab/dutch/collocations.tab": "9a013563bce4637595a6db9d2eeb0ab3f68685d704ae20d97ad718aa91afbe4a",
+          "tokenizers/punkt_tab/dutch/sent_starters.txt": "734454acc5952d91a1dfaca8cdfdabb715d8cdd35789c749528639d80751f45c",
+          "tokenizers/punkt_tab/dutch/ortho_context.tab": "e2077b5748564a9666e437c0a96ea9c5bed0fe3ab5c756535584785d3af20fc9",
+          "tokenizers/punkt_tab/dutch/abbrev_types.txt": "dcd4af07101692c986049ba07abcd6b7c1a2464ef4e46a932cf92d6e220388dd",
+          "tokenizers/punkt_tab/english/collocations.tab": "8e2da1225e4dd2cc9dba261ee231ccb134859e21b46006e7f472c5ee269af0cf",
+          "tokenizers/punkt_tab/english/abbrev_types.txt": "92a3e070f43d9b4c5534758ca40ad7343b04e7e29bfe0c2eb658a39445a4f779",
+          "tokenizers/punkt_tab/english/ortho_context.tab": "4bbcca25ed3d3f06c02402abf8419b9f033b8adc06e7b482eca4e45f81a5dc4c",
+          "tokenizers/punkt_tab/english/sent_starters.txt": "f3f8535483e1dba487241b764945168123bca3209a9645e59acd1225dc76edac",
+          "tokenizers/punkt_tab/swedish/abbrev_types.txt": "1e1a78bd5e7fd6e7eb4b15b751a23d441cda845d5fc0b631958177b2f504da00",
+          "tokenizers/punkt_tab/swedish/collocations.tab": "bd2260433c94617ba7cf6102e4c1035099a72e5a2f6b60734639252e41633c04",
+          "tokenizers/punkt_tab/swedish/sent_starters.txt": "6f0f7a6773f7488a23bafc6c29e7d4554e792d89c6b7a89fbd6a83bec85ef767",
+          "tokenizers/punkt_tab/swedish/ortho_context.tab": "d48c5705d0570993628e539ca211f05cdb5aad7adfcc6ed7b24310941bfac9f8",
+          "tokenizers/punkt_tab/french/collocations.tab": "8ddf150ef5a0d22694e7c4d807f80b6d55da731ca81ea139633f560b378af990",
+          "tokenizers/punkt_tab/french/ortho_context.tab": "7090ef4292647d4fe137159bd768a5304015d0614d59fdcfc30b2389634365ac",
+          "tokenizers/punkt_tab/french/abbrev_types.txt": "01747ecfed08830d582d8c94634b63a36da316c0a67feec2871cf03f0dd5c657",
+          "tokenizers/punkt_tab/french/sent_starters.txt": "b45a1ebdae9cdf46cf2e8be016b4718bf4f825445fc783d445faf0cfb2d569f8",
+          "tokenizers/punkt_tab/spanish/ortho_context.tab": "1346ecfc57b26174987ffa9bd4a2558a66f46592a513da3859648790351df370",
+          "tokenizers/punkt_tab/spanish/collocations.tab": "fa5ea7dbf61f2b1c12180d660a3012c9faaf4962eb12549d77af95e2a40be65d",
+          "tokenizers/punkt_tab/spanish/sent_starters.txt": "4d4f7380ba16380b6158e9e8ead6973c52f27e3c9c88af63f15a41c490998319",
+          "tokenizers/punkt_tab/spanish/abbrev_types.txt": "246a4b3efbad45b63eb9672b718574b535acef6d656f24dc17a46d13a38efba1",
+          "tokenizers/punkt_tab/italian/abbrev_types.txt": "5d406f6bfb35e55f6bea282bf148bdcc9e4677860eb01a8e67c34b894274ac50",
+          "tokenizers/punkt_tab/italian/sent_starters.txt": "4dc2cdfda34d4f286e5875d6b62b148771a799a71f0d45b504da23cb61b59d51",
+          "tokenizers/punkt_tab/italian/collocations.tab": "8167b58a049bb04de8d692ed33d72963503a061717cd37cacb33bb2d00669caf",
+          "tokenizers/punkt_tab/italian/ortho_context.tab": "462ffd48bc1c9b86efe66d04d826cd1e7a5745be871b8121759ed2920a967370",
+          "tokenizers/punkt_tab/czech/collocations.tab": "fd58f549658c8389be32577e232187be9376c79708f66c60388a84916c8f3f3d",
+          "tokenizers/punkt_tab/czech/abbrev_types.txt": "8eb1feb5a6a46f9bd8f6a5ae58e218428a65b459b5ebd61668d83fa80acfc329",
+          "tokenizers/punkt_tab/czech/ortho_context.tab": "451cb1a68a03ba88ced1247e6bb48c442e87dce1c9f463104618fac509866cd4",
+          "tokenizers/punkt_tab/czech/sent_starters.txt": "42f1de18ab29f9842113b87ec020202c0c25316c97d37f968435a7c7ee3018ca",
+          "tokenizers/punkt_tab/greek/collocations.tab": "0fd732534d56177c80874125ca894ae60aee7b052ee2865a405b454cfd737a6f",
+          "tokenizers/punkt_tab/greek/ortho_context.tab": "a87e4467791f974f808c0d396f6c82cd3a014d4fb4458a2287e2fcbce7084e9c",
+          "tokenizers/punkt_tab/greek/abbrev_types.txt": "0d56253b7ebc83f0f2403479bcf2b8ea51ffdea89ee60e34018eb32e4750d683",
+          "tokenizers/punkt_tab/greek/sent_starters.txt": "1a450aec85164e3fbfeb814768c9f120abd7139726af5bb5e2a577096739ca8e",
+          "tokenizers/punkt_tab/danish/collocations.tab": "b003d3b839afd47afa81d64620a1cf15b75b944212a7f3ee6a7571f041ae02ec",
+          "tokenizers/punkt_tab/danish/ortho_context.tab": "59d7ccda7b1eef6cbcddb6d2f1930c255a5d43600e66e32eff28eab8190c0727",
+          "tokenizers/punkt_tab/danish/abbrev_types.txt": "4a358b26b7ba372cab3cedeb43b4e99a76ae9d01150493964141eb42a62e4a6e",
+          "tokenizers/punkt_tab/danish/sent_starters.txt": "f8dd41bdb1bb633574b22d38205e1c073639a0b80cb9591964bf92d84317527f",
+          "tokenizers/punkt_tab/german/abbrev_types.txt": "259e5d78bc9d61a12d55ba47552c4e9c5ca08364d78a4669e864fd6de86818e3",
+          "tokenizers/punkt_tab/german/sent_starters.txt": "fe4b63edbdd33f78ba0a755f035680a864948b145ae82fc99072440a62a77acd",
+          "tokenizers/punkt_tab/german/ortho_context.tab": "023887e78cfb919f1a00f9a96a88f42131582748cf833fd469490ee66596307c",
+          "tokenizers/punkt_tab/german/collocations.tab": "f77bd513f42e8179f5c932111c312be353d5913387d0bfe90a95c109111bca25",
+          "tokenizers/punkt_tab/estonian/sent_starters.txt": "7ade7bb8ca7c527aac09517a6efbdf4f749e9a9fc0e43d2856c58be847030c83",
+          "tokenizers/punkt_tab/estonian/ortho_context.tab": "768b7e6e2ba93ff096e244af175c343b1a73463c4a1b99beebe6a9aa57ea1d78",
+          "tokenizers/punkt_tab/estonian/abbrev_types.txt": "0307878fb32af1e21d8f3ba0644e39c89602f2f8aa4e4304943f7e9e0fd081b2",
+          "tokenizers/punkt_tab/estonian/collocations.tab": "f1400a7ebf3c82a3d5aac886eb5bf06a1a840946cf052bb1532da7c25094797f",
+          "tokenizers/punkt_tab/malayalam/abbrev_types.txt": "1ea2cd01629c8cbeac0799d39383e10c4d6948734c255d37e3ceda550ba62464",
+          "tokenizers/punkt_tab/malayalam/sent_starters.txt": "918c902aa9d0b72700410258274ae335da51148fee7fc27095ab4114b23a245c",
+          "tokenizers/punkt_tab/malayalam/collocations.tab": "71bc38e42133f288c660a338169d8858944135282ad4166a2c5d23cc8a06ed73",
+          "tokenizers/punkt_tab/malayalam/ortho_context.tab": "5289e43f46ef3679f4ebbed95ef1fad5b64dd7aa8957042adb2b661cc6ae4425",
+          "tokenizers/punkt_tab/norwegian/collocations.tab": "9c815b01e2f7518552b53f09012644df1fa0d8c7642baff9dc5f61e85e0be422",
+          "tokenizers/punkt_tab/norwegian/ortho_context.tab": "57ea2aa129de6ae414cd0cbecba8b2399c4fde775a2145776a7e8f1023f3f183",
+          "tokenizers/punkt_tab/norwegian/abbrev_types.txt": "beced74076edabe64f45effb823012d1396db41f35fa1d8be2ac6b69bf7bc40f",
+          "tokenizers/punkt_tab/norwegian/sent_starters.txt": "2b49ef0f0c2e1b4e8b06aee1172e4d88ce6ad01486fe4182cff6fc443a73ddeb",
+          "tokenizers/punkt_tab/russian/ortho_context.tab": "b296cba91006569d3ef79eb2cff2378bf5be5b75e9e83ea119b883d3c3ee69b6",
+          "tokenizers/punkt_tab/russian/sent_starters.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "tokenizers/punkt_tab/russian/abbrev_types.txt": "75191526be516a9918948fe3ad46f6c2c4dee14314359a899b8c2ebf496cb631",
+          "tokenizers/punkt_tab/russian/collocations.tab": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "tokenizers/punkt_tab/turkish/abbrev_types.txt": "de56078c5eeb3fe07e24eab67c4aaf44e2181cbe80edd976cb1622819599d6fd",
+          "tokenizers/punkt_tab/turkish/ortho_context.tab": "fc214227f99d5ea3ee70d208df16b1984eab375d1946ed379061c6cf5c1718be",
+          "tokenizers/punkt_tab/turkish/collocations.tab": "061ce2981776a8f875da4f24bebd7e138f8da1d9057b43d07f580148ec106a33",
+          "tokenizers/punkt_tab/turkish/sent_starters.txt": "93239fb55b5d2ae6d945a84a94e118ba8a816326b17cdc11ba8111bea0c97828",
+          "tokenizers/punkt_tab/slovene/collocations.tab": "4c10daafdff496e369f3a8809bebf187abc851df630457ae93c7ca4fda350651",
+          "tokenizers/punkt_tab/slovene/ortho_context.tab": "3ba826bdd7e5543af7af8e317d4652ba8b47fd812157855a6274ec1387a46b3e",
+          "tokenizers/punkt_tab/slovene/abbrev_types.txt": "b1d6b16d1d2b3c0c4132c1528b9843d1557f7f544044db27f4e8d2d6985faf2b",
+          "tokenizers/punkt_tab/slovene/sent_starters.txt": "85ae14dadef3c4c9f753491d84919abb10e09003adfe248794d4a597fabc5793",
+          "tokenizers/punkt_tab/portuguese/sent_starters.txt": "7b7f4a1586b1df8592bf294c8dd0d19aaf90740d78ce3b40a31eff2b9669d15e",
+          "tokenizers/punkt_tab/portuguese/abbrev_types.txt": "cd5c3cf9c4c8b766bc9edbc96444b0e2189b837b26c583aa2cce83a18e4285f5",
+          "tokenizers/punkt_tab/portuguese/ortho_context.tab": "2d9c143f7b322fc74738a21e0b2b04feed1668245ac93e5a8e5399e6e0d8ed8a",
+          "tokenizers/punkt_tab/portuguese/collocations.tab": "a150d2ca3b8bd9d87cd25f2e1d2142607cdf9344efe914bd034af6017a16d841",
+          "tokenizers/punkt_tab/finnish/abbrev_types.txt": "7829baabcb5d69e26232839a1f5b6bc6d12b0e59b7f0a65f6ab1c163acbeb800",
+          "tokenizers/punkt_tab/finnish/sent_starters.txt": "ab81cf3b774ef068ac98adb99fcb3b1a05caf0423bdfa302bdc285e15597567f",
+          "tokenizers/punkt_tab/finnish/collocations.tab": "4d717a1b4d1fb7108ca9c9ed2cc63f8b4813cfaf73819e96fce79495ddc48292",
+          "tokenizers/punkt_tab/finnish/ortho_context.tab": "43e55a8bfa977561337a09105c570036df11346c6f91e57d8631520eefb26167",
+          "tokenizers/punkt/norwegian.pickle": "e4a97f8f9a03a0338dd746bcc89a0ae0f54ae43b835fa37d83e279e1ca794faf",
+          "tokenizers/punkt/polish.pickle": "16127b6d10933427a3e90fb20e9be53e1fb371ff79a730c1030734ed80b90c92",
+          "tokenizers/punkt/czech.pickle": "5ba73d293c7d7953956bcf02f3695ec5c1f0d527f2a3c38097f5593394fa1690",
+          "tokenizers/punkt/turkish.pickle": "d3ae47d76501d027698809d12e75292c9c392910488543342802f95db9765ccc",
+          "tokenizers/punkt/malayalam.pickle": "1f8cf58acbdb7f472ac40affc13663be42dafb47c15030c11ade0444c9e0e53d",
+          "tokenizers/punkt/swedish.pickle": "40d50ebdad6caa87715f2e300b1217ec92c42de205a543cc4a56903bd2c9acfa",
+          "tokenizers/punkt/slovene.pickle": "7dac650212b3787b39996c01bd2084115493e6f6ec390bab61f767525b08b8ea",
+          "tokenizers/punkt/dutch.pickle": "4a8e26b3d68c45c38e594d19e2d5677447bfdcaa636d3b1e7acfed0e9272d73c",
+          "tokenizers/punkt/english.pickle": "dda37972ae88998a6fd3e3ec002697a6bd362b32d050fda7d7ca5276873092aa",
+          "tokenizers/punkt/portuguese.pickle": "bb01bf7c79a4eadc2178bbd209665139a0e4b38f2d1c44fef097de93955140e0",
+          "tokenizers/punkt/spanish.pickle": "271dc6027c4aae056f72a9bfab5645cf67e198bf4f972895844e40f5989ccdc3",
+          "tokenizers/punkt/danish.pickle": "ea29760a0a9197f52ca59e78aeafc5a6f55d05258faf7db1709b2b9eb321ef20",
+          "tokenizers/punkt/README": "d3251cae66a9359bd68c039e3a46172a05ca9df0b27dcdfa23ae594d68d27ec4",
+          "tokenizers/punkt/russian.pickle": "bc984432fbe31f7000014f8047502476889169c60f09be5413ca09276b16c909",
+          "tokenizers/punkt/greek.pickle": "21752a6762fad5cfe46fb5c45fad9a85484a0e8e81c67e6af6fb973cfc27d67c",
+          "tokenizers/punkt/.DS_Store": "24344a0387309358be715e1b803ec962c9a0800fd7b60a2492a681db81f91873",
+          "tokenizers/punkt/italian.pickle": "dcb2717d7be5f26e860a92e05acf69b1123a5f4527cd7a269a9ab9e9e668c805",
+          "tokenizers/punkt/estonian.pickle": "3867fee26a36bdb197c64362aa13ac683f5f33fa4d0d225a5d56707582a55a1d",
+          "tokenizers/punkt/french.pickle": "de05f3d5647d3d2296626fb83f68428e4c6ad6e05a00ed4694c8bdc8f2f197ee",
+          "tokenizers/punkt/finnish.pickle": "1a9e17b3d5b4df76345d812b8a65b1da0767eda5086eadcc11e625eef0942835",
+          "tokenizers/punkt/german.pickle": "eab497fa085413130c8fd0fb13b929128930afe2f6a26ea8715c95df7088e97c",
+          "tokenizers/punkt/PY3/finnish.pickle": "6a4b5ff5500ee851c456f9dd40d5fc0d8c1859c88eb3178de1317d26b7d22833",
+          "tokenizers/punkt/PY3/slovene.pickle": "52ef2cc0ed27d79b3aa635cbbc40ad811883a75a4b8a8be1ae406972870fd864",
+          "tokenizers/punkt/PY3/french.pickle": "28e3a4cd2971989b3cb9fd3433a6f15d17981e464db2be039364313b5de94f29",
+          "tokenizers/punkt/PY3/czech.pickle": "64b0734b6fbe8e8d7cac79f48d1dd9f853824e57c4e3594dadd74ba2c1d97f50",
+          "tokenizers/punkt/PY3/english.pickle": "5cad3758596392364e3be9803dbd7ebeda384b68937b488a01365f5551bb942c",
+          "tokenizers/punkt/PY3/swedish.pickle": "b0f7d538bfd5266633b09e842cd92e9e0ac10f1d923bf211e1497972ddc47318",
+          "tokenizers/punkt/PY3/italian.pickle": "68a94007b1e4ffdc4d1a190185ca5442c3dafeb17ab39d30329e84cd74a43947",
+          "tokenizers/punkt/PY3/README": "d3251cae66a9359bd68c039e3a46172a05ca9df0b27dcdfa23ae594d68d27ec4",
+          "tokenizers/punkt/PY3/malayalam.pickle": "1f8cf58acbdb7f472ac40affc13663be42dafb47c15030c11ade0444c9e0e53d",
+          "tokenizers/punkt/PY3/danish.pickle": "6189c7dd254e29e2bd406a7f6a4336297c8953214792466a790ea4444223ceb3",
+          "tokenizers/punkt/PY3/german.pickle": "ddcbbe85e2042a019b1a6e37fd8c153286c38ba201fae0f5bfd9a3f74abae25c",
+          "tokenizers/punkt/PY3/turkish.pickle": "ae68ef5863728ac5332e87eb1f6bae772ff32a13a4caa2b01a5c68103e853c5b",
+          "tokenizers/punkt/PY3/russian.pickle": "549762f8190024d89b511472df21a3a135eee5d9233e63ac244db737c2c61d7e",
+          "tokenizers/punkt/PY3/dutch.pickle": "fda0d6a13f02e8898daec7fe923da88e25abe081bcfa755c0e015075c215fe4c",
+          "tokenizers/punkt/PY3/spanish.pickle": "164a50fadc5a49f8ec7426eae11d3111ee752b48a3ef373d47745011192a5984",
+          "tokenizers/punkt/PY3/norwegian.pickle": "4ff7a46d1438b311457d15d7763060b8d3270852c1850fd788c5cee194dc4a1d",
+          "tokenizers/punkt/PY3/estonian.pickle": "b364f72538d17b146a98009ad239a8096ce6c0a8b02958c0bc776ecd0c58a25f",
+          "tokenizers/punkt/PY3/polish.pickle": "624900ae3ddfb4854a98c5d3b8b1c9bb719975f33fee61ce1441dab9f8a00718",
+          "tokenizers/punkt/PY3/greek.pickle": "85dabc44ab90a5f208ef37ff6b4892ebe7e740f71fb4da47cfd95417ca3e22fd",
+          "tokenizers/punkt/PY3/portuguese.pickle": "02a0b7b25c3c7471e1791b66a31bbb530afbb0160aee4fcecf0107652067b4a1"
+        }
+      },
+      "coding_summary": {
+        "model": "v2b",
+        "n": 164,
+        "passed": 70,
+        "infra_errors": 0,
+        "state": "complete_valid",
+        "protocol": "he-suite-4-upstream+declared-single-function-adapter-v1",
+        "backend_gate": {
+          "kind": "live_backend_validation_not_model_scores",
+          "canonical_passed": 164,
+          "canonical_n": 164,
+          "authored_fixture_failures": [],
+          "network_and_secret_probe": {
+            "id": "fixture/0",
+            "finish_reason": "raw+no_stop",
+            "phase_evidence": {
+              "startup": true,
+              "module_sha256": "79901c6f5b59701c465b164aed290fa53abc35abc80a5378fc10f4dac1f9a84c",
+              "input_sha256": "6713454432aaa16923bc72a3cef02edb2581e0520136da956f4f5d952656f712",
+              "driver_python": "3.13.18"
+            },
+            "status": "passed",
+            "correct": 1,
+            "detail": ""
+          },
+          "sdk_version": "1.4.2",
+          "image": "python:3.13-slim@sha256:48d884813cf44e927cf64c5529dd630dd3b18338c6dc727991eef9b71e934a20",
+          "module_sha256": "79901c6f5b59701c465b164aed290fa53abc35abc80a5378fc10f4dac1f9a84c",
+          "state": "pass"
+        },
+        "generation_items_sha256": "d6076b02417cc1c1197c5f0da63e5597d12420cb6438f40b87017ec10e3ccfd5"
+      }
+    }
+  }
+}

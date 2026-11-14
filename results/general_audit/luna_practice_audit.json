@@ -1,0 +1,19 @@
+{
+  "judge": "gpt-6-luna",
+  "sample": "10 blinded practice responses; not study validation",
+  "v1_issue": "P006 rationale swapped observed and reference answers despite a matching final reference-based label.",
+  "v2": {
+    "n": 10,
+    "evidence_quote_failures": [],
+    "observed_answer_failures": [],
+    "reference_copy_failures": [],
+    "objective_label_disagreements": [],
+    "objective_comparable_n": 8
+  },
+  "limitations": [
+    "Same cases were reused after prompt repair: debugging, not held-out judge validation.",
+    "Reference agreement does not establish reference correctness.",
+    "Two open-ended truncated responses lack verified usefulness labels.",
+    "No human annotations or sensitivity/specificity estimate."
+  ]
+}

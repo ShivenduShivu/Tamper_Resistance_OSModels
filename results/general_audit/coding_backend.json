@@ -1,0 +1,23 @@
+{
+  "kind": "live_backend_validation_not_model_scores",
+  "canonical_passed": 164,
+  "canonical_n": 164,
+  "authored_fixture_failures": [],
+  "network_and_secret_probe": {
+    "id": "fixture/0",
+    "finish_reason": "raw+no_stop",
+    "phase_evidence": {
+      "startup": true,
+      "module_sha256": "79901c6f5b59701c465b164aed290fa53abc35abc80a5378fc10f4dac1f9a84c",
+      "input_sha256": "6713454432aaa16923bc72a3cef02edb2581e0520136da956f4f5d952656f712",
+      "driver_python": "3.13.18"
+    },
+    "status": "passed",
+    "correct": 1,
+    "detail": ""
+  },
+  "sdk_version": "1.4.2",
+  "image": "python:3.13-slim@sha256:48d884813cf44e927cf64c5529dd630dd3b18338c6dc727991eef9b71e934a20",
+  "module_sha256": "79901c6f5b59701c465b164aed290fa53abc35abc80a5378fc10f4dac1f9a84c",
+  "state": "pass"
+}
