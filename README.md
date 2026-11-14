@@ -266,7 +266,7 @@ We didn't rely on one attack implementation. **Lexsi's SafeTune** computes its o
 - **A1 holds off a harmful fine-tune 3.5–4× longer than v2** (held-out HarmBench prompts, two attack seeds, predictions written before the runs). It still breaks in the end: this is **delay, not prevention**.
 <!-- TODO before merge (Shivendu): commit the score-only fine-tuning results and the predictions file, and link them here. -->
 - **A1 has a real capability cost** (clean checkpoints, paired 95% intervals, change vs v2): coding (HumanEval) **37 vs 70 of 164** passes (−20.1 points [−27.4, −12.5], roughly half of v2's passes); maths (GSM8K, numeric parser) −11.5 [−18.0, −4.9]; security knowledge (CyberMetric) −4.2 [−6.8, −1.7]. It refuses fewer safe XSTest questions than v2 (34.0% vs 42.8%).
-- **A2 (Booster) is a negative result:** weaker against the fine-tuning attack, and it refuses more safe questions than v2 (54.4% vs 42.8%).
+- **A2 (Booster) is a negative result:** we claim no fine-tuning durability gain for it over v2, and it refuses more safe questions than v2 (54.4% vs 42.8%).
 - We publish A1 as a **trade-off, not a better model**: more durability against fine-tuning, paid for in coding and maths. Full table and pinned revisions: [`results/phaseA_capability/`](results/phaseA_capability/README.md).
 
 ## 9. Result 5: it holds outside English
