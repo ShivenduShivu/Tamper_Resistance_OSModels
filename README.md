@@ -39,6 +39,12 @@ Anyone can download an open model and strip its safety with **one free command**
 > - **The result:** low-KL attacks found in our searches retain 100% keyword-scored refusal. The selected strongest-found v2 attack had **~16× the measured shift** (KL) of the selected original-model attack and yielded **40%** harmful answers instead of 91%. This is an observation from these searches, not a minimum shift required for every successful attack.
 > - **The limits:** fine-tuning on harmful examples and forcing the answer's first words ("prefill") still work against it. v2 refuses 43% of safe questions that only sound risky (original: 17%), and instruction following drops about 10 points. We say so.
 
+> **Against the track's ask** (*"make safety survive later harmful fine-tuning by someone else, and demonstrate it with attack fine-tunes"*):
+> - **Editing safety out of the weights (abliteration):** resisted by v2 (sections 5–8).
+> - **Harmful fine-tuning:** **none of our models prevents it.** v2 delays the collapse only briefly: 89% refusal after 5 attack steps at lr 2e-4 against 8% for the original, and about 5% for both by step 10 ([A0](results/phaseA_A0/summary.jsonl)). A1 (v2 + RepNoise) holds out 3.5–4× longer than v2, at the cost of about half of v2's coding passes (section 8).
+> - **Our claim is delay, not prevention,** with what each defense costs measured alongside.
+<!-- TODO before merge (Shivendu): the A1 3.5–4× figure needs its score-only results and predictions file committed and linked (see section 8). -->
+
 ---
 
 ## Contents
