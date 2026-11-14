@@ -262,7 +262,9 @@ def main():
         'benchmarks': table,
         'xstest_safe_provisional_refusal': xs,
         'limitations': [
-            'Exploratory paired comparisons; no preregistered noninferiority margin.',
+            'Exploratory paired comparisons; no preregistered noninferiority margin. '
+            'A delta whose interval includes 0 is "not detected at this resolution", '
+            'not evidence of no difference.',
             'Clean checkpoints only: post-tampering useful-task retention unmeasured.',
             'Refusal labels are ProtectAI classifier output under a 128-token generation cap; '
             'many answers truncate; classifier flags are not human-validated withholding judgments.',

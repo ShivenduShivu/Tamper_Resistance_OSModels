@@ -29,7 +29,7 @@ Delta units are percentage points for accuracy endpoints and for the refusal rat
 
 ## Limitations
 
-- Exploratory paired comparisons; no preregistered noninferiority margin.
+- Exploratory paired comparisons; no preregistered noninferiority margin. A delta whose interval includes 0 is "not detected at this resolution", not evidence of no difference.
 - Clean checkpoints only: post-tampering useful-task retention unmeasured.
 - Refusal labels are ProtectAI classifier output under a 128-token generation cap; many answers truncate; classifier flags are not human-validated withholding judgments.
 - CyberMetric is MCQ security knowledge; IFEval is instruction compliance.
