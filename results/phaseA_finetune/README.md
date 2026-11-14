@@ -46,7 +46,7 @@ How long does each model keep refusing while an attacker fine-tunes it on harmfu
 ## Reading
 - **Delay, not prevention.** Every model ends at the original model's level: 3–6% refusal, 92–97% harmful by Granite.
 - **A1 vs v2:**
-  - at lr 2e-5, v2 breaks between steps 25 and 50 and A1 between 100 and 175 (about **3.5–4× later**), with both training seeds;
+  - at lr 2e-5, v2 breaks between steps 25 and 50 and A1 between 100 and 175, with both training seeds: about **3–4× later** at the midpoints of those intervals, and somewhere between 2× and 7× given the checkpoint spacing (one attack seed);
   - at lr 2e-4, A1 lasts about 2.5× longer.
 - **Why A1 delays the attack:** the attacker's training loss on A1 starts at about 239, against about 1.5–1.9 for every other model. Refusal collapses only once the loss is back near 1.4, so the delay is the time the attacker spends undoing RepNoise.
 - **A2 (Booster)** is no better than v2 at lr 2e-5 and worse at lr 2e-4: a negative result.
