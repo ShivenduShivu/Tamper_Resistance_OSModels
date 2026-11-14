@@ -16,6 +16,8 @@ Same harness, settings, prompts, parsers and scorers as the merged capability au
 
 Delta units are percentage points for accuracy endpoints and for the refusal rate. Full paired statistics (discordant counts, exact McNemar p, secondary deltas against base) are in `phaseA_capability_scores.json`.
 
+The MMLU forced-choice secondary row is identical to the generated-letter row for all four models: the forced-choice scorer resolved to the same letter as the generated-letter parser on every one of the 200 items (the same behavior held in PR #7's frozen clean_results.json), so the rows match item-for-item rather than being copied.
+
 ## Models
 
 - `base`: `CohereLabs/tiny-aya-global` @ `af89d219b53ed9b13b8a4645f9c8028973510324` (frozen PR #7 artifacts re-read)
