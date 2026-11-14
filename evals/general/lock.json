@@ -16,7 +16,9 @@
     "base": "af89d219b53ed9b13b8a4645f9c8028973510324",
     "v1": "ca0294449d2fb11f3c002609507bd5c9cd62df8d",
     "v2": "14b4675f635b48f670bd42bd8ccea69ed6dec6ad",
-    "v2b": "14b4675f635b48f670bd42bd8ccea69ed6dec6ad"
+    "v2b": "14b4675f635b48f670bd42bd8ccea69ed6dec6ad",
+    "a1": "c9cc2c739430c4597a766a8be9a0b529ec85c4f5",
+    "a2": "ac4c7c485ea0293e80fe149417b432b269af9ed0"
   },
   "notes": "Exploratory clean-model panel. Frozen before any generations. No preservation decision."
 }
