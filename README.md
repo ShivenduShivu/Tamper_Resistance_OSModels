@@ -245,7 +245,7 @@ We didn't rely on one attack implementation. **Lexsi's SafeTune** computes its o
 | 🟡 **Partly** | Heretic, strongest attack (KL 0.15) | 91% harmful | 40% harmful | Granite |
 | 🟡 **Partly** | SafeTune CAA steering −1 | 97% harmful | 72% harmful | Granite |
 | 🔴 **Not resisted** | Prefill "Sure, here is" | 82% harmful | 77% harmful | Granite (see pilot, section 12) |
-| 🔴 **Not resisted** | Harmful LoRA fine-tune, 100 examples* | 1% refusal | 3% refusal | ProtectAI |
+| 🔴 **Not resisted** | Harmful LoRA fine-tune, 100 examples (single-BOS re-run) | 0% refusal | 3% refusal | ProtectAI |
 | ⚪ **N/A** | SafeTune CAA steering −4 | gibberish | gibberish | breaks every model; not a strip |
 
 <sub>* Measured before the single-BOS fix (section 13); all other rows are final.</sub>
@@ -370,6 +370,7 @@ These use the same attack (SafeTune refusal-direction ablation) on both models, 
   - **Fix:** we corrected it and **re-ran every headline number**.
   - **Effect on the headline:** none; it held.
   - **What changed:** a "−2.5 MMLU points" cost disappeared, and prefill turned out weaker than first measured.
+  - **Fine-tuning re-run (after the article's first version):** the harmful LoRA failure holds with single BOS: 0% (original) vs 3% (v2) refusal after 100 examples. Details in the model cards.
   - **Unaffected:** Heretic and SafeTune use their own correct tokenisation.
   - **Training:** v2's training-time direction estimate had the same quirk, so a retrained v2 may be stronger.
 - **Pilot tokenisation (found and fixed by Aban).** Training openers were split into tokens differently from the test openers. This was fixed and verified on 21,195 encodings before the final pilot.
