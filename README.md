@@ -41,7 +41,7 @@ Anyone can download an open model and strip its safety with **one free command**
 
 > **Against the track's ask** (*"make safety survive later harmful fine-tuning by someone else, and demonstrate it with attack fine-tunes"*):
 > - **Editing safety out of the weights (abliteration):** resisted by v2 (sections 5–8).
-> - **Harmful fine-tuning:** **none of our models prevents it.** v2 delays the collapse only briefly: 89% refusal after 5 attack steps at lr 2e-4 against 8% for the original, and about 5% for both by step 10 ([A0](results/phaseA_A0/summary.jsonl)). A1 (v2 + RepNoise) holds out 3.5–4× longer than v2 ([score-only results](results/phaseA_finetune/README.md)), at the cost of about half of v2's coding passes (section 8).
+> - **Harmful fine-tuning:** **none of our models prevents it.** v2 delays the collapse only briefly: 89% refusal after 5 attack steps at lr 2e-4 against 8% for the original, and about 5% for both by step 10 ([A0](results/phaseA_A0/summary.jsonl)). A1 (v2 + RepNoise) holds out about 3–4× longer than v2: at lr 2e-5 it breaks between attack steps 100 and 175, against 25 and 50 for v2 (one attack seed; [score-only results](results/phaseA_finetune/README.md)), at the cost of about half of v2's coding passes (section 8).
 > - **Our claim is delay, not prevention,** with what each defense costs measured alongside.
 
 ---
@@ -262,7 +262,7 @@ We didn't rely on one attack implementation. **Lexsi's SafeTune** computes its o
 > - **Not resisted:** training on harmful data and forcing the answer's first words. These are the known open problems in tamper resistance (Qi et al. 2023; TamperBench).
 
 **Delaying harmful fine-tuning: A1 and A2 (Phase A).** We trained two more checkpoints on top of v2 with published fine-tuning defenses: **A1** = v2 + RepNoise, **A2** = v2 + Booster.
-- **A1 holds off a harmful fine-tune 3.5–4× longer than v2** (held-out HarmBench prompts, two training seeds, predictions written before the runs; re-judged by Granite Guardian). It still breaks in the end: this is **delay, not prevention**.
+- **A1 holds off a harmful fine-tune about 3–4× longer than v2:** at lr 2e-5 it breaks between attack steps 100 and 175, against 25 and 50 for v2 (held-out HarmBench prompts, two training seeds, one attack seed, predictions written before the runs; re-judged by Granite Guardian). It still breaks in the end: this is **delay, not prevention**.
 - **Evidence:** [score-only results](results/phaseA_finetune/README.md) and the [predictions](results/phaseA_finetune/PREDICTIONS.md), all three of which held. When refusal collapses, Granite Guardian rates 92–97% of answers harmful, so the collapse is real harmful content, not degenerate text. Why it delays: the attacker's loss on A1 starts at about 239 (against about 1.5 elsewhere), and refusal breaks only once that loss is back to normal.
 - **A1 has a real capability cost** (clean checkpoints, paired 95% intervals, change vs v2): coding (HumanEval) **37 vs 70 of 164** passes (−20.1 points [−27.4, −12.5], roughly half of v2's passes); maths (GSM8K, numeric parser) −11.5 [−18.0, −4.9]; security knowledge (CyberMetric) −4.2 [−6.8, −1.7]. It refuses fewer safe XSTest questions than v2 (34.0% vs 42.8%).
 - **A2 (Booster) is a negative result:** we claim no fine-tuning durability gain for it over v2, and it refuses more safe questions than v2 (54.4% vs 42.8%).
