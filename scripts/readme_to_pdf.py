@@ -32,6 +32,12 @@ doc = f"""<!doctype html><html><head><meta charset="utf-8"><base href="{ROOT.as_
 tmp = ROOT / "docs" / "_readme_print.html"; tmp.write_text(doc, encoding="utf-8")
 out = ROOT / "docs" / "Heretic_Resistant_Tiny_Aya.pdf"
 edge = r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
-subprocess.run([edge, "--headless=new", "--disable-gpu", "--no-pdf-header-footer", "--virtual-time-budget=15000",
-                f"--print-to-pdf={out}", tmp.as_uri()], check=True, capture_output=True)
-tmp.unlink(); print("wrote", out, round(out.stat().st_size / 1e6, 2), "MB")
+import tempfile, time
+before = out.stat().st_mtime if out.exists() else 0
+with tempfile.TemporaryDirectory() as prof:   # own profile: a running Edge window otherwise swallows the job silently
+    subprocess.run([edge, "--headless=new", "--disable-gpu", "--no-pdf-header-footer", "--virtual-time-budget=15000",
+                    f"--user-data-dir={prof}", f"--print-to-pdf={out}", tmp.as_uri()], check=True, capture_output=True, timeout=180)
+tmp.unlink()
+if not out.exists() or out.stat().st_mtime <= before:
+    raise SystemExit("Edge did not write a new PDF")
+print("wrote", out, round(out.stat().st_size / 1e6, 2), "MB")
