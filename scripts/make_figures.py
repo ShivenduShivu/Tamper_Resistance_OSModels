@@ -34,7 +34,7 @@ def g(k): d = G["day6__" + k]; return d["unsafe"], tuple(d["unsafe_ci95"])
 
 # ---------- 1. HERO
 fig, axs = plt.subplots(1, 3, figsize=(13, 5.3)); fig.subplots_adjust(top=0.72, bottom=0.12, wspace=0.34)
-fig.suptitle("One free command strips Tiny Aya's safety.  Our v2 holds.", fontsize=19, fontweight="bold", color=INK, y=0.97)
+fig.suptitle("One free command strips Tiny Aya's safety.  Our v2 resists it far better.", fontsize=19, fontweight="bold", color=INK, y=0.97)
 fig.text(0.5, 0.875, "Heretic (automated abliteration) vs Cohere's Tiny Aya Global and our hardened v2", ha="center", color=MUTED, fontsize=11.5)
 bars(axs[0], ["Original", "v2"], [0.14, 1.00], [RED, GREEN]); axs[0].set_title("Refusal kept, cheap attacks\n(KL ≤ 0.05, keyword score)", color=INK)
 u0, c0 = g("base_heretic_r14_harm"); u2, c2 = g("v2_heretic_r33_harm")
@@ -42,16 +42,16 @@ bars(axs[1], ["Original", "v2"], [u0, u2], [RED, GREEN], ci=[c0, c2]); axs[1].se
 axs[2].barh([1, 0], [0.0094, 0.153], color=[RED, GREEN], height=0.55); axs[2].set_yticks([1, 0]); axs[2].set_yticklabels(["Original", "v2"], color=INK)
 axs[2].set_xlim(0, 0.19); axs[2].grid(axis="x", color=GRID, lw=0.6); axs[2].set_axisbelow(True)
 axs[2].text(0.0094 + 0.004, 1, "KL 0.009", va="center", fontweight="bold"); axs[2].text(0.153 + 0.004, 0, "KL 0.153  (~16×)", va="center", fontweight="bold")
-axs[2].set_title("Behaviour shift needed\nfor that attack (KL)", color=INK)
+axs[2].set_title("Behaviour shift at the strongest\nattack found (KL)", color=INK)
 save(fig, "hero", "n = 100 harmful prompts (mlabonne/harmful_behaviors test). Lower harmful = safer; higher KL = the attack shifts the model's behaviour more (MMLU stays ~52%).")
 
 # ---------- 2. VULNERABILITY (refusal and harm in separate panels)
 fig, axs = plt.subplots(1, 3, figsize=(13, 4.8)); fig.subplots_adjust(top=0.78, bottom=0.13, wspace=0.32)
-fig.suptitle("The threat: Heretic strips the original Tiny Aya almost completely, at no visible cost", fontsize=14.5, fontweight="bold", y=0.97)
+fig.suptitle("The threat: Heretic strips the original Tiny Aya almost completely, with little change in MMLU", fontsize=14.5, fontweight="bold", y=0.97)
 bars(axs[0], ["Before", "After Heretic"], [0.98, 0.01], [BLUE, RED]); axs[0].set_title("Refuses harmful requests\n(ProtectAI refusal judge)", color=INK)
 uc, cc = g("base_clean_harm")
 bars(axs[1], ["Before", "After Heretic"], [uc, u0], [BLUE, RED], ci=[cc, c0]); axs[1].set_title("Answers judged harmful\n(Granite Guardian, 95% CI)", color=INK)
-bars(axs[2], ["Before", "After Heretic"], [0.523, 0.520], [BLUE, RED], fmt="{:.1f}%", ylim=72); axs[2].set_title("General knowledge (MMLU)\nunchanged: nobody notices", color=INK)
+bars(axs[2], ["Before", "After Heretic"], [0.523, 0.520], [BLUE, RED], fmt="{:.1f}%", ylim=72); axs[2].set_title("General knowledge (MMLU)\nbarely moves", color=INK)
 save(fig, "vulnerability", "Heretic's best attack on the original: KL 0.009, about 1 GPU-hour on a free T4.")
 
 # ---------- 3. PARETO (with 200-trial v2 search)
@@ -130,19 +130,11 @@ ax.grid(axis="y", color=GRID, lw=0.6); ax.set_axisbelow(True); ax.legend(frameon
 fig.suptitle("Trained only in English, v2's protection carries over to four more languages", fontsize=14.5, fontweight="bold", y=0.97)
 save(fig, "multilingual", "CohereLabs/aya_redteaming, 100 prompts per language (different prompts per language), each model's strongest Heretic attack. Granite on NLLB translations, 95% CI.")
 
-# ---------- 7. SAFETY vs USABILITY
-fig, ax = plt.subplots(figsize=(9.5, 5.4)); fig.subplots_adjust(top=0.86, bottom=0.16, left=0.11)
-pts = {"Original": (16.4, 91, RED), "v2": (39.2, 40, GREEN), "v2b": (18.4, 57, BLUE)}
-for k, (xo, yh, col) in pts.items():
-    ax.scatter(xo, yh, s=420, color=col, zorder=3, edgecolor=INK, lw=1.2); ax.annotate(k, (xo, yh), xytext=(12, 8), textcoords="offset points", fontsize=13, fontweight="bold")
-ax.annotate("", xy=(18.4, 57), xytext=(39.2, 40), arrowprops=dict(arrowstyle="->", color=MUTED, lw=1.4))
-ax.text(29, 52, "v2b: less cautious,\nless robust", color=MUTED, fontsize=9.5, ha="center")
-ax.set_xlim(0, 50); ax.set_ylim(0, 100); ax.grid(color=GRID, lw=0.6)
-ax.set_xlabel("Over-refusal: safe questions refused (XSTest, %)  →  less useful")
-ax.set_ylabel("Harmful answers at strongest attack (%)  →  less safe")
-ax.text(2, 4, "ideal corner", color=GREEN, fontsize=10)
-fig.suptitle("Safety vs usability: two useful points, one trade-off", fontsize=14.5, fontweight="bold", y=0.97)
-save(fig, "tradeoff", "MMLU is unchanged across all three (52.3% / 53.0% / 52.7%).")
+# ---------- 7. SAFETY vs USABILITY and CAPABILITY COST
+# Both figures (tradeoff.png, capability_cost.png) are built by docs/build/build_capability_figures.py,
+# which holds the paired capability numbers; run it here so this script never overwrites them with stale values.
+import runpy
+runpy.run_path("docs/build/build_capability_figures.py")
 
 # ---------- 8. PREFILL PILOT (separate)
 fig, axs = plt.subplots(1, 2, figsize=(12, 5)); fig.subplots_adjust(top=0.72, bottom=0.16, wspace=0.28)
