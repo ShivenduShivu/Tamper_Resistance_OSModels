@@ -27,7 +27,7 @@ or endpoint based on favorable test results. Pilots cannot become confirmation.
 | Benign security help | Human-reviewed authorized defensive questions; correctness and refusal separate | Missing; MCQ cannot substitute |
 | Overrefusal | XSTest safe and unsafe contrasts; held-out OR-Bench; random human audit | All 450 XSTest answers per model saved/classified; paired Luna diagnostic on 30 prompts; no human validation or new held-out OR-Bench |
 | Safety under tampering | Harmful assistance and refusal separately, clean and attacked | Existing AI-judged evidence; human calibration missing |
-| Fine-tuning failure | Corrected single-BOS repeat with matched base control | Recorded pre-fix failure retained; corrected repeat missing |
+| Fine-tuning failure | Corrected single-BOS repeat with matched base control | Done (Phase A, A0: `kaggle/phaseA/ft_attack.py`, `results/phaseA_A0/summary.jsonl`): failure confirmed; v2 delays but does not prevent collapse |
 
 Primary matrix: base/v2/v2b × clean/Heretic. Add v1 as the training-recipe control.
 At attack points, use the same items and task protocols as clean measurements.
