@@ -14,7 +14,7 @@
 
 ## What can be inspected
 
-- Structured links point to existing public, score-only evidence at upstream commit `952a4ed5b2e8be474d66f9ea0c83113ea542bd80`. They are separate from this private review branch; reviewers still need repository access to read this draft. No new data is published by this index.
+- Every link above points to public, score-only evidence in this repository. No new data is published by this index.
 - Clean audit item verdicts include model/task/item identities and score metadata; selected-item files supply stable IDs and hashes. These support checking aggregates and paired comparisons, not rescoring unpublished raw answers.
 - Harm and refusal are separate labels. Read each linked protocol for the prompt set, judge, model revisions and limitations. The 1,000-question MMLU aggregate is not the paired 200-item audit.
 - Harmful outputs, attacked weights and refusal-direction tensors are deliberately withheld. Clean audit raw answers are retained privately. Availability of score files is not certification of full reproduction.
