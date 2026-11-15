@@ -42,5 +42,5 @@ This file is a text-only map for AI agents and screen readers. Every number belo
 ## Optional
 
 - [Decision log, every run in order](https://github.com/ShivenduShivu/Tamper_Resistance_OSModels/blob/main/notes/LOG.md)
-- Upstream fixes merged into the hackathon toolkits: AuditKIT #35 and #36, CircuitKIT #37, SafeTune #79 (via #77)
+- Upstream fixes merged into the hackathon toolkits: AuditKIT #35 and #36, CircuitKIT #37, SafeTune #79 (via #77), SafeTune #92 (memory: avoid full-vocabulary logits in RepNoise and steering-vector extraction)
 - Never published: stripped or attacked models, their raw outputs, refusal-direction tensors, credentials

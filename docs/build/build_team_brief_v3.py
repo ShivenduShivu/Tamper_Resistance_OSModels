@@ -34,7 +34,7 @@ S += [p("Heretic-Resistant Tiny Aya", H1),
           "6. Lexsi's own <b>SafeTune</b> confirms it (55% -> 0% harmful). It also holds in <b>Hindi, Arabic, French, Spanish</b> (41% vs 12% harmful).",
           "7. <b>It is not free:</b> MMLU and coding hold, but instruction following drops 10 points and v2 refuses 43% of safe-but-scary questions (original 17%).",
           "8. <b>Harmful fine-tuning still breaks every model.</b> Adding RepNoise (model <b>A1</b>) delays the collapse <b>about 3-4x</b> on held-out prompts (between 2x and 7x given the checkpoint spacing; two training seeds, one attack seed), but costs about half of v2's coding passes. <b>Delay, not prevention.</b> Prefill also still works (a small pilot cut it 86% -> 0%).",
-          "9. Everything is public: models, data, score files, code, a live demo page and the article; plus <b>4 bug fixes merged</b> into Lexsi's toolkits."], *BLUE),
+          "9. Everything is public: models, data, score files, code, a live demo page and the article; plus <b>5 fixes merged</b> into Lexsi's toolkits."], *BLUE),
       Spacer(1, 6), p("Key numbers at a glance", H3),
       table([["", "Original Tiny Aya", "Our v2", "Our v2b"],
              ["Refuses harmful requests (no attack)", "98%", "100%", "100%"],
@@ -293,7 +293,7 @@ S += [p("Part C. What we found", H1),
 S += [p("Part D. Team, toolkits, artifacts and process", H1),
       p("19. Who did what", H2),
       table([["Person", "Contributions"],
-             ["<b>Shivendu</b> (HF: StarWarrior24x7)", "Threat demo; v1/v2/v2b defenses; adaptive Heretic evaluation; Lexsi toolkit integration and the 4 upstream fixes; single-BOS re-evaluation; "
+             ["<b>Shivendu</b> (HF: StarWarrior24x7)", "Threat demo; v1/v2/v2b defenses; adaptive Heretic evaluation; Lexsi toolkit integration and the 5 upstream fixes; single-BOS re-evaluation; "
               "Phase A (A1 RepNoise, A2 Booster, held-out fine-tuning tests with predictions, Granite re-judge); article, Space, brief"],
              ["<b>Abhinav</b> (HF: laterabhi)", "Granite Guardian harm judge (pre- and post-fix); Heretic-200; multilingual evaluation with Llama Guard cross-check; ROI; "
               "final judge-style review of a fresh clone (PR #10): consistency and overclaim fixes, the stop-token bug, HF sync script"],
@@ -306,13 +306,14 @@ S += [p("Part D. Team, toolkits, artifacts and process", H1),
              ["<b>CircuitKIT</b>", "Attempted refusal-circuit comparison", "Built the task (worked around a pairing issue); discovery needs &gt;16 GB GPU"]], [24, 80, 76]),
       p("<b>Mechanism (SafeTune):</b> v2's refusal direction is 10-20% weaker in middle/late layers than the original's. Our reading: v2 no "
         "longer depends on one dominant direction, so deleting it no longer deletes refusal.", SM),
-      p("<b>Contributing back: 4 bug fixes merged upstream.</b> While integrating the toolkits we hit real bugs, reproduced each, fixed it with a "
-        "regression test and sent it upstream. All four are merged:"),
+      p("<b>Contributing back: 5 fixes merged upstream.</b> While integrating the toolkits we hit four real bugs and one memory problem, reproduced each, fixed it with a "
+        "regression test and sent it upstream. All five are merged:"),
       table([["Toolkit", "PR", "What was wrong"],
              ["AuditKIT", "#35", "In multi-probe runs every probe was scored by every probe's detectors, so correct refusals were marked as failures"],
              ["AuditKIT", "#36", "A probe with no prompts reported a 100% pass rate while testing nothing"],
              ["CircuitKIT", "#37", "The safety helpers built prompt pairs that discovery rejects, so the documented example could not run"],
-             ["SafeTune", "#79 (via #77)", "DeepRefusal training with gradient checkpointing silently computed the wrong gradient (ablation hooks were off during recomputation)"]], [24, 26, 130]),
+             ["SafeTune", "#79 (via #77)", "DeepRefusal training with gradient checkpointing silently computed the wrong gradient (ablation hooks were off during recomputation)"],
+             ["SafeTune", "#92", "With a 262k vocabulary, RepNoise and refusal-direction extraction built full-vocabulary logits they did not need (about 10 GB and 3 GB); now only the needed positions"]], [24, 26, 130]),
       p("The maintainers reproduced and merged them, keeping our commits. This is evidence that we used the toolkits seriously, not just imported them.", SM),
       p("21. Everything public", H2),
       table([["What", "Where (Hugging Face user StarWarrior24x7)"],
@@ -343,7 +344,7 @@ S += [p("Part E. Pitch, judge questions and glossary", H1),
           "confirms it independently: 55% harmful down to 0%. The strongest attack we found distorts the model about 16 times more and still only gets 40% harmful answers; "
           "a five-times-longer search found no stronger worst case. It holds in Hindi, Arabic, French and Spanish. "
           "We measured the price too: instruction following drops 10 points and it over-refuses more. Harmful fine-tuning still breaks every model; "
-          "adding RepNoise delays that about three to four times on held-out prompts, at a cost in coding. Everything is public, including four bug fixes merged into Lexsi's own toolkits.\""], *BLUE),
+          "adding RepNoise delays that about three to four times on held-out prompts, at a cost in coding. Everything is public, including five fixes merged into Lexsi's own toolkits.\""], *BLUE),
       p("24. Questions judges will likely ask", H2),
       table([["Question", "Short answer"],
              ["Isn't the attacker just paying more KL?", "Yes, and we say so. The strongest attack found had ~16x the measured damage for a much worse strip (40% vs 91% harmful), and the cheap attacks found fail entirely. Not a proven minimum."],
@@ -356,7 +357,7 @@ S += [p("Part E. Pitch, judge questions and glossary", H1),
              ["Why not ship A1 as the main model?", "Its coding drops from 70 to 37 of 164 HumanEval passes. We publish it as a research checkpoint and keep v2 as the headline."],
              ["Why trust results after you found bugs?", "We re-ran every headline number after the BOS fix; Heretic/SafeTune never had the bug; the headline held. Finding and fixing bugs openly is the point."],
              ["Is it only English?", "No: tested in 4 more languages; v2 is even stronger there (12% vs 41% harmful)."],
-             ["Did you really use the Lexsi toolkits?", "Yes: SafeTune and AuditKIT in the evaluation, CircuitKIT attempted, and 4 bug fixes merged upstream."],
+             ["Did you really use the Lexsi toolkits?", "Yes: SafeTune and AuditKIT in the evaluation, CircuitKIT attempted, and 5 fixes merged upstream."],
              ["Is it worth deploying?", "Defense costs ~$1 once; self-hosting is ~4-10x cheaper than current mid-tier closed APIs."]], [60, 120]),
       p("25. Glossary", H2),
       *[term(w, m) for w, m in [
