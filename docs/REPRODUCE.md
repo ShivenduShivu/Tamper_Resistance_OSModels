@@ -15,6 +15,7 @@
 | Defended checkpoints A1, A2 and their capability cost | [`results/phaseA_capability/`](../results/phaseA_capability/README.md) |
 | Figures in this article | `pip install -r requirements.txt && python scripts/make_figures.py` |
 | Attack curves from the raw Heretic journals | `pip install optuna && python scripts/pareto.py` |
+| Every headline number in the README, rebuilt from `results/` and checked against the text | `python scripts/rebuild_numbers.py` (standard library only; prints each number with its source file) |
 
 Jobs run on free Kaggle T4 GPUs (FP16). **Never published:** stripped models, their raw outputs, refusal-direction tensors and credentials.
 

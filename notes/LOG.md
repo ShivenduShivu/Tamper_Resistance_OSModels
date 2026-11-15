@@ -449,3 +449,7 @@ Unsafe rate (lower is safer), 95% Wilson CI in the summary file; refusal = Prote
 
 ## 2026-11-14: A1 fine-tuning ratio wording
 - The A1 delay is now stated as "about 3–4×" with the bracketing checkpoints (A1 breaks between attack steps 100 and 175 at lr 2e-5, v2 between 25 and 50; one attack seed), since the checkpoint spacing allows anything from 2× to 7×. The earlier "Open" note about missing A1 evidence is resolved by `results/phaseA_finetune/`.
+
+## 2026-11-15: Judge-facing README and number rebuild script
+- Aban's judge-facing README (results first, 82 lines) with the long write-up moved to `docs/DETAILS.md` (sections 1–16) and `docs/REPRODUCE.md` (17–19), plus `docs/ABSTRACT.md` and `docs/EVIDENCE.md`, re-applied on current main; links are relative again.
+- `scripts/rebuild_numbers.py` recomputes the 18 headline numbers in the README from `results/` (harm rates from per-item Granite scores) and checks each against the text; a control with two numbers changed in the README fails as expected.
