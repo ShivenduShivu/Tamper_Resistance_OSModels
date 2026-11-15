@@ -1,0 +1,46 @@
+# Heretic-Resistant Tiny Aya
+
+> Lexsi Labs x Cohere x Hugging Face AI Safety & Alignment Hackathon, Track 2b (tamper resistance). Heretic, a free one-command abliteration tool, strips the safety training from Cohere's Tiny Aya Global (3.35B). We fine-tuned Tiny Aya while running that attack inside the model (checkpoint "v2"), so it keeps refusing with its refusal direction removed, and we measured what that costs. Harmful fine-tuning is not prevented; a second defense (A1, v2 + RepNoise) only delays it.
+
+This file is a text-only map for AI agents and screen readers. Every number below also appears in README.md and is rebuilt from the committed score files by `python scripts/rebuild_numbers.py` (standard library only). Raw links (raw.githubusercontent.com) return plain text.
+
+## Key results (100 harmful prompts from mlabonne/harmful_behaviors unless stated; "harmful" judged by IBM Granite Guardian)
+
+- After Heretic's strongest attack found: original 91% harmful, v2 40% harmful. A 5x longer search (200 trials) found 42% on v2, overlapping intervals.
+- Cheap attacks (KL <= 0.05, Heretic's keyword refusal score): original keeps 14% refusal, v2 keeps 100%.
+- That strongest attack on v2 shifted normal behaviour about 16x more than the one that broke the original (KL 0.153 vs 0.009). This is what the searches found, not a proven minimum.
+- Lexsi SafeTune direction-removal attack: original 55% harmful, v2 0% (n = 100, 95% interval 0-4%).
+- Outside English (Hindi, Arabic, French, Spanish pooled, aya_redteaming prompts): original 41% harmful, v2 12%.
+- Costs (clean models): MMLU 52.3% vs 53.0% (descriptive, not an equivalence test); instruction following (IFEval) 77.5% vs 67.5%; safe questions refused (XSTest, n = 250, provisional classifier labels) 17.2% vs 42.8%. v2b brings over-refusal back to 16.8% but loses maths and more instruction following.
+- Harmful fine-tuning (LoRA on harmful examples) breaks every checkpoint. On 193 held-out HarmBench prompts at lr 2e-5, v2 breaks between attack steps 25 and 50, A1 (v2 + RepNoise) between 100 and 175: about 3-4x later (2-7x given the checkpoint spacing; two training seeds, one attack seed). A1 loses about half of v2's coding passes (HumanEval 37 vs 70 of 164). A2 (v2 + Booster) gives no durability gain: a negative result.
+- The claim is delay, not prevention, against fine-tuning; resistance, not immunity, against abliteration.
+
+## What the figures show (images in the README, described here in words)
+
+- docs/figures/hero.png: three bar panels, original vs v2. (1) Refusal kept under cheap attacks (KL <= 0.05, keyword score): 14% vs 100%. (2) Harmful answers at the strongest attack found (Granite, 95% CI): 91% vs 40%. (3) Behaviour shift (KL) of that strongest attack: 0.009 vs 0.153 (~16x).
+- docs/figures/pareto.png: every attack Heretic found, as refusal (%) against behaviour shift (KL), one step curve per model. The original falls from 100% to 14% before KL 0.01. v1 falls to 43% by KL 0.011 and ends at 17%. v2b falls to 47% by KL 0.054. v2 stays at 100% through the whole cheap-attack zone (KL <= 0.05), is still at 96% near KL 0.1, and its strongest point is 33% at KL 0.153. The dashed 200-trial v2 search drops earlier between KL 0.085 and 0.14 but bottoms out near 38-40%.
+- docs/figures/capability_cost.png (in docs/DETAILS.md): change vs the original in percentage points, paired 95% intervals. Real drops (interval excludes zero): IFEval v2 -10.0, v2b -19.5; GSM8K strict v2 -13.0, v2b -22.0; GSM8K standard parser v2b -16.5. No change detected (interval includes zero): GSM8K standard parser v2 -1.0; CyberMetric -1.4 / -1.8; MMLU -0.5 / +0.5; HumanEval -1.2 / -1.2.
+- docs/figures/tradeoff.png (in docs/DETAILS.md): safety vs usability. v2 is the safest checkpoint but over-refuses and loses instruction following; v2b fixes over-refusal at a maths and instruction-following cost.
+
+## Main documents
+
+- [README](https://github.com/ShivenduShivu/Tamper_Resistance_OSModels/blob/main/README.md): one-page summary with the results table, models, method, limitations and the track's ask
+- [Full write-up](https://github.com/ShivenduShivu/Tamper_Resistance_OSModels/blob/main/docs/DETAILS.md): method, every attack table, multilingual results, capability costs, bugs found and fixed, roadmap
+- [Evidence index](https://github.com/ShivenduShivu/Tamper_Resistance_OSModels/blob/main/docs/EVIDENCE.md): each result mapped to its score file, protocol and code
+- [Reproduce](https://github.com/ShivenduShivu/Tamper_Resistance_OSModels/blob/main/docs/REPRODUCE.md): quick start, job folders, licences; note the single-BOS detail (the chat template already adds BOS)
+- [Capability results](https://github.com/ShivenduShivu/Tamper_Resistance_OSModels/blob/main/docs/GENERAL_CAPABILITY_RESULTS.md): paired clean-checkpoint audit
+- [Fine-tuning results](https://github.com/ShivenduShivu/Tamper_Resistance_OSModels/blob/main/results/phaseA_finetune/README.md) and [predictions written before the runs](https://github.com/ShivenduShivu/Tamper_Resistance_OSModels/blob/main/results/phaseA_finetune/PREDICTIONS.md)
+
+## Models (Hugging Face)
+
+- [v2, main result (v2b in subfolder "v2b")](https://huggingface.co/StarWarrior24x7/tiny-aya-global-xref-v2)
+- [v1, explained refusals only](https://huggingface.co/StarWarrior24x7/tiny-aya-global-xref-v1)
+- [A1, v2 + RepNoise, research checkpoint](https://huggingface.co/StarWarrior24x7/tiny-aya-global-phaseA-v2-repnoise)
+- [A2, v2 + Booster, negative result](https://huggingface.co/StarWarrior24x7/tiny-aya-global-phaseA-v2-booster)
+- [Results explorer (Space)](https://huggingface.co/spaces/StarWarrior24x7/heretic-resistant-tiny-aya)
+
+## Optional
+
+- [Decision log, every run in order](https://github.com/ShivenduShivu/Tamper_Resistance_OSModels/blob/main/notes/LOG.md)
+- Upstream fixes merged into the hackathon toolkits: AuditKIT #35 and #36, CircuitKIT #37, SafeTune #79 (via #77)
+- Never published: stripped or attacked models, their raw outputs, refusal-direction tensors, credentials
