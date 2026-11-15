@@ -34,6 +34,17 @@ Each dot is the best attack found at a given behaviour shift: the original (red)
 
 **What it does not stop:** prefill attacks and harmful fine-tuning break every checkpoint — A1 only delays (numbers in the track's ask below). Full per-attack matrix: [docs/DETAILS.md §8](docs/DETAILS.md#8-attack-resistance-matrix-what-it-stops-and-what-it-doesnt).
 
+## Models
+
+| Model | What it is | Hugging Face |
+|---|---|---|
+| Original | Cohere's Tiny Aya Global, 3.35B (gated: accept Cohere's terms) | [CohereLabs/tiny-aya-global](https://huggingface.co/CohereLabs/tiny-aya-global) |
+| v1 | Fine-tuned on explained refusals only | [StarWarrior24x7/tiny-aya-global-xref-v1](https://huggingface.co/StarWarrior24x7/tiny-aya-global-xref-v1) |
+| **v2** | **Main result: trained through the attack** | [StarWarrior24x7/tiny-aya-global-xref-v2](https://huggingface.co/StarWarrior24x7/tiny-aya-global-xref-v2) |
+| v2b | v2 + borderline-safe questions (less over-refusal) | same repo, `subfolder="v2b"` |
+| A1 | v2 + RepNoise: delays harmful fine-tuning | [StarWarrior24x7/tiny-aya-global-phaseA-v2-repnoise](https://huggingface.co/StarWarrior24x7/tiny-aya-global-phaseA-v2-repnoise) |
+| A2 | v2 + Booster: negative result | [StarWarrior24x7/tiny-aya-global-phaseA-v2-booster](https://huggingface.co/StarWarrior24x7/tiny-aya-global-phaseA-v2-booster) |
+
 ## How it works
 
 - **Threat:** refusal lives mostly along one direction in the model's internal activity (Arditi et al. 2024); Heretic edits it out of the weights in about an hour on a free GPU.
@@ -47,12 +58,12 @@ Each dot is the best attack found at a given behaviour shift: the original (red)
 > *"Make safety survive later harmful fine-tuning by someone else, and demonstrate it with attack fine-tunes"*
 >
 > - **Abliteration:** resisted by v2 in these evaluations (above).
-> - **Harmful fine-tuning:** **no model prevents it.** v2 delays the collapse briefly (89% refusal after 5 attack steps at lr 2e-4 vs 8% original, ~5% for both by step 10; [A0](results/phaseA_A0/summary.jsonl)). A1 (v2 + RepNoise) holds out about 3–4× longer (breaks between steps 100–175 vs 25–50 at lr 2e-5, one attack seed; [scores](results/phaseA_finetune/README.md)) at the cost of about half of v2's coding passes.
+> - **Harmful fine-tuning:** **no model prevents it.** v2 delays the collapse briefly (89% refusal after 5 attack steps at lr 2e-4 vs 8% original, ~5% for both by step 10; [A0](results/phaseA_A0/summary.jsonl), 100 `harmful_behaviors` prompts; the held-out HarmBench-193 run below gives 94% vs 3% at step 5). On held-out HarmBench-193, A1 (v2 + RepNoise) holds out about 3–4× longer (breaks between steps 100–175 vs 25–50 at lr 2e-5, one attack seed; [scores](results/phaseA_finetune/README.md)) at the cost of about half of v2's coding passes.
 > - **Our claim is delay, not prevention,** with each defense's cost measured alongside.
 
 ## Limitations
 
-- **v2 is not unbreakable:** the strongest found attack still gets through at ~16× the original attack's measured shift — an observation from these searches, not a proven minimum.
+- **v2 is not unbreakable:** the strongest attack Heretic found on v2 still gets 40% harmful answers. That attack shifted the model's normal behaviour ~16× more than the one that broke the original (KL 0.153 vs 0.009); this is what these searches found, not a proven minimum.
 - **Not free:** instruction following −10.0 points [−16.7, −3.2] (v2), −19.5 (v2b); safe-question refusal +25.6 [+19.2, +31.8] (v2b fixes this but loses maths); parser-sensitive maths −13.0 strict, −1.0 numeric. One model size (3.35B), one training seed.
 - **Judges are AI models,** so two independent ones are used plus a cross-check; refusal labels are provisional classifier output. v1 alone, a straight Fool's Gold replication and T4-sized CircuitKIT discovery did not work. Bugs we found, fixed and re-ran: [full honesty section](docs/DETAILS.md#13-limitations-failures-and-honest-corrections).
 

@@ -120,6 +120,10 @@ claim("Fine-tune A0, lr 2e-4", f"step 5: {pct(a0['v2_5'])} vs {pct(a0['base_5'])
 RJ = {}
 for row in jsonl("results/phaseA_finetune/granite_rejudge.summary.jsonl"):
     RJ.update(row)
+hb_v2, hb_base = RJ["v2_lat_lr2e-4_step5"]["protectai_refusal"], RJ["base_lat_lr2e-4_step5"]["protectai_refusal"]
+claim("Fine-tune on HarmBench-193, lr 2e-4, step 5", f"v2 {pct(hb_v2)} vs original {pct(hb_base)}",
+      "results/phaseA_finetune/granite_rejudge.summary.jsonl", f"HarmBench-193 run below gives {pct(hb_v2)} vs {pct(hb_base)} at step 5")
+
 STEPS = [10, 25, 50, 100, 175]
 
 
@@ -147,7 +151,8 @@ claim("A1 coding passes vs v2", f"{HE['a1']['success_n']} vs {HE['v2']['success_
 # ---- limitations ----
 kl_ratio = D6["heretic_v2_t0"]["front_kl"] / D6["heretic_base_t0"]["front_kl"]
 claim("Shift at the strongest attack found", f"KL {D6['heretic_v2_t0']['front_kl']:.3f} / {D6['heretic_base_t0']['front_kl']:.4f} = {kl_ratio:.1f}×",
-      "results/day6/summary.jsonl", f"~{round(kl_ratio)}× the original attack's measured shift")
+      "results/day6/summary.jsonl", f"still gets {pct(v2_h)} harmful answers", f"~{round(kl_ratio)}× more than the one that broke the original",
+      f"(KL {D6['heretic_v2_t0']['front_kl']:.3f} vs {D6['heretic_base_t0']['front_kl']:.3f})")
 claim("IFEval, v2 and v2b", f"{pp(ife['delta'])} {ci(*ife['delta_ci'])}; v2b {pp(P['ifeval:v2b']['delta'])}", "results/general_audit/clean_results.json",
       f"instruction following {pp(ife['delta'])}", f"{ci(*ife['delta_ci'])} (v2), {pp(P['ifeval:v2b']['delta'])} (v2b)")
 XP = CR["paired_xstest_safe_provisional_refusal"]["v2"]
