@@ -46,7 +46,7 @@ print(tok.decode(out[0, enc["input_ids"].shape[1]:], skip_special_tokens=True))
 
 | Member | Contributions |
 |---|---|
-| **Shivendu** ([@StarWarrior24x7](https://huggingface.co/StarWarrior24x7)) | Threat demo; v1/v2/v2b defenses; adaptive evaluation; Lexsi toolkit integration and the 4 upstream fixes; single-BOS re-evaluation; Phase A fine-tuning defenses (A1, A2) and held-out tests with predictions and Granite re-judge; article, explorer, brief |
+| **Shivendu** ([@StarWarrior24x7](https://huggingface.co/StarWarrior24x7)) | Threat demo; v1/v2/v2b defenses; adaptive evaluation; Lexsi toolkit integration and the 5 upstream fixes; single-BOS re-evaluation; Phase A fine-tuning defenses (A1, A2) and held-out tests with predictions and Granite re-judge; article, explorer, brief |
 | **Abhinav** ([@laterabhi](https://huggingface.co/laterabhi)) | Granite Guardian harm judging; Heretic-200; multilingual evaluation with Llama Guard cross-check; ROI; judge-style fresh-clone review with consistency and overclaim fixes, the stop-token fix and the HF sync script |
 | **Aban** ([@abanwild](https://huggingface.co/abanwild)) | Found the double-BOS bug; prefix-recovery pilot with matched and benign controls; tokenisation fix; ROI model check; frozen paired capability audit of v2, v2b, A1 and A2 (IFEval, GSM8K, HumanEval, MMLU, CyberMetric, XSTest) |
 

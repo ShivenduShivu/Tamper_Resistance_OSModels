@@ -329,9 +329,9 @@ These use the same attack (SafeTune refusal-direction ablation) on both models, 
 
 **Mechanism (what we can say).** SafeTune's per-layer refusal directions are 10–20% weaker in v2's middle and late layers (layer 24: 40.2 vs 46.4), with the same peak layer (18). Our reading is that v2 stops relying on one dominant direction, so deleting it no longer deletes refusal.
 
-## 14. Contributing back: 4 merged fixes to Lexsi's toolkits
+## 14. Contributing back: 5 merged fixes to Lexsi's toolkits
 
-While integrating the hackathon's toolkits, we hit four real bugs. We reproduced each, fixed it with a regression test, and sent it upstream. **All four are merged.**
+While integrating the hackathon's toolkits, we hit four real bugs and one memory problem. We reproduced each, fixed it with a regression test, and sent it upstream. **All five are merged.**
 
 | Toolkit | Pull request | What was wrong | Fix and test |
 |---|---|---|---|
@@ -339,8 +339,9 @@ While integrating the hackathon's toolkits, we hit four real bugs. We reproduced
 | **AuditKIT** | [#36](https://github.com/Lexsi-Labs/AuditKIT/pull/36) ✅ merged | A probe with no prompts reported a **100% pass rate** while testing nothing; the docstring example triggered it | Raises a clear error naming the probe; docstring fixed; test added |
 | **CircuitKIT** | [#37](https://github.com/Lexsi-Labs/CircuitKIT/pull/37) ✅ merged | Every safety `register_*` helper built prompt pairs whose "corrupt" prompt equals the clean one, which `discover()` rejects, so the module's own documented example could not run, and the pairing mode could not be changed | Contrastive `harmful_vs_benign` pairs by default; pairing mode and refusal/compliance tokens passed through; tests: 79 → 81 passing, and the new tests fail on the old code |
 | **SafeTune** | [#79](https://github.com/Lexsi-Labs/SafeTune/pull/79) ✅ merged (via [#77](https://github.com/Lexsi-Labs/SafeTune/pull/77)) | `DeepRefusalTrainer` with gradient checkpointing switched its ablation hooks off before `backward()`, so the recomputed forward pass ran **without** ablation: with reentrant checkpointing the gradient was silently wrong (3.2% relative difference at the same loss); non-reentrant raised `CheckpointError` | Backward runs while the hooks are active, with the random gate drawn once per step; 4 new tests compare gradients with and without checkpointing (71 related tests pass) |
+| **SafeTune** | [#92](https://github.com/Lexsi-Labs/SafeTune/pull/92) ✅ merged | With Tiny Aya's 262k vocabulary, RepNoise's per-layer harmful loss projected every position of every hidden state through the LM head (37 full-vocabulary logits tensors kept for backward, about 10 GB at batch 1 and 512 tokens), and steering-vector extraction computed logits it never used (~3 GB per batch; it ran out of memory on a T4 in our A2 job) | Only the counted response positions are projected, with the same loss and gradients; extraction asks for one logit position when the model supports it; new tests fail on the old code and pass with the fix |
 
-The AuditKIT maintainers combined #35 and #36 into a release PR, keeping our commits and thanking us for "the clear bug reports with the reproductions". The SafeTune maintainer reproduced #79 and merged our commit unchanged into release PR #77.
+The AuditKIT maintainers combined #35 and #36 into a release PR, keeping our commits and thanking us for "the clear bug reports with the reproductions". The SafeTune maintainer reproduced #79 and merged our commit unchanged into release PR #77; #92 was merged directly.
 
 ## 15. Cost and real-world value
 

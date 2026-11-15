@@ -119,4 +119,4 @@ API prices are list prices checked Nov 12, 2026 (sources in DETAILS §15). A ser
 
 ## Declaration of work done outside the hackathon
 
-All code, training, evaluation and writing in this submission was done during the hackathon build period. The repository's history starts on 2026-11-10. The work builds on public tools and papers (Heretic, the Lexsi toolkits, Tiny Aya, and the papers cited), which are credited and not claimed as our own. The four upstream fixes were made during the hackathon while integrating the toolkits.
+All code, training, evaluation and writing in this submission was done during the hackathon build period. The repository's history starts on 2026-11-10. The work builds on public tools and papers (Heretic, the Lexsi toolkits, Tiny Aya, and the papers cited), which are credited and not claimed as our own. The five upstream fixes were made during the hackathon while integrating the toolkits.
