@@ -12,6 +12,8 @@
 
 </div>
 
+> ⚠️ **Content warning:** this write-up quotes a few harmful requests from public benchmarks (for example spam bots, exam cheating, insider trading) and discusses harmful-content categories. It never shows a stripped model's harmful output.
+
 ![Heretic strips the original Tiny Aya; our v2 resists it far better](docs/figures/hero.png)
 
 ## Results at a glance
@@ -33,6 +35,15 @@
 Each dot is the best attack found at a given behaviour shift: the original (red) collapses at low KL, v2 (green) holds across the cheap-attack zone; a 5× longer search found similar worst-case harm (42% vs 40%, overlapping intervals — not an equivalence test).
 
 **What it does not stop:** prefill attacks and harmful fine-tuning break every checkpoint — A1 only delays (numbers in the track's ask below). Full per-attack matrix: [docs/DETAILS.md §8](docs/DETAILS.md#8-attack-resistance-matrix-what-it-stops-and-what-it-doesnt).
+
+## Abstract
+
+A free abliteration tool removes Tiny Aya's refusal behaviour with one command (91% harmful answers after its best attack in our tests). We resist it by running the attack *inside* LoRA fine-tuning: on half the steps, a freshly re-estimated refusal direction is projected out and the model must still refuse harmful prompts and answer benign ones, using only self-generated data. Evaluated with a fresh Heretic search per model and independent judges, v2 keeps 100% keyword-scored refusal across the cheap-attack zone, transfers to four languages it was never trained in (41% → 12% harmful, pooled), with MMLU within 0.7 points of the original on the clean 1,000-question evaluation (descriptive, not an equivalence test) — while over-refusing safe questions (43% vs 17%, classifier labels) and losing 10 instruction-following points. Harmful fine-tuning still breaks every checkpoint; our A1 variant only delays it about 3–4×, at a capability cost. All models, data, scores and logs are published, including everything that still breaks the defense.
+
+## Tracks and problem statement
+
+- **Track 2b: AI Safety and Correction**
+  - **Problem statement 12: Tamper resistance.** Make safety survive later tampering by someone else (abliteration and harmful fine-tuning), and demonstrate it with attacks.
 
 ## Models
 
@@ -74,6 +85,8 @@ About 37 GPU-hours total, almost all free Kaggle T4s (about $13 at on-demand pri
 ## Submission materials
 
 - **Abstract for the entry form:** [docs/ABSTRACT.md](docs/ABSTRACT.md)
+- **Submission checklist:** [docs/SUBMISSION.md](docs/SUBMISSION.md) maps every required write-up item to where it is answered, and covers metrics, splits and leak checks, per-toolkit settings, judge checks, cost per 1,000 replies and the declaration of outside work
+- **For AI agents and screen readers:** [llms.txt](llms.txt), a text-only map of the project with every figure described in words
 - **Artifacts:** models v1, v2 (+ `v2b/`), A1, A2 with cards → [models collection](https://huggingface.co/collections/StarWarrior24x7/heretic-resistant-tiny-aya-models-6af3e1eff9a91556f5535934); training data, Heretic journals, judge scores, logs → [data & results collection](https://huggingface.co/collections/StarWarrior24x7/heretic-resistant-tiny-aya-data-and-results-6af3e1f03fff746c25b4884c); interactive results explorer → [Hugging Face Space](https://huggingface.co/spaces/StarWarrior24x7/heretic-resistant-tiny-aya); code, run configs, decision log → this repo. **Never published:** stripped models, their raw outputs, refusal-direction tensors, credentials.
 - **Reproduce:** `python scripts/rebuild_numbers.py` rebuilds every number on this page from `results/` (standard library, no GPU) and checks it against the text. Free Kaggle T4s (FP16); one T4 loads v2. Quick-start code, every job folder, figure scripts, model/dataset/licence tables: [docs/REPRODUCE.md](docs/REPRODUCE.md) — note the single-BOS tokenisation detail (the chat template already adds BOS). Heretic's scoring prompts were excluded from training; XSTest never trained on; 200 OR-Bench prompts held out; an audit found two normalized prompt duplicates and no train/eval overlap under the declared lexical checks.
 - **With more credits:** turn the prefill pilot into a claim (retrain, re-attack, 128-token judging); CircuitKIT discovery on a 40 GB+ GPU; Aya Expanse 8B for scaling; code-mixed languages; multi-seed attack runs. Proposed targets, not validated results: [roadmap](docs/DETAILS.md#16-roadmap).
