@@ -24,7 +24,9 @@ This data trains [xref-v1](https://huggingface.co/StarWarrior24x7/tiny-aya-globa
 **Content warning:** the prompts include harmful requests taken from a public benchmark. The responses are refusals or benign answers only.
 
 **License:**
-- The generated responses come from Tiny Aya Global (CC-BY-NC-4.0), so this dataset is released as CC-BY-NC-4.0.
-- Prompts keep their source licences. The Dolly prompts are CC-BY-SA-3.0; please follow the attribution terms of each source.
+- **Generated responses:** they come from Tiny Aya Global (CC-BY-NC-4.0), so our CC-BY-NC-4.0 licence applies to them. It does not relicense the prompts.
+- **Prompts keep their source terms:**
+  - The 1,155 Dolly prompts are CC-BY-SA-3.0 (attribution and share-alike). Use them under those terms.
+  - The 1,200 `extended_refusal` prompts come from [LLM-LAT/harmful-dataset](https://huggingface.co/datasets/LLM-LAT/harmful-dataset), whose card declares no licence. We redistribute them, with credit, only so the training can be reproduced, and we claim no rights over them. If you are a rights holder and want them removed, open a discussion on this repository and we will remove them.
 
 Part of the Lexsi Labs × Cohere × Hugging Face AI Safety & Alignment Hackathon, Track 2b (Tamper Resistance).
